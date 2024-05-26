@@ -1,10 +1,19 @@
-import './App.css';
+import "./App.css";
+import Homepage from "./pages/Homepage";
+import GlobalStyles from "./styles/GlobalStyles";
 
 function App() {
   return (
-    <div >
-     <h1>Little lemon</h1>
-    </div>
+    <>
+      <GlobalStyles />
+      <Homepage />
+      {/* <header>
+        <nav></nav>
+      </header>
+      <main></main>
+      <footer></footer>
+      <h1>Little lemon</h1> */}
+    </>
   );
 }
 

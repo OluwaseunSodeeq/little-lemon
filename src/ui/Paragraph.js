@@ -1,0 +1,63 @@
+import styled, { css } from "styled-components";
+
+export const fontSize = {
+  small: css`
+    font-size: 1.2rem;
+  `,
+  medium: css`
+    font-size: 1.4rem;
+  `,
+  large: css`
+    font-size: 1.6rem;
+  `,
+  xlarge: css`
+    font-size: 1.8rem;
+  `,
+  extraLarge: css`
+    font-size: 4rem;
+    font-family: serif;
+    /* font-family: "karla"; */
+  `,
+};
+
+export const fontWeight = {
+  regular: css`
+    font-weight: var(--regular);
+  `,
+  medium: css`
+    font-weight: var(--medium);
+  `,
+  bold: css`
+    font-weight: var(--bold);
+  `,
+  deepBold: css`
+    font-weight: var(--deepBold);
+  `,
+};
+
+export const color = {
+  black: css`
+    color: var(--black);
+  `,
+  deepGreen: css`
+    color: var(--deepGreen);
+  `,
+  yellow: css`
+    color: var(--yellow);
+  `,
+  pureWhite: css`
+    color: var(--pureWhite);
+  `,
+};
+
+export const Paragraph = styled.p`
+  ${(props) => fontSize[props.fontSize]}
+  ${(props) => fontWeight[props.fontWeight]}
+  ${(props) => color[props.color]}
+`;
+
+Paragraph.defaultProps = {
+  color: "pureWhite",
+  fontWeight: "regular",
+  fontSize: "large",
+};
