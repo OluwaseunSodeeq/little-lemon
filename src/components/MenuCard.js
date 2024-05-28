@@ -76,7 +76,7 @@ function MenuCard({ card }) {
       </ImageStyled>
       {/*  */}
       <CardTexttContainer>
-        <FlexedDiv type="sb">
+        <FlexedDiv type="grid">
           <NameStyled>{name}</NameStyled>
           <PriceStyled>${price}</PriceStyled>
         </FlexedDiv>

@@ -17,6 +17,10 @@ export const fontSize = {
     font-size: 4rem;
     font-family: serif;
     /* font-family: "karla"; */
+
+    @media (max-width: 450px) {
+      font-size: 3.5rem;
+    }
   `,
 };
 

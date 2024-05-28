@@ -33,6 +33,7 @@ const cardArray = [
 
 const WeekSpacialStyled = styled.div`
   margin-top: 2rem;
+
   /* border: 2px solid red; */
 `;
 function WeekSpecial() {
@@ -48,8 +49,8 @@ function WeekSpecial() {
           </FlexedDiv>
           <WeekSpacialStyled>
             <GridColumns>
-              {cardArray.map((card) => (
-                <MenuCard card={card} />
+              {cardArray.map((card, index) => (
+                <MenuCard card={card} key={index} />
               ))}
             </GridColumns>
           </WeekSpacialStyled>

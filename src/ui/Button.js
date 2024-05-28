@@ -80,6 +80,11 @@ export const Button = styled.button`
   ${(props) => fontWeight[props.fontWeight]}
   ${(props) => color[props.textColor]}
   ${(props) => backgroundColor[props.backgroundColor]}
+
+  @media (max-width: 450px) {
+    border-radius: var(--border-radius-xlg);
+    /* border: 2px solid black; */
+  }
 `;
 
 Button.defaultProps = {

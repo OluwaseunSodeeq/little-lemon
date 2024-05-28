@@ -17,12 +17,23 @@ export const Heading = styled.h1`
       font-size: 32px;
       color: var(--black);
     `}
-    ${(props) =>
+  
+  ${(props) =>
     props.as === "h3" &&
     css`
       font-size: 28px;
       color: var(--pure-white);
       margin-top: -1rem;
     `}
+
+  ${(props) =>
+    props.as === "h4" &&
+    css`
+      font-size: 20px;
+      color: var(--pureWhite);
+      font-weight: var(--bold);
+      font-family: var(--karla);
+    `} 
+
   ${additionalStyles}
 `;
