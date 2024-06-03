@@ -15,8 +15,6 @@ export const fontSize = {
   `,
   extraLarge: css`
     font-size: 4rem;
-    font-family: serif;
-    /* font-family: "karla"; */
 
     @media (max-width: 450px) {
       font-size: 3.5rem;
@@ -36,6 +34,22 @@ export const fontWeight = {
   `,
   deepBold: css`
     font-weight: var(--deepBold);
+  `,
+};
+
+export const fontFamily = {
+  karla: css`
+    font-family: var(--karla);
+    text-decoration: underline;
+  `,
+  sanSerif: css`
+    font-family: "sans-serif";
+  `,
+  serif: css`
+    font-family: "serif";
+  `,
+  markazi: css`
+    font-family: var(--markazi);
   `,
 };
 
@@ -64,4 +78,5 @@ Paragraph.defaultProps = {
   color: "pureWhite",
   fontWeight: "regular",
   fontSize: "large",
+  fontFamily: "serif",
 };

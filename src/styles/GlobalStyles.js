@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
-
+// @import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
 const GlobalStyles = createGlobalStyle`
+
 :root {
     --deepGreen: #495E57;
     --ash: #D9D9D9;

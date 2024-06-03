@@ -9,7 +9,7 @@ const NavStyled = styled.nav`
 `;
 const LiContainer = styled.ul`
   display: flex;
-  gap: 20px;
+  gap: 10px;
 `;
 function Nav() {
   return (
@@ -28,11 +28,9 @@ function Nav() {
           <a href="#reservations">Reservations</a>
         </NavLi>
         <NavLi>
-          <a href="#order">Order</a>
+          <a href="#order">Order Online</a>
         </NavLi>
-        <NavLi>
-          <a href="#online">Online</a>
-        </NavLi>
+
         <NavLi>
           <a href="#login">Login</a>
         </NavLi>

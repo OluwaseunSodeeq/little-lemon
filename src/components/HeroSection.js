@@ -5,7 +5,7 @@ import HeroSectionContent from "./HeroSectionContent";
 
 function HeroSection() {
   return (
-    <Container as="section">
+    <Container as="section" type="homepage">
       <Content>
         <HeroSectionContent />
       </Content>
