@@ -65,6 +65,18 @@ const makeReservationBgBottom = css`
   }
 `;
 
+//CONFIRM RESERVATION
+const confirmReservationBg = css`
+  position: relative;
+  top: 9rem;
+  height: auto;
+  background-color: var(--deepGreen);
+
+  @media (max-width: 450px) {
+    top: 7rem;
+  }
+`;
+
 const footerBg = css`
   position: relative;
   top: 20rem;
@@ -111,6 +123,14 @@ export const Container = styled.div`
     props.type === "makeReservationBottom" &&
     css`
       ${makeReservationBgBottom}
+    `}
+
+    /* Confirm RESERVATION */
+    ${(props) =>
+    props.as === "section" &&
+    props.type === "confirmReservation" &&
+    css`
+      ${confirmReservationBg}
     `}
 /* WEEK SPECIAL */
     ${(props) =>

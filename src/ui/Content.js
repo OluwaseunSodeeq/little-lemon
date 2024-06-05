@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Content = styled.div`
   width: 100%;
   max-width: 120rem;
+  height: auto;
   padding: 0 10.4rem;
   margin: 0 auto;
   overflow-x: hidden;

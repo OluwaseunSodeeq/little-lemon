@@ -5,17 +5,24 @@ import { Paragraph } from "../ui/Paragraph";
 // import DateButtons from "../components/DateButtons";
 import CustomButton from "../components/CustomButton";
 
+// Make Reservations
+const MakeReservationStyled = styled.div`
+  padding: 2rem 0 3rem;
+`;
+
 //FORM STYLING
 const Form = styled.form`
   position: relative;
-  border: 2px solid red;
-  height: 23rem;
   width: 100%;
+
+  /* border: 2px solid red; */
+  /* height: 23rem; */
   /* height: auto; */
 `;
 
 // RADIO STYLING
 const RadioButtonsContainer = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 5rem;
@@ -23,18 +30,21 @@ const RadioButtonsContainer = styled.div`
 `;
 
 const RadioButton = styled.div`
-  margin-top: 3rem;
-  border: 2px solid blue;
+  width: 48%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+
+  /* border: 2px solid blue; */
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 2rem;
 `;
 
 const Radiolabel = styled.label`
   cursor: pointer;
-
   font-size: 1.8rem;
   color: var(--pureWhite);
   font-family: var(--karla);
@@ -98,34 +108,36 @@ function MakeReservation() {
     <>
       <Container as="div" type="makeReservationTop">
         <Content>
-          <Paragraph
-            fontSize="extraLarge"
-            color="yellow"
-            fontWeight="bold"
-            fontFamily="karla"
-          >
-            Reservations
-          </Paragraph>
-          <Form action="">
-            <RadioButtonsContainer>
-              <RadioButton>
-                <Radiolabel htmlFor="indoor">Indoor seating</Radiolabel>
-                <RadioInput type="radio" name="seating" id="indoor" />
+          <MakeReservationStyled>
+            <Paragraph
+              fontSize="extraLarge"
+              color="yellow"
+              fontWeight="bold"
+              fontFamily="karla"
+            >
+              Reservations
+            </Paragraph>
+            <Form action="">
+              <RadioButtonsContainer>
+                <RadioButton>
+                  <Radiolabel htmlFor="indoor">Indoor seating</Radiolabel>
+                  <RadioInput type="radio" name="seating" id="indoor" />
 
-                {/* <RadioContainer className={className}> */}
-                {/* <RadioContainer> */}
-                {/* <HiddenRadioInput checked={checked} {...props} />
+                  {/* <RadioContainer className={className}> */}
+                  {/* <RadioContainer> */}
+                  {/* <HiddenRadioInput checked={checked} {...props} />
                   <CustomRadioInput checked={checked} /> */}
-                {/* </RadioContainer> */}
-              </RadioButton>
+                  {/* </RadioContainer> */}
+                </RadioButton>
 
-              <RadioButton>
-                <Radiolabel htmlFor="indoor">Outdoor seating</Radiolabel>
-                <RadioInput type="radio" name="seating" id="indoor" />
-              </RadioButton>
-            </RadioButtonsContainer>
-            <CustomButton />
-          </Form>
+                <RadioButton>
+                  <Radiolabel htmlFor="indoor">Outdoor seating</Radiolabel>
+                  <RadioInput type="radio" name="seating" id="indoor" />
+                </RadioButton>
+              </RadioButtonsContainer>
+              <CustomButton />
+            </Form>
+          </MakeReservationStyled>
         </Content>
       </Container>
       <Container as="div" type="makeReservationBottom"></Container>

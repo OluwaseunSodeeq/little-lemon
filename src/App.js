@@ -2,10 +2,13 @@ import "./App.css";
 // import Footer from "./Footer";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+
 // import Header from "./Header";
-import MakeReservation from "./pages/MakeReservation";
+// import MakeReservation from "./pages/MakeReservation";
 // import Homepage from "./pages/Homepage";
+
 import GlobalStyles from "./styles/GlobalStyles";
+import ConfirmReservation from "./pages/ConfirmReservation";
 
 function App() {
   return (
@@ -14,7 +17,8 @@ function App() {
       {/* <Homepage /> */}
       <div>
         <Header />
-        <MakeReservation />
+        <ConfirmReservation />
+        {/* <MakeReservation /> */}
         <Footer />
       </div>
 
