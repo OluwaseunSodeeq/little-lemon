@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import { Paragraph } from "../ui/Paragraph";
-// import DateButtons from "../components/DateButtons";
 import CustomButton from "../components/CustomButton";
 
 // Make Reservations
@@ -10,14 +9,11 @@ const MakeReservationStyled = styled.div`
   padding: 2rem 0 3rem;
 `;
 
-//FORM STYLING
+// FORM STYLING
+
 const Form = styled.form`
   position: relative;
   width: 100%;
-
-  /* border: 2px solid red; */
-  /* height: 23rem; */
-  /* height: auto; */
 `;
 
 // RADIO STYLING
@@ -35,8 +31,6 @@ const RadioButton = styled.div`
   margin-bottom: 2rem;
   padding-left: 1rem;
 
-  /* border: 2px solid blue; */
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -44,64 +38,54 @@ const RadioButton = styled.div`
 `;
 
 const Radiolabel = styled.label`
+  width: 55%;
+  position: relative;
   cursor: pointer;
   font-size: 1.8rem;
   color: var(--pureWhite);
   font-family: var(--karla);
   font-weight: var(--bold);
+
+  display: flex;
+  align-items: center;
 `;
+
 const RadioInput = styled.input`
   background-color: var(--deepGreen);
   border: 1px sold var(--pureWhite);
+  display: none;
+
+  &:checked + ${Radiolabel} > span::after {
+    opacity: 1;
+  }
 `;
 
-// Container for the radio input
-// const RadioContainer = styled.div`
-//   background-color: var(--deepGreen);
-//   display: inline-flex;
-//   align-items: center;
-//   justify-content: center;
-//   border: 2px solid green;
-// `;
+const RadioSpan = styled.span`
+  position: absolute;
+  background-color: var(--deepGreen);
+  border: 2px solid var(--pureWhite);
+  height: 2.2rem;
+  width: 2.2rem;
+  border-radius: 50%;
+  display: inline-block;
+  right: 0;
+  top: 0.25rem;
 
-// Hidden native radio input
-// const HiddenRadioInput = styled.input.attrs({ type: "radio" })`
-//   border: 0;
-//   clip: rect(0, 0, 0, 0);
-//   height: 1px;
-//   margin: -1px;
-//   overflow: hidden;
-//   padding: 0;
-//   position: absolute;
-//   white-space: nowrap;
-//   width: 1px;
-// `;
-
-// Custom radio input
-// const CustomRadioInput = styled.div`
-//   width: 16px;
-//   height: 16px;
-//   background-color: ${(props) =>
-//     props.checked ? "var(--deepGreen)" : "var(--pureWhite"};
-//   border: 1px solid var(--pureWhite);
-//   border-radius: 50%;
-//   transition: all 150ms;
-//   display: inline-block;
-//   cursor: pointer;
-//   margin-right: 8px;
-
-//   ${RadioContainer}:hover & {
-//     background-color: var(--lightGreen);
-//   }
-
-//   ${HiddenRadioInput}:focus + & {
-//     box-shadow: 0 0 0 3px var(--lightGreen);
-//   }
-
-//   ${HiddenRadioInput}:checked + & {
-//     background-color: var(--pureWhite);
-//   }
-// `;
+  &::after {
+    content: "";
+    display: block;
+    height: 1.1rem;
+    width: 1.1rem;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--pureWhite);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+`;
 
 function MakeReservation() {
   return (
@@ -120,19 +104,17 @@ function MakeReservation() {
             <Form action="">
               <RadioButtonsContainer>
                 <RadioButton>
-                  <Radiolabel htmlFor="indoor">Indoor seating</Radiolabel>
                   <RadioInput type="radio" name="seating" id="indoor" />
-
-                  {/* <RadioContainer className={className}> */}
-                  {/* <RadioContainer> */}
-                  {/* <HiddenRadioInput checked={checked} {...props} />
-                  <CustomRadioInput checked={checked} /> */}
-                  {/* </RadioContainer> */}
+                  <Radiolabel htmlFor="indoor">
+                    Indoor seating <RadioSpan />
+                  </Radiolabel>
                 </RadioButton>
 
                 <RadioButton>
-                  <Radiolabel htmlFor="indoor">Outdoor seating</Radiolabel>
-                  <RadioInput type="radio" name="seating" id="indoor" />
+                  <RadioInput type="radio" name="seating" id="outdoor" />
+                  <Radiolabel htmlFor="outdoor">
+                    Outdoor seating <RadioSpan />
+                  </Radiolabel>
                 </RadioButton>
               </RadioButtonsContainer>
               <CustomButton />

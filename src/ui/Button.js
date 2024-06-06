@@ -63,7 +63,15 @@ const backgroundColor = {
     background-color: var(--yellow);
     &:hover {
       background-color: var(--deepGreen);
-      border: 1px double var(--pureWhite);
+      transform: translateY(-3px);
+      box-shadow: 0 1rem 2rem rgba(black, 0.2);
+      margin-left: 3rem;
+
+      &::after {
+        transform: scaleX(1.4) scaleY(1.6);
+        opacity: 0;
+        padding: 0.5rem;
+      }
     }
   `,
   pureWhite: css`
@@ -72,18 +80,43 @@ const backgroundColor = {
 };
 
 export const Button = styled.button`
+  position: relative;
   font-family: var(--markazi);
-  box-shadow: var(--shadow-sm);
-  border: none;
   border-radius: var(--border-radius-md);
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+
+  &:active,
+  &:focus {
+    outline: none;
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(black, 0.2);
+  }
+
+  &::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: var(--border-radius-md);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+    border: 1px solid var(--deepGreen);
+  }
+
+  /*  */
   ${(props) => fontSize[props.fontSize]}
   ${(props) => fontWeight[props.fontWeight]}
   ${(props) => color[props.textColor]}
   ${(props) => backgroundColor[props.backgroundColor]}
-
+  
   @media (max-width: 450px) {
     border-radius: var(--border-radius-xlg);
-    /* border: 2px solid black; */
   }
 `;
 
