@@ -1,34 +1,41 @@
-import "./App.css";
-// import Footer from "./Footer";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import GlobalStyles from "./styles/GlobalStyles";
+import { Suspense, lazy } from "react";
+
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Loader from "./ui/Loader";
 
-// import Header from "./Header";
-import MakeReservation from "./pages/MakeReservation";
+// import MakeReservation from "./pages/MakeReservation";
+// import Menu from "./pages/Menu";
+// import About from "./components/About";
+// import Login from "./components/Login";
 // import Homepage from "./pages/Homepage";
 
-import GlobalStyles from "./styles/GlobalStyles";
-// import ConfirmReservation from "./pages/ConfirmReservation";
+const Homepage = lazy(() => import("./pages/Homepage"));
+const About = lazy(() => import("./pages/About"));
+const Menu = lazy(() => import("./pages/Menu"));
+const MakeReservation = lazy(() => import("./pages/MakeReservation"));
 
+// const OrderOnline = lazy(() => import("./pages/OrderOnline"))
 function App() {
   return (
     <>
+      <BrowserRouter>
+        <Suspense fallback={<Loader />}>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/menu" element={<Menu />} />
+            <Route path="/reservations" element={<MakeReservation />} />
+            <Route path="orderonline" element={<Menu />} />
+            {/* <Route path="login" element={<Login />} /> */}
+          </Routes>
+          <Footer />
+        </Suspense>
+      </BrowserRouter>
       <GlobalStyles />
-      <div>
-        <Header />
-        {/* <Homepage /> */}
-
-        {/* <ConfirmReservation /> */}
-        <MakeReservation />
-        <Footer />
-      </div>
-
-      {/* <header>
-        <nav></nav>
-      </header>
-      <main></main>
-      <footer></footer>
-      <h1>Little lemon</h1> */}
     </>
   );
 }

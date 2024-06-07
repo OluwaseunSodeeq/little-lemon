@@ -108,8 +108,7 @@ function MakeReservation() {
                   <Radiolabel htmlFor="indoor">
                     Indoor seating <RadioSpan />
                   </Radiolabel>
-                </RadioButton>
-
+                </RadioButton>{" "}
                 <RadioButton>
                   <RadioInput type="radio" name="seating" id="outdoor" />
                   <Radiolabel htmlFor="outdoor">

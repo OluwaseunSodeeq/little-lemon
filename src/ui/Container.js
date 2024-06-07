@@ -76,6 +76,17 @@ const confirmReservationBg = css`
     top: 7rem;
   }
 `;
+// Menu
+const menuBg = css`
+  position: relative;
+  top: 9rem;
+  height: auto;
+  background-color: var(--deepGreen);
+
+  @media (max-width: 450px) {
+    top: 7rem;
+  }
+`;
 
 const footerBg = css`
   position: relative;
@@ -132,6 +143,15 @@ export const Container = styled.div`
     css`
       ${confirmReservationBg}
     `}
+
+     /* Menu */
+     ${(props) =>
+    props.as === "section" &&
+    props.type === "menu" &&
+    css`
+      ${menuBg}
+    `}
+
 /* WEEK SPECIAL */
     ${(props) =>
     props.as === "aside" &&

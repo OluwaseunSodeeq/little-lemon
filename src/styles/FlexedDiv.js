@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const FlexedDiv = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
 
@@ -8,6 +9,10 @@ export const FlexedDiv = styled.div`
     props.type === "sb" &&
     css`
       justify-content: space-between;
+
+      @media (max-width: 950px) {
+        flex-wrap: wrap;
+      }
 
       @media (max-width: 450px) {
         flex-direction: column;
