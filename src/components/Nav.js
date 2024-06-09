@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const NavStyled = styled.nav`
   display: block;
+  transition: all 2s;
 
   &:global(.active) {
     &::before {
@@ -21,16 +22,34 @@ const NavStyled = styled.nav`
   }
 
   @media (max-width: 950px) {
-    display: none;
+    padding: 3rem 0;
+    width: 90%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 90;
+    display: ${({ hamburger }) => (hamburger ? "block" : "none")};
+
+    // Transition properties
+    transition: top 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    top: ${({ hamburger }) => (hamburger ? "25rem" : "0")};
   }
 `;
 const LiContainer = styled.ul`
   display: flex;
-  gap: 10px;
+  gap: 1rem;
+
+  @media (max-width: 950px) {
+    /* display: ${({ hamburger }) => (hamburger ? "flex" : "none")}; */
+    flex-direction: column;
+    gap: 2.5rem;
+  }
 `;
-function Nav() {
+function Nav({ hamburger }) {
   return (
-    <NavStyled>
+    <NavStyled hamburger={hamburger}>
       <LiContainer>
         <NavLi>
           <NavLink to="/">Home</NavLink>

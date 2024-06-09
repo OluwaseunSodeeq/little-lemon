@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 const LogoContainer = styled.div`
+  /* position: relative; */
   display: inline-block;
+  /* z-index: 90; */
 `;
 
 function Logo() {

@@ -38,6 +38,12 @@ export const NavLi = styled.li`
     color: var(--yellow);
     width: 100%;
   }
+
+  @media (max-width: 950px) {
+    font-size: 1.8rem;
+
+    /* color: var(--pureWhite); */
+  }
 `;
 
 // import styled from "styled-components";

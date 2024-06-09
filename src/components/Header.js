@@ -3,7 +3,6 @@ import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import Logo from "./Logo";
 import Nav from "./Nav";
-import { useState } from "react";
 
 const HeaderContent = styled.div`
   height: 9rem;
@@ -22,6 +21,8 @@ const HeaderIcon = styled.span`
   font-size: 1.8rem;
 `;
 const Hamburger = styled.div`
+  position: relative;
+  z-index: 90;
   color: var(--deepGreen);
   display: none;
   @media (max-width: 950px) {
@@ -29,8 +30,8 @@ const Hamburger = styled.div`
   }
 `;
 
-function Header() {
-  const [hamburger, setHamburger] = useState(false);
+function Header({ setHamburger, hamburger }) {
+  // const [hamburger, setHamburger] = useState(false);
 
   const toggleHamburger = () => setHamburger((open) => !open);
   return (
@@ -71,7 +72,7 @@ function Header() {
               </HeaderIcon>
             )}
           </Hamburger>
-          <Nav />
+          <Nav hamburger={hamburger} />
         </HeaderContent>
       </Content>
     </Container>
