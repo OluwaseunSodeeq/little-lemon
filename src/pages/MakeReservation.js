@@ -52,7 +52,7 @@ const Radiolabel = styled.label`
 
 const RadioInput = styled.input`
   background-color: var(--deepGreen);
-  border: 1px sold var(--pureWhite);
+  border: 1px solid var(--pureWhite);
   display: none;
 
   &:checked + ${Radiolabel} > span::after {
@@ -108,7 +108,7 @@ function MakeReservation() {
                   <Radiolabel htmlFor="indoor">
                     Indoor seating <RadioSpan />
                   </Radiolabel>
-                </RadioButton>{" "}
+                </RadioButton>
                 <RadioButton>
                   <RadioInput type="radio" name="seating" id="outdoor" />
                   <Radiolabel htmlFor="outdoor">

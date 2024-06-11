@@ -49,7 +49,6 @@ const fontWeight = {
 const fontFamily = {
   karla: css`
     font-family: var(--karla);
-    text-decoration: underline;
   `,
   karlaText: css`
     font-family: var(--karla);
