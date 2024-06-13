@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 
 // Styled components
@@ -28,7 +28,7 @@ const SelectDivStyled = styled.div`
   width: 100%;
   background-color: var(--deepGreen);
   /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
-  z-index: 1;
+  z-index: 10;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -36,9 +36,9 @@ const SelectDivStyled = styled.div`
   z-index: 30;
 `;
 
-const DinnerOptionStyled = styled.option`
+const OptionStyled = styled.option`
   position: relative;
-  z-index: 50;
+  z-index: 80;
   width: 48%;
   padding: 10px;
   cursor: pointer;
@@ -53,56 +53,41 @@ const DinnerOptionStyled = styled.option`
 `;
 
 // Custom select component
-function CustomDropdown({ options, value, setEachValue }) {
-  const [showOptions, setShowOptions] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("No. of Diners");
+function CustomDropdown({
+  value,
+  options,
+  toggleOptions,
+  showOptions,
+  currentID,
+  dispatch,
+}) {
   const selectRef = useRef(null);
-
-  const toggleOptions = () => {
-    setShowOptions((prevShow) => !prevShow);
-  };
-
-  const handleOptionClick = (value) => {
-    setSelectedValue(value);
-    setShowOptions(false);
-  };
+  console.log(toggleOptions);
+  console.log(options, toggleOptions, showOptions);
 
   const selectChangeHandler = (e) => {
-    handleOptionClick(e.target.value);
+    const type = ["date", "time", "occasion", "dinner"][currentID];
+    dispatch({ type: type, payload: e.target.value });
+    toggleOptions();
   };
-
-  //   const options = [
-  //     "1 Diner",
-  //     "2 Diners",
-  //     "3 Diners",
-  //     "4 Diners",
-  //     "5 Diners",
-  //     "6 Diners",
-  //     "7 Diners",
-  //     "8 Diners",
-  //     "9 Diners",
-  //     "10 Diners",
-  //   ];
 
   return (
     <SelectContainer>
       <SelectStyled
         ref={selectRef}
-        onChange={selectChangeHandler}
-        value={selectedValue}
+        onChange={() => selectChangeHandler(currentID)}
+        value={value}
         onClick={toggleOptions}
-      >
-        {/* <option value="" disabled hidden>
-          {selectedValue}
-        </option> */}
-      </SelectStyled>
-      {/* <DropdownIcon>▼</DropdownIcon> */}
+      ></SelectStyled>
       {showOptions && (
         <SelectDivStyled>
           {options.map((option, index) => (
-            <DinnerOptionStyled key={index} value={option}>
+            <OptionStyled
+              key={index}
+              onClick={() => selectChangeHandler({ target: { value: option } })}
+            >
               {option}
-            </DinnerOptionStyled>
+            </OptionStyled>
           ))}
         </SelectDivStyled>
       )}

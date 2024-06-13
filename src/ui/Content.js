@@ -4,7 +4,7 @@ export const Content = styled.div`
   width: 100%;
   max-width: 120rem;
   height: auto;
-  padding: 0 10.4rem;
+  padding: 0 10.4rem 2rem;
   margin: 0 auto;
   overflow-x: hidden;
 

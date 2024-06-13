@@ -7,6 +7,7 @@ import CustomButton from "../components/CustomButton";
 // Make Reservations
 const MakeReservationStyled = styled.div`
   padding: 2rem 0 3rem;
+  height: auto;
 `;
 
 // FORM STYLING
@@ -14,6 +15,7 @@ const MakeReservationStyled = styled.div`
 const Form = styled.form`
   position: relative;
   width: 100%;
+  height: auto;
 `;
 
 // RADIO STYLING
