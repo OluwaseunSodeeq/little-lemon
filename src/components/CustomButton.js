@@ -23,6 +23,10 @@ const ButtonContainer = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   row-gap: 0.4rem;
+
+  @media (max-width: 450px) {
+    width: 100%;
+  }
 `;
 
 const CustomButtonStyledContainer = styled.div`

@@ -62,8 +62,6 @@ function CustomDropdown({
   dispatch,
 }) {
   const selectRef = useRef(null);
-  console.log(toggleOptions);
-  console.log(options, toggleOptions, showOptions);
 
   const selectChangeHandler = (e) => {
     const type = ["date", "time", "occasion", "dinner"][currentID];

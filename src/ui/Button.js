@@ -81,6 +81,7 @@ const backgroundColor = {
 
 export const Button = styled.button`
   position: relative;
+  /* width: 15rem; */
   font-family: var(--markazi);
   border-radius: var(--border-radius-md);
   transition: all 0.2s;

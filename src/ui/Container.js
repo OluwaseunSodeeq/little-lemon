@@ -39,6 +39,11 @@ const makeReservationBg = css`
   height: auto;
   background-color: var(--pureWhite);
 
+  /*  */
+  /* display: flex;
+  flex-direction: column;
+  row-gap: 5rem; */
+
   @media (max-width: 450px) {
     top: 7rem;
   }
@@ -46,22 +51,20 @@ const makeReservationBg = css`
 const makeReservationBgTop = css`
   /* font-family: var(--karla); */
   position: relative;
-  top: 9rem;
   height: auto;
   background-color: var(--deepGreen);
 
   @media (max-width: 450px) {
-    top: 7rem;
   }
 `;
 const makeReservationBgBottom = css`
-  /* position: relative; */
-  /* top: 9rem; */
+  position: relative;
+  top: 5rem;
   /* height: 27rem; */
-  /* background-color: var(--deepGreen); */
+  background-color: var(--pureWhite);
 
   @media (max-width: 450px) {
-    top: 7rem;
+    top: 4rem;
   }
 `;
 

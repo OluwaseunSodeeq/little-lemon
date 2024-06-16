@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Loader from "./ui/Loader";
 import styled from "styled-components";
+import { MenusContextProvider } from "./Context/MenusContext";
 
 // import MakeReservation from "./pages/MakeReservation";
 // import Menu from "./pages/Menu";
@@ -23,7 +24,7 @@ const MakeReservation = lazy(() => import("./pages/MakeReservation"));
 const AppSection = styled.section`
   position: relative;
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
 `;
 
 export const HamburgerBg = styled.div`
@@ -49,22 +50,24 @@ function App() {
 
   return (
     <AppSection>
-      <BrowserRouter>
-        <Suspense fallback={<Loader />}>
-          <HamburgerBg hamburger={hamburger} />
+      <MenusContextProvider>
+        <BrowserRouter>
+          <Suspense fallback={<Loader />}>
+            <HamburgerBg hamburger={hamburger} />
 
-          <Header hamburger={hamburger} setHamburger={setHamburger} />
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/reservations" element={<MakeReservation />} />
-            <Route path="orderonline" element={<Menu />} />
-            {/* <Route path="login" element={<Login />} /> */}
-          </Routes>
-          <Footer />
-        </Suspense>
-      </BrowserRouter>
+            <Header hamburger={hamburger} setHamburger={setHamburger} />
+            <Routes>
+              <Route path="/" element={<Homepage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/reservations" element={<MakeReservation />} />
+              <Route path="orderonline" element={<Menu />} />
+              {/* <Route path="login" element={<Login />} /> */}
+            </Routes>
+            <Footer />
+          </Suspense>
+        </BrowserRouter>
+      </MenusContextProvider>
       <GlobalStyles />
     </AppSection>
   );

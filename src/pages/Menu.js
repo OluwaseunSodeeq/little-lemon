@@ -3,26 +3,21 @@ import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import { Paragraph } from "../ui/Paragraph";
 import { FlexedDiv } from "../styles/FlexedDiv";
+import useMenusContext from "../Context/useMenusContext";
 
 const MenuStyled = styled.div`
   width: 100%;
   padding: 2rem 0 3rem 0;
 `;
-// const MenuStyledContainer = styled.div``;
 const OtherMenuStyledContainer = styled.div`
   padding: 5rem 0;
 `;
-// const OtherMiniMenuStyledContainer = styled.div`
-//   width: 100%;
-// `;
 
 const BasicMenuStyledContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-
-  /* border: 2px solid var(--pureWhite); */
 `;
 
 const EachMenuContainer = styled.div`
@@ -44,10 +39,10 @@ const EachMenu = styled.div`
   cursor: pointer;
   border-radius: var(--border-radius-lg);
   padding: 0.5rem;
-
+  background-color: ${({ selected }) =>
+    selected ? "rgba(255, 255, 255, 0.3)" : ""};
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    /* border: 2px solid red; */
+    background-color: rgba(255, 255, 255, 0.1);
   }
 `;
 
@@ -57,9 +52,10 @@ const MenuImage = styled.div`
   border-radius: 1998px;
   border: 2px solid var(--pureWhite);
 
-  /* &img {
+  & > img {
     width: 100%;
-  } */
+    border-radius: 1998px;
+  }
 `;
 const OthermenuItem = styled.div`
   display: flex;
@@ -70,51 +66,11 @@ const OthermenuItem = styled.div`
 const OtherMenuContainer = styled.div`
   width: 100%;
 `;
-function Menu() {
-  const menuArr = [
-    {
-      generalName: "Paste",
-      list: [
-        { name: "Special Pasta", price: "10", image: "" },
-        { name: "Small Pasta", price: "3", image: "" },
-        { name: "Medium Pasta", price: "5", image: "" },
-        { name: "Big Pasta", price: "8", image: "" },
-      ],
-    },
-    {
-      generalName: "Burger",
-      list: [
-        { name: "Special Burger", price: "10", image: "" },
-        { name: "Small Burger", price: "3", image: "" },
-        { name: "Medium Burger", price: "5", image: "" },
-        { name: "Big Burger", price: "8", image: "" },
-      ],
-    },
-    {
-      generalName: "Pizza",
-      list: [
-        { name: "Special Pizza", price: "10", image: "" },
-        { name: "Small Pizza", price: "3", image: "" },
-        { name: "Medium Pizza", price: "5", image: "" },
-        { name: "Big Pizza", price: "8", image: "" },
-      ],
-    },
-    {
-      generalName: "OTHER FOOD MENU",
-      list: [
-        { name: "Food Name", price: "5", image: "" },
-        { name: "Food Name", price: "7", image: "" },
-        { name: "Food Name", price: "2", image: "" },
-        { name: "Food Name", price: "10", image: "" },
-        { name: "Food Name", price: "12", image: "" },
-        { name: "Food Name", price: "2", image: "" },
-        { name: "Food Name", price: "2", image: "" },
-        { name: "Food Name", price: "7", image: "" },
-      ],
-    },
-  ];
 
-  const resultOfMainMenu = menuArr
+function Menu() {
+  const { menus, SelectedMenuHandler } = useMenusContext();
+
+  const resultOfMainMenu = menus
     .filter((menu) => menu.generalName !== "OTHER FOOD MENU")
     .map((menu, i) => {
       const { list, generalName } = menu;
@@ -129,10 +85,19 @@ function Menu() {
           </Paragraph>
           <BasicMenuStyledContainer>
             {list.map((food, i) => {
-              const { name, price, image } = food;
+              const { name, price, image, id, selected } = food;
+
               return (
-                <EachMenu key={i}>
-                  <MenuImage>{image}</MenuImage>
+                <EachMenu
+                  selected={selected}
+                  onClick={() => {
+                    SelectedMenuHandler(id, generalName);
+                  }}
+                  key={i}
+                >
+                  <MenuImage>
+                    <img src={image} alt={name} />
+                  </MenuImage>
                   <Paragraph fontFamily="karlaText" fontSize="xlarge">
                     {name}
                   </Paragraph>
@@ -152,7 +117,7 @@ function Menu() {
       );
     });
 
-  const resultOfOtherMenu = menuArr
+  const resultOfOtherMenu = menus
     .filter((menu) => menu.generalName === "OTHER FOOD MENU")
     .map((menu, i) => {
       const { list, generalName } = menu;
@@ -167,11 +132,16 @@ function Menu() {
           </Paragraph>
           <OthermenuItem>
             {list.map((food, i) => {
-              const { name, price, image } = food;
+              const { name, price, image, id, selected } = food;
               return (
                 <EachMenuContainer key={i}>
-                  <EachMenu>
-                    <MenuImage>{image}</MenuImage>
+                  <EachMenu
+                    onClick={() => SelectedMenuHandler(id, generalName)}
+                    selected={selected}
+                  >
+                    <MenuImage>
+                      <img src={image} alt={name} />
+                    </MenuImage>
                     <Paragraph fontFamily="karlaText" fontSize="xlarge">
                       {name}
                     </Paragraph>

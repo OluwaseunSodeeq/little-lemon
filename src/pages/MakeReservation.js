@@ -3,6 +3,9 @@ import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import { Paragraph } from "../ui/Paragraph";
 import CustomButton from "../components/CustomButton";
+import { Button } from "../ui/Button";
+import useMenusContext from "../Context/useMenusContext";
+import { useState } from "react";
 
 // Make Reservations
 const MakeReservationStyled = styled.div`
@@ -25,6 +28,12 @@ const RadioButtonsContainer = styled.div`
   align-items: center;
   gap: 5rem;
   justify-content: center;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    gap: 0rem;
+    margin-bottom: 2rem;
+  }
 `;
 
 const RadioButton = styled.div`
@@ -37,6 +46,13 @@ const RadioButton = styled.div`
   align-items: center;
   justify-content: flex-start;
   gap: 2rem;
+
+  @media (max-width: 450px) {
+    width: 100%;
+    padding-left: 0rem;
+    gap: 0rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const Radiolabel = styled.label`
@@ -50,6 +66,11 @@ const Radiolabel = styled.label`
 
   display: flex;
   align-items: center;
+  @media (max-width: 450px) {
+    width: 100%;
+    justify-content: start;
+    /* column-gap: 2rem; */
+  }
 `;
 
 const RadioInput = styled.input`
@@ -76,7 +97,7 @@ const RadioSpan = styled.span`
   &::after {
     content: "";
     display: block;
-    height: 1.1rem;
+    height: 0%.8rem;
     width: 1.1rem;
     border-radius: 50%;
     position: absolute;
@@ -86,12 +107,65 @@ const RadioSpan = styled.span`
     background-color: var(--pureWhite);
     opacity: 0;
     transition: opacity 0.2s;
+
+    @media (max-width: 450px) {
+      height: 0.8rem;
+      width: 0.8rem;
+    }
+  }
+  @media (max-width: 450px) {
+    left: 50%;
+    height: 1.8rem;
+    width: 1.8rem;
   }
 `;
+// BOTTOM CONTAINER STYLE
 
+const BottomContainerStyled = styled.div`
+  /* width: 60%; */
+  margin: 0 auto;
+  /* border: 2px solid red; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  column-gap: 5rem;
+`;
+const MenusContainer = styled.div`
+  /* border: 2px solid blue; */
+  text-align: center;
+`;
+const ButtonContainer = styled.div`
+  display: inline-block;
+  text-align: center;
+  margin-top: 3rem;
+`;
 function MakeReservation() {
+  // const { menus, SelectedMenuHandler } = useMenusContext();
+  const { menus } = useMenusContext();
+  const [selectedmenus, setSelectedmenus] = useState([]);
+
+  console.log(menus);
+  const orderArray = menus.map((category) => {
+    const { generalName, list } = category;
+    const selectedlist = list
+      .filter((menu) => menu.selected === true)
+      .map((menu) => menu.list);
+    // .map((menu) => {
+    //   return {menu.list, menu.generalName;}
+    // });
+    // .map((menu) => {
+    //   menu.generalName, menu.list;
+    // });
+    console.log(selectedlist);
+    // return setSelectedmenus((previuosArr) => [
+    //   ...previuosArr,
+    //   { generalName, menu },
+    // ]);
+  });
+  console.log(orderArray);
   return (
-    <>
+    <Container as="section" type="makeReservation">
       <Container as="div" type="makeReservationTop">
         <Content>
           <MakeReservationStyled>
@@ -123,8 +197,23 @@ function MakeReservation() {
           </MakeReservationStyled>
         </Content>
       </Container>
-      <Container as="div" type="makeReservationBottom"></Container>
-    </>
+      <Container as="div" type="makeReservationBottom">
+        <Content>
+          <BottomContainerStyled>
+            <MenusContainer>
+              {selectedmenus.length === 0 ? (
+                <span>Kindly make an order</span>
+              ) : (
+                orderArray
+              )}
+            </MenusContainer>
+            <ButtonContainer>
+              <Button>Confirm Reservation</Button>
+            </ButtonContainer>
+          </BottomContainerStyled>
+        </Content>
+      </Container>
+    </Container>
   );
 }
 
