@@ -6,7 +6,7 @@ const MenusContextData = createContext(null);
 function MenusContextProvider({ children }) {
   const [menus, setMenus] = useState(menuArr);
 
-  const SelectedMenuHandler = (id, generalName) => {
+  const selectedMenuHandler = (id, generalName) => {
     const updatedMenus = menus.map((category) => {
       const { generalName: menuGeneralName, list } = category;
       if (menuGeneralName === generalName) {
@@ -21,7 +21,7 @@ function MenusContextProvider({ children }) {
     setMenus(updatedMenus);
   };
   return (
-    <MenusContextData.Provider value={{ menus, SelectedMenuHandler }}>
+    <MenusContextData.Provider value={{ menus, selectedMenuHandler }}>
       {children}
     </MenusContextData.Provider>
   );

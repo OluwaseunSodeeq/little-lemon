@@ -68,7 +68,7 @@ const OtherMenuContainer = styled.div`
 `;
 
 function Menu() {
-  const { menus, SelectedMenuHandler } = useMenusContext();
+  const { menus, selectedMenuHandler } = useMenusContext();
 
   const resultOfMainMenu = menus
     .filter((menu) => menu.generalName !== "OTHER FOOD MENU")
@@ -91,7 +91,7 @@ function Menu() {
                 <EachMenu
                   selected={selected}
                   onClick={() => {
-                    SelectedMenuHandler(id, generalName);
+                    selectedMenuHandler(id, generalName);
                   }}
                   key={i}
                 >
@@ -136,7 +136,7 @@ function Menu() {
               return (
                 <EachMenuContainer key={i}>
                   <EachMenu
-                    onClick={() => SelectedMenuHandler(id, generalName)}
+                    onClick={() => selectedMenuHandler(id, generalName)}
                     selected={selected}
                   >
                     <MenuImage>
