@@ -68,6 +68,9 @@ const color = {
   black: css`
     color: var(--black);
   `,
+  red: css`
+    color: red;
+  `,
   deepGreen: css`
     color: var(--deepGreen);
   `,

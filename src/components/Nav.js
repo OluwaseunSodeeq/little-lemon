@@ -64,10 +64,10 @@ function Nav({ hamburger }) {
           <NavLink to="/reservations">Reservations</NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to="orderonlne">Order Online</NavLink>
+          <NavLink to="/orderonline">Order Online</NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to="login">Login</NavLink>
+          <NavLink to="/login">Login</NavLink>
         </NavLi>
       </LiContainer>
     </NavStyled>

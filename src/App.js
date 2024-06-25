@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import Loader from "./ui/Loader";
 import styled from "styled-components";
 import { MenusContextProvider } from "./Context/MenusContext";
+// import CustomSelect from "./pages/Test2";
 
 // import MakeReservation from "./pages/MakeReservation";
 // import Menu from "./pages/Menu";
@@ -18,6 +19,8 @@ const Homepage = lazy(() => import("./pages/Homepage"));
 const About = lazy(() => import("./pages/About"));
 const Menu = lazy(() => import("./pages/Menu"));
 const MakeReservation = lazy(() => import("./pages/MakeReservation"));
+const Login = lazy(() => import("./pages/Login"));
+const OrderOnline = lazy(() => import("./pages/OrderOnline"));
 
 // const OrderOnline = lazy(() => import("./pages/OrderOnline"))
 
@@ -61,8 +64,8 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/reservations" element={<MakeReservation />} />
-              <Route path="orderonline" element={<Menu />} />
-              {/* <Route path="login" element={<Login />} /> */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/orderonline" element={<OrderOnline />} />
             </Routes>
             <Footer />
           </Suspense>

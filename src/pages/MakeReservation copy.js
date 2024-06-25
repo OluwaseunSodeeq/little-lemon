@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
@@ -7,10 +7,6 @@ import CustomButton from "../components/CustomButton";
 import { Button } from "../ui/Button";
 import useMenusContext from "../Context/useMenusContext";
 import BackPageOfMakeReservation from "./BackPageOfMakeReservation";
-import { useFormik } from "formik";
-import { makeReservationSchemas } from "../schemas";
-
-// NOTE for the challenge ofSelect and option tags
 /*
 NOTE:
 The native <option> tag inside a <select> element has limited styling capabilities and cannot be styled the same way as other HTML elements due to browser restrictions. For example, you cannot control the width of the individual <option> elements or apply complex layouts like flexbox to them. This is why creating a custom dropdown component is often necessary to achieve advanced styling and layout requirements.
@@ -59,8 +55,8 @@ const RadioButton = styled.div`
   margin-bottom: 2rem;
   padding-left: 1rem;
   display: flex;
-  justify-content: start;
-  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   gap: 2rem;
 
   @media (max-width: 450px) {
@@ -82,7 +78,6 @@ const Radiolabel = styled.label`
   font-weight: var(--bold);
   display: flex;
   align-items: center;
-  justify-content: start;
 
   @media (max-width: 450px) {
     width: 100%;
@@ -238,60 +233,10 @@ const ButtonContainer = styled.div`
   text-align: center;
   margin-top: 3rem;
 `;
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "date":
-      return { ...state, date: action.payload };
-    case "dinner":
-      return { ...state, dinner: action.payload };
-    case "occasion":
-      return { ...state, occasion: action.payload };
-    case "time":
-      return { ...state, time: action.payload };
-    case "seating":
-      return { ...state, seating: action.payload };
-    case "textArea":
-      return { ...state, textArea: action.payload };
-    default:
-      throw new Error("Unknown action type");
-  }
-};
 
-const initialState = {
-  date: "",
-  dinner: "",
-  occasion: "",
-  time: "",
-  seating: "",
-  firstName: "",
-  lastName: "",
-  phoneNumber: "",
-  email: "",
-  textArea: "",
-};
-
+// Main Component
 function MakeReservation() {
   const { menus, selectedMenuHandler } = useMenusContext();
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { date, occasion, dinner, seating, time } = state;
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  // const { errors, touched, handleBlur, handleChange, handleSubmit } = useFormik(
-  const { errors, handleBlur, handleChange, handleSubmit, touched, values } =
-    useFormik({
-      initialValues: initialState,
-      validationSchema: makeReservationSchemas,
-      onSubmit: (values) => {
-        // handle form submission
-        console.log(values);
-      },
-    });
-
-  const handleFieldChange = (e) => {
-    handleChange(e);
-    dispatch({ type: e.target.name, payload: e.target.value });
-  };
-
   const notinIsSelected = 0;
   const makeAnOrderMsg = (
     <Paragraph
@@ -303,7 +248,7 @@ function MakeReservation() {
       Kindly make an Order!
     </Paragraph>
   );
-
+  // Generate selected menu items
   const orderArray = menus
     .flatMap((category) => {
       const { generalName, list } = category;
@@ -313,7 +258,7 @@ function MakeReservation() {
     .map((menu, i) => {
       const { id, generalName, image, name } = menu;
       return (
-        <SelectedmenuImageContainer index={i} key={i}>
+        <SelectedmenuImageContainer index={i} key={id}>
           <SelectedmenuImageStyled>
             <img src={image} alt={name} />
             <span onClick={() => selectedMenuHandler(id, generalName)}>X</span>
@@ -321,15 +266,10 @@ function MakeReservation() {
         </SelectedmenuImageContainer>
       );
     });
-  console.log(values);
+  console.log(orderArray.length);
   return (
     <Container as="section" type="makeReservation">
-      <Form
-        onSubmit={(e) => {
-          setFormSubmitted(true);
-          handleSubmit(e);
-        }}
-      >
+      <Form>
         <Container as="div" type="makeReservationTop">
           <Content>
             <MakeReservationStyled>
@@ -341,94 +281,51 @@ function MakeReservation() {
               >
                 Reservations
               </Paragraph>
-              <>
+              <Form action="">
                 <RadioButtonsContainer>
                   <RadioButton>
-                    <RadioInput
-                      type="radio"
-                      name="seating"
-                      id="indoor"
-                      value="indoor"
-                      onChange={handleFieldChange}
-                      checked={seating === "indoor"}
-                      onBlur={handleBlur}
-                    />
+                    <RadioInput type="radio" name="seating" id="indoor" />
                     <Radiolabel htmlFor="indoor">
                       Indoor seating <RadioSpan />
                     </Radiolabel>
-                    {formSubmitted && errors.seating && touched.seating && (
-                      <Paragraph fontSize="large" color="red">
-                        {errors.seating}
-                      </Paragraph>
-                    )}
                   </RadioButton>
                   <RadioButton>
-                    <RadioInput
-                      type="radio"
-                      name="seating"
-                      id="outdoor"
-                      value="outdoor"
-                      onChange={handleFieldChange}
-                      checked={seating === "outdoor"}
-                      onBlur={handleBlur}
-                    />
+                    <RadioInput type="radio" name="seating" id="outdoor" />
                     <Radiolabel htmlFor="outdoor">
                       Outdoor seating <RadioSpan />
                     </Radiolabel>
-                    {formSubmitted && errors.seating && touched.seating && (
-                      <Paragraph fontSize="large" color="red">
-                        {errors.seating}
-                      </Paragraph>
-                    )}
                   </RadioButton>
                 </RadioButtonsContainer>
-                <CustomButton
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  date={date}
-                  dinner={dinner}
-                  occasion={occasion}
-                  time={time}
-                  errors={formSubmitted ? errors : {}}
-                  dispatch={dispatch}
-                />
-              </>
+                <CustomButton />
+              </Form>
             </MakeReservationStyled>
           </Content>
         </Container>
-        <BackPageOfMakeReservation
-          values={values}
-          handleChange={handleChange}
-          dispatch={dispatch}
-          date={date}
-          dinner={dinner}
-          occasion={occasion}
-          time={time}
-        />
-        <Container as="div" type="makeReservationBottom">
-          <Content>
-            <BottomContainerStyled>
-              {orderArray.length > notinIsSelected && (
-                <Paragraph
-                  color="deepGreen"
-                  fontFamily="markazi"
-                  fontweight="deepBold"
-                  fontSize="xxxlarge"
-                >
-                  {orderArray.length} items{" "}
-                  {orderArray.length === 1 ? "is" : "are"} selected!
-                </Paragraph>
-              )}
-              <MenusContainer>
-                {orderArray.length === 0 ? makeAnOrderMsg : orderArray}
-              </MenusContainer>
-              <ButtonContainer>
-                <Button type="submit">Confirm Reservation</Button>
-              </ButtonContainer>
-            </BottomContainerStyled>
-          </Content>
-        </Container>
+        <BackPageOfMakeReservation />
       </Form>
+      <Container as="div" type="makeReservationBottom">
+        <Content>
+          <BottomContainerStyled>
+            {orderArray.length > notinIsSelected && (
+              <Paragraph
+                color="deepGreen"
+                fontFamily="markazi"
+                fontweight="deepBold"
+                fontSize="xxxlarge"
+              >
+                {orderArray.length} items{" "}
+                {orderArray.length === 1 ? "is" : "are"} selected!
+              </Paragraph>
+            )}
+            <MenusContainer>
+              {orderArray.length === 0 ? makeAnOrderMsg : orderArray}
+            </MenusContainer>
+            <ButtonContainer>
+              <Button>Confirm Reservation</Button>
+            </ButtonContainer>
+          </BottomContainerStyled>
+        </Content>
+      </Container>
     </Container>
   );
 }

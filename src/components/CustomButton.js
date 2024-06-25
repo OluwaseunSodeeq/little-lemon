@@ -1,4 +1,4 @@
-import React, { useState, useRef, useReducer } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { CiCalendar } from "react-icons/ci";
 import { IoPersonOutline } from "react-icons/io5";
@@ -6,6 +6,7 @@ import { LiaGlassCheersSolid } from "react-icons/lia";
 import { LuAlarmClock } from "react-icons/lu";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import CustomDropdown from "./CustomDropDown";
+import { Paragraph } from "../ui/Paragraph";
 
 const CustomButtonsContainer = styled.div`
   display: flex;
@@ -83,31 +84,16 @@ const RenderSpanText = styled.span`
   font-family: var(--karla);
 `;
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "date":
-      return { ...state, date: action.payload };
-    case "dinner":
-      return { ...state, dinner: action.payload };
-    case "occasion":
-      return { ...state, occasion: action.payload };
-    case "time":
-      return { ...state, time: action.payload };
-    default:
-      throw new Error("Unknown action type");
-  }
-};
-
-const initialState = {
-  date: "",
-  dinner: "",
-  occasion: "",
-  time: "",
-};
-
-const CustomButton = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { date, dinner, occasion, time } = state;
+const CustomButton = ({
+  handleBlur,
+  handleChange,
+  time,
+  date,
+  occasion,
+  dinner,
+  errors,
+  dispatch,
+}) => {
   const [showOptions, setShowOptions] = useState(false);
   const [currentElement, setCurrentElement] = useState(null);
   const dateRef = useRef(null);
@@ -120,6 +106,8 @@ const CustomButton = () => {
       value: date || "Select Date",
       afterIcon: <RiArrowDropDownLine style={{ fontSize: "3.4rem" }} />,
       inputType: "input",
+      errorKey: "date",
+      placeholder: "Select Date",
     },
     {
       currentID: 1,
@@ -129,6 +117,8 @@ const CustomButton = () => {
       afterIcon: <RiArrowDropDownLine style={{ fontSize: "3.4rem" }} />,
       inputType: "select",
       options: ["Morning", "Afternoon", "Evening", "Night"],
+      errorKey: "time",
+      placeholder: "Select Time",
     },
     {
       currentID: 2,
@@ -138,8 +128,9 @@ const CustomButton = () => {
       afterIcon: <RiArrowDropDownLine style={{ fontSize: "3.4rem" }} />,
       inputType: "select",
       options: ["Birthday", "Anniversary", "Graduation", "Other"],
+      errorKey: "occasion",
+      placeholder: "Occasion",
     },
-
     {
       currentID: 3,
       label: "Number of Diners",
@@ -159,6 +150,8 @@ const CustomButton = () => {
         "9 Diners",
         "10 Diners",
       ],
+      errorKey: "dinner",
+      placeholder: "No. of Diners",
     },
   ];
 
@@ -173,6 +166,7 @@ const CustomButton = () => {
       month: "long",
       day: "numeric",
     });
+    handleChange(e);
     dispatch({ type: "date", payload: formattedDate });
   };
 
@@ -192,6 +186,8 @@ const CustomButton = () => {
           inputType,
           options,
           currentID,
+          errorKey,
+          placeholder,
         } = btn;
         return (
           <ButtonContainer key={i}>
@@ -201,10 +197,12 @@ const CustomButton = () => {
                 <>
                   <DateInput
                     type="date"
+                    name="date"
                     placeholder="Select Date"
                     ref={dateRef}
                     onClick={onShowPicker}
                     onChange={dateChangeHandler}
+                    onBlur={handleBlur}
                   />
                   <CustomRenderInputContent>
                     <span>{beforeIcon}</span>
@@ -215,12 +213,14 @@ const CustomButton = () => {
               ) : (
                 <>
                   <CustomDropdown
+                    ind={i}
                     options={options}
                     value={value}
                     currentID={currentID}
                     showOptions={showOptions && currentElement === currentID}
                     toggleOptions={() => toggleOptions(currentID)}
                     dispatch={dispatch}
+                    handleChange={handleChange}
                   />
                   <CustomRenderInputContent>
                     <span>{beforeIcon}</span>
@@ -230,6 +230,11 @@ const CustomButton = () => {
                 </>
               )}
             </CustomButtonStyledContainer>
+            {value === placeholder && (
+              <Paragraph color="red" fontSize="large">
+                {errors[errorKey]}
+              </Paragraph>
+            )}
           </ButtonContainer>
         );
       })}
@@ -239,4 +244,151 @@ const CustomButton = () => {
 
 export default CustomButton;
 
-// ////////////////////////////////////////////////////////////////////////////////////////////
+// const CustomButton = ({
+//   handleBlur,
+//   time,
+//   date,
+//   occasion,
+//   dinner,
+//   errors,
+//   dispatch,
+// }) => {
+//   const [showOptions, setShowOptions] = useState(false);
+//   const [currentElement, setCurrentElement] = useState(null);
+//   const dateRef = useRef(null);
+
+//   const content = [
+//     {
+//       currentID: 0,
+//       label: "Date",
+//       beforeIcon: <CiCalendar style={{ fontSize: "3rem" }} />,
+//       value: date || "Select Date",
+//       afterIcon: <RiArrowDropDownLine style={{ fontSize: "3.4rem" }} />,
+//       inputType: "input",
+//     },
+//     {
+//       currentID: 1,
+//       label: "Time",
+//       beforeIcon: <LuAlarmClock style={{ fontSize: "3rem" }} />,
+//       value: time || "Select Time",
+//       afterIcon: <RiArrowDropDownLine style={{ fontSize: "3.4rem" }} />,
+//       inputType: "select",
+//       options: ["Morning", "Afternoon", "Evening", "Night"],
+//     },
+//     {
+//       currentID: 2,
+//       label: "Occasion",
+//       beforeIcon: <LiaGlassCheersSolid style={{ fontSize: "3rem" }} />,
+//       value: occasion || "Occasion",
+//       afterIcon: <RiArrowDropDownLine style={{ fontSize: "3.4rem" }} />,
+//       inputType: "select",
+//       options: ["Birthday", "Anniversary", "Graduation", "Other"],
+//     },
+
+//     {
+//       currentID: 3,
+//       label: "Number of Diners",
+//       beforeIcon: <IoPersonOutline style={{ fontSize: "3rem" }} />,
+//       value: dinner || "No. of Diners",
+//       afterIcon: <RiArrowDropDownLine style={{ fontSize: "3.4rem" }} />,
+//       inputType: "select",
+//       options: [
+//         "1 Diner",
+//         "2 Diners",
+//         "3 Diners",
+//         "4 Diners",
+//         "5 Diners",
+//         "6 Diners",
+//         "7 Diners",
+//         "8 Diners",
+//         "9 Diners",
+//         "10 Diners",
+//       ],
+//     },
+//   ];
+
+//   const onShowPicker = () => {
+//     dateRef.current.showPicker();
+//   };
+
+//   const dateChangeHandler = (e) => {
+//     const selectedDate = new Date(e.target.value);
+//     const formattedDate = selectedDate.toLocaleDateString("en-US", {
+//       year: "numeric",
+//       month: "long",
+//       day: "numeric",
+//     });
+//     dispatch({ type: "date", payload: formattedDate });
+//   };
+
+//   const toggleOptions = (id) => {
+//     setCurrentElement(id);
+//     setShowOptions((prevShow) => (currentElement !== id ? true : !prevShow));
+//   };
+
+//   return (
+//     <CustomButtonsContainer>
+//       {content.map((btn, i) => {
+//         const {
+//           beforeIcon,
+//           value,
+//           afterIcon,
+//           label,
+//           inputType,
+//           options,
+//           currentID,
+//         } = btn;
+//         return (
+//           <ButtonContainer key={i}>
+//             <ButtonLabel>{label}</ButtonLabel>
+//             <CustomButtonStyledContainer>
+//               {inputType === "input" ? (
+//                 <>
+//                   <DateInput
+//                     type="date"
+//                     name="date"
+//                     placeholder="Select Date"
+//                     ref={dateRef}
+//                     onClick={onShowPicker}
+//                     onChange={dateChangeHandler}
+//                     onBlur={handleBlur}
+//                   />
+//                   <CustomRenderInputContent>
+//                     <span>{beforeIcon}</span>
+//                     <RenderSpanText>{value}</RenderSpanText>
+//                     <span>{afterIcon}</span>
+//                   </CustomRenderInputContent>
+//                 </>
+//               ) : (
+//                 <>
+//                   <CustomDropdown
+//                     ind={i}
+//                     options={options}
+//                     value={value}
+//                     currentID={currentID}
+//                     showOptions={showOptions && currentElement === currentID}
+//                     toggleOptions={() => toggleOptions(currentID)}
+//                     dispatch={dispatch}
+//                   />
+//                   <CustomRenderInputContent>
+//                     <span>{beforeIcon}</span>
+//                     <RenderSpanText>{value}</RenderSpanText>
+//                     <span>{afterIcon}</span>
+//                   </CustomRenderInputContent>
+//                 </>
+//               )}
+//             </CustomButtonStyledContainer>
+//             {errors.name && (
+//               <Paragraph color="red" fontSize="large">
+//                 {errors[btn.label.toLowerCase()]}
+//               </Paragraph>
+//             )}
+//           </ButtonContainer>
+//         );
+//       })}
+//     </CustomButtonsContainer>
+//   );
+// };
+
+// export default CustomButton;
+// // ////////////////////////////////////////////////////////////////////////////////////////////

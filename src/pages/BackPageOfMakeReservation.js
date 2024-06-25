@@ -15,10 +15,11 @@ const ConfirmReservationStyled = styled.div`
   padding: 3rem 0.5rem;
 `;
 
-const Form = styled.form`
-  position: relative;
-  width: 100%;
-`;
+// const Form = styled.form`
+//   position: relative;
+//   width: 100%;
+// `;
+
 const GenaralInputsContainer = styled.div`
   width: 100%;
   display: flex;
@@ -156,7 +157,15 @@ const TextAreaStyled = styled.textarea`
   width: 100%;
   height: 13rem;
 `;
-function ConfirmReservation() {
+function BackPageOfMakeReservation({
+  values,
+  handleChange,
+  dispatch,
+  date,
+  time,
+  occasion,
+  dinner,
+}) {
   const [selectCountryCode, setSelectCountryCode] = useState("NG");
   const contryCodeHandler = (e) => setSelectCountryCode(e.target.value);
   const dataArr = [
@@ -197,86 +206,97 @@ function ConfirmReservation() {
     },
   ];
   const textAreaText = { label: "Special Requests", value: "" };
+
   const makeReservationArr = [
-    { icon: <FaCalendar />, text: "June 10" },
-    { icon: <IoPersonOutline />, text: "10 Diners" },
-    { icon: <LuAlarmClock />, text: "6:00 pm" },
-    { icon: <LiaGlassCheersSolid />, text: "Birthday" },
+    { icon: <FaCalendar />, text: values.date || "Select Date" },
+    { icon: <IoPersonOutline />, text: values.dinner || "No. of dinners" },
+    { icon: <LuAlarmClock />, text: values.time || "Select Time" },
+    { icon: <LiaGlassCheersSolid />, text: values.occasion || "Occasion" },
   ];
-  const radioButtonselected = "Outdoor seating";
+  const textAreaHandler = (e) => {
+    handleChange(e);
+    dispatch({ type: "textArea", payload: e.target.value });
+  };
   return (
     <>
       <Container as="section" type="confirmReservation">
         <Content>
           <ConfirmReservationStyled>
-            <Form action="">
-              <GenaralInputsContainer>
-                {dataArr.map((input) => {
-                  const {
-                    id,
-                    inputType,
-                    label,
-                    itemId,
-                    selectOptns,
-                    placeholder,
-                  } = input;
-                  return (
-                    <EachInputContainer key={inputType}>
-                      <LabelInput htmlFor={id}>
-                        <IoMdStar
-                          style={{
-                            fontSize: "1.2rem",
-                            color: "var(--pureWhite)",
-                          }}
-                        />
-                        {label}
-                      </LabelInput>
-                      <InputWrapper>
-                        {itemId === LASTINPUTID && (
-                          <SelectStyled
-                            value={selectCountryCode}
-                            onChange={contryCodeHandler}
-                          >
-                            {selectOptns.map((optn) => (
-                              <OptionStyled key={optn.country}>
-                                {optn.countryAbbrev}
-                              </OptionStyled>
-                            ))}
-                          </SelectStyled>
-                        )}
-                        <Input
-                          type={inputType}
-                          itemId={itemId}
-                          id={id}
-                          placeholder={placeholder}
-                        />
-                      </InputWrapper>
-                    </EachInputContainer>
-                  );
-                })}
-              </GenaralInputsContainer>
-              <GenaralBottomContainer>
-                <MakeReservationDataContainer>
-                  <MakeReservationData>
-                    {makeReservationArr.map((data, i) => {
-                      const { icon, text } = data;
-                      return (
-                        <EachMakeReservationData key={i}>
-                          <IconSpan>{icon}</IconSpan>
-                          <TextSpan>{text}</TextSpan>
-                        </EachMakeReservationData>
-                      );
-                    })}
-                  </MakeReservationData>
-                  <ButtonSelected>{radioButtonselected}</ButtonSelected>
-                </MakeReservationDataContainer>
-                <TextAreaContainer>
-                  <LabelInput>{textAreaText.label}</LabelInput>
-                  {/* <TextAreaStyled value={} onChange={}/> */}
-                  <TextAreaStyled />
-                </TextAreaContainer>
-              </GenaralBottomContainer>
-            </Form>
+            {/* <Form action=""> */}
+            <GenaralInputsContainer>
+              {dataArr.map((input, i) => {
+                const {
+                  id,
+                  inputType,
+                  label,
+                  itemId,
+                  selectOptns,
+                  placeholder,
+                } = input;
+                return (
+                  <EachInputContainer key={i}>
+                    <LabelInput htmlFor={id}>
+                      <IoMdStar
+                        style={{
+                          fontSize: "1.2rem",
+                          color: "var(--pureWhite)",
+                        }}
+                      />
+                      {label}
+                    </LabelInput>
+                    <InputWrapper>
+                      {itemId === LASTINPUTID && (
+                        <SelectStyled
+                          value={selectCountryCode}
+                          onChange={contryCodeHandler}
+                        >
+                          {selectOptns.map((optn) => (
+                            <OptionStyled key={optn.country}>
+                              {optn.countryAbbrev}
+                            </OptionStyled>
+                          ))}
+                        </SelectStyled>
+                      )}
+                      <Input
+                        type={inputType}
+                        itemId={itemId}
+                        id={id}
+                        name={id}
+                        placeholder={placeholder}
+                        value={values.id}
+                        onChange={handleChange}
+                      />
+                    </InputWrapper>
+                  </EachInputContainer>
+                );
+              })}
+            </GenaralInputsContainer>
+            <GenaralBottomContainer>
+              <MakeReservationDataContainer>
+                <MakeReservationData>
+                  {makeReservationArr.map((data, i) => {
+                    const { icon, text } = data;
+                    return (
+                      <EachMakeReservationData key={i}>
+                        <IconSpan>{icon}</IconSpan>
+                        <TextSpan>{text}</TextSpan>
+                      </EachMakeReservationData>
+                    );
+                  })}
+                </MakeReservationData>
+                <ButtonSelected>{`${values.seating} seating`}</ButtonSelected>
+              </MakeReservationDataContainer>
+              <TextAreaContainer>
+                <LabelInput>{textAreaText.label}</LabelInput>
+                {/* <TextAreaStyled value={} onChange={}/> */}
+                <TextAreaStyled
+                  id="textArea"
+                  onChange={textAreaHandler}
+                  // value={values.id}
+                />
+              </TextAreaContainer>
+            </GenaralBottomContainer>
+            {/* </Form> */}
           </ConfirmReservationStyled>
         </Content>
       </Container>
@@ -284,4 +304,4 @@ function ConfirmReservation() {
   );
 }
 
-export default ConfirmReservation;
+export default BackPageOfMakeReservation;

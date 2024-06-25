@@ -53,6 +53,53 @@ const OptionStyled = styled.option`
 `;
 
 // Custom select component
+// function CustomDropdown({
+//   value,
+//   options,
+//   toggleOptions,
+//   showOptions,
+//   currentID,
+//   dispatch,
+//   ind,
+//   handleChange,
+// }) {
+//   const selectRef = useRef(null);
+//   const typeofDD = ["date", "time", "occasion", "dinner"];
+
+//   const selectChangeHandler = (e) => {
+//     const type = ["date", "time", "occasion", "dinner"][currentID];
+
+//     handleChange(e);
+//     dispatch({ type: type, payload: e.target.value });
+//     toggleOptions();
+//   };
+
+//   return (
+//     <SelectContainer>
+//       <SelectStyled
+//         ref={selectRef}
+//         onChange={() => selectChangeHandler(currentID)}
+//         value={value}
+//         onClick={toggleOptions}
+//         name={typeofDD[currentID]}
+//       ></SelectStyled>
+//       {showOptions && (
+//         <SelectDivStyled>
+//           {options.map((option, index) => (
+//             <OptionStyled
+//               key={`${typeofDD[ind]}${index}`}
+//               onClick={() => selectChangeHandler({ target: { value: option } })}
+//             >
+//               {option}
+//             </OptionStyled>
+//           ))}
+//         </SelectDivStyled>
+//       )}
+//     </SelectContainer>
+//   );
+// }
+
+// export default CustomDropdown;
 function CustomDropdown({
   value,
   options,
@@ -60,11 +107,15 @@ function CustomDropdown({
   showOptions,
   currentID,
   dispatch,
+  ind,
+  handleChange,
 }) {
   const selectRef = useRef(null);
+  const typeofDD = ["date", "time", "occasion", "dinner"];
 
   const selectChangeHandler = (e) => {
-    const type = ["date", "time", "occasion", "dinner"][currentID];
+    const type = typeofDD[currentID];
+    handleChange(e);
     dispatch({ type: type, payload: e.target.value });
     toggleOptions();
   };
@@ -73,16 +124,21 @@ function CustomDropdown({
     <SelectContainer>
       <SelectStyled
         ref={selectRef}
-        onChange={() => selectChangeHandler(currentID)}
+        onChange={selectChangeHandler} // Pass the event to the handler
         value={value}
         onClick={toggleOptions}
+        name={typeofDD[currentID]}
       ></SelectStyled>
       {showOptions && (
         <SelectDivStyled>
           {options.map((option, index) => (
             <OptionStyled
-              key={index}
-              onClick={() => selectChangeHandler({ target: { value: option } })}
+              key={`${typeofDD[ind]}${index}`}
+              onClick={() =>
+                selectChangeHandler({
+                  target: { name: typeofDD[currentID], value: option },
+                })
+              }
             >
               {option}
             </OptionStyled>
