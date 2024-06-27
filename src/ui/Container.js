@@ -23,7 +23,7 @@ const weekSpecialBg = css`
 // HOMEPAGE
 const herosectionBg = css`
   position: relative;
-  top: 9rem;
+  top: 8rem;
   height: 27rem;
   background-color: var(--deepGreen);
 
@@ -31,18 +31,25 @@ const herosectionBg = css`
     top: 7rem;
   }
 `;
+const headingSectionBg = css`
+  /* position: relative; */
+  border: 2px solid green;
+  /* top: 8rem; */
+  /* height: 27rem; */
+  background-color: var(--deepGreen);
+
+  @media (max-width: 450px) {
+    /* top: 7rem; */
+  }
+`;
 
 //MAKE RESERVATION
 const makeReservationBg = css`
   position: relative;
-  top: 9rem;
+  /* top: 8rem; */
   height: auto;
+  top: 10rem;
   background-color: var(--pureWhite);
-
-  /*  */
-  /* display: flex;
-  flex-direction: column;
-  row-gap: 5rem; */
 
   @media (max-width: 450px) {
     top: 7rem;
@@ -71,18 +78,18 @@ const makeReservationBgBottom = css`
 //CONFIRM RESERVATION
 const confirmReservationBg = css`
   position: relative;
-  top: 9rem;
+  /* top: 8rem; */
   height: auto;
   background-color: var(--deepGreen);
 
   @media (max-width: 450px) {
-    top: 7rem;
+    /* top: 7rem; */
   }
 `;
 // Menu
 const menuBg = css`
   position: relative;
-  top: 9rem;
+  top: 8rem;
   height: auto;
   background-color: var(--deepGreen);
 
@@ -116,6 +123,13 @@ export const Container = styled.div`
       ${herosectionBg}
     `}
 
+/* ReservationText */
+${(props) =>
+    props.as === "div" &&
+    props.type === "reservationHeading" &&
+    css`
+      ${headingSectionBg}
+    `}
 
     /* Make RESERVATION */
     ${(props) =>
@@ -124,6 +138,8 @@ export const Container = styled.div`
     css`
       ${makeReservationBg}
     `}
+
+
     /* TOP */
     ${(props) =>
     props.as === "div" &&

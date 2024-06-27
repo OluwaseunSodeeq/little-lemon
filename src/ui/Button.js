@@ -65,7 +65,7 @@ const backgroundColor = {
       background-color: var(--deepGreen);
       transform: translateY(-3px);
       box-shadow: 0 1rem 2rem rgba(black, 0.2);
-      margin-left: 3rem;
+      /* margin-left: 3rem; */
 
       &::after {
         transform: scaleX(1.4) scaleY(1.6);

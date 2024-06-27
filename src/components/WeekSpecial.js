@@ -33,15 +33,13 @@ const cardArray = [
 
 const WeekSpacialStyled = styled.div`
   margin-top: 2rem;
-
-  /* border: 2px solid red; */
 `;
 function WeekSpecial() {
   return (
     <Container as="aside">
       <Content>
         <>
-          <FlexedDiv type="sb">
+          <FlexedDiv type="sbt">
             <Paragraph fontSize="extraLarge" color="black" fontWeight="bold">
               This week specials!
             </Paragraph>

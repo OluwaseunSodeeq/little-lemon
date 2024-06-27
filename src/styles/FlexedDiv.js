@@ -15,10 +15,27 @@ export const FlexedDiv = styled.div`
       }
 
       @media (max-width: 450px) {
-        flex-direction: column;
+        /* flex-direction: column; */
+        justify-content: start;
+        /* border: 2px solid blue; */
       }
     `}
+  ${(props) =>
+    props.type === "sbt" &&
+    css`
+      justify-content: space-between;
 
+      @media (max-width: 950px) {
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 450px) {
+        flex-direction: column;
+        justify-content: center;
+
+        /* border: 2px solid blue; */
+      }
+    `}
   ${(props) =>
     props.type === "grid" &&
     css`
@@ -31,7 +48,8 @@ export const FlexedDiv = styled.div`
     css`
       gap: 2rem;
     `}
-    ${(props) =>
+
+  ${(props) =>
     props.type === "doubleGap" &&
     css`
       gap: 8rem;
@@ -42,12 +60,14 @@ export const FlexedDiv = styled.div`
         gap: 2rem;
       }
     `}
+
   ${(props) =>
     props.type === "center" &&
     css`
       justify-content: center;
     `}
-    ${(props) =>
+
+  ${(props) =>
     props.type === "column" &&
     css`
       justify-content: center;

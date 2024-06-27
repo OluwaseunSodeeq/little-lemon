@@ -1,9 +1,12 @@
 import styled from "styled-components";
+import { Container } from "./Container";
+import { Content } from "./Content";
 
 const LoaderDIv = styled.div`
   position: relative;
-  top: 9rem;
+  /* top: 9rem; */
   left: 50%;
+  top: 50%;
 
   display: flex;
   justify-content: center;
@@ -11,7 +14,13 @@ const LoaderDIv = styled.div`
 `;
 
 function Loader() {
-  return <LoaderDIv>Loading</LoaderDIv>;
+  return (
+    <Container>
+      <Content>
+        <LoaderDIv>Loading</LoaderDIv>
+      </Content>
+    </Container>
+  );
 }
 
 export default Loader;

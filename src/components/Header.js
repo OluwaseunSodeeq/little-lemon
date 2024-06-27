@@ -5,11 +5,10 @@ import Logo from "./Logo";
 import Nav from "./Nav";
 
 const HeaderContent = styled.div`
-  height: 9rem;
+  height: 8rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 0;
   box-shadow: var(--backdrop-color);
 
   @media (max-width: 450px) {

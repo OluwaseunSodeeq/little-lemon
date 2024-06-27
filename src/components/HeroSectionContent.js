@@ -8,23 +8,34 @@ const HeroSectionContentDiv = styled.div`
   padding: 0;
   font-family: var(--karla);
   overflow-y: hidden;
+
+  @media (max-width: 450px) {
+    width: 100%;
+  }
 `;
 const HeroSectionContentLeft = styled.div`
   padding: 2rem 0 8rem 0;
   width: 28rem;
+
+  @media (max-width: 450px) {
+    width: 90%;
+    margin-left: 0px;
+    padding-left: 0px;
+  }
 `;
 const HeroSectionContentRight = styled.div`
   padding: 2rem 0 0;
   width: 30rem;
   height: 32rem;
   border-radius: var(--border-radius-lg);
+
   @media (max-width: 450px) {
     display: none;
   }
 `;
 
 const HeroSectionContentBtnContainer = styled.div`
-  padding-top: 1rem;
+  padding-top: 2rem;
 `;
 function HeroSectionContent() {
   return (

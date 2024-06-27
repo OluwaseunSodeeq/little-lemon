@@ -2,23 +2,17 @@ import styled from "styled-components";
 import { IoMdStar } from "react-icons/io";
 import { FaCalendar } from "react-icons/fa";
 
-import { Container } from "../ui/Container";
-import { Content } from "../ui/Content";
 import { LASTINPUTID } from "../ui/Constant";
 import { useState } from "react";
 import { IoPersonOutline } from "react-icons/io5";
 import { LuAlarmClock } from "react-icons/lu";
 import { LiaGlassCheersSolid } from "react-icons/lia";
+import { Paragraph } from "../ui/Paragraph";
 
 const ConfirmReservationStyled = styled.div`
   background-color: var(--deepGreen);
   padding: 3rem 0.5rem;
 `;
-
-// const Form = styled.form`
-//   position: relative;
-//   width: 100%;
-// `;
 
 const GenaralInputsContainer = styled.div`
   width: 100%;
@@ -32,7 +26,7 @@ const EachInputContainer = styled.div`
   width: 45%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
 `;
 const LabelInput = styled.label`
   font-family: var(--karla);
@@ -44,9 +38,11 @@ const InputWrapper = styled.div`
   padding: 0px;
   position: relative;
   height: 4.5rem;
+  /* height: auto; */
   overflow: hidden;
   background-color: var(--pureWhite);
   border-radius: var(--border-radius-md);
+  border: ${({ error }) => (error ? "2px solid red" : "")};
 `;
 const Input = styled.input`
   height: 100%;
@@ -57,15 +53,12 @@ const Input = styled.input`
   outline: var(--deepGreen);
   font-weight: var(--bold);
   color: var(--deepGreen);
+  /*  */
   width: ${({ itemId }) => (itemId === LASTINPUTID ? "80%" : "100%")};
-  /* z-index: ${({ itemId }) => (itemId === LASTINPUTID ? "20%" : "")}; */
   margin-left: ${({ itemId }) => (itemId === LASTINPUTID ? "20%" : "")};
-
   &:focus {
     height: 100%;
-    padding: 0 2rem;
-    /* outline: var(pureWhite); */
-    /* border: 5px solid var(--deepGreen); */
+    padding: 0 2.5rem;
   }
   &::placeholder {
     color: var(--deepGreen);
@@ -108,7 +101,12 @@ const GenaralBottomContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   flex-wrap: wrap;
+
+  @media (max-width: 450px) {
+    align-items: center;
+  }
   /* row-gap: 2rem; */
 `;
 // Make Reservation Data
@@ -127,6 +125,8 @@ const MakeReservationData = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
+
+  row-gap: 2rem;
 `;
 const EachMakeReservationData = styled.div`
   width: 45%;
@@ -134,16 +134,20 @@ const EachMakeReservationData = styled.div`
   justify-content: space-between;
   align-items: center;
   padding-right: 1.5rem;
+  border-radius: var(--border-radius-sm);
+
+  border: ${({ error }) => (error ? "2px solid red" : "")};
 `;
 const IconSpan = styled.span`
   & > * {
-    font-size: 3.4rem;
+    font-size: 3rem;
     color: var(--pureWhite);
   }
 `;
 const TextSpan = styled.span`
   font-size: 1.4rem;
   color: var(--pureWhite);
+  font-weight: 600;
 `;
 const ButtonSelected = styled.div`
   font-weight: var(--Bold);
@@ -156,15 +160,15 @@ const TextAreaContainer = styled.div`
 const TextAreaStyled = styled.textarea`
   width: 100%;
   height: 13rem;
+  border-radius: var(--border-radius-md);
+  padding: 2rem;
 `;
 function BackPageOfMakeReservation({
   values,
   handleChange,
   dispatch,
-  date,
-  time,
-  occasion,
-  dinner,
+  errors,
+  touched,
 }) {
   const [selectCountryCode, setSelectCountryCode] = useState("NG");
   const contryCodeHandler = (e) => setSelectCountryCode(e.target.value);
@@ -192,7 +196,7 @@ function BackPageOfMakeReservation({
     },
     {
       label: "Phone Number",
-      id: "phoneNumber",
+      id: "tel",
       inputType: "tel",
       itemId: 3,
       placeholder: "8149428278",
@@ -208,98 +212,107 @@ function BackPageOfMakeReservation({
   const textAreaText = { label: "Special Requests", value: "" };
 
   const makeReservationArr = [
-    { icon: <FaCalendar />, text: values.date || "Select Date" },
-    { icon: <IoPersonOutline />, text: values.dinner || "No. of dinners" },
-    { icon: <LuAlarmClock />, text: values.time || "Select Time" },
-    { icon: <LiaGlassCheersSolid />, text: values.occasion || "Occasion" },
+    { icon: <FaCalendar />, text: values.date || "Select Date", id: "date" },
+    {
+      icon: <IoPersonOutline />,
+      text: values.dinner || "No. of diners",
+      id: "dinner",
+    },
+    { icon: <LuAlarmClock />, text: values.time || "Select Time", id: "time" },
+    {
+      icon: <LiaGlassCheersSolid />,
+      text: values.occasion || "Occasion",
+      id: "occasion",
+    },
   ];
   const textAreaHandler = (e) => {
     handleChange(e);
     dispatch({ type: "textArea", payload: e.target.value });
   };
+  console.log(errors);
   return (
     <>
-      <Container as="section" type="confirmReservation">
-        <Content>
-          <ConfirmReservationStyled>
-            {/* <Form action=""> */}
-            <GenaralInputsContainer>
-              {dataArr.map((input, i) => {
-                const {
-                  id,
-                  inputType,
-                  label,
-                  itemId,
-                  selectOptns,
-                  placeholder,
-                } = input;
+      {/* <Container as="section" type="confirmReservation">
+        <Content> */}
+      <ConfirmReservationStyled>
+        {/* <Form action=""> */}
+        <GenaralInputsContainer>
+          {dataArr.map((input, i) => {
+            const { id, inputType, label, itemId, selectOptns, placeholder } =
+              input;
+            return (
+              <EachInputContainer key={i}>
+                <LabelInput htmlFor={id}>
+                  <IoMdStar
+                    style={{
+                      fontSize: "1.2rem",
+                      color: "var(--pureWhite)",
+                    }}
+                  />
+                  {label}
+                </LabelInput>
+
+                <InputWrapper error={errors[id] && touched[id]}>
+                  {itemId === LASTINPUTID && (
+                    <SelectStyled
+                      value={selectCountryCode}
+                      onChange={contryCodeHandler}
+                    >
+                      {selectOptns.map((optn) => (
+                        <OptionStyled key={optn.country}>
+                          {optn.countryAbbrev}
+                        </OptionStyled>
+                      ))}
+                    </SelectStyled>
+                  )}
+                  <Input
+                    type={inputType}
+                    itemId={itemId}
+                    id={id}
+                    name={id}
+                    placeholder={placeholder}
+                    value={values[id]}
+                    onChange={handleChange}
+                  />
+                </InputWrapper>
+                {errors[id] && (
+                  <Paragraph color="red" fontSize="large">
+                    {errors[id]}
+                  </Paragraph>
+                )}
+              </EachInputContainer>
+            );
+          })}
+        </GenaralInputsContainer>
+        <GenaralBottomContainer>
+          <MakeReservationDataContainer>
+            <MakeReservationData>
+              {makeReservationArr.map((data, i) => {
+                const { icon, text, id } = data;
                 return (
-                  <EachInputContainer key={i}>
-                    <LabelInput htmlFor={id}>
-                      <IoMdStar
-                        style={{
-                          fontSize: "1.2rem",
-                          color: "var(--pureWhite)",
-                        }}
-                      />
-                      {label}
-                    </LabelInput>
-                    <InputWrapper>
-                      {itemId === LASTINPUTID && (
-                        <SelectStyled
-                          value={selectCountryCode}
-                          onChange={contryCodeHandler}
-                        >
-                          {selectOptns.map((optn) => (
-                            <OptionStyled key={optn.country}>
-                              {optn.countryAbbrev}
-                            </OptionStyled>
-                          ))}
-                        </SelectStyled>
-                      )}
-                      <Input
-                        type={inputType}
-                        itemId={itemId}
-                        id={id}
-                        name={id}
-                        placeholder={placeholder}
-                        value={values.id}
-                        onChange={handleChange}
-                      />
-                    </InputWrapper>
-                  </EachInputContainer>
+                  <EachMakeReservationData key={i} error={errors[id]}>
+                    <IconSpan>{icon}</IconSpan>
+                    <TextSpan>{text}</TextSpan>
+                  </EachMakeReservationData>
                 );
               })}
-            </GenaralInputsContainer>
-            <GenaralBottomContainer>
-              <MakeReservationDataContainer>
-                <MakeReservationData>
-                  {makeReservationArr.map((data, i) => {
-                    const { icon, text } = data;
-                    return (
-                      <EachMakeReservationData key={i}>
-                        <IconSpan>{icon}</IconSpan>
-                        <TextSpan>{text}</TextSpan>
-                      </EachMakeReservationData>
-                    );
-                  })}
-                </MakeReservationData>
-                <ButtonSelected>{`${values.seating} seating`}</ButtonSelected>
-              </MakeReservationDataContainer>
-              <TextAreaContainer>
-                <LabelInput>{textAreaText.label}</LabelInput>
-                {/* <TextAreaStyled value={} onChange={}/> */}
-                <TextAreaStyled
-                  id="textArea"
-                  onChange={textAreaHandler}
-                  // value={values.id}
-                />
-              </TextAreaContainer>
-            </GenaralBottomContainer>
-            {/* </Form> */}
-          </ConfirmReservationStyled>
-        </Content>
-      </Container>
+            </MakeReservationData>
+            <ButtonSelected>{`${values.seating} seating`}</ButtonSelected>
+          </MakeReservationDataContainer>
+          <TextAreaContainer>
+            <LabelInput>{textAreaText.label}</LabelInput>
+            {/* <TextAreaStyled value={} onChange={}/> */}
+            <TextAreaStyled
+              id="textArea"
+              onChange={textAreaHandler}
+              // value={values.id}
+            />
+          </TextAreaContainer>
+        </GenaralBottomContainer>
+        {/* </Form> */}
+      </ConfirmReservationStyled>
+      {/* </Content>
+      </Container> */}
     </>
   );
 }

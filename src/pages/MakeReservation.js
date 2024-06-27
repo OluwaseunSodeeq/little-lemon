@@ -26,8 +26,11 @@ If you need full control over the dropdown's appearance and behavior, creating a
 */
 // Container for Reservation Section
 const MakeReservationStyled = styled.div`
-  padding: 2rem 0 3rem;
+  width: 100%;
   height: auto;
+  padding: 2rem 0 3rem;
+  display: inline-block;
+  /* overflow-y: hidden; */
 `;
 
 // Form Container
@@ -224,20 +227,19 @@ const MenusContainer = styled.div`
   height: 25rem;
   width: 100%;
   margin: 0 auto;
-  /* border: 2px solid green; */
 
   &:hover ${SelectedmenuImageContainer}:not(:hover) {
     z-index: 10;
-    /* transform: scale(0.95) translateY(0); */
+    //  transform: scale(0.95) translateY(0);
   }
 `;
 
-// Button Container
 const ButtonContainer = styled.div`
   display: inline-block;
   text-align: center;
   margin-top: 3rem;
 `;
+
 const reducer = (state, action) => {
   switch (action.type) {
     case "date":
@@ -270,13 +272,97 @@ const initialState = {
   textArea: "",
 };
 
+// // Cards Style
+// const CardFace = styled.css`
+//   position: absolute;
+//   left: 0;
+//   top: 0;
+//   width: 100%;
+//   height: 100%;
+//   -webkit-backface-visibility: hidden;
+//   backface-visibility: hidden;
+//   transition: all 0.8s ease;
+//   overflow: hidden;
+//   border: 2px solid blue;
+// `;
+// const FrontCard = styled.div`
+//   ${CardFace}
+//   background-color: var(--deepGreen);
+//   /* z-index: 30; */
+//   /* transform: ${({ turn }) => (turn ? "rotateY(-180deg)" : "")}; */
+//   /* transform: ${({ turn }) => (turn ? "rotateY(-180deg)" : "")}; */
+// `;
+// const BackCard = styled.div`
+//   ${CardFace}
+//   background-color: var(--deepGreen);
+//   transform: rotateY(180deg);
+//   /* transform: ${({ turn }) =>
+//     turn ? "rotateY(0deg)" : "rotateY(-180deg)"}; */
+// `;
+
+// const ReservationCard = styled.div`
+//   position: relative;
+//   height: 50rem;
+//   height: auto;
+
+//   /* perspective: 150rem;
+//   -moz-perspective: 150rem; */
+
+//   border: 5px solid red;
+
+//   &:hover ${FrontCard} {
+//     transform: rotateY(-180deg);
+//   }
+//   &:hover ${BackCard} {
+//     transform: rotateY(0deg);
+//   }
+// `;
+
+const CardFace = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: transform 0.8s ease;
+  overflow: hidden;
+`;
+
+const FrontCard = styled(CardFace)`
+  background-color: var(--deepGreen);
+  transform: rotateY(0deg);
+`;
+
+const BackCard = styled(CardFace)`
+  background-color: var(--deepGreen);
+  transform: rotateY(180deg);
+`;
+
+const ReservationCard = styled.div`
+  position: relative;
+  width: 100%;
+  height: 50rem;
+  perspective: 150rem;
+  overflow: "hidden";
+
+  /* &:hover ${FrontCard} {
+    transform: rotateY(180deg);
+  }
+
+  &:hover ${BackCard} {
+    transform: rotateY(0deg);
+  } */
+`;
+
 function MakeReservation() {
   const { menus, selectedMenuHandler } = useMenusContext();
   const [state, dispatch] = useReducer(reducer, initialState);
   const { date, occasion, dinner, seating, time } = state;
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [turn, setTurn] = useState(false);
 
-  // const { errors, touched, handleBlur, handleChange, handleSubmit } = useFormik(
   const { errors, handleBlur, handleChange, handleSubmit, touched, values } =
     useFormik({
       initialValues: initialState,
@@ -284,6 +370,10 @@ function MakeReservation() {
       onSubmit: (values) => {
         // handle form submission
         console.log(values);
+
+        if (3 > 2) {
+          setTurn(true);
+        }
       },
     });
 
@@ -321,9 +411,20 @@ function MakeReservation() {
         </SelectedmenuImageContainer>
       );
     });
-  console.log(values);
   return (
     <Container as="section" type="makeReservation">
+      <Container as="div" type="reservationHeading">
+        <Content>
+          <Paragraph
+            fontSize="extraLarge"
+            color="yellow"
+            fontWeight="bold"
+            fontFamily="karla"
+          >
+            Reservations
+          </Paragraph>
+        </Content>
+      </Container>
       <Form
         onSubmit={(e) => {
           setFormSubmitted(true);
@@ -332,79 +433,155 @@ function MakeReservation() {
       >
         <Container as="div" type="makeReservationTop">
           <Content>
-            <MakeReservationStyled>
-              <Paragraph
-                fontSize="extraLarge"
-                color="yellow"
-                fontWeight="bold"
-                fontFamily="karla"
-              >
-                Reservations
-              </Paragraph>
-              <>
-                <RadioButtonsContainer>
-                  <RadioButton>
-                    <RadioInput
-                      type="radio"
-                      name="seating"
-                      id="indoor"
-                      value="indoor"
-                      onChange={handleFieldChange}
-                      checked={seating === "indoor"}
-                      onBlur={handleBlur}
+            <ReservationCard>
+              <FrontCard>
+                <MakeReservationStyled>
+                  <>
+                    <RadioButtonsContainer>
+                      <RadioButton>
+                        <RadioInput
+                          type="radio"
+                          name="seating"
+                          id="indoor"
+                          value="indoor"
+                          onChange={handleFieldChange}
+                          checked={seating === "indoor"}
+                          onBlur={handleBlur}
+                        />
+                        <Radiolabel htmlFor="indoor">
+                          Indoor seating <RadioSpan />
+                        </Radiolabel>
+                        {formSubmitted && errors.seating && touched.seating && (
+                          <Paragraph fontSize="large" color="red">
+                            {errors.seating}
+                          </Paragraph>
+                        )}
+                      </RadioButton>
+                      <RadioButton>
+                        <RadioInput
+                          type="radio"
+                          name="seating"
+                          id="outdoor"
+                          value="outdoor"
+                          onChange={handleFieldChange}
+                          checked={seating === "outdoor"}
+                          onBlur={handleBlur}
+                        />
+                        <Radiolabel htmlFor="outdoor">
+                          Outdoor seating <RadioSpan />
+                        </Radiolabel>
+                        {formSubmitted && errors.seating && touched.seating && (
+                          <Paragraph fontSize="large" color="red">
+                            {errors.seating}
+                          </Paragraph>
+                        )}
+                      </RadioButton>
+                    </RadioButtonsContainer>
+                    <CustomButton
+                      handleBlur={handleBlur}
+                      handleChange={handleChange}
+                      date={date}
+                      dinner={dinner}
+                      occasion={occasion}
+                      time={time}
+                      errors={formSubmitted ? errors : {}}
+                      dispatch={dispatch}
                     />
-                    <Radiolabel htmlFor="indoor">
-                      Indoor seating <RadioSpan />
-                    </Radiolabel>
-                    {formSubmitted && errors.seating && touched.seating && (
-                      <Paragraph fontSize="large" color="red">
-                        {errors.seating}
-                      </Paragraph>
-                    )}
-                  </RadioButton>
-                  <RadioButton>
-                    <RadioInput
-                      type="radio"
-                      name="seating"
-                      id="outdoor"
-                      value="outdoor"
-                      onChange={handleFieldChange}
-                      checked={seating === "outdoor"}
-                      onBlur={handleBlur}
-                    />
-                    <Radiolabel htmlFor="outdoor">
-                      Outdoor seating <RadioSpan />
-                    </Radiolabel>
-                    {formSubmitted && errors.seating && touched.seating && (
-                      <Paragraph fontSize="large" color="red">
-                        {errors.seating}
-                      </Paragraph>
-                    )}
-                  </RadioButton>
-                </RadioButtonsContainer>
-                <CustomButton
-                  handleBlur={handleBlur}
+                  </>
+                </MakeReservationStyled>
+                {/* </Content>
+            </Container> */}
+              </FrontCard>
+
+              <BackCard turn={turn}>
+                <BackPageOfMakeReservation
+                  values={values}
                   handleChange={handleChange}
-                  date={date}
-                  dinner={dinner}
-                  occasion={occasion}
-                  time={time}
-                  errors={formSubmitted ? errors : {}}
                   dispatch={dispatch}
+                  errors={errors}
+                  touched={touched}
                 />
-              </>
-            </MakeReservationStyled>
+              </BackCard>
+            </ReservationCard>
           </Content>
         </Container>
-        <BackPageOfMakeReservation
-          values={values}
-          handleChange={handleChange}
-          dispatch={dispatch}
-          date={date}
-          dinner={dinner}
-          occasion={occasion}
-          time={time}
-        />
+
+        {/*
+         <ReservationCard>
+          <FrontCard>
+            <Container as="div" type="makeReservationTop">
+              <Content>
+                <MakeReservationStyled>
+                  <>
+                    <RadioButtonsContainer>
+                      <RadioButton>
+                        <RadioInput
+                          type="radio"
+                          name="seating"
+                          id="indoor"
+                          value="indoor"
+                          onChange={handleFieldChange}
+                          checked={seating === "indoor"}
+                          onBlur={handleBlur}
+                        />
+                        <Radiolabel htmlFor="indoor">
+                          Indoor seating <RadioSpan />
+                        </Radiolabel>
+                        {formSubmitted && errors.seating && touched.seating && (
+                          <Paragraph fontSize="large" color="red">
+                            {errors.seating}
+                          </Paragraph>
+                        )}
+                      </RadioButton>
+                      <RadioButton>
+                        <RadioInput
+                          type="radio"
+                          name="seating"
+                          id="outdoor"
+                          value="outdoor"
+                          onChange={handleFieldChange}
+                          checked={seating === "outdoor"}
+                          onBlur={handleBlur}
+                        />
+                        <Radiolabel htmlFor="outdoor">
+                          Outdoor seating <RadioSpan />
+                        </Radiolabel>
+                        {formSubmitted && errors.seating && touched.seating && (
+                          <Paragraph fontSize="large" color="red">
+                            {errors.seating}
+                          </Paragraph>
+                        )}
+                      </RadioButton>
+                    </RadioButtonsContainer>
+                    <CustomButton
+                      handleBlur={handleBlur}
+                      handleChange={handleChange}
+                      date={date}
+                      dinner={dinner}
+                      occasion={occasion}
+                      time={time}
+                      errors={formSubmitted ? errors : {}}
+                      dispatch={dispatch}
+                    />
+                  </>
+                </MakeReservationStyled>
+              </Content>
+            </Container>
+          </FrontCard>
+          {/* </CardFace> */}
+
+        {/* <CardFace> */}
+        {/* <BackCard turn={turn}>
+            <BackPageOfMakeReservation
+              values={values}
+              handleChange={handleChange}
+              dispatch={dispatch}
+              errors={errors}
+              touched={touched}
+            />
+          </BackCard>
+        </ReservationCard> */}
+
         <Container as="div" type="makeReservationBottom">
           <Content>
             <BottomContainerStyled>
