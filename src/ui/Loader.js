@@ -1,25 +1,36 @@
-import styled from "styled-components";
-import { Container } from "./Container";
-import { Content } from "./Content";
+import styled, { keyframes } from "styled-components";
 
-const LoaderDIv = styled.div`
-  position: relative;
-  /* top: 9rem; */
-  left: 50%;
-  top: 50%;
+const spin = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
 
+const LoaderContainer = styled.div`
+  height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+`;
+
+const LoaderCircle = styled.div`
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 0.25rem dashed
+    ${({ theme }) => theme.contentColor || "var(--deepGreen)"};
+  animation: ${spin} 5s linear infinite;
 `;
 
 function Loader() {
   return (
-    <Container>
-      <Content>
-        <LoaderDIv>Loading</LoaderDIv>
-      </Content>
-    </Container>
+    <LoaderContainer>
+      <LoaderCircle />
+    </LoaderContainer>
   );
 }
 

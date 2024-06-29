@@ -9,6 +9,9 @@ export const Heading = styled.h1`
     css`
       font-size: 38px;
       color: var(--yellow);
+      @media (max-width: 450px) {
+        font-size: 24px;
+      }
     `}
 
   ${(props) =>

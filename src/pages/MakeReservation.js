@@ -5,10 +5,10 @@ import { Content } from "../ui/Content";
 import { Paragraph } from "../ui/Paragraph";
 import CustomButton from "../components/CustomButton";
 import { Button } from "../ui/Button";
-import useMenusContext from "../Context/useMenusContext";
 import BackPageOfMakeReservation from "./BackPageOfMakeReservation";
 import { useFormik } from "formik";
 import { makeReservationSchemas } from "../schemas";
+import useMenusContext from "../Contexts/Menu/useMenusContext";
 
 // NOTE for the challenge ofSelect and option tags
 /*
@@ -23,6 +23,38 @@ Even with the custom styling, individual <option> elements within the <select> c
 
 Alternative Solution
 If you need full control over the dropdown's appearance and behavior, creating a custom component using <div> and other HTML elements, as demonstrated in the previous examples, is the recommended approach. This gives you the flexibility to style and position each option as needed, without the limitations of the native <select> and <option> elements.
+The purpose of the assessment
+The primary purpose of the assessment is to check your knowledge and understanding of the key learning objectives of the course.  The assessment is designed to help you make sure that you can apply what you have learned. Most importantly, the assessment helps you establish which topics you have mastered and which topics require further focus before completing the course.
+
+What to expect from the peer review 
+You will combine the skills and knowledge that you applied throughout the course to write code to create a form that handles table bookings for the Little Lemon restaurant.  Your table bookings form will all be assessed in the peer review submission, and you will assess some of your peers' projects too.
+
+What to expect from the final graded quiz 
+The quiz only tests the topics you have already covered, so there shouldn't be any surprises. Please review the feedback on your answers and, where necessary, go back and work through the topics that require further attention. 
+
+web app and website:
+The key difference between a website, and web application is the level of interactivity, and dynamic content. The easy way to remember this is that a website is more informative and a web application is more interactive.
+
+css
+ layout is one of the most important components of designing a good web page because layouts help divide a page into different sections, thus making the page more presentable.
+ grid and flexbox: They added more flexibility and dimensionality with better options for fine tuning specific sections of a web page
+ 
+ ui testing:UI testing is a complex area with many techniques and strategies used by developers. The strategies you will use will often be determined by business priority, customer requirements, and project timelines.
+ Cross-device testing involves the manual or automated use of different devices to test the layout and behavior of an application. 
+
+ JS
+ Defensive programming is all about assuming that all the arguments a function will receive are of the wrong type,  the wrong value or both.
+
+ In programming, there is something known as the programming paradigms. You can think of this as a classification, a style or just a general way to write code.
+ oop:revolves around the idea of organizing our programs using objects to group related data and functionality.
+ This is in contrast to the functional programming approach, where the data used in the app needs to be kept separate from functions that operate on that data.
+ REACT
+ State is simply all the values of all the variables your app is working with at any given point in time.
+ Hooks are functions that were introduced in React version 16.8. They let you hook into React state and lifestyle features from components
+ // 
+
+The Capstone project at the center of this course is based on a scenario involving the restaurant Little Lemon. In particular, the owners of Little Lemon have received negative feedback on the reserve a table function on the Little Lemon website. Users are confused about how to use it and unhappy with how it looks and functions. That's where you come in. In this course, you will learn how to build a responsive web app and demonstrate multiple skills by coding a modern front end application that allows users to reserve a table for the Little Lemon restaurant. You will be guided through the process of building the app, combining all the skills and technologies you've learned throughout this program to solve the problem at hand. Now, you may be wondering how this course is structured. Well, the course consists of four modules: starting the project, project foundations, project functionality, and project assessment. In the first module, starting the project, you'll do exactly that. Get started with the capstone project. This will include a brief recap of and links to content in the React course you have already completed, you'll start by setting up a coding environment, a React project, and a Git repository for the project on GitHub so you are ready to proceed with the development phase of the project. You'll also briefly recap UX and UI linking to content in a previously completed course, principles of UX and UI. You will employ UX, UI methodologies in your project, including preparing the wireframes and applying design fundamentals using Figma. In Module 2, which covers the project foundations, you'll use semantic HTML, meta tags and Open Graph Protocol to create a modern HTML structure for the web app. You will also use CSS grid and other CSS styling to set up a responsive, clear, and inviting website. Not to mention your recap the basics of React. Module 3 is all about the functionality of your project. You'll code the table booking system using React. The importance of UX and form validation will be covered with an exercise where you will validate forms in your app and write unit tests. Plus accessibility and UX, UI usability evaluation will be covered along with an exercise in both to ensure your interface complies with both issues. In the final module, project assessment, you'll have the chance to reflect on all you have learned and your accomplishments. More specifically, you'll have the opportunity to perform a self-review of your project and a peer review of other learners solutions for the little lemon reserve a table web app assessing the projects in terms of usability, accessibility, design, and code. With all of this to look forward to, I'm sure you are eager to begin. Let's get started with your project.
+
 */
 // Container for Reservation Section
 const MakeReservationStyled = styled.div`
@@ -356,6 +388,10 @@ const ReservationCard = styled.div`
   } */
 `;
 
+const Headingtext = styled.span`
+  margin-top: 3rem;
+`;
+
 function MakeReservation() {
   const { menus, selectedMenuHandler } = useMenusContext();
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -411,6 +447,8 @@ function MakeReservation() {
         </SelectedmenuImageContainer>
       );
     });
+
+  console.log(errors.length);
   return (
     <Container as="section" type="makeReservation">
       <Container as="div" type="reservationHeading">
@@ -421,7 +459,7 @@ function MakeReservation() {
             fontWeight="bold"
             fontFamily="karla"
           >
-            Reservations
+            <Headingtext>Reservations</Headingtext>
           </Paragraph>
         </Content>
       </Container>
@@ -506,82 +544,6 @@ function MakeReservation() {
           </Content>
         </Container>
 
-        {/*
-         <ReservationCard>
-          <FrontCard>
-            <Container as="div" type="makeReservationTop">
-              <Content>
-                <MakeReservationStyled>
-                  <>
-                    <RadioButtonsContainer>
-                      <RadioButton>
-                        <RadioInput
-                          type="radio"
-                          name="seating"
-                          id="indoor"
-                          value="indoor"
-                          onChange={handleFieldChange}
-                          checked={seating === "indoor"}
-                          onBlur={handleBlur}
-                        />
-                        <Radiolabel htmlFor="indoor">
-                          Indoor seating <RadioSpan />
-                        </Radiolabel>
-                        {formSubmitted && errors.seating && touched.seating && (
-                          <Paragraph fontSize="large" color="red">
-                            {errors.seating}
-                          </Paragraph>
-                        )}
-                      </RadioButton>
-                      <RadioButton>
-                        <RadioInput
-                          type="radio"
-                          name="seating"
-                          id="outdoor"
-                          value="outdoor"
-                          onChange={handleFieldChange}
-                          checked={seating === "outdoor"}
-                          onBlur={handleBlur}
-                        />
-                        <Radiolabel htmlFor="outdoor">
-                          Outdoor seating <RadioSpan />
-                        </Radiolabel>
-                        {formSubmitted && errors.seating && touched.seating && (
-                          <Paragraph fontSize="large" color="red">
-                            {errors.seating}
-                          </Paragraph>
-                        )}
-                      </RadioButton>
-                    </RadioButtonsContainer>
-                    <CustomButton
-                      handleBlur={handleBlur}
-                      handleChange={handleChange}
-                      date={date}
-                      dinner={dinner}
-                      occasion={occasion}
-                      time={time}
-                      errors={formSubmitted ? errors : {}}
-                      dispatch={dispatch}
-                    />
-                  </>
-                </MakeReservationStyled>
-              </Content>
-            </Container>
-          </FrontCard>
-          {/* </CardFace> */}
-
-        {/* <CardFace> */}
-        {/* <BackCard turn={turn}>
-            <BackPageOfMakeReservation
-              values={values}
-              handleChange={handleChange}
-              dispatch={dispatch}
-              errors={errors}
-              touched={touched}
-            />
-          </BackCard>
-        </ReservationCard> */}
-
         <Container as="div" type="makeReservationBottom">
           <Content>
             <BottomContainerStyled>
@@ -600,7 +562,7 @@ function MakeReservation() {
                 {orderArray.length === 0 ? makeAnOrderMsg : orderArray}
               </MenusContainer>
               <ButtonContainer>
-                <Button type="submit">Confirm Reservation</Button>
+                <Button> {errors ? "Next  >>>" : "Confirm Reservation"}</Button>
               </ButtonContainer>
             </BottomContainerStyled>
           </Content>

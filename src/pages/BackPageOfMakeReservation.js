@@ -229,7 +229,7 @@ function BackPageOfMakeReservation({
     handleChange(e);
     dispatch({ type: "textArea", payload: e.target.value });
   };
-  console.log(errors);
+  // console.log(errors);
   return (
     <>
       {/* <Container as="section" type="confirmReservation">

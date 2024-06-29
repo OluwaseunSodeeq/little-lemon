@@ -1,11 +1,13 @@
 import { createContext, useState } from "react";
 import { menuArr } from "./defaultMenusArray";
 
-const MenusContextData = createContext(null);
+const MenusContextData = createContext();
 
 function MenusContextProvider({ children }) {
+  // DATA FOR MENU
   const [menus, setMenus] = useState(menuArr);
 
+  // Menu Handler
   const selectedMenuHandler = (id, generalName) => {
     const updatedMenus = menus.map((category) => {
       const { generalName: menuGeneralName, list } = category;
@@ -21,10 +23,15 @@ function MenusContextProvider({ children }) {
     setMenus(updatedMenus);
   };
   return (
-    <MenusContextData.Provider value={{ menus, selectedMenuHandler }}>
+    <MenusContextData.Provider
+      value={{
+        menus,
+        selectedMenuHandler,
+      }}
+    >
       {children}
     </MenusContextData.Provider>
   );
 }
 
-export { MenusContextProvider, MenusContextData };
+export { MenusContextData, MenusContextProvider };

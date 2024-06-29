@@ -3,7 +3,7 @@ import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import { Paragraph } from "../ui/Paragraph";
 import { FlexedDiv } from "../styles/FlexedDiv";
-import useMenusContext from "../Context/useMenusContext";
+import useMenusContext from "../Contexts/Menu/useMenusContext";
 
 const MenuStyled = styled.div`
   width: 100%;

@@ -3,6 +3,7 @@ import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import Logo from "./Logo";
 import Nav from "./Nav";
+import useToggleContext from "../Contexts/ToggleContext/useToggleContext";
 
 const HeaderContent = styled.div`
   height: 8rem;
@@ -30,16 +31,15 @@ const Hamburger = styled.div`
 `;
 
 function Header({ setHamburger, hamburger }) {
-  // const [hamburger, setHamburger] = useState(false);
+  const { open, toggleHamburger } = useToggleContext();
 
-  const toggleHamburger = () => setHamburger((open) => !open);
   return (
     <Container as="header">
       <Content>
         <HeaderContent>
           <Logo />
           <Hamburger onClick={toggleHamburger}>
-            {hamburger ? (
+            {open ? (
               <HeaderIcon>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ function Header({ setHamburger, hamburger }) {
               </HeaderIcon>
             )}
           </Hamburger>
-          <Nav hamburger={hamburger} />
+          <Nav hamburger={open} onCloseHandler={toggleHamburger} />
         </HeaderContent>
       </Content>
     </Container>

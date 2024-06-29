@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { NavLi } from "../ui/NavLi";
 import { NavLink } from "react-router-dom";
+import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 const NavStyled = styled.nav`
   display: block;
@@ -47,27 +48,34 @@ const LiContainer = styled.ul`
     gap: 2.5rem;
   }
 `;
-function Nav({ hamburger }) {
+function Nav({ hamburger, onCloseHandler }) {
+  const { logoutHandler } = useAuthContext();
+
+  // LogoutHandler
+  const mainLogoutHandler = () => {
+    logoutHandler();
+    onCloseHandler();
+  };
   return (
     <NavStyled hamburger={hamburger}>
       <LiContainer>
-        <NavLi>
-          <NavLink to="/">Home</NavLink>
+        <NavLi onClick={onCloseHandler}>
+          <NavLink to="/home">Home</NavLink>
         </NavLi>
-        <NavLi>
+        <NavLi onClick={onCloseHandler}>
           <NavLink to="/about">About</NavLink>
         </NavLi>
-        <NavLi>
+        <NavLi onClick={onCloseHandler}>
           <NavLink to="/menu">Menu</NavLink>
         </NavLi>
-        <NavLi>
+        <NavLi onClick={onCloseHandler}>
           <NavLink to="/reservations">Reservations</NavLink>
         </NavLi>
-        <NavLi>
+        <NavLi onClick={onCloseHandler}>
           <NavLink to="/orderonline">Order Online</NavLink>
         </NavLi>
-        <NavLi>
-          <NavLink to="/login">Login</NavLink>
+        <NavLi onClick={mainLogoutHandler}>
+          <NavLink to="/">Logout</NavLink>
         </NavLi>
       </LiContainer>
     </NavStyled>
