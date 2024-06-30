@@ -65,9 +65,9 @@ function Nav({ hamburger, onCloseHandler }) {
         <NavLi onClick={onCloseHandler}>
           <NavLink to="/about">About</NavLink>
         </NavLi>
-        <NavLi onClick={onCloseHandler}>
+        {/* <NavLi onClick={onCloseHandler}>
           <NavLink to="/menu">Menu</NavLink>
-        </NavLi>
+        </NavLi> */}
         <NavLi onClick={onCloseHandler}>
           <NavLink to="/reservations">Reservations</NavLink>
         </NavLi>

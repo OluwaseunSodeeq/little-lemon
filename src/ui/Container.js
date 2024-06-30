@@ -31,11 +31,20 @@ const herosectionBg = css`
     top: 7rem;
   }
 `;
+//About
+const aboutBg = css`
+  position: relative;
+  width: 100%;
+  top: 10rem;
+  background-color: var(--pureWhite);
+  @media (max-width: 950px) {
+    top: 8rem;
+  }
+  @media (max-width: 450px) {
+    top: 7rem;
+  }
+`;
 const headingSectionBg = css`
-  /* position: relative; */
-  border: 2px solid green;
-  /* top: 8rem; */
-  /* height: 27rem; */
   background-color: var(--deepGreen);
 
   @media (max-width: 450px) {
@@ -97,7 +106,7 @@ const menuBg = css`
     top: 7rem;
   }
 `;
-
+// Footer
 const footerBg = css`
   position: relative;
   top: 20rem;
@@ -105,6 +114,12 @@ const footerBg = css`
   height: auto;
   /* background-color: var(--deepGreen); */
   padding: 4rem 0;
+`;
+
+// Login
+const loginBg = css`
+  position: relative;
+  background-color: var(--pureWhite);
 `;
 export const Container = styled.div`
   width: 100%;
@@ -121,6 +136,14 @@ export const Container = styled.div`
     props.type === "homepage" &&
     css`
       ${herosectionBg}
+    `}
+
+     /* ABOUT */
+  ${(props) =>
+    props.as === "section" &&
+    props.type === "about" &&
+    css`
+      ${aboutBg}
     `}
 
 /* ReservationText */
@@ -182,5 +205,13 @@ ${(props) =>
     props.as === "footer" &&
     css`
       ${footerBg}
+    `}
+
+    /* Login */
+    ${(props) =>
+    props.as === "section" &&
+    props.type === "login" &&
+    css`
+      ${loginBg}
     `}
 `;

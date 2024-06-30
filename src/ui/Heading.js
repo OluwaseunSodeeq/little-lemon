@@ -37,6 +37,22 @@ export const Heading = styled.h1`
       font-weight: var(--bold);
       font-family: var(--karla);
     `} 
+    ${(props) =>
+    props.as === "h5" &&
+    css`
+      font-size: 24px;
+      color: var(--deepGreen);
+      font-weight: var(--bold);
+      font-family: var(--karla);
+    `} 
+    ${(props) =>
+    props.as === "h6" &&
+    css`
+      font-size: 20px;
+      color: var(--yellow);
+      font-weight: var(--bold);
+      font-style: italic;
+    `} 
 
   ${additionalStyles}
 `;

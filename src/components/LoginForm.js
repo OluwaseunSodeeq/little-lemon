@@ -5,7 +5,6 @@ import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 // import { useNavigate } from "react-router-dom";
 
 const LoginFormDiv = styled.form`
-  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -13,8 +12,7 @@ const LoginFormDiv = styled.form`
   flex-direction: column;
 
   @media (max-width: 450px) {
-    width: 100%;
-    border: 2px solid blue;
+    width: 80%;
   }
 `;
 
@@ -23,8 +21,8 @@ const InputContainer = styled.div`
   padding: 1.5rem 0px;
 
   @media (max-width: 450px) {
-    border: 2px solid green;
     width: 100%;
+    margin: 0 auto;
   }
 `;
 
@@ -49,12 +47,6 @@ const Input = styled.input`
 
   &:focus {
     border-bottom-color: var(--yellow);
-  }
-
-  @media (max-width: 450px) {
-    width: 90%;
-    padding: 0px;
-    margin: 1rem auto;
   }
 `;
 

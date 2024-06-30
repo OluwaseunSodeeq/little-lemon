@@ -22,6 +22,10 @@ const fontSize = {
     font-style: italic;
     text-align: center;
   `,
+  nameSize: css`
+    font-size: 2.8rem;
+    font-style: italic;
+  `,
   extraLarge: css`
     font-size: 4rem;
 

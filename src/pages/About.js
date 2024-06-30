@@ -1,11 +1,16 @@
+import AboutFooter from "../components/AboutFooter";
+import AboutHeader from "../components/AboutHeader";
+import AboutMain from "../components/AboutMain";
 import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 
 function About() {
   return (
-    <Container>
+    <Container as="section" type="about">
       <Content>
-        <div>About Page</div>
+        <AboutHeader />
+        <AboutMain />
+        <AboutFooter />
       </Content>
     </Container>
   );

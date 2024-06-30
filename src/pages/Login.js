@@ -11,8 +11,6 @@ const LoginLayout = styled.main`
   align-content: center;
   justify-content: center;
   gap: 3.2rem;
-  /* background-color: var(--deepGreen);
-  border-radius: var(--border-radius-md); */
 `;
 const FormContent = styled.div`
   background-color: var(--deepGreen);
@@ -24,9 +22,11 @@ const FormContent = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 45rem;
+  margin: 0 auto;
 
   @media (max-width: 450px) {
     width: 90%;
+    margin: 0 auto;
     padding: 2rem 0;
   }
 `;
@@ -43,7 +43,7 @@ const LogoContainer = styled.div`
 `;
 function Login() {
   return (
-    <Container>
+    <Container as="section" type="login">
       <Content>
         <LoginLayout>
           <LogoContainer>
