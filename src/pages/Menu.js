@@ -23,7 +23,7 @@ const BasicMenuStyledContainer = styled.div`
 const EachMenuContainer = styled.div`
   width: 30%;
   @media (max-width: 950px) {
-    width: 40%;
+    width: 45%;
   }
 
   @media (max-width: 600px) {
@@ -32,13 +32,12 @@ const EachMenuContainer = styled.div`
 `;
 const EachMenu = styled.div`
   width: 100%;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
   border-radius: var(--border-radius-lg);
-  padding: 0.5rem;
+  padding: 0 1rem;
   background-color: ${({ selected }) =>
     selected ? "rgba(255, 255, 255, 0.3)" : ""};
   &:hover {
@@ -62,6 +61,7 @@ const OthermenuItem = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
+  row-gap: 1rem;
 `;
 const OtherMenuContainer = styled.div`
   width: 100%;
@@ -166,7 +166,7 @@ function Menu() {
       <Content>
         <MenuStyled>
           <BasicMenuStyledContainer>
-            <FlexedDiv type="sb">{resultOfMainMenu}</FlexedDiv>
+            <FlexedDiv type="flexMenu">{resultOfMainMenu}</FlexedDiv>
           </BasicMenuStyledContainer>
           <OtherMenuStyledContainer>
             {resultOfOtherMenu}

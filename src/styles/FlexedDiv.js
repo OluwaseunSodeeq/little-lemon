@@ -6,6 +6,21 @@ export const FlexedDiv = styled.div`
   align-items: center;
 
   ${(props) =>
+    props.type === "flexMenu" &&
+    css`
+      justify-content: space-between;
+
+      @media (max-width: 950px) {
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        column-gap: 10%;
+      }
+
+      @media (max-width: 450px) {
+      }
+    `}
+  ${(props) =>
     props.type === "sb" &&
     css`
       justify-content: space-between;

@@ -41,6 +41,7 @@ const FooterRightStyled = styled.div`
   @media (max-width: 450px) {
     width: 100%;
     justify-content: flex-start;
+    flex-direction: column;
     /* flex-wrap: wrap; */
     column-gap: 4rem;
   }

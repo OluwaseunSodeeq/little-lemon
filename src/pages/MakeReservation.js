@@ -1,20 +1,28 @@
 import React, { useReducer, useState } from "react";
 import styled from "styled-components";
-import { Container } from "../ui/Container";
-import { Content } from "../ui/Content";
-import { Paragraph } from "../ui/Paragraph";
-import CustomButton from "../components/CustomButton";
-import { Button } from "../ui/Button";
-import BackPageOfMakeReservation from "./BackPageOfMakeReservation";
 import { useFormik } from "formik";
-import { makeReservationSchemas } from "../schemas";
-import useMenusContext from "../Contexts/Menu/useMenusContext";
 import { CiCalendar } from "react-icons/ci";
 import { IoPersonOutline } from "react-icons/io5";
 import { LiaGlassCheersSolid } from "react-icons/lia";
 import { LuAlarmClock } from "react-icons/lu";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { FrontCard, ReservationCard } from "../components/FlippingCard";
+import useMenusContext from "../Contexts/Menu/useMenusContext";
+import { makeReservationSchemas } from "../schemas";
+
+import { Container } from "../ui/Container";
+import { Content } from "../ui/Content";
+import { Paragraph } from "../ui/Paragraph";
+import CustomButton from "../components/CustomButton";
+import { Button } from "../ui/Button";
+import { LeftBackCard, RightBackCard } from "./BackPageOfMakeReservation";
+import {
+  BackCardLeft,
+  BackCardRight,
+  FrontCardLeft,
+  FrontCardRight,
+  ReservationCard,
+} from "../components/FlippingCard";
+
 // NOTE for the challenge ofSelect and option tags
 /*
 NOTE:
@@ -66,8 +74,6 @@ const MakeReservationStyled = styled.div`
   width: 100%;
   height: auto;
   padding: 2rem 0 3rem;
-  display: inline-block;
-  /* overflow-y: hidden; */
 `;
 
 // Form Container
@@ -309,105 +315,44 @@ const initialState = {
   textArea: "",
 };
 
-// // Cards Style
-// const CardFace = styled.css`
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-//   width: 100%;
-//   height: 100%;
-//   -webkit-backface-visibility: hidden;
-//   backface-visibility: hidden;
-//   transition: all 0.8s ease;
-//   overflow: hidden;
-//   border: 2px solid blue;
-// `;
-// const FrontCard = styled.div`
-//   ${CardFace}
-//   background-color: var(--deepGreen);
-//   /* z-index: 30; */
-//   /* transform: ${({ turn }) => (turn ? "rotateY(-180deg)" : "")}; */
-//   /* transform: ${({ turn }) => (turn ? "rotateY(-180deg)" : "")}; */
-// `;
-// const BackCard = styled.div`
-//   ${CardFace}
-//   background-color: var(--deepGreen);
-//   transform: rotateY(180deg);
-//   /* transform: ${({ turn }) =>
-//     turn ? "rotateY(0deg)" : "rotateY(-180deg)"}; */
-// `;
-
-// const ReservationCard = styled.div`
-//   position: relative;
-//   height: 50rem;
-//   height: auto;
-
-//   /* perspective: 150rem;
-//   -moz-perspective: 150rem; */
-
-//   border: 5px solid red;
-
-//   &:hover ${FrontCard} {
-//     transform: rotateY(-180deg);
-//   }
-//   &:hover ${BackCard} {
-//     transform: rotateY(0deg);
-//   }
-// `;
-
-// const CardFace = styled.div`
-//   position: absolute;
-//   left: 0;
-//   top: 0;
-//   width: 100%;
-//   height: 100%;
-//   -webkit-backface-visibility: hidden;
-//   backface-visibility: hidden;
-//   transition: transform 0.8s ease;
-//   overflow: hidden;
-// `;
-
-// const FrontCard = styled(CardFace)`
-//   background-color: var(--deepGreen);
-//   /* transform: rotateY(0deg); */
-// `;
-
-// const BackCard = styled(CardFace)`
-//   background-color: var(--deepGreen);
-//   /* transform: rotateY(180deg); */
-// `;
-
-// const ReservationCard = styled.div`
-//   position: relative;
-//   width: 100%;
-//   height: 50rem;
-//   perspective: 150rem;
-//   overflow: "hidden";
-
-//   & ${FrontCard} {
-//     transform: ${({ turn }) => (turn ? " rotateY(180deg)" : " rotateY(0deg);")};
-//     /*  rotateY(180deg); */
-//   }
-
-//   & ${BackCard} {
-//     transform: ${({ turn }) => (turn ? " rotateY(0deg)" : "rotateY(180deg);")};
-//     /* transform: rotateY(0deg); */
-//   }
-// `;
 const CardLeft = styled.div`
   width: 50%;
-  /* border: 2px solid red; */
+  @media (max-width: 450px) {
+    width: 100%;
+  }
 `;
 const CardRight = styled.div`
   width: 50%;
-  /* border: 2px solid red; */
+  @media (max-width: 450px) {
+    width: 100%;
+  }
 `;
 const FlexedCard = styled.div`
   display: flex;
   column-gap: 5rem;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    /* row-gap: 3rem; */
+  }
 `;
+
 const Headingtext = styled.span`
   margin-top: 3rem;
+  border: none;
+`;
+const HidetheRightRadio = styled.div`
+  display: block;
+
+  @media (max-width: 450px) {
+    display: none;
+  }
+`;
+const ShowtheRightRadio = styled.div`
+  display: none;
+  @media (max-width: 450px) {
+    display: block;
+  }
 `;
 
 function MakeReservation() {
@@ -416,62 +361,6 @@ function MakeReservation() {
   const { date, occasion, dinner, seating, time } = state;
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [turn, setTurn] = useState(false);
-  // const [flip, setFlip] = useState(false);
-  const err = true;
-  // console.log(flip, setFlip);
-  const turnHandler = () => {
-    console.log("Hello turn");
-    setTurn((open) => !open);
-  };
-
-  const { errors, handleBlur, handleChange, handleSubmit, touched, values } =
-    useFormik({
-      initialValues: initialState,
-      validationSchema: makeReservationSchemas,
-      onSubmit: (values) => {
-        // handle form submission
-        console.log(values);
-
-        if (3 > 2) {
-          setTurn(true);
-        }
-      },
-    });
-
-  const handleFieldChange = (e) => {
-    handleChange(e);
-    dispatch({ type: e.target.name, payload: e.target.value });
-  };
-
-  const notinIsSelected = 0;
-  const makeAnOrderMsg = (
-    <Paragraph
-      color="deepGreen"
-      fontFamily="markazi"
-      fontweight="deepBold"
-      fontSize="xxxlarge"
-    >
-      Kindly make an Order!
-    </Paragraph>
-  );
-
-  const orderArray = menus
-    .flatMap((category) => {
-      const { generalName, list } = category;
-      return list.map((menu) => ({ ...menu, generalName: generalName }));
-    })
-    .filter((item) => item.selected)
-    .map((menu, i) => {
-      const { id, generalName, image, name } = menu;
-      return (
-        <SelectedmenuImageContainer index={i} key={i}>
-          <SelectedmenuImageStyled>
-            <img src={image} alt={name} />
-            <span onClick={() => selectedMenuHandler(id, generalName)}>X</span>
-          </SelectedmenuImageStyled>
-        </SelectedmenuImageContainer>
-      );
-    });
 
   const content = [
     {
@@ -543,6 +432,99 @@ function MakeReservation() {
       placeholder: "Occasion",
     },
   ];
+  const dataArr = [
+    {
+      label: "First Name",
+      id: "firstName",
+      inputType: "text",
+      itemId: 0,
+      placeholder: "Oluwaseun",
+    },
+    {
+      label: "Last Name",
+      id: "lastName",
+      inputType: "text",
+      itemId: 1,
+      placeholder: "Sodeeq",
+    },
+    {
+      label: "Email",
+      id: "email",
+      inputType: "email",
+      itemId: 2,
+      placeholder: "ademolaoluwaseun90@gmail.com",
+    },
+    {
+      label: "Phone Number",
+      id: "tel",
+      inputType: "tel",
+      itemId: 3,
+      placeholder: "8149428278",
+      selectOptns: [
+        { code: +234, countryAbbrev: "NG", country: "Nigeria" },
+        { code: +1, countryAbbrev: "US", country: "United State of America" },
+        { code: +91, countryAbbrev: "IN", country: "India" },
+        { code: +44, countryAbbrev: "GB", country: "Great Britain" },
+        { code: +86, countryAbbrev: "CN", country: "China" },
+      ],
+    },
+  ];
+  // const [flip, setFlip] = useState(false);
+  const err = true;
+  // console.log(flip, setFlip);
+  const turnHandler = () => {
+    console.log("Hello turn");
+    setTurn((open) => !open);
+  };
+
+  const { errors, handleBlur, handleChange, handleSubmit, touched, values } =
+    useFormik({
+      initialValues: initialState,
+      validationSchema: makeReservationSchemas,
+      onSubmit: (values) => {
+        // handle form submission
+        console.log(values);
+
+        if (3 > 2) {
+          setTurn(true);
+        }
+      },
+    });
+
+  const handleFieldChange = (e) => {
+    handleChange(e);
+    dispatch({ type: e.target.name, payload: e.target.value });
+  };
+
+  const notinIsSelected = 0;
+  const makeAnOrderMsg = (
+    <Paragraph
+      color="deepGreen"
+      fontFamily="markazi"
+      fontweight="deepBold"
+      fontSize="xxxlarge"
+    >
+      Kindly make an Order!
+    </Paragraph>
+  );
+
+  const orderArray = menus
+    .flatMap((category) => {
+      const { generalName, list } = category;
+      return list.map((menu) => ({ ...menu, generalName: generalName }));
+    })
+    .filter((item) => item.selected)
+    .map((menu, i) => {
+      const { id, generalName, image, name } = menu;
+      return (
+        <SelectedmenuImageContainer index={i} key={i}>
+          <SelectedmenuImageStyled>
+            <img src={image} alt={name} />
+            <span onClick={() => selectedMenuHandler(id, generalName)}>X</span>
+          </SelectedmenuImageStyled>
+        </SelectedmenuImageContainer>
+      );
+    });
 
   const cardLeftCards = content.filter(
     (customSelect) =>
@@ -580,7 +562,31 @@ function MakeReservation() {
                 <FlexedCard>
                   <CardLeft>
                     <ReservationCard turn={turn}>
-                      <FrontCard>
+                      <FrontCardLeft>
+                        <ShowtheRightRadio>
+                          <RadioButton>
+                            <RadioInput
+                              type="radio"
+                              name="seating"
+                              id="outdoor"
+                              value="outdoor"
+                              onChange={handleFieldChange}
+                              checked={seating === "outdoor"}
+                              onBlur={handleBlur}
+                            />
+                            <Radiolabel htmlFor="outdoor">
+                              Outdoor seating <RadioSpan />
+                            </Radiolabel>
+                            {formSubmitted &&
+                              errors.seating &&
+                              touched.seating && (
+                                <Paragraph fontSize="large" color="red">
+                                  {errors.seating}
+                                </Paragraph>
+                              )}
+                          </RadioButton>
+                        </ShowtheRightRadio>
+
                         <RadioButton>
                           <RadioInput
                             type="radio"
@@ -614,34 +620,47 @@ function MakeReservation() {
                           content={cardLeftCards}
                         />
                         {/* {cardLeftCards} */}
-                      </FrontCard>
+                      </FrontCardLeft>
+                      <BackCardLeft>
+                        <LeftBackCard
+                          values={values}
+                          handleChange={handleChange}
+                          errors={errors}
+                          touched={touched}
+                          turn={turn}
+                          dataArr={dataArr}
+                        />
+                      </BackCardLeft>
                     </ReservationCard>
                   </CardLeft>
 
                   <CardRight>
                     <ReservationCard turn={turn}>
-                      <FrontCard>
-                        <RadioButton>
-                          <RadioInput
-                            type="radio"
-                            name="seating"
-                            id="outdoor"
-                            value="outdoor"
-                            onChange={handleFieldChange}
-                            checked={seating === "outdoor"}
-                            onBlur={handleBlur}
-                          />
-                          <Radiolabel htmlFor="outdoor">
-                            Outdoor seating <RadioSpan />
-                          </Radiolabel>
-                          {formSubmitted &&
-                            errors.seating &&
-                            touched.seating && (
-                              <Paragraph fontSize="large" color="red">
-                                {errors.seating}
-                              </Paragraph>
-                            )}
-                        </RadioButton>
+                      <FrontCardRight>
+                        <HidetheRightRadio>
+                          <RadioButton>
+                            <RadioInput
+                              type="radio"
+                              name="seating"
+                              id="outdoor"
+                              value="outdoor"
+                              onChange={handleFieldChange}
+                              checked={seating === "outdoor"}
+                              onBlur={handleBlur}
+                            />
+                            <Radiolabel htmlFor="outdoor">
+                              Outdoor seating <RadioSpan />
+                            </Radiolabel>
+                            {formSubmitted &&
+                              errors.seating &&
+                              touched.seating && (
+                                <Paragraph fontSize="large" color="red">
+                                  {errors.seating}
+                                </Paragraph>
+                              )}
+                          </RadioButton>
+                        </HidetheRightRadio>
+
                         <CustomButton
                           handleBlur={handleBlur}
                           handleChange={handleChange}
@@ -654,20 +673,30 @@ function MakeReservation() {
                           content={cardRightCards}
                         />
                         {/* {cardRightCards} */}
-                      </FrontCard>
+                      </FrontCardRight>
+                      <BackCardRight>
+                        <RightBackCard
+                          values={values}
+                          handleChange={handleChange}
+                          errors={errors}
+                          touched={touched}
+                          turn={turn}
+                          dataArr={dataArr}
+                        />
+                      </BackCardRight>
                     </ReservationCard>
                   </CardRight>
                 </FlexedCard>
               </MakeReservationStyled>
 
-              <BackPageOfMakeReservation
+              {/* <BackPageOfMakeReservation
                 values={values}
                 handleChange={handleChange}
                 dispatch={dispatch}
                 errors={errors}
                 touched={touched}
                 turn={turn}
-              />
+              /> */}
             </>
             <ButtonContainer>
               {err ? (

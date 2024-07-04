@@ -10,32 +10,35 @@ export const CardFace = styled.div`
   backface-visibility: hidden;
   transition: transform 0.8s ease;
   overflow: hidden;
+  background-color: var(--deepGreen);
 `;
 
-export const FrontCard = styled(CardFace)`
-  background-color: var(--deepGreen);
-  /* transform: rotateY(0deg); */
-`;
+export const FrontCardLeft = styled(CardFace)``;
 
-export const BackCard = styled(CardFace)`
-  background-color: var(--deepGreen);
-  /* transform: rotateY(180deg); */
-`;
+export const FrontCardRight = styled(CardFace)``;
+
+export const BackCardLeft = styled(CardFace)``;
+export const BackCardRight = styled(CardFace)``;
 
 export const ReservationCard = styled.div`
   position: relative;
   width: 100%;
-  height: 50rem;
+  height: 43rem;
   perspective: 150rem;
   overflow: "hidden";
 
-  & ${FrontCard} {
+  & ${FrontCardLeft} {
     transform: ${({ turn }) => (turn ? " rotateY(180deg)" : " rotateY(0deg);")};
-    /*  rotateY(180deg); */
+  }
+  & ${FrontCardRight} {
+    transform: ${({ turn }) =>
+      turn ? " rotateY(-180deg)" : " rotateY(0deg);"};
   }
 
-  & ${BackCard} {
+  & ${BackCardLeft} {
     transform: ${({ turn }) => (turn ? " rotateY(0deg)" : "rotateY(180deg);")};
-    /* transform: rotateY(0deg); */
+  }
+  & ${BackCardRight} {
+    transform: ${({ turn }) => (turn ? " rotateY(0deg)" : "rotateY(-180deg);")};
   }
 `;

@@ -24,8 +24,9 @@ const weekSpecialBg = css`
 const herosectionBg = css`
   position: relative;
   top: 8rem;
-  height: 27rem;
+  height: auto;
   background-color: var(--deepGreen);
+  /* height: 27rem; */
 
   @media (max-width: 450px) {
     top: 7rem;
@@ -48,7 +49,7 @@ const headingSectionBg = css`
   background-color: var(--deepGreen);
 
   @media (max-width: 450px) {
-    /* top: 7rem; */
+    margin-top: 3rem;
   }
 `;
 

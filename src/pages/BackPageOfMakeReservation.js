@@ -1,19 +1,13 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { IoMdStar } from "react-icons/io";
 import { FaCalendar } from "react-icons/fa";
+import { IoPersonOutline } from "react-icons/io5";
+import { LiaGlassCheersSolid } from "react-icons/lia";
+import { LuAlarmClock } from "react-icons/lu";
 
 import { LASTINPUTID } from "../ui/Constant";
-import { useState } from "react";
-import { IoPersonOutline } from "react-icons/io5";
-import { LuAlarmClock } from "react-icons/lu";
-import { LiaGlassCheersSolid } from "react-icons/lia";
 import { Paragraph } from "../ui/Paragraph";
-import { BackCard, ReservationCard } from "../components/FlippingCard";
-
-const ConfirmReservationStyled = styled.div`
-  background-color: var(--deepGreen);
-  padding: 3rem 0.5rem;
-`;
 
 const GenaralInputsContainer = styled.div`
   width: 100%;
@@ -27,7 +21,6 @@ const EachInputContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-start; */
 `;
 const LabelInput = styled.label`
   font-family: var(--karla);
@@ -39,7 +32,6 @@ const InputWrapper = styled.div`
   padding: 0px;
   position: relative;
   height: 4.5rem;
-  /* height: auto; */
   overflow: hidden;
   background-color: var(--pureWhite);
   border-radius: var(--border-radius-md);
@@ -65,7 +57,6 @@ const Input = styled.input`
     color: var(--deepGreen);
     font-style: italic;
     font-size: 1.6rem;
-    /* font-family: var(--karla); */
   }
 `;
 
@@ -84,7 +75,6 @@ const SelectStyled = styled.select`
   font-weight: var(--regular);
   border: none;
   outline: none;
-  /* height: 3.5rem; */
   padding: 0 1rem;
 `;
 const OptionStyled = styled.option`
@@ -111,13 +101,14 @@ const MakeReservationData = styled.div`
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-
   row-gap: 2rem;
 `;
 const EachMakeReservationData = styled.div`
   width: 45%;
+  color: var(--pureWhite);
   display: flex;
   justify-content: space-between;
+  /* gap: 2rem; */
   align-items: center;
   padding-right: 1.5rem;
   border-radius: var(--border-radius-sm);
@@ -132,13 +123,13 @@ const IconSpan = styled.span`
 `;
 const TextSpan = styled.span`
   font-size: 1.4rem;
-  color: var(--pureWhite);
   font-weight: 600;
 `;
 const ButtonSelected = styled.div`
   font-weight: var(--Bold);
   color: var(--pureWhite);
   font-size: 2rem;
+  margin-top: 2rem;
 `;
 const TextAreaContainer = styled.div`
   width: 100%;
@@ -150,84 +141,74 @@ const TextAreaStyled = styled.textarea`
   padding: 2rem;
 `;
 
-const CardLeft = styled.div`
-  width: 50%;
-  /* border: 2px solid red; */
-`;
-const CardRight = styled.div`
-  width: 50%;
-  /* border: 2px solid red; */
-`;
-const FlexedCard = styled.div`
-  display: flex;
-  column-gap: 5rem;
-`;
-function BackPageOfMakeReservation({
+export function LeftBackCard({
+  values,
+  handleChange,
+  errors,
+  touched,
+  turn,
+  dataArr,
+}) {
+  const cardLeftInput = dataArr.filter(
+    (input) => input.id === "firstName" || input.id === "email"
+  );
+  const makeReservationArr = [
+    {
+      icon: <FaCalendar style={{ fontSize: "2.4rem", color: "inherit" }} />,
+      text: values.date || "Select Date",
+      id: "date",
+    },
+    {
+      icon: (
+        <IoPersonOutline style={{ fontSize: "2.4rem", color: "inherit" }} />
+      ),
+      text: values.dinner || "No. of diners",
+      id: "dinner",
+    },
+    {
+      icon: <LuAlarmClock style={{ fontSize: "2.4rem", color: "inherit" }} />,
+      text: values.time || "Select Time",
+      id: "time",
+    },
+    {
+      icon: (
+        <LiaGlassCheersSolid style={{ fontSize: "2.4rem", color: "inherit" }} />
+      ),
+      text: values.occasion || "Occasion",
+      id: "occasion",
+    },
+  ];
+
+  return (
+    <>
+      <GeneralInputsContainer
+        arr={cardLeftInput}
+        errors={errors}
+        touched={touched}
+        values={values}
+        handleChange={handleChange}
+      />
+      <SummaryOfSelectTags
+        makeReservationArr={makeReservationArr}
+        values={values}
+        errors={errors}
+      />
+    </>
+  );
+}
+
+export function RightBackCard({
   values,
   handleChange,
   dispatch,
   errors,
   touched,
-  turn,
+  dataArr,
 }) {
   const [selectCountryCode, setSelectCountryCode] = useState("NG");
   const contryCodeHandler = (e) => setSelectCountryCode(e.target.value);
-  const dataArr = [
-    {
-      label: "First Name",
-      id: "firstName",
-      inputType: "text",
-      itemId: 0,
-      placeholder: "Oluwaseun",
-    },
-    {
-      label: "Last Name",
-      id: "lastName",
-      inputType: "text",
-      itemId: 1,
-      placeholder: "Sodeeq",
-    },
-    {
-      label: "Email",
-      id: "email",
-      inputType: "email",
-      itemId: 2,
-      placeholder: "ademolaoluwaseun90@gmail.com",
-    },
-    {
-      label: "Phone Number",
-      id: "tel",
-      inputType: "tel",
-      itemId: 3,
-      placeholder: "8149428278",
-      selectOptns: [
-        { code: +234, countryAbbrev: "NG", country: "Nigeria" },
-        { code: +1, countryAbbrev: "US", country: "United State of America" },
-        { code: +91, countryAbbrev: "IN", country: "India" },
-        { code: +44, countryAbbrev: "GB", country: "Great Britain" },
-        { code: +86, countryAbbrev: "CN", country: "China" },
-      ],
-    },
-  ];
   const textAreaText = { label: "Special Requests", value: "" };
 
-  const makeReservationArr = [
-    { icon: <FaCalendar />, text: values.date || "Select Date", id: "date" },
-    {
-      icon: <IoPersonOutline />,
-      text: values.dinner || "No. of diners",
-      id: "dinner",
-    },
-    { icon: <LuAlarmClock />, text: values.time || "Select Time", id: "time" },
-    {
-      icon: <LiaGlassCheersSolid />,
-      text: values.occasion || "Occasion",
-      id: "occasion",
-    },
-  ];
-  const cardLeftInput = dataArr.filter(
-    (input) => input.id === "firstName" || input.id === "email"
-  );
   const cardRightInput = dataArr.filter(
     (input) => input.id !== "firstName" && input.id !== "email"
   );
@@ -235,58 +216,27 @@ function BackPageOfMakeReservation({
     handleChange(e);
     dispatch({ type: "textArea", payload: e.target.value });
   };
-  // console.log(errors);
+
   return (
     <>
-      <ConfirmReservationStyled>
-        <FlexedCard>
-          <CardLeft>
-            <ReservationCard turn={turn}>
-              <BackCard>
-                <GeneralInputsContainer
-                  arr={cardLeftInput}
-                  errors={errors}
-                  touched={touched}
-                  values={values}
-                  selectCountryCode={selectCountryCode}
-                  contryCodeHandler={contryCodeHandler}
-                  handleChange={handleChange}
-                />
-                <SummaryOfSelectTags
-                  makeReservationArr={makeReservationArr}
-                  values={values}
-                  errors={errors}
-                />
-              </BackCard>
-            </ReservationCard>
-          </CardLeft>
-          <CardRight>
-            <ReservationCard>
-              <BackCard>
-                <GeneralInputsContainer
-                  arr={cardRightInput}
-                  errors={errors}
-                  touched={touched}
-                  values={values}
-                  selectCountryCode={selectCountryCode}
-                  contryCodeHandler={contryCodeHandler}
-                  handleChange={handleChange}
-                />
+      <GeneralInputsContainer
+        arr={cardRightInput}
+        errors={errors}
+        touched={touched}
+        values={values}
+        selectCountryCode={selectCountryCode}
+        contryCodeHandler={contryCodeHandler}
+        handleChange={handleChange}
+      />
 
-                <TextAreaContainer>
-                  <LabelInput>{textAreaText.label}</LabelInput>
-                  {/* <TextAreaStyled value={} onChange={}/> */}
-                  <TextAreaStyled
-                    id="textArea"
-                    onChange={textAreaHandler}
-                    // value={values.id}
-                  />
-                </TextAreaContainer>
-              </BackCard>
-            </ReservationCard>
-          </CardRight>
-        </FlexedCard>
-      </ConfirmReservationStyled>
+      <TextAreaContainer>
+        <LabelInput>{textAreaText.label}</LabelInput>
+        <TextAreaStyled
+          id="textArea"
+          onChange={textAreaHandler}
+          // value={values.id}
+        />
+      </TextAreaContainer>
     </>
   );
 }
@@ -370,7 +320,8 @@ function GeneralInputsContainer({
     </GenaralInputsContainer>
   );
 }
-export default BackPageOfMakeReservation;
+
+// export default BackPageOfMakeReservation;
 
 // import styled from "styled-components";
 // import { IoMdStar } from "react-icons/io";
