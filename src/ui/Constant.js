@@ -7,3 +7,4 @@ export const boxShadowValue = `
 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
 0 100px 80px rgba(0, 0, 0, 0.12)
 `;
+export const ZERO = 0;

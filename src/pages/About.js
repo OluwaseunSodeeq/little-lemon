@@ -1,6 +1,7 @@
 import AboutFooter from "../components/AboutFooter";
 import AboutHeader from "../components/AboutHeader";
-import AboutMain from "../components/AboutMain";
+// import AboutMain from "../components/AboutMain";
+import BookedSummary from "../components/BookedSummary";
 import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 
@@ -9,7 +10,8 @@ function About() {
     <Container as="section" type="about">
       <Content>
         <AboutHeader />
-        <AboutMain />
+        {/* <AboutMain /> */}
+        <BookedSummary />
         <AboutFooter />
       </Content>
     </Container>

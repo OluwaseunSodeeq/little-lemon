@@ -1,10 +1,6 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-// import { CiCalendar } from "react-icons/ci";
-// import { IoPersonOutline } from "react-icons/io5";
-// import { LiaGlassCheersSolid } from "react-icons/lia";
-// import { LuAlarmClock } from "react-icons/lu";
-// import { RiArrowDropDownLine } from "react-icons/ri";
+
 import CustomDropdown from "./CustomDropDown";
 import { Paragraph } from "../ui/Paragraph";
 import { boxShadowValue } from "../ui/Constant";
@@ -14,13 +10,9 @@ const CustomSelectContainer = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  /* justify-content: space-between; */
-  /* flex-wrap: wrap; */
   row-gap: 7rem;
   width: 100%;
   height: auto;
-
-  /*  */
   z-index: 30;
 `;
 
@@ -116,82 +108,12 @@ const CustomButton = ({
   const [showOptions, setShowOptions] = useState(false);
   const [currentElement, setCurrentElement] = useState(null);
   const dateRef = useRef(null);
-
-  // const content = [
-  //   {
-  //     currentID: 0,
-  //     label: "Date",
-  //     beforeIcon: <CiCalendar style={{ fontSize: "3rem", color: "inherit" }} />,
-  //     value: date || "Select Date",
-  //     afterIcon: (
-  //       <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-  //     ),
-  //     inputType: "input",
-  //     errorKey: "date",
-  //     placeholder: "Select Date",
-  //   },
-  //   {
-  //     currentID: 1,
-  //     label: "Time",
-  //     beforeIcon: (
-  //       <LuAlarmClock style={{ fontSize: "3rem", color: "inherit" }} />
-  //     ),
-  //     value: time || "Select Time",
-  //     afterIcon: (
-  //       <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-  //     ),
-  //     inputType: "select",
-  //     options: ["Morning", "Afternoon", "Evening", "Night"],
-  //     errorKey: "time",
-  //     placeholder: "Select Time",
-  //   },
-  //   {
-  //     currentID: 2,
-  //     label: "Occasion",
-  //     beforeIcon: (
-  //       <LiaGlassCheersSolid style={{ fontSize: "3rem", color: "inherit" }} />
-  //     ),
-  //     value: occasion || "Occasion",
-  //     afterIcon: (
-  //       <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-  //     ),
-  //     inputType: "select",
-  //     options: ["Birthday", "Anniversary", "Graduation", "Other"],
-  //     errorKey: "occasion",
-  //     placeholder: "Occasion",
-  //   },
-  //   {
-  //     currentID: 3,
-  //     label: "Number of Diners",
-  //     beforeIcon: (
-  //       <IoPersonOutline style={{ fontSize: "3rem", color: "inherit" }} />
-  //     ),
-  //     value: dinner || "No. of Diners",
-  //     afterIcon: (
-  //       <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-  //     ),
-  //     inputType: "select",
-  //     options: [
-  //       "1 Diner",
-  //       "2 Diners",
-  //       "3 Diners",
-  //       "4 Diners",
-  //       "5 Diners",
-  //       "6 Diners",
-  //       "7 Diners",
-  //       "8 Diners",
-  //       "9 Diners",
-  //       "10 Diners",
-  //     ],
-  //     errorKey: "dinner",
-  //     placeholder: "No. of Diners",
-  //   },
-  // ];
-
   const onShowPicker = () => {
+    // Render Calendar
     dateRef.current.showPicker();
   };
 
+  //Update Calendar
   const dateChangeHandler = (e) => {
     const selectedDate = new Date(e.target.value);
     const formattedDate = selectedDate.toLocaleDateString("en-US", {
@@ -203,6 +125,7 @@ const CustomButton = ({
     dispatch({ type: "date", payload: formattedDate });
   };
 
+  //Select An Option
   const toggleOptions = (id) => {
     setCurrentElement(id);
     setShowOptions((prevShow) => (currentElement !== id ? true : !prevShow));

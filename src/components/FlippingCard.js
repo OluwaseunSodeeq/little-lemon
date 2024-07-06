@@ -42,3 +42,25 @@ export const ReservationCard = styled.div`
     transform: ${({ turn }) => (turn ? " rotateY(0deg)" : "rotateY(-180deg);")};
   }
 `;
+
+export const CardLeft = styled.div`
+  width: 50%;
+  @media (max-width: 450px) {
+    width: 100%;
+  }
+`;
+export const CardRight = styled.div`
+  width: 50%;
+  @media (max-width: 450px) {
+    width: 100%;
+  }
+`;
+export const FlexedCard = styled.div`
+  display: flex;
+  column-gap: 5rem;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    /* row-gap: 3rem; */
+  }
+`;

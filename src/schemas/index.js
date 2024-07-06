@@ -6,8 +6,10 @@ export const makeReservationSchemas = yup.object().shape({
   occasion: yup.string().required("Please select an occasion"),
   seating: yup.string().required("Please select where to seat"),
   time: yup.string().required("Please select a time"),
-  firstName: yup.string().required("First name is required"),
-  lastName: yup.string().required("Last name is required"),
+
+  firstName: yup.string().min(3).required("First name is required"),
+  lastName: yup.string().min(3).required("Last name is required"),
+
   email: yup
     .string()
     .email("Invalid email address")

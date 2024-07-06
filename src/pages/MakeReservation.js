@@ -1,5 +1,6 @@
 import React, { useReducer, useState } from "react";
 import styled from "styled-components";
+// import { ErrorMessage, useFormik } from "formik";
 import { useFormik } from "formik";
 import { CiCalendar } from "react-icons/ci";
 import { IoPersonOutline } from "react-icons/io5";
@@ -18,10 +19,14 @@ import { LeftBackCard, RightBackCard } from "./BackPageOfMakeReservation";
 import {
   BackCardLeft,
   BackCardRight,
+  CardLeft,
+  CardRight,
+  FlexedCard,
   FrontCardLeft,
   FrontCardRight,
   ReservationCard,
 } from "../components/FlippingCard";
+import { ZERO } from "../ui/Constant";
 
 // NOTE for the challenge ofSelect and option tags
 /*
@@ -283,6 +288,24 @@ const ButtonContainer = styled.div`
   margin-top: 3rem;
 `;
 
+const Headingtext = styled.span`
+  margin-top: 3rem;
+  border: none;
+`;
+const HidetheRightRadio = styled.div`
+  display: block;
+
+  @media (max-width: 450px) {
+    display: none;
+  }
+`;
+const ShowtheRightRadio = styled.div`
+  display: none;
+  @media (max-width: 450px) {
+    display: block;
+  }
+`;
+// REDUCER
 const reducer = (state, action) => {
   switch (action.type) {
     case "date":
@@ -302,65 +325,20 @@ const reducer = (state, action) => {
   }
 };
 
-const initialState = {
-  date: "",
-  dinner: "",
-  occasion: "",
-  time: "",
-  seating: "",
-  firstName: "",
-  lastName: "",
-  phoneNumber: "",
-  email: "",
-  textArea: "",
-};
-
-const CardLeft = styled.div`
-  width: 50%;
-  @media (max-width: 450px) {
-    width: 100%;
-  }
-`;
-const CardRight = styled.div`
-  width: 50%;
-  @media (max-width: 450px) {
-    width: 100%;
-  }
-`;
-const FlexedCard = styled.div`
-  display: flex;
-  column-gap: 5rem;
-
-  @media (max-width: 450px) {
-    flex-direction: column;
-    /* row-gap: 3rem; */
-  }
-`;
-
-const Headingtext = styled.span`
-  margin-top: 3rem;
-  border: none;
-`;
-const HidetheRightRadio = styled.div`
-  display: block;
-
-  @media (max-width: 450px) {
-    display: none;
-  }
-`;
-const ShowtheRightRadio = styled.div`
-  display: none;
-  @media (max-width: 450px) {
-    display: block;
-  }
-`;
-
 function MakeReservation() {
-  const { menus, selectedMenuHandler } = useMenusContext();
+  const {
+    menus,
+    selectedMenuHandler,
+    setUserBookedData,
+    initialState,
+    setUserSelectedItems,
+  } = useMenusContext();
+
   const [state, dispatch] = useReducer(reducer, initialState);
   const { date, occasion, dinner, seating, time } = state;
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [turn, setTurn] = useState(false);
+  // const [formSubmitted, setformSubmitted] = useState(false);
 
   const content = [
     {
@@ -469,12 +447,11 @@ function MakeReservation() {
       ],
     },
   ];
-  // const [flip, setFlip] = useState(false);
-  const err = true;
-  // console.log(flip, setFlip);
-  const turnHandler = () => {
+
+  const turnCardHandler = () => {
     console.log("Hello turn");
     setTurn((open) => !open);
+    setFormSubmitted(false);
   };
 
   const { errors, handleBlur, handleChange, handleSubmit, touched, values } =
@@ -484,19 +461,16 @@ function MakeReservation() {
       onSubmit: (values) => {
         // handle form submission
         console.log(values);
-
-        if (3 > 2) {
-          setTurn(true);
-        }
+        setUserBookedData(values);
+        setUserSelectedItems(orderArray);
       },
     });
 
   const handleFieldChange = (e) => {
-    handleChange(e);
+    // handleChange(e);
     dispatch({ type: e.target.name, payload: e.target.value });
   };
 
-  const notinIsSelected = 0;
   const makeAnOrderMsg = (
     <Paragraph
       color="deepGreen"
@@ -534,7 +508,13 @@ function MakeReservation() {
     (customSelect) =>
       customSelect.errorKey === "dinner" || customSelect.errorKey === "time"
   );
-  console.log(errors.length);
+
+  // If there is any error
+  const err = Object.keys(errors).length;
+  // console.log(ErrorMessage);
+  // console.log(values);
+  console.log(errors);
+
   return (
     <Container as="section" type="makeReservation">
       <Container as="div" type="reservationHeading">
@@ -551,8 +531,13 @@ function MakeReservation() {
       </Container>
       <Form
         onSubmit={(e) => {
+          // e.preventDefault();
+          // setFormSubmitted(true);
+          // handleSubmit(e);
+          e.preventDefault();
           setFormSubmitted(true);
           handleSubmit(e);
+          //setformSubmitted(false); // Reset after handling submit
         }}
       >
         <Container as="div" type="makeReservationTop">
@@ -578,7 +563,7 @@ function MakeReservation() {
                               Outdoor seating <RadioSpan />
                             </Radiolabel>
                             {formSubmitted &&
-                              errors.seating &&
+                              errors.name &&
                               touched.seating && (
                                 <Paragraph fontSize="large" color="red">
                                   {errors.seating}
@@ -600,13 +585,11 @@ function MakeReservation() {
                           <Radiolabel htmlFor="indoor">
                             Indoor seating <RadioSpan />
                           </Radiolabel>
-                          {formSubmitted &&
-                            errors.seating &&
-                            touched.seating && (
-                              <Paragraph fontSize="large" color="red">
-                                {errors.seating}
-                              </Paragraph>
-                            )}
+                          {formSubmitted && errors.name && touched.seating && (
+                            <Paragraph fontSize="large" color="red">
+                              {errors.seating}
+                            </Paragraph>
+                          )}
                         </RadioButton>
                         <CustomButton
                           handleBlur={handleBlur}
@@ -699,12 +682,12 @@ function MakeReservation() {
               /> */}
             </>
             <ButtonContainer>
-              {err ? (
-                <Button type="button" onClick={turnHandler}>
+              {err !== ZERO || err !== undefined || !formSubmitted ? (
+                <Button type="button" onClick={turnCardHandler}>
                   Next &gt;&gt;&gt;
                 </Button>
               ) : (
-                <Button>Confirm Reservation</Button>
+                <Button type="submit">Confirm Reservation</Button>
               )}
             </ButtonContainer>
           </Content>
@@ -713,7 +696,7 @@ function MakeReservation() {
         <Container as="div" type="makeReservationBottom">
           <Content>
             <BottomContainerStyled>
-              {orderArray.length > notinIsSelected && (
+              {orderArray.length > ZERO && (
                 <Paragraph
                   color="deepGreen"
                   fontFamily="markazi"
@@ -728,8 +711,8 @@ function MakeReservation() {
                 {orderArray.length === 0 ? makeAnOrderMsg : orderArray}
               </MenusContainer>
               <ButtonContainer>
-                {err ? (
-                  <Button type="button" onClick={turnHandler}>
+                {err !== ZERO || err !== undefined ? (
+                  <Button type="button" onClick={turnCardHandler}>
                     Next &gt;&gt;&gt;
                   </Button>
                 ) : (
@@ -1171,7 +1154,7 @@ export default MakeReservation;
 //     dispatch({ type: e.target.name, payload: e.target.value });
 //   };
 
-//   const notinIsSelected = 0;
+//   const ZERO = 0;
 //   const makeAnOrderMsg = (
 //     <Paragraph
 //       color="deepGreen"
@@ -1300,7 +1283,7 @@ export default MakeReservation;
 //         <Container as="div" type="makeReservationBottom">
 //           <Content>
 //             <BottomContainerStyled>
-//               {orderArray.length > notinIsSelected && (
+//               {orderArray.length > ZERO && (
 //                 <Paragraph
 //                   color="deepGreen"
 //                   fontFamily="markazi"
