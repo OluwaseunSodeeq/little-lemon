@@ -76,6 +76,7 @@ css
 */
 // Container for Reservation Section
 const MakeReservationStyled = styled.div`
+  position: relative;
   width: 100%;
   height: auto;
   padding: 2rem 0 3rem;
@@ -88,27 +89,10 @@ const Form = styled.form`
   height: auto;
 `;
 
-// Radio Buttons Container
-// const RadioButtonsContainer = styled.div`
-//   width: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   gap: 5rem;
-
-//   @media (max-width: 450px) {
-//     flex-direction: column;
-//     gap: 0rem;
-//     margin-bottom: 2rem;
-//   }
-// `;
-
 // Individual Radio Button
 const RadioButton = styled.div`
-  /* width: 48%; */
   margin-top: 2rem;
   margin-bottom: 2rem;
-  /* padding-left: 1rem; */
   display: flex;
   justify-content: start;
   flex-direction: column;
@@ -191,7 +175,7 @@ const RadioSpan = styled.span`
   }
 `;
 
-// Container for Bottom Section
+// =======================Container for Bottom Section=====================
 const BottomContainerStyled = styled.div`
   position: relative;
   width: 100%;
@@ -283,9 +267,13 @@ const MenusContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
+  position: relative;
+  z-index: 10;
   display: inline-block;
   text-align: center;
   margin-top: 3rem;
+  border: 2px solid red;
+  margin-left: 50%;
 `;
 
 const Headingtext = styled.span`
@@ -324,21 +312,32 @@ const reducer = (state, action) => {
       throw new Error("Unknown action type");
   }
 };
-
+// user InitailData
+const initialState = {
+  date: "",
+  dinner: "",
+  occasion: "",
+  time: "",
+  seating: "",
+  firstName: "",
+  lastName: "",
+  tel: "",
+  email: "",
+  textArea: "",
+};
 function MakeReservation() {
   const {
     menus,
     selectedMenuHandler,
     setUserBookedData,
-    initialState,
+
     setUserSelectedItems,
   } = useMenusContext();
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { date, occasion, dinner, seating, time } = state;
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const { date, occasion, dinner, time } = state;
+  // const [formSubmitted, setFormSubmitted] = useState(false);
   const [turn, setTurn] = useState(false);
-  // const [formSubmitted, setformSubmitted] = useState(false);
 
   const content = [
     {
@@ -350,7 +349,7 @@ function MakeReservation() {
         <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
       ),
       inputType: "input",
-      errorKey: "date",
+      name: "date",
       placeholder: "Select Date",
     },
     {
@@ -376,9 +375,10 @@ function MakeReservation() {
         "9 Diners",
         "10 Diners",
       ],
-      errorKey: "dinner",
+      name: "dinner",
       placeholder: "No. of Diners",
     },
+
     {
       currentID: 1,
       label: "Time",
@@ -391,7 +391,7 @@ function MakeReservation() {
       ),
       inputType: "select",
       options: ["Morning", "Afternoon", "Evening", "Night"],
-      errorKey: "time",
+      name: "time",
       placeholder: "Select Time",
     },
     {
@@ -406,10 +406,11 @@ function MakeReservation() {
       ),
       inputType: "select",
       options: ["Birthday", "Anniversary", "Graduation", "Other"],
-      errorKey: "occasion",
+      name: "occasion",
       placeholder: "Occasion",
     },
   ];
+
   const dataArr = [
     {
       label: "First Name",
@@ -449,27 +450,39 @@ function MakeReservation() {
   ];
 
   const turnCardHandler = () => {
-    console.log("Hello turn");
     setTurn((open) => !open);
-    setFormSubmitted(false);
+    // setFormSubmitted(false);
   };
 
-  const { errors, handleBlur, handleChange, handleSubmit, touched, values } =
-    useFormik({
-      initialValues: initialState,
-      validationSchema: makeReservationSchemas,
-      onSubmit: (values) => {
-        // handle form submission
-        console.log(values);
-        setUserBookedData(values);
-        setUserSelectedItems(orderArray);
-      },
-    });
+  const {
+    errors,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    touched,
+    values,
+    setFieldValue,
+  } = useFormik({
+    initialValues: initialState,
+    validationSchema: makeReservationSchemas,
+    onSubmit: (values) => {
+      // handle form submission
+      console.log(values);
+      setUserBookedData(values);
+      setUserSelectedItems(orderArray);
+    },
+  });
 
   const handleFieldChange = (e) => {
-    // handleChange(e);
-    dispatch({ type: e.target.name, payload: e.target.value });
+    const { name, value } = e.target;
+    dispatch({ type: name, payload: value });
+    setFieldValue(name, value);
+    // setFormSubmitted(false);
   };
+  // const handleFieldChange = (e) => {
+  //   dispatch({ type: e.target.name, payload: e.target.value });
+  //   setFormSubmitted(false);
+  // };
 
   const makeAnOrderMsg = (
     <Paragraph
@@ -502,18 +515,19 @@ function MakeReservation() {
 
   const cardLeftCards = content.filter(
     (customSelect) =>
-      customSelect.errorKey === "date" || customSelect.errorKey === "occasion"
+      customSelect.name === "date" || customSelect.name === "occasion"
   );
+
   const cardRightCards = content.filter(
     (customSelect) =>
-      customSelect.errorKey === "dinner" || customSelect.errorKey === "time"
+      customSelect.name === "dinner" || customSelect.name === "time"
   );
 
   // If there is any error
   const err = Object.keys(errors).length;
-  // console.log(ErrorMessage);
-  // console.log(values);
-  console.log(errors);
+
+  console.log(errors, ZERO, err);
+  console.log(values);
 
   return (
     <Container as="section" type="makeReservation">
@@ -531,13 +545,8 @@ function MakeReservation() {
       </Container>
       <Form
         onSubmit={(e) => {
-          // e.preventDefault();
-          // setFormSubmitted(true);
-          // handleSubmit(e);
           e.preventDefault();
-          setFormSubmitted(true);
           handleSubmit(e);
-          //setformSubmitted(false); // Reset after handling submit
         }}
       >
         <Container as="div" type="makeReservationTop">
@@ -545,7 +554,7 @@ function MakeReservation() {
             <>
               <MakeReservationStyled>
                 <FlexedCard>
-                  <CardLeft>
+                  <CardLeft errors={errors}>
                     <ReservationCard turn={turn}>
                       <FrontCardLeft>
                         <ShowtheRightRadio>
@@ -555,20 +564,18 @@ function MakeReservation() {
                               name="seating"
                               id="outdoor"
                               value="outdoor"
+                              checked={values.seating === "outdoor"}
                               onChange={handleFieldChange}
-                              checked={seating === "outdoor"}
                               onBlur={handleBlur}
                             />
                             <Radiolabel htmlFor="outdoor">
                               Outdoor seating <RadioSpan />
                             </Radiolabel>
-                            {formSubmitted &&
-                              errors.name &&
-                              touched.seating && (
-                                <Paragraph fontSize="large" color="red">
-                                  {errors.seating}
-                                </Paragraph>
-                              )}
+                            {errors.seating && touched.seating && (
+                              <Paragraph fontSize="large" color="red">
+                                {errors.seating}
+                              </Paragraph>
+                            )}
                           </RadioButton>
                         </ShowtheRightRadio>
 
@@ -578,14 +585,14 @@ function MakeReservation() {
                             name="seating"
                             id="indoor"
                             value="indoor"
+                            checked={values.seating === "indoor"}
                             onChange={handleFieldChange}
-                            checked={seating === "indoor"}
                             onBlur={handleBlur}
                           />
                           <Radiolabel htmlFor="indoor">
                             Indoor seating <RadioSpan />
                           </Radiolabel>
-                          {formSubmitted && errors.name && touched.seating && (
+                          {errors.seating && touched.seating && (
                             <Paragraph fontSize="large" color="red">
                               {errors.seating}
                             </Paragraph>
@@ -598,11 +605,10 @@ function MakeReservation() {
                           dinner={dinner}
                           occasion={occasion}
                           time={time}
-                          errors={formSubmitted ? errors : {}}
+                          errors={errors}
                           dispatch={dispatch}
                           content={cardLeftCards}
                         />
-                        {/* {cardLeftCards} */}
                       </FrontCardLeft>
                       <BackCardLeft>
                         <LeftBackCard
@@ -612,6 +618,7 @@ function MakeReservation() {
                           touched={touched}
                           turn={turn}
                           dataArr={dataArr}
+                          turnCardHandler={turnCardHandler}
                         />
                       </BackCardLeft>
                     </ReservationCard>
@@ -625,22 +632,20 @@ function MakeReservation() {
                             <RadioInput
                               type="radio"
                               name="seating"
-                              id="outdoor"
-                              value="outdoor"
+                              id="Outdoor"
+                              value="Outdoor"
+                              checked={values.seating === "Outdoor"}
                               onChange={handleFieldChange}
-                              checked={seating === "outdoor"}
                               onBlur={handleBlur}
                             />
-                            <Radiolabel htmlFor="outdoor">
+                            <Radiolabel htmlFor="Outdoor">
                               Outdoor seating <RadioSpan />
                             </Radiolabel>
-                            {formSubmitted &&
-                              errors.seating &&
-                              touched.seating && (
-                                <Paragraph fontSize="large" color="red">
-                                  {errors.seating}
-                                </Paragraph>
-                              )}
+                            {errors.seating && touched.seating && (
+                              <Paragraph fontSize="large" color="red">
+                                {errors.seating}
+                              </Paragraph>
+                            )}
                           </RadioButton>
                         </HidetheRightRadio>
 
@@ -651,11 +656,10 @@ function MakeReservation() {
                           dinner={dinner}
                           occasion={occasion}
                           time={time}
-                          errors={formSubmitted ? errors : {}}
+                          errors={errors}
                           dispatch={dispatch}
                           content={cardRightCards}
                         />
-                        {/* {cardRightCards} */}
                       </FrontCardRight>
                       <BackCardRight>
                         <RightBackCard
@@ -665,30 +669,18 @@ function MakeReservation() {
                           touched={touched}
                           turn={turn}
                           dataArr={dataArr}
+                          handleBlur={handleBlur}
                         />
                       </BackCardRight>
                     </ReservationCard>
                   </CardRight>
                 </FlexedCard>
               </MakeReservationStyled>
-
-              {/* <BackPageOfMakeReservation
-                values={values}
-                handleChange={handleChange}
-                dispatch={dispatch}
-                errors={errors}
-                touched={touched}
-                turn={turn}
-              /> */}
             </>
             <ButtonContainer>
-              {err !== ZERO || err !== undefined || !formSubmitted ? (
-                <Button type="button" onClick={turnCardHandler}>
-                  Next &gt;&gt;&gt;
-                </Button>
-              ) : (
-                <Button type="submit">Confirm Reservation</Button>
-              )}
+              <Button type="button" onClick={turnCardHandler}>
+                Next &gt;&gt;&gt;
+              </Button>
             </ButtonContainer>
           </Content>
         </Container>
@@ -696,7 +688,7 @@ function MakeReservation() {
         <Container as="div" type="makeReservationBottom">
           <Content>
             <BottomContainerStyled>
-              {orderArray.length > ZERO && (
+              {orderArray.length > 0 && (
                 <Paragraph
                   color="deepGreen"
                   fontFamily="markazi"
@@ -711,16 +703,7 @@ function MakeReservation() {
                 {orderArray.length === 0 ? makeAnOrderMsg : orderArray}
               </MenusContainer>
               <ButtonContainer>
-                {err !== ZERO || err !== undefined ? (
-                  <Button type="button" onClick={turnCardHandler}>
-                    Next &gt;&gt;&gt;
-                  </Button>
-                ) : (
-                  //   <Button onClick={() => setFlip((open) => !open)}>
-                  //   Next &gt;&gt;&gt;
-                  // </Button>
-                  <Button>Confirm Reservation</Button>
-                )}
+                <Button type="submit">Confirm Reservation</Button>
               </ButtonContainer>
             </BottomContainerStyled>
           </Content>

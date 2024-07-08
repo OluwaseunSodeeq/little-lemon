@@ -112,8 +112,8 @@ const EachMakeReservationData = styled.div`
   align-items: center;
   padding-right: 1.5rem;
   border-radius: var(--border-radius-sm);
-
   border: ${({ error }) => (error !== undefined ? "2px solid red" : "")};
+  cursor: pointer;
 `;
 const IconSpan = styled.span`
   & > * {
@@ -147,16 +147,18 @@ export function LeftBackCard({
   errors,
   touched,
   dataArr,
+  turnCardHandler,
 }) {
   const cardLeftInput = dataArr.filter(
     (input) => input.id === "firstName" || input.id === "email"
   );
+  // console.log(cardLeftInput);
   const makeReservationArr = [
     {
       icon: <FaCalendar style={{ fontSize: "2.4rem", color: "inherit" }} />,
       text: values.date || "Select Date",
       id: "date",
-      errorKey: "date",
+      name: "date",
     },
     {
       icon: (
@@ -164,13 +166,13 @@ export function LeftBackCard({
       ),
       text: values.dinner || "No. of diners",
       id: "dinner",
-      errorKey: "dinner",
+      name: "dinner",
     },
     {
       icon: <LuAlarmClock style={{ fontSize: "2.4rem", color: "inherit" }} />,
       text: values.time || "Select Time",
       id: "time",
-      errorKey: "time",
+      name: "time",
     },
     {
       icon: (
@@ -178,13 +180,14 @@ export function LeftBackCard({
       ),
       text: values.occasion || "Occasion",
       id: "occasion",
-      errorKey: "occasion",
+      name: "occasion",
     },
   ];
 
   return (
     <>
       <GeneralInputsContainer
+        // LestInput Array
         arr={cardLeftInput}
         errors={errors}
         touched={touched}
@@ -192,9 +195,11 @@ export function LeftBackCard({
         handleChange={handleChange}
       />
       <SummaryOfSelectTags
+        // frontpage result Array
         makeReservationArr={makeReservationArr}
         values={values}
         errors={errors}
+        turnCardHandler={turnCardHandler}
       />
     </>
   );
@@ -207,6 +212,7 @@ export function RightBackCard({
   errors,
   touched,
   dataArr,
+  handleBlur,
 }) {
   const [selectCountryCode, setSelectCountryCode] = useState("NG");
   const contryCodeHandler = (e) => setSelectCountryCode(e.target.value);
@@ -215,6 +221,7 @@ export function RightBackCard({
   const cardRightInput = dataArr.filter(
     (input) => input.id !== "firstName" && input.id !== "email"
   );
+
   const textAreaHandler = (e) => {
     handleChange(e);
     dispatch({ type: "textArea", payload: e.target.value });
@@ -230,30 +237,49 @@ export function RightBackCard({
         selectCountryCode={selectCountryCode}
         contryCodeHandler={contryCodeHandler}
         handleChange={handleChange}
+        handleBlur={handleBlur}
       />
 
       <TextAreaContainer>
         <LabelInput>{textAreaText.label}</LabelInput>
         <TextAreaStyled
           id="textArea"
-          onChange={() => textAreaHandler}
-          // value={values.id}
+          name="textArea"
+          onChange={textAreaHandler}
+          value={values["textArea"]}
+          onBlur={handleBlur}
         />
+        <div>
+          {errors.textArea && touched.textArea && (
+            <Paragraph fontSize="large" color="red">
+              {errors.textArea}
+            </Paragraph>
+          )}
+        </div>
       </TextAreaContainer>
     </>
   );
 }
 
-function SummaryOfSelectTags({ makeReservationArr, values, errors }) {
+function SummaryOfSelectTags({
+  turnCardHandler,
+  makeReservationArr,
+  values,
+  errors,
+}) {
   return (
     <MakeReservationDataContainer>
       <MakeReservationData>
         {makeReservationArr.map((data) => {
-          const { icon, text, id, errorKey } = data;
+          const { icon, text, id, name } = data;
           // const error = errors.errorkey;
           console.log(errors, data);
           return (
-            <EachMakeReservationData key={id} error={errors[errorKey]}>
+            <EachMakeReservationData
+              key={id}
+              error={errors[name]}
+              onClick={turnCardHandler}
+            >
               <IconSpan>{icon}</IconSpan>
               <TextSpan>{text}</TextSpan>
             </EachMakeReservationData>
@@ -279,7 +305,7 @@ function GeneralInputsContainer({
       {arr.map((input, i) => {
         const { id, inputType, label, itemId, selectOptns, placeholder } =
           input;
-        console.log(id);
+        // console.log(errors[id] && touched[id]);
         return (
           <EachInputContainer key={i}>
             <LabelInput htmlFor={id}>
@@ -315,7 +341,7 @@ function GeneralInputsContainer({
                 onChange={handleChange}
               />
             </InputWrapper>
-            {errors.name && (
+            {errors[id] && touched[id] && (
               <Paragraph color="red" fontSize="large">
                 {errors[id]}
               </Paragraph>

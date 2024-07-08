@@ -4,24 +4,11 @@ import { menuArr } from "./defaultMenusArray";
 const MenusContextData = createContext();
 
 function MenusContextProvider({ children }) {
-  // user InitailData
-  const initialState = {
-    date: "",
-    dinner: "",
-    occasion: "",
-    time: "",
-    seating: "",
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    email: "",
-    textArea: "",
-  };
   // DATA FOR MENU
   const [menus, setMenus] = useState(menuArr);
 
   useState();
-  const [userBookedData, setUserBookedData] = useState(initialState);
+  const [userBookedData, setUserBookedData] = useState({});
   const [userSelectedItems, setUserSelectedItems] = useState([]);
 
   // Menu Handler
@@ -46,7 +33,6 @@ function MenusContextProvider({ children }) {
         selectedMenuHandler,
         userBookedData,
         setUserBookedData,
-        initialState,
         userSelectedItems,
         setUserSelectedItems,
       }}

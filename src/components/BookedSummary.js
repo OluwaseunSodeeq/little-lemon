@@ -58,9 +58,9 @@ function BookedSummary() {
   } = userBookedData;
   const name = `${firstName} + " " + ${lastName}`;
   const menuDataArr = userSelectedItems;
-  const totalItemsSelected = userSelectedItems.length;
+  const totalItemsSelected = userSelectedItems?.length;
 
-  const totalPrice = userSelectedItems.reduce(
+  const totalPrice = userSelectedItems?.reduce(
     (acc, eachMenu) => acc + eachMenu.price,
     0
   );
@@ -92,7 +92,7 @@ function BookedSummary() {
         <EachUserData>
           <p>Seating</p>: <span>{seating}</span>
         </EachUserData>
-        {textArea.length > 0 && (
+        {textArea?.length > 0 && (
           <EachUserData>
             <p>Special Request:</p>:<Paragraph>{textArea}</Paragraph>
           </EachUserData>

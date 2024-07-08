@@ -57,7 +57,7 @@ const CustomRenderInputContent = styled.div`
   height: 100%;
   position: absolute;
   padding: 1rem 2rem;
-  z-index: 10;
+  /* z-index: 10; */
   top: 0;
   left: 0;
   display: flex;
@@ -92,28 +92,25 @@ const RenderSpanText = styled.span`
 const RotatingSpan = styled.span`
   transition: transform 0.3s ease-in-out;
   transform: ${({ value }) => (value ? "rotate(180deg)" : "")};
+  margin-top: -1rem;
 `;
 
 const CustomButton = ({
   handleBlur,
   handleChange,
-  time,
-  date,
-  occasion,
-  dinner,
   errors,
+  // touched,
   dispatch,
   content,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [currentElement, setCurrentElement] = useState(null);
   const dateRef = useRef(null);
+
   const onShowPicker = () => {
-    // Render Calendar
     dateRef.current.showPicker();
   };
 
-  //Update Calendar
   const dateChangeHandler = (e) => {
     const selectedDate = new Date(e.target.value);
     const formattedDate = selectedDate.toLocaleDateString("en-US", {
@@ -125,12 +122,10 @@ const CustomButton = ({
     dispatch({ type: "date", payload: formattedDate });
   };
 
-  //Select An Option
   const toggleOptions = (id) => {
     setCurrentElement(id);
     setShowOptions((prevShow) => (currentElement !== id ? true : !prevShow));
   };
-  // console.log(errors[errorKey]);
 
   return (
     <CustomSelectContainer>
@@ -143,60 +138,50 @@ const CustomButton = ({
           inputType,
           options,
           currentID,
-          errorKey,
+          name,
           placeholder,
         } = btn;
+
         return (
           <ButtonContainer key={i}>
             <ButtonLabel>{label}</ButtonLabel>
             <CustomButtonStyledContainer
-              errors={errors[errorKey]}
+              errors={errors[name]}
               value={value !== placeholder}
             >
               {inputType === "input" ? (
-                <>
-                  <DateInput
-                    type="date"
-                    name="date"
-                    placeholder={placeholder}
-                    ref={dateRef}
-                    onClick={onShowPicker}
-                    onChange={dateChangeHandler}
-                    onBlur={handleBlur}
-                  />
-                  <CustomRenderInputContent value={value !== placeholder}>
-                    <span>{beforeIcon}</span>
-                    <RenderSpanText>{value}</RenderSpanText>
-                    <RotatingSpan value={value !== placeholder}>
-                      {afterIcon}
-                    </RotatingSpan>
-                  </CustomRenderInputContent>
-                </>
+                <DateInput
+                  type="date"
+                  name="date"
+                  placeholder={placeholder}
+                  ref={dateRef}
+                  onClick={onShowPicker}
+                  onChange={dateChangeHandler}
+                  onBlur={handleBlur}
+                />
               ) : (
-                <>
-                  <CustomDropdown
-                    ind={i}
-                    options={options}
-                    value={value}
-                    currentID={currentID}
-                    showOptions={showOptions && currentElement === currentID}
-                    toggleOptions={() => toggleOptions(currentID)}
-                    dispatch={dispatch}
-                    handleChange={handleChange}
-                  />
-                  <CustomRenderInputContent value={value !== placeholder}>
-                    <span>{beforeIcon}</span>
-                    <RenderSpanText>{value}</RenderSpanText>
-                    <RotatingSpan value={value !== placeholder}>
-                      {afterIcon}
-                    </RotatingSpan>
-                  </CustomRenderInputContent>
-                </>
+                <CustomDropdown
+                  ind={i}
+                  options={options}
+                  value={value}
+                  currentID={currentID}
+                  showOptions={showOptions && currentElement === currentID}
+                  toggleOptions={() => toggleOptions(currentID)}
+                  dispatch={dispatch}
+                  handleChange={handleChange}
+                />
               )}
+              <CustomRenderInputContent value={value !== placeholder}>
+                <span>{beforeIcon}</span>
+                <RenderSpanText>{value}</RenderSpanText>
+                <RotatingSpan value={value !== placeholder}>
+                  {afterIcon}
+                </RotatingSpan>
+              </CustomRenderInputContent>
             </CustomButtonStyledContainer>
-            {value === placeholder && (
+            {errors[name] && (
               <Paragraph color="red" fontSize="large">
-                {errors[errorKey]}
+                {errors[name]}
               </Paragraph>
             )}
           </ButtonContainer>

@@ -11,17 +11,20 @@ export const CardFace = styled.div`
   transition: transform 0.8s ease;
   overflow: hidden;
   background-color: var(--deepGreen);
+  /* z-index: 50; */
 `;
 
 export const FrontCardLeft = styled(CardFace)``;
 
-export const FrontCardRight = styled(CardFace)``;
+export const FrontCardRight = styled(CardFace)`
+  /* border: 2px solid red; */
+`;
 
 export const BackCardLeft = styled(CardFace)``;
 export const BackCardRight = styled(CardFace)``;
 
 export const ReservationCard = styled.div`
-  position: relative;
+  /* position: relative; */
   width: 100%;
   height: 43rem;
   perspective: 150rem;
@@ -56,8 +59,12 @@ export const CardRight = styled.div`
   }
 `;
 export const FlexedCard = styled.div`
+  /* position: relative; */
   display: flex;
   column-gap: 5rem;
+  /* border: 2px solid blue; */
+
+  /* row-gap: 5rem; */
 
   @media (max-width: 450px) {
     flex-direction: column;
