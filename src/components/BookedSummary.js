@@ -2,23 +2,27 @@ import styled from "styled-components";
 import { Heading } from "../ui/Heading";
 import { Paragraph } from "../ui/Paragraph";
 import useMenusContext from "../Contexts/Menu/useMenusContext";
+import { Button } from "../ui/Button";
 
 const BookedSummaryContainer = styled.div`
-  display: inline-block;
+  /* display: inline-block; */
   padding: 1rem 2rem;
   max-width: 50rem;
+  position: relative;
+  border: 2px solid red;
+  margin: 0 auto;
 `;
 const ContentContainer = styled.div`
-  padding: 2rem 0;
+  padding: ${({ top }) => (top ? "2rem 0" : "")};
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 3rem;
+  gap: 1rem;
   align-items: center;
 `;
 const EachUserData = styled.div`
   display: inline-block;
-  padding: 1rem;
+  padding: 0 1rem;
   color: var(--deepGreen);
 
   & > p {
@@ -40,23 +44,46 @@ const EachUserData = styled.div`
     }
   }
 `;
+const CloseBtn = styled.span`
+  color: red;
+  font-size: 1.8rem;
+  font-weight: var(--bold);
+  position: absolute;
+  right: 3rem;
+  top: 3rem;
+  cursor: pointer;
+`;
 // const MenuDataContainer = styled.div``;
-function BookedSummary() {
-  const { userSelectedItems, userBookedData } = useMenusContext();
+function BookedSummary({ onClose }) {
+  const { userSelectedItems } = useMenusContext();
+  const userBookedData = {
+    countryCode: "+44",
+    date: "2024-07-10",
+    dinner: "9 Diners",
+    email: "ademolaoluwaseun90@gmail.com",
+    firstName: "Oluwaseun",
+    lastName: "Sodeeq",
+    occasion: "Birthday",
+    seating: "indoor",
+    tel: "1234567890",
+    textArea: "I love to read.",
+    time: "Morning",
+  };
 
   const {
     firstName,
     lastName,
     email,
-    phoneNumber,
+    tel: phoneNumber,
     seating,
     date,
     time,
     occasion,
     dinner,
     textArea,
+    countryCode,
   } = userBookedData;
-  const name = `${firstName} + " " + ${lastName}`;
+  const name = `${firstName} ${" "} ${lastName}`;
   const menuDataArr = userSelectedItems;
   const totalItemsSelected = userSelectedItems?.length;
 
@@ -64,10 +91,12 @@ function BookedSummary() {
     (acc, eachMenu) => acc + eachMenu.price,
     0
   );
+  
   return (
     <BookedSummaryContainer>
+      <CloseBtn onClick={onClose}>X</CloseBtn>
       <Heading as="h1">Booked Summary</Heading>
-      <ContentContainer>
+      <ContentContainer top="top">
         <EachUserData>
           <p>Name</p>: <span>{name}</span>
         </EachUserData>
@@ -75,7 +104,11 @@ function BookedSummary() {
           <p>Email</p>: <span>{email}</span>
         </EachUserData>
         <EachUserData>
-          <p>Phone No</p>: <span>{phoneNumber}</span>
+          <p>Phone No</p>:{" "}
+          <span>
+            {countryCode}
+            {phoneNumber}
+          </span>
         </EachUserData>
         <EachUserData>
           <p>Date</p>: <span>{date}</span>
@@ -94,7 +127,7 @@ function BookedSummary() {
         </EachUserData>
         {textArea?.length > 0 && (
           <EachUserData>
-            <p>Special Request:</p>:<Paragraph>{textArea}</Paragraph>
+            <p>Special Request:</p>:<span>{textArea}</span>
           </EachUserData>
         )}
       </ContentContainer>
@@ -108,9 +141,13 @@ function BookedSummary() {
           );
         })}
         <EachUserData>
-          <p>${totalItemsSelected} items</p>: <span>Agg ${totalPrice}</span>
+          <p>{totalItemsSelected} items</p>: <span>Agg {totalPrice}</span>
         </EachUserData>
       </ContentContainer>
+      <Paragraph color="deepGreen">
+        {firstName}, Kindly confirm your Reservation
+      </Paragraph>
+      <Button>Confirm!</Button>
     </BookedSummaryContainer>
   );
 }

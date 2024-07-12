@@ -7,7 +7,10 @@ import { useLocation } from "react-router-dom";
 const Main = styled.main`
   padding: 0;
 `;
-
+const MainContainer = styled.section`
+  position: relative;
+  padding: 0;
+`;
 function AppLayout() {
   const location = useLocation();
 
@@ -15,13 +18,13 @@ function AppLayout() {
   const shouldRenderHeaderFooter = !["/", "/404"].includes(location.pathname);
 
   return (
-    <>
+    <MainContainer>
       {shouldRenderHeaderFooter && <Header />}
       <Main>
         <Outlet />
       </Main>
       {shouldRenderHeaderFooter && <Footer />}
-    </>
+    </MainContainer>
   );
 }
 

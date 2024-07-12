@@ -1,19 +1,16 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
-
 import CustomDropdown from "./CustomDropDown";
 import { Paragraph } from "../ui/Paragraph";
 import { boxShadowValue } from "../ui/Constant";
 
 const CustomSelectContainer = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
   row-gap: 7rem;
   width: 100%;
   height: auto;
-  z-index: 30;
 `;
 
 const ButtonContainer = styled.div`
@@ -92,19 +89,22 @@ const RenderSpanText = styled.span`
 const RotatingSpan = styled.span`
   transition: transform 0.3s ease-in-out;
   transform: ${({ value }) => (value ? "rotate(180deg)" : "")};
-  margin-top: -1rem;
+  margin-top: ${({ value }) => (value ? "-1rem" : "")};
+  /* margin-top: -1rem; */
 `;
 
 const CustomButton = ({
   handleBlur,
   handleChange,
   errors,
-  // touched,
+  // errors = {}, // default to empty object
+  // touched = {}, // default to empty object
   dispatch,
   content,
+  formSubmitted,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
-  const [currentElement, setCurrentElement] = useState(null);
+  const [currentOption, setCurrentOption] = useState(null);
   const dateRef = useRef(null);
 
   const onShowPicker = () => {
@@ -123,8 +123,8 @@ const CustomButton = ({
   };
 
   const toggleOptions = (id) => {
-    setCurrentElement(id);
-    setShowOptions((prevShow) => (currentElement !== id ? true : !prevShow));
+    setCurrentOption(id);
+    setShowOptions((prevShow) => (currentOption !== id ? true : !prevShow));
   };
 
   return (
@@ -141,12 +141,14 @@ const CustomButton = ({
           name,
           placeholder,
         } = btn;
-
+        // console.log(name);
+        // console.log(errors[name]);
+        console.log(formSubmitted);
         return (
           <ButtonContainer key={i}>
             <ButtonLabel>{label}</ButtonLabel>
             <CustomButtonStyledContainer
-              errors={errors[name]}
+              errors={errors[name] && formSubmitted}
               value={value !== placeholder}
             >
               {inputType === "input" ? (
@@ -165,13 +167,16 @@ const CustomButton = ({
                   options={options}
                   value={value}
                   currentID={currentID}
-                  showOptions={showOptions && currentElement === currentID}
+                  showOptions={showOptions && currentOption === currentID}
                   toggleOptions={() => toggleOptions(currentID)}
                   dispatch={dispatch}
                   handleChange={handleChange}
                 />
               )}
-              <CustomRenderInputContent value={value !== placeholder}>
+              <CustomRenderInputContent
+                value={value !== placeholder}
+                onClick={toggleOptions}
+              >
                 <span>{beforeIcon}</span>
                 <RenderSpanText>{value}</RenderSpanText>
                 <RotatingSpan value={value !== placeholder}>
@@ -179,7 +184,7 @@ const CustomButton = ({
                 </RotatingSpan>
               </CustomRenderInputContent>
             </CustomButtonStyledContainer>
-            {errors[name] && (
+            {errors[name] && formSubmitted && (
               <Paragraph color="red" fontSize="large">
                 {errors[name]}
               </Paragraph>

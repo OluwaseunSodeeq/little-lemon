@@ -26,6 +26,11 @@ function MenusContextProvider({ children }) {
 
     setMenus(updatedMenus);
   };
+
+  // If any Item is selected
+  const isAnyItemSelected = menus
+    .flatMap((category) => category.list)
+    .filter((selected) => selected.selected === true);
   return (
     <MenusContextData.Provider
       value={{
@@ -35,6 +40,7 @@ function MenusContextProvider({ children }) {
         setUserBookedData,
         userSelectedItems,
         setUserSelectedItems,
+        isAnyItemSelected,
       }}
     >
       {children}

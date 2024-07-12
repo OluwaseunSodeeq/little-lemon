@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import styled from "styled-components";
 import { IoMdStar } from "react-icons/io";
 import { FaCalendar } from "react-icons/fa";
@@ -40,7 +40,7 @@ const InputWrapper = styled.div`
 const Input = styled.input`
   height: 100%;
   position: relative;
-  padding: 0.5rem 1rem;
+  padding: ${({ space }) => (space ? "0.5rem 2rem;" : "0.5rem 1rem;")};
   border-radius: var(--border-radius-md);
   border: none;
   outline: var(--deepGreen);
@@ -112,7 +112,7 @@ const EachMakeReservationData = styled.div`
   align-items: center;
   padding-right: 1.5rem;
   border-radius: var(--border-radius-sm);
-  border: ${({ error }) => (error !== undefined ? "2px solid red" : "")};
+  border: ${({ error }) => (error ? "2px solid red" : "")};
   cursor: pointer;
 `;
 const IconSpan = styled.span`
@@ -148,6 +148,7 @@ export function LeftBackCard({
   touched,
   dataArr,
   turnCardHandler,
+  formSubmitted,
 }) {
   const cardLeftInput = dataArr.filter(
     (input) => input.id === "firstName" || input.id === "email"
@@ -193,6 +194,7 @@ export function LeftBackCard({
         touched={touched}
         values={values}
         handleChange={handleChange}
+        formSubmitted={formSubmitted}
       />
       <SummaryOfSelectTags
         // frontpage result Array
@@ -200,6 +202,7 @@ export function LeftBackCard({
         values={values}
         errors={errors}
         turnCardHandler={turnCardHandler}
+        formSubmitted={formSubmitted}
       />
     </>
   );
@@ -208,25 +211,17 @@ export function LeftBackCard({
 export function RightBackCard({
   values,
   handleChange,
-  dispatch,
   errors,
   touched,
   dataArr,
   handleBlur,
+  formSubmitted,
 }) {
-  const [selectCountryCode, setSelectCountryCode] = useState("NG");
-  const contryCodeHandler = (e) => setSelectCountryCode(e.target.value);
   const textAreaText = { label: "Special Requests", value: "" };
 
   const cardRightInput = dataArr.filter(
     (input) => input.id !== "firstName" && input.id !== "email"
   );
-
-  const textAreaHandler = (e) => {
-    handleChange(e);
-    dispatch({ type: "textArea", payload: e.target.value });
-  };
-
   return (
     <>
       <GeneralInputsContainer
@@ -234,10 +229,9 @@ export function RightBackCard({
         errors={errors}
         touched={touched}
         values={values}
-        selectCountryCode={selectCountryCode}
-        contryCodeHandler={contryCodeHandler}
         handleChange={handleChange}
         handleBlur={handleBlur}
+        formSubmitted={formSubmitted}
       />
 
       <TextAreaContainer>
@@ -245,16 +239,16 @@ export function RightBackCard({
         <TextAreaStyled
           id="textArea"
           name="textArea"
-          onChange={textAreaHandler}
+          onChange={handleChange}
           value={values["textArea"]}
           onBlur={handleBlur}
         />
         <div>
-          {errors.textArea && touched.textArea && (
+          {/* {errors.textArea && touched.textArea && (
             <Paragraph fontSize="large" color="red">
               {errors.textArea}
             </Paragraph>
-          )}
+          )} */}
         </div>
       </TextAreaContainer>
     </>
@@ -266,18 +260,18 @@ function SummaryOfSelectTags({
   makeReservationArr,
   values,
   errors,
+  formSubmitted,
 }) {
   return (
     <MakeReservationDataContainer>
       <MakeReservationData>
         {makeReservationArr.map((data) => {
           const { icon, text, id, name } = data;
-          // const error = errors.errorkey;
-          console.log(errors, data);
+          console.log(errors[name] && formSubmitted);
           return (
             <EachMakeReservationData
               key={id}
-              error={errors[name]}
+              error={errors[name] && formSubmitted}
               onClick={turnCardHandler}
             >
               <IconSpan>{icon}</IconSpan>
@@ -296,16 +290,14 @@ function GeneralInputsContainer({
   errors,
   touched,
   values,
-  selectCountryCode,
-  contryCodeHandler,
   handleChange,
+  formSubmitted,
 }) {
   return (
     <GenaralInputsContainer>
       {arr.map((input, i) => {
         const { id, inputType, label, itemId, selectOptns, placeholder } =
           input;
-        // console.log(errors[id] && touched[id]);
         return (
           <EachInputContainer key={i}>
             <LabelInput htmlFor={id}>
@@ -321,14 +313,19 @@ function GeneralInputsContainer({
             <InputWrapper error={errors[id] && touched[id]}>
               {itemId === LASTINPUTID && (
                 <SelectStyled
-                  value={selectCountryCode}
-                  onChange={contryCodeHandler}
+                  id={"countryCode"}
+                  value={values.countryCode}
+                  onChange={handleChange}
                 >
-                  {selectOptns.map((optn) => (
-                    <OptionStyled key={optn.country}>
-                      {optn.countryAbbrev}
-                    </OptionStyled>
-                  ))}
+                  {selectOptns.map((optn) => {
+                    const { countryAbbrev, country, code } = optn;
+                    return (
+                      // <OptionStyled value={Number(code)} key={country}>
+                      <OptionStyled value={code} key={country}>
+                        {countryAbbrev}
+                      </OptionStyled>
+                    );
+                  })}
                 </SelectStyled>
               )}
               <Input
@@ -339,9 +336,10 @@ function GeneralInputsContainer({
                 placeholder={placeholder}
                 value={values[id]}
                 onChange={handleChange}
+                space={itemId === LASTINPUTID}
               />
             </InputWrapper>
-            {errors[id] && touched[id] && (
+            {errors[id] && touched[id] && formSubmitted && (
               <Paragraph color="red" fontSize="large">
                 {errors[id]}
               </Paragraph>
@@ -352,7 +350,7 @@ function GeneralInputsContainer({
     </GenaralInputsContainer>
   );
 }
-
+// INITIAL APPROACH
 // export default BackPageOfMakeReservation;
 
 // import styled from "styled-components";

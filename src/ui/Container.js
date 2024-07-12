@@ -10,13 +10,12 @@ const headerBg = css`
 
 //WEEK SPECIAL
 const weekSpecialBg = css`
-  position: relative;
-  top: 20rem;
   background-color: var(--pureWhite);
   padding-bottom: 3rem;
+  margin-top: 20rem;
 
   @media (max-width: 450px) {
-    top: 10rem;
+    margin-top: 10rem;
   }
 `;
 
@@ -41,6 +40,7 @@ const aboutBg = css`
   @media (max-width: 950px) {
     top: 8rem;
   }
+
   @media (max-width: 450px) {
     top: 7rem;
   }
@@ -60,6 +60,7 @@ const makeReservationBg = css`
   height: auto;
   top: 10rem;
   background-color: var(--pureWhite);
+  padding-bottom: 5rem;
 
   @media (max-width: 450px) {
     top: 7rem;
@@ -76,12 +77,14 @@ const makeReservationBgTop = css`
 `;
 const makeReservationBgBottom = css`
   position: relative;
-  top: 5rem;
   /* height: 27rem; */
+  border: 5px solid red;
+
+  margin-top: 5rem;
   background-color: var(--pureWhite);
 
   @media (max-width: 450px) {
-    top: 4rem;
+    margin-top: 4rem;
   }
 `;
 
@@ -107,13 +110,21 @@ const menuBg = css`
     top: 7rem;
   }
 `;
+// HELPER
+const helperBg = css`
+  position: relative;
+  background-color: var(--pureWhite);
+  bottom: 0;
+  /* top: 3rem; */
+  padding-top: 3rem;
+`;
 // Footer
 const footerBg = css`
   position: relative;
-  top: 20rem;
+  bottom: 0;
+  /* top: 10rem; */
   background-color: var(--black);
   height: auto;
-  /* background-color: var(--deepGreen); */
   padding: 4rem 0;
 `;
 
@@ -195,9 +206,17 @@ ${(props) =>
       ${menuBg}
     `}
 
+    /* HElper */
+    ${(props) =>
+    props.as === "div" &&
+    props.type === "helper" &&
+    css`
+      ${helperBg}
+    `}
 /* WEEK SPECIAL */
     ${(props) =>
-    props.as === "aside" &&
+    props.as === "section" &&
+    props.type === "week" &&
     css`
       ${weekSpecialBg}
     `}

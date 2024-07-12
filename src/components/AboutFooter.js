@@ -8,9 +8,6 @@ const AboutFooterContainer = styled.div`
   height: auto;
   padding: 7rem 0 0;
 
-  /* display: flex;
-  justify-content: space-between; */
-
   @media (max-width: 450px) {
     /* flex-direction: column;
     justify-content: center; */
@@ -28,7 +25,7 @@ const AboutFooterTop = styled.div`
 const AboutFooterBottom = styled.div`
   margin-left: 3%;
   @media (max-width: 450px) {
-    margin-left: 3rem;
+    margin-left: 0;
   }
 `;
 

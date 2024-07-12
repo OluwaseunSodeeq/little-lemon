@@ -4,10 +4,12 @@ import { Content } from "../ui/Content";
 import { Paragraph } from "../ui/Paragraph";
 import { FlexedDiv } from "../styles/FlexedDiv";
 import useMenusContext from "../Contexts/Menu/useMenusContext";
+// import { Button } from "../ui/Button";
 
 const MenuStyled = styled.div`
   width: 100%;
-  padding: 2rem 0 3rem 0;
+  padding: 2rem 0 2rem 0;
+  /* border: 5px solid blueviolet; */
 `;
 const OtherMenuStyledContainer = styled.div`
   padding: 5rem 0;
@@ -66,9 +68,14 @@ const OthermenuItem = styled.div`
 const OtherMenuContainer = styled.div`
   width: 100%;
 `;
+// const ButtonContainer = styled.div`
+//   position: relative;
+//   text-align: center;
+//   border: 5px solid red;
+// `;
 
 function Menu() {
-  const { menus, selectedMenuHandler } = useMenusContext();
+  const { menus, selectedMenuHandler, isAnyItemSelected } = useMenusContext();
 
   const resultOfMainMenu = menus
     .filter((menu) => menu.generalName !== "OTHER FOOD MENU")
@@ -161,19 +168,39 @@ function Menu() {
         </OtherMenuContainer>
       );
     });
+  console.log(isAnyItemSelected);
   return (
-    <Container as="section" type="menu">
-      <Content>
-        <MenuStyled>
-          <BasicMenuStyledContainer>
-            <FlexedDiv type="flexMenu">{resultOfMainMenu}</FlexedDiv>
-          </BasicMenuStyledContainer>
-          <OtherMenuStyledContainer>
-            {resultOfOtherMenu}
-          </OtherMenuStyledContainer>
-        </MenuStyled>
-      </Content>
-    </Container>
+    <>
+      <Container as="section" type="menu">
+        <Content>
+          <MenuStyled>
+            <BasicMenuStyledContainer>
+              <FlexedDiv type="flexMenu">{resultOfMainMenu}</FlexedDiv>
+            </BasicMenuStyledContainer>
+            <OtherMenuStyledContainer>
+              {resultOfOtherMenu}
+            </OtherMenuStyledContainer>
+          </MenuStyled>
+        </Content>
+      </Container>
+      {/*       
+      <Container as="div" type="helper">
+        <Content>
+          <ButtonContainer>
+            {isAnyItemSelected ? (
+              <Paragraph fontSize="xlarge" color="deepGreen">
+                Click Back for the submission of your selections
+              </Paragraph>
+            ) : (
+              <Paragraph fontSize="xlarge" color="deepGreen">
+                Make some selections above
+              </Paragraph>
+            )}
+            <Button>Back</Button>
+          </ButtonContainer>
+        </Content>
+      </Container> */}
+    </>
   );
 }
 

@@ -36,23 +36,21 @@ const WeekSpacialStyled = styled.div`
 `;
 function WeekSpecial() {
   return (
-    <Container as="aside">
+    <Container as="section" type="week">
       <Content>
-        <>
-          <FlexedDiv type="sbt">
-            <Paragraph fontSize="extraLarge" color="black" fontWeight="bold">
-              This week specials!
-            </Paragraph>
-            <Button>Online Menu</Button>
-          </FlexedDiv>
-          <WeekSpacialStyled>
-            <GridColumns>
-              {cardArray.map((card, index) => (
-                <MenuCard card={card} key={index} />
-              ))}
-            </GridColumns>
-          </WeekSpacialStyled>
-        </>
+        <FlexedDiv type="sbt">
+          <Paragraph fontSize="extraLarge" color="black" fontWeight="bold">
+            This week specials!
+          </Paragraph>
+          <Button>Online Menu</Button>
+        </FlexedDiv>
+        <WeekSpacialStyled>
+          <GridColumns>
+            {cardArray.map((card, index) => (
+              <MenuCard card={card} key={index} />
+            ))}
+          </GridColumns>
+        </WeekSpacialStyled>
       </Content>
     </Container>
   );

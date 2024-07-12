@@ -9,7 +9,8 @@ export const makeReservationSchemas = yup.object().shape({
 
   firstName: yup.string().min(3).required("First name is required"),
   lastName: yup.string().min(3).required("Last name is required"),
-  textArea: yup.string().min(5).required("Kindly leave a message"),
+  textArea: yup.string().min(5),
+  // textArea: yup.string().min(5).required("Kindly leave a message"),
 
   email: yup
     .string()

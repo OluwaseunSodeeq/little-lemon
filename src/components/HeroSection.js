@@ -1,4 +1,3 @@
-// import styled from "styled-components";
 import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import HeroSectionContent from "./HeroSectionContent";

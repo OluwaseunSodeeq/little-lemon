@@ -1,11 +1,11 @@
-import HeroSection from "./HeroSection";
-import WeekSpecial from "./WeekSpecial";
+// import HeroSection from "./HeroSection";
+// import WeekSpecial from "./WeekSpecial";
 
 function Main() {
   return (
     <>
-      <HeroSection />
-      <WeekSpecial />
+      {/* <HeroSection />
+      <WeekSpecial /> */}
     </>
   );
 }
