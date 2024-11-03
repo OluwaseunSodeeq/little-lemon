@@ -1,3 +1,4 @@
+import React from "react";
 // import HeroSection from "./HeroSection";
 // import WeekSpecial from "./WeekSpecial";
 

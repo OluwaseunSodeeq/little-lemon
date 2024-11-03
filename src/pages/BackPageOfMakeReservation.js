@@ -1,4 +1,5 @@
 // import { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { IoMdStar } from "react-icons/io";
 import { FaCalendar } from "react-icons/fa";
@@ -186,7 +187,7 @@ export function LeftBackCard({
   ];
 
   return (
-    <>
+    <div>
       <GeneralInputsContainer
         // LestInput Array
         arr={cardLeftInput}
@@ -204,7 +205,7 @@ export function LeftBackCard({
         turnCardHandler={turnCardHandler}
         formSubmitted={formSubmitted}
       />
-    </>
+    </div>
   );
 }
 
@@ -223,7 +224,7 @@ export function RightBackCard({
     (input) => input.id !== "firstName" && input.id !== "email"
   );
   return (
-    <>
+    <div>
       <GeneralInputsContainer
         arr={cardRightInput}
         errors={errors}
@@ -251,7 +252,7 @@ export function RightBackCard({
           )} */}
         </div>
       </TextAreaContainer>
-    </>
+    </div>
   );
 }
 

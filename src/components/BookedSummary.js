@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { Heading } from "../ui/Heading";
 import { Paragraph } from "../ui/Paragraph";
@@ -91,7 +92,7 @@ function BookedSummary({ onClose }) {
     (acc, eachMenu) => acc + eachMenu.price,
     0
   );
-  
+
   return (
     <BookedSummaryContainer>
       <CloseBtn onClick={onClose}>X</CloseBtn>

@@ -56,7 +56,6 @@ const headingSectionBg = css`
 //MAKE RESERVATION
 const makeReservationBg = css`
   position: relative;
-  /* top: 8rem; */
   height: auto;
   top: 10rem;
   background-color: var(--pureWhite);
@@ -67,7 +66,6 @@ const makeReservationBg = css`
   }
 `;
 const makeReservationBgTop = css`
-  /* font-family: var(--karla); */
   position: relative;
   height: auto;
   background-color: var(--deepGreen);
@@ -77,11 +75,10 @@ const makeReservationBgTop = css`
 `;
 const makeReservationBgBottom = css`
   position: relative;
-  /* height: 27rem; */
-  border: 5px solid red;
-
+  height: auto;
   margin-top: 5rem;
   background-color: var(--pureWhite);
+  margin-bottom: 5rem;
 
   @media (max-width: 450px) {
     margin-top: 4rem;

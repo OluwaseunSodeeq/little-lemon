@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Heading } from "../ui/Heading";
@@ -37,7 +38,9 @@ function PageNotFound() {
     <StyledPageNotFound>
       <Box>
         <Heading as="h1">
-          The page you are looking for could not be found 😢
+          <span role="img" aria-label="description of emoji">
+            😢
+          </span>
         </Heading>
         <button onClick={moveBack} size="large">
           &larr; Go back

@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../ui/Button";
@@ -65,23 +66,32 @@ function LoginForm() {
     loginHandler,
     auth,
   } = useAuthContext();
-  const [error] = useState("");
+
+  const [error, setError] = useState({ name: "", password: password });
 
   console.log(auth);
   function handleSubmit(e) {
     e.preventDefault();
-    if (!name || !password || password !== defaultPassword) return;
+    if (!name || !password || password !== defaultPassword) {
+      setError({ name, password });
+    }
     console.log("User has Log in", auth);
     loginHandler();
+
     // onLogin();
     // navigate("/home");
   }
-
+  const atleastThree = 3;
   return (
     <LoginFormDiv onSubmit={handleSubmit}>
       <InputContainer>
         <InputLabel htmlFor="username">Your Name</InputLabel>
         <Input
+          error={
+            error.name === "" ||
+            error.name === " " ||
+            name.length < atleastThree
+          }
           type="text"
           id="username"
           placeholder="Your Name"
@@ -96,6 +106,7 @@ function LoginForm() {
         <InputLabel htmlFor="name">Your Password</InputLabel>
 
         <Input
+          error={error.password !== password}
           type="password"
           id="password"
           autoComplete="current-password"

@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { NavLi } from "../ui/NavLi";
 import { NavLink } from "react-router-dom";
@@ -38,6 +39,14 @@ const NavStyled = styled.nav`
     top: ${({ hamburger }) => (hamburger ? "25rem" : "0")};
   }
 `;
+// const NavMenuStyled = styled(NavLink)`
+//   &:hover,
+//   :active,
+//   :visited {
+//     color: var(--yellow);
+//   }
+// `;
+
 const LiContainer = styled.ul`
   display: flex;
   gap: 1rem;

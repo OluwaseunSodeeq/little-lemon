@@ -1,3 +1,4 @@
+import React from "react";
 import MenuCard from "./MenuCard";
 import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";

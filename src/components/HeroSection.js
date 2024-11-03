@@ -1,3 +1,4 @@
+import React from "react";
 import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import HeroSectionContent from "./HeroSectionContent";

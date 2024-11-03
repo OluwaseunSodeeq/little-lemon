@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { FlexedDiv } from "../styles/FlexedDiv";
 import { Container } from "../ui/Container";

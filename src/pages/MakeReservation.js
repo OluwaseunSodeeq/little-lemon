@@ -6,6 +6,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import { LiaGlassCheersSolid } from "react-icons/lia";
 import { LuAlarmClock } from "react-icons/lu";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { TiShoppingCart } from "react-icons/ti";
 import useMenusContext from "../Contexts/Menu/useMenusContext";
 import { makeReservationSchemas } from "../schemas";
 
@@ -186,6 +187,7 @@ const BottomContainerStyled = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   column-gap: 5rem;
   padding: 2rem;
 
@@ -198,7 +200,7 @@ const BottomContainerStyled = styled.div`
 const SelectedmenuImageStyled = styled.div`
   width: 100%;
   height: 100%;
-  position: relative;
+  /* position: relative; */
   cursor: pointer;
 
   & > img {
@@ -232,16 +234,15 @@ const SelectedmenuImageContainer = styled.div`
   z-index: 10;
   width: 23rem;
   height: 23rem;
-  top: 50%;
+  top: 14rem;
   transform: translate(-50%, -50%);
   padding: 1rem 0;
   transition: all 0.2s;
-
   right: ${({ index }) => index * 7}rem;
+  /* left: ${({ index }) => index * 5}rem; */
 
   &:hover {
     z-index: 20;
-    /* transform: scale(1.05) translateY(-0.5rem); */
   }
 
   @media (max-width: 450px) {
@@ -256,10 +257,11 @@ const SelectedmenuImageContainer = styled.div`
 
 const MenusContainer = styled.div`
   position: relative;
-  display: inline-block;
-  height: 25rem;
+  height: ${(empty) => (empty ? "37rem" : "23rem")};
   width: 100%;
-  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover ${SelectedmenuImageContainer}:not(:hover) {
     z-index: 10;
@@ -298,6 +300,20 @@ const ShowtheRightRadio = styled.div`
     display: block;
   }
 `;
+
+const BottomBtnsContainer = styled.div`
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+const CartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
 // REDUCER
 const reducer = (state, action) => {
   switch (action.type) {
@@ -489,7 +505,7 @@ function MakeReservation() {
     validationSchema: makeReservationSchemas,
     onSubmit: (values) => {
       // handle form submission
-      console.log(values);
+      // console.log(values);
       setUserBookedData(values);
       setUserSelectedItems(orderArray);
     },
@@ -499,28 +515,16 @@ function MakeReservation() {
     dispatch({ type: e.target.name, payload: e.target.value });
     handleChange(e);
   };
-
-  const makeAnOrderMsg = (
-    <Paragraph
-      color="deepGreen"
-      fontFamily="markazi"
-      fontweight="deepBold"
-      fontSize="xxxlarge"
-    >
-      Kindly make an Order!
-    </Paragraph>
-  );
-
   const orderArray = menus
     .flatMap((category) => {
       const { generalName, list } = category;
-      return list.map((menu) => ({ ...menu, generalName: generalName }));
+      return list.map((menu) => ({ ...menu, generalName }));
     })
     .filter((item) => item.selected)
     .map((menu, i) => {
       const { id, generalName, image, name } = menu;
       return (
-        <SelectedmenuImageContainer index={i} key={i}>
+        <SelectedmenuImageContainer index={i} key={id}>
           <SelectedmenuImageStyled>
             <img src={image} alt={name} />
             <span onClick={() => selectedMenuHandler(id, generalName)}>X</span>
@@ -528,7 +532,7 @@ function MakeReservation() {
         </SelectedmenuImageContainer>
       );
     });
-
+  console.log(orderArray.length);
   const cardLeftCards = content.filter(
     (customSelect) =>
       customSelect.name === "date" || customSelect.name === "occasion"
@@ -542,7 +546,6 @@ function MakeReservation() {
   // If there is any error
   // const err = Object.keys(errors).length;
   console.log("VALUES:", values);
-  console.log(isAnyItemSelected);
   return (
     <Container as="section" type="makeReservation">
       <Container as="div" type="reservationHeading">
@@ -711,21 +714,38 @@ function MakeReservation() {
                   {orderArray.length === 1 ? "is" : "are"} selected!
                 </Paragraph>
               )}
-              <MenusContainer>
-                {orderArray.length === 0 ? makeAnOrderMsg : orderArray}
-              </MenusContainer>
-
-              <ButtonContainer>
-                {isAnyItemSelected.length ? (
-                  <Button disabled={isSubmitting} type="submit">
-                    Confirm Reservation
-                  </Button>
+              <MenusContainer empty={orderArray.length}>
+                {orderArray.length === 0 ? (
+                  <CartContainer>
+                    <TiShoppingCart
+                      style={{ fontSize: "5rem", color: "var(--deepGreen)" }}
+                    />
+                    <Paragraph
+                      color="deepGreen"
+                      fontFamily="markazi"
+                      fontweight="deepBold"
+                      fontSize="xxxlarge"
+                    >
+                      Kindly make an Order!
+                    </Paragraph>
+                  </CartContainer>
                 ) : (
-                  <Button disabled={isSubmitting} type="submit">
-                    Go to Menu
-                  </Button>
+                  <div>{orderArray}</div>
                 )}
-              </ButtonContainer>
+              </MenusContainer>
+              <BottomBtnsContainer>
+                <ButtonContainer>
+                  {isAnyItemSelected.length ? (
+                    <Button disabled={isSubmitting} type="submit">
+                      Confirm Reservation
+                    </Button>
+                  ) : (
+                    <Button disabled={isSubmitting} type="submit">
+                      Go to Menu
+                    </Button>
+                  )}
+                </ButtonContainer>
+              </BottomBtnsContainer>
             </BottomContainerStyled>
           </Content>
         </Container>
@@ -735,6 +755,7 @@ function MakeReservation() {
 }
 
 export default MakeReservation;
+
 // INITIAL APPROACH
 // import React, { useReducer, useState } from "react";
 // import styled from "styled-components";
