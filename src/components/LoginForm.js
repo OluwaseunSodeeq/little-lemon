@@ -1,8 +1,10 @@
-import React from 'react';
+import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../ui/Button";
 import useAuthContext from "../Contexts/Authenticate/useAuthContext";
+import { useNavigate } from "react-router-dom";
+
 // import { useNavigate } from "react-router-dom";
 
 const LoginFormDiv = styled.form`
@@ -56,7 +58,9 @@ const InputErrorMsg = styled.p`
   color: red;
 `;
 
-function LoginForm() {
+function LoginForm({ auth }) {
+  const navigate = useNavigate();
+
   const {
     userPassword: password,
     userName: name,
@@ -64,63 +68,128 @@ function LoginForm() {
     setUserPassword: setPassword,
     defaultPassword,
     loginHandler,
-    auth,
   } = useAuthContext();
 
-  const [error, setError] = useState({ name: "", password: password });
+  const [error, setError] = useState({ name: "", password: "" });
 
-  console.log(auth);
   function handleSubmit(e) {
     e.preventDefault();
-    if (!name || !password || password !== defaultPassword) {
-      setError({ name, password });
+
+    if (!name.trim() || !password.trim() || password !== defaultPassword) {
+      setError({
+        name: !name.trim() ? "Please enter your name" : "",
+        password: password !== defaultPassword ? "Incorrect password" : "",
+      });
+      return;
     }
-    console.log("User has Log in", auth);
+
+    navigate("/home");
     loginHandler();
 
-    // onLogin();
-    // navigate("/home");
+    console.log("Login form", auth);
+    console.log(name, password);
   }
-  const atleastThree = 3;
   return (
     <LoginFormDiv onSubmit={handleSubmit}>
       <InputContainer>
         <InputLabel htmlFor="username">Your Name</InputLabel>
         <Input
-          error={
-            error.name === "" ||
-            error.name === " " ||
-            name.length < atleastThree
-          }
           type="text"
           id="username"
           placeholder="Your Name"
-          //   autoComplete="username"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          //   disabled={isLoading}
         />
-        {error && <InputErrorMsg>Pls Enter Your name</InputErrorMsg>}
+        {error.name && <InputErrorMsg>{error.name}</InputErrorMsg>}
       </InputContainer>
       <InputContainer>
-        <InputLabel htmlFor="name">Your Password</InputLabel>
-
+        <InputLabel htmlFor="password">Your Password</InputLabel>
         <Input
-          error={error.password !== password}
           type="password"
           id="password"
-          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          //   disabled={isLoading}
         />
-        {error && <InputErrorMsg>Pls Enter the right Password</InputErrorMsg>}
+        {error.password && <InputErrorMsg>{error.password}</InputErrorMsg>}
       </InputContainer>
       <InputContainer>
-        <Button>Log in</Button>
+        <Button $textColor="black" $backgroundColor="yellow" type="submit">
+          Log in
+        </Button>
       </InputContainer>
     </LoginFormDiv>
   );
 }
 
 export default LoginForm;
+
+// function LoginForm() {
+//   const {
+//     userPassword: password,
+//     userName: name,
+//     setUserName: setName,
+//     setUserPassword: setPassword,
+//     defaultPassword,
+//     loginHandler,
+//     auth,
+//   } = useAuthContext();
+
+//   const [error, setError] = useState({ name: "", password: password });
+
+//   console.log("Login form");
+//   console.log(auth);
+
+//   function handleSubmit(e) {
+//     e.preventDefault();
+//     if (!name || !password || password !== defaultPassword) {
+//       setError({ name, password });
+//     }
+//     loginHandler();
+//     console.log("User has Log in", auth);
+
+//     // onLogin();
+//     // navigate("/home");
+//   }
+//   const atleastThree = 3;
+//   return (
+//     <LoginFormDiv onSubmit={handleSubmit}>
+//       <InputContainer>
+//         <InputLabel htmlFor="username">Your Name</InputLabel>
+//         <Input
+//           error={
+//             error.name === "" ||
+//             error.name === " " ||
+//             name.length < atleastThree
+//           }
+//           type="text"
+//           id="username"
+//           placeholder="Your Name"
+//           //   autoComplete="username"
+//           value={name}
+//           onChange={(e) => setName(e.target.value)}
+//           //   disabled={isLoading}
+//         />
+//         {error && <InputErrorMsg>Pls Enter Your name</InputErrorMsg>}
+//       </InputContainer>
+//       <InputContainer>
+//         <InputLabel htmlFor="name">Your Password</InputLabel>
+
+//         <Input
+//           error={error.password !== password}
+//           type="password"
+//           id="password"
+//           autoComplete="current-password"
+//           value={password}
+//           onChange={(e) => setPassword(e.target.value)}
+//           //   disabled={isLoading}
+//         />
+//         {error && <InputErrorMsg>Pls Enter the right Password</InputErrorMsg>}
+//       </InputContainer>
+//       <InputContainer>
+//         <Button>Log in</Button>
+//       </InputContainer>
+//     </LoginFormDiv>
+//   );
+// }
+
+// export default LoginForm;

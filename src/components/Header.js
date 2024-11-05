@@ -31,9 +31,10 @@ const Hamburger = styled.div`
   }
 `;
 
-function Header({ setHamburger, hamburger }) {
+// function Header({ setHamburger, hamburger }) {
+function Header() {
   const { open, toggleHamburger } = useToggleContext();
-
+  console.log(open);
   return (
     <Container as="header">
       <Content>
@@ -72,7 +73,7 @@ function Header({ setHamburger, hamburger }) {
               </HeaderIcon>
             )}
           </Hamburger>
-          <Nav hamburger={open} onCloseHandler={toggleHamburger} />
+          <Nav openHamburger={open} onToggleHamburger={toggleHamburger} />
         </HeaderContent>
       </Content>
     </Container>

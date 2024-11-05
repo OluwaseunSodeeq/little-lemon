@@ -7,15 +7,36 @@ function AuthContextProvider({ children }) {
   const defaultPassword = "user2024";
   const [userName, setUserName] = useState("");
   const [userPassword, setUserPassword] = useState(defaultPassword);
-  // DATA FOR MENU
   const [auth, setAuth] = useState(false);
+
+  // DATA FOR MENU
 
   //Auth Handlers
   const loginHandler = () => {
-    setAuth(true);
+    // if (
+    //   userName === "" ||
+    //   userName === " " ||
+    //   userPassword === " " ||
+    //   userPassword === ""
+    // )
+    //   return;
+    // setAuth(true);
+    //If either userName or userPassword is empty, this line stops the function execution right there.
+    if (!userName.trim() || !userPassword.trim()) return;
+
+    // Example validation logic
+    if (userName !== "" && userPassword === defaultPassword) {
+      setAuth(true);
+    } else {
+      console.error("Invalid username or password");
+      // setAuth(false);
+    }
   };
+
   const logoutHandler = () => {
     setAuth(false);
+    setUserName("");
+    setUserPassword(defaultPassword);
   };
 
   return (

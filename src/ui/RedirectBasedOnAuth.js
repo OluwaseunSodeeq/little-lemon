@@ -4,6 +4,9 @@ import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 function RedirectBasedOnAuth() {
   const { auth: isAuthenticated } = useAuthContext();
+
+  console.log(isAuthenticated);
+
   return isAuthenticated ? (
     <Navigate replace to="/home" />
   ) : (

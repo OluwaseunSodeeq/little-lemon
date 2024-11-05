@@ -1,7 +1,6 @@
-// import { useLocation } from "react-router-dom";
 import React from "react";
-import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import useAuthContext from "../Contexts/Authenticate/useAuthContext";
@@ -12,15 +11,14 @@ const MainContainer = styled.section`
   display: flex;
   flex-direction: column;
 `;
-// const MainContainer = styled.section`
-//   position: relative;
-//   padding: 0;
-// `;
+
 const Main = styled.main`
   padding: 0;
 `;
-function AppLayout({ LoggedIn }) {
+function AppLayout() {
   const { auth: isAuthenticated } = useAuthContext();
+  console.log(isAuthenticated);
+
   // const location = useLocation();
   // const loggedIn = !["/", "/404"].includes(location.pathname);
 
@@ -41,17 +39,13 @@ function AppLayout({ LoggedIn }) {
   // );
 
   return (
-    <>
-      {isAuthenticated && (
-        <MainContainer>
-          <Header />
-          <Main>
-            <Outlet />
-          </Main>
-          <Footer />
-        </MainContainer>
-      )}
-    </>
+    <MainContainer>
+      <Header />
+      <Main>
+        <Outlet />
+      </Main>
+      <Footer />
+    </MainContainer>
   );
 }
 

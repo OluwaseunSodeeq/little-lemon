@@ -57,30 +57,31 @@ const LiContainer = styled.ul`
     gap: 2.5rem;
   }
 `;
-function Nav({ hamburger, onCloseHandler }) {
+function Nav({ openHamburger, onToggleHamburger }) {
   const { logoutHandler } = useAuthContext();
 
   // LogoutHandler
   const mainLogoutHandler = () => {
     logoutHandler();
-    onCloseHandler();
+    onToggleHamburger();
   };
+
   return (
-    <NavStyled hamburger={hamburger}>
+    <NavStyled hamburger={openHamburger}>
       <LiContainer>
-        <NavLi onClick={onCloseHandler}>
+        <NavLi onClick={onToggleHamburger}>
           <NavLink to="/home">Home</NavLink>
         </NavLi>
-        <NavLi onClick={onCloseHandler}>
+        <NavLi onClick={onToggleHamburger}>
           <NavLink to="/about">About</NavLink>
         </NavLi>
-        {/* <NavLi onClick={onCloseHandler}>
+        {/* <NavLi onClick={onToggleHamburger}>
           <NavLink to="/menu">Menu</NavLink>
         </NavLi> */}
-        <NavLi onClick={onCloseHandler}>
+        <NavLi onClick={onToggleHamburger}>
           <NavLink to="/reservations">Reservations</NavLink>
         </NavLi>
-        <NavLi onClick={onCloseHandler}>
+        <NavLi onClick={onToggleHamburger}>
           <NavLink to="/orderonline">Order Online</NavLink>
         </NavLi>
         <NavLi onClick={mainLogoutHandler}>
