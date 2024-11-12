@@ -47,19 +47,6 @@ const LogoContainer = styled.div`
 function Login() {
   const { auth } = useAuthContext();
   console.log("Login page", auth);
-  // Redirect to home if already authenticated
-  // if (isAuthenticated) {
-  //   navigate("/home");
-  //   return null;
-  // }
-
-  // const handleLogin = (event) => {
-  //   event.preventDefault();
-  // Assume `login` function takes care of authentication and then redirects
-  // login().then(() => {
-  //   navigate("/home");
-  // });
-  // };
 
   return (
     <Container as="section" type="login">
