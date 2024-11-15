@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 const NavStyled = styled.nav`
+  color: var(--deepGreen);
   display: block;
   transition: all 2s;
 
@@ -11,7 +12,8 @@ const NavStyled = styled.nav`
     content: "";
     position: absolute;
     bottom: -0.3rem;
-    color: var(--yellow);
+    color: var(--pureWhite);
+
     left: 0;
     width: 1px;
     height: 1px;
@@ -22,7 +24,7 @@ const NavStyled = styled.nav`
 
   @media (max-width: 950px) {
     padding: 3rem 0;
-    width: 90%;
+    width: 99%;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -31,15 +33,24 @@ const NavStyled = styled.nav`
     display: ${({ hamburger }) => (hamburger ? "block" : "none")};
     transition: top 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     top: ${({ hamburger }) => (hamburger ? "25rem" : "0")};
+    background-color: var(--white);
+
+    /* width: 90%; */
+    /* background-color: rgba(255, 255, 255, 0.3); */
   }
 `;
 
 const StyledNavLink = styled(NavLink)`
   color: inherit;
   text-decoration: none;
+  padding: 0.5rem;
 
   &.active {
-    color: var(--yellow);
+    /* color: var(--yellow); */
+    color: var(--pureWhite);
+    background-color: var(--deepGreen);
+    border-radius: 5px;
+    font-weight: 500;
   }
 `;
 
@@ -77,7 +88,7 @@ function Nav({ openHamburger, onToggleHamburger }) {
           <StyledNavLink to="/orderonline">Order Online</StyledNavLink>
         </li>
         <li onClick={mainLogoutHandler}>
-          <StyledNavLink to="/">Logout</StyledNavLink>
+          <StyledNavLink to="/login">Logout</StyledNavLink>
         </li>
       </LiContainer>
     </NavStyled>

@@ -134,6 +134,7 @@ const ButtonSelected = styled.div`
 `;
 const TextAreaContainer = styled.div`
   width: 100%;
+  margin-top: 2rem;
 `;
 const TextAreaStyled = styled.textarea`
   width: 100%;

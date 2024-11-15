@@ -100,11 +100,14 @@ const confirmReservationBg = css`
 const menuBg = css`
   position: relative;
   top: 8rem;
+  padding-top: 4rem;
   height: auto;
   background-color: var(--deepGreen);
+  padding-bottom: 10rem;
 
   @media (max-width: 450px) {
-    top: 7rem;
+    top: 10rem;
+    padding-bottom: 10rem;
   }
 `;
 // HELPER

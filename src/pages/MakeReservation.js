@@ -27,9 +27,13 @@ import {
   ReservationCard,
 } from "../components/FlippingCard";
 import { Heading } from "../ui/Heading";
+import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
+import { menuArr } from "../Contexts/Menu/defaultMenusArray";
+
 // import { ZERO } from "../ui/Constant";
 
-// NOTE for the challenge ofSelect and option tags
+// NOTE for the challenge of Select and option tags
 /*
 NOTE:
 The native <option> tag inside a <select> element has limited styling capabilities and cannot be styled the same way as other HTML elements due to browser restrictions. For example, you cannot control the width of the individual <option> elements or apply complex layouts like flexbox to them. This is why creating a custom dropdown component is often necessary to achieve advanced styling and layout requirements.
@@ -306,6 +310,10 @@ const BottomBtnsContainer = styled.div`
   bottom: 2rem;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @media (max-width: 450px) {
+    bottom: -2rem;
+  }
 `;
 const CartContainer = styled.div`
   display: flex;
@@ -362,6 +370,7 @@ const initialState = {
 function MakeReservation() {
   const {
     menus,
+    setMenus,
     selectedMenuHandler,
     setUserBookedData,
     setUserSelectedItems,
@@ -372,6 +381,7 @@ function MakeReservation() {
   const { date, occasion, dinner, time } = state;
   const [turn, setTurn] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [resetBtns, setResetBtns] = useState(false);
 
   const content = [
     {
@@ -503,11 +513,22 @@ function MakeReservation() {
   } = useFormik({
     initialValues: initialState,
     validationSchema: makeReservationSchemas,
-    onSubmit: (values) => {
-      // handle form submission
-      // console.log(values);
-      setUserBookedData(values);
-      setUserSelectedItems(orderArray);
+    onSubmit: (values, { resetForm }) => {
+      // setUserBookedData(values);
+      // setUserSelectedItems(orderArray);
+      try {
+        setUserBookedData(values);
+        setUserSelectedItems(orderArray);
+        toast.success("Reservation successfully made!");
+
+        setMenus(menuArr);
+        resetForm();
+        setUserSelectedItems([]);
+        setResetBtns(true);
+        // console.log(values)
+      } catch (error) {
+        toast.error("Failed to make reservation. Please try again.");
+      }
     },
   });
 
@@ -515,6 +536,7 @@ function MakeReservation() {
     dispatch({ type: e.target.name, payload: e.target.value });
     handleChange(e);
   };
+  console.log(menus);
   const orderArray = menus
     .flatMap((category) => {
       const { generalName, list } = category;
@@ -532,7 +554,8 @@ function MakeReservation() {
         </SelectedmenuImageContainer>
       );
     });
-  console.log(orderArray.length);
+  console.log(orderArray);
+
   const cardLeftCards = content.filter(
     (customSelect) =>
       customSelect.name === "date" || customSelect.name === "occasion"
@@ -560,6 +583,12 @@ function MakeReservation() {
           e.preventDefault();
           handleSubmit(e);
           setFormSubmitted(true);
+
+          if (Object.keys(errors).length) {
+            Object.keys(errors).forEach((field) => {
+              toast.error(errors[field]);
+            });
+          }
         }}
       >
         <Container as="div" type="makeReservationTop">
@@ -622,6 +651,8 @@ function MakeReservation() {
                           dispatch={dispatch}
                           content={cardLeftCards}
                           formSubmitted={formSubmitted}
+                          resetBtns={resetBtns}
+                          setResetBtns={resetBtns}
                         />
                       </FrontCardLeft>
                       <BackCardLeft>
@@ -673,6 +704,8 @@ function MakeReservation() {
                           dispatch={dispatch}
                           content={cardRightCards}
                           formSubmitted={formSubmitted}
+                          resetBtns={resetBtns}
+                          setResetBtns={resetBtns}
                         />
                       </FrontCardRight>
                       <BackCardRight>
@@ -693,7 +726,12 @@ function MakeReservation() {
               </MakeReservationStyled>
             </>
             <ButtonContainer next="next">
-              <Button type="button" onClick={turnCardHandler}>
+              <Button
+                $textColor="deepGreen"
+                $backgroundColor="pureWhite"
+                type="button"
+                onClick={turnCardHandler}
+              >
                 Next &gt;&gt;&gt;
               </Button>
             </ButtonContainer>
@@ -741,7 +779,7 @@ function MakeReservation() {
                     </Button>
                   ) : (
                     <Button disabled={isSubmitting} type="submit">
-                      Go to Menu
+                      <Link to="/orderonline"> Go to Menu </Link>
                     </Button>
                   )}
                 </ButtonContainer>

@@ -98,7 +98,7 @@ export const Button = styled.button`
     left: 0;
     z-index: -1;
     transition: all 0.4s;
-    border: 1px solid var(--deepGreen);
+    /* border: 1px solid var(--deepGreen); */
   }
 
   ${(props) => fontSize[props.$fontSize || "xlarge"]}

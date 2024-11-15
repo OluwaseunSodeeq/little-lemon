@@ -7,14 +7,16 @@ import Nav from "./Nav";
 import useToggleContext from "../Contexts/ToggleContext/useToggleContext";
 
 const HeaderContent = styled.div`
-  height: 8rem;
+  /* height: 8rem; */
+  height: 7rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   box-shadow: var(--backdrop-color);
+  margin-top: 2rem;
 
   @media (max-width: 450px) {
-    height: 7rem;
+    margin-top: 0;
   }
 `;
 

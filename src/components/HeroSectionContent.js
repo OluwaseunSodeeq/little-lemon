@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Heading } from "../ui/Heading";
 import { Paragraph } from "../ui/Paragraph";
 import { Button } from "../ui/Button";
+import { Link } from "react-router-dom";
 
 const HeroSectionContentDiv = styled.div`
   width: 100%;
@@ -67,7 +68,9 @@ function HeroSectionContent() {
           love and served with a modern twist.
         </Paragraph>
         <HeroSectionContentBtnContainer>
-          <Button>Reserved Table</Button>
+          <Button>
+            <Link to="/reservations"> Reserved Table </Link>
+          </Button>
         </HeroSectionContentBtnContainer>
       </HeroSectionContentLeft>
       <HeroSectionContentRight>

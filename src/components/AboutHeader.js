@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Button } from "../ui/Button";
+import { Link } from "react-router-dom";
 
 const AboutHeaderBg = styled.div`
   position: relative;
@@ -64,7 +65,9 @@ function AboutHeader() {
       </BtnContain>
 
       <ButtonContainer>
-        <Button>ORDER ONLINE</Button>
+        <Button>
+          <Link to="/orderonline"> ORDER ONLINE</Link>
+        </Button>
       </ButtonContainer>
     </AboutHeaderBg>
   );

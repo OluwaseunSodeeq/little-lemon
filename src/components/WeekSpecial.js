@@ -7,6 +7,7 @@ import { Paragraph } from "../ui/Paragraph";
 import { Button } from "../ui/Button";
 import { GridColumns } from "../styles/Grid";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const cardArray = [
   {
@@ -43,7 +44,9 @@ function WeekSpecial() {
           <Paragraph fontSize="extraLarge" color="black" fontWeight="bold">
             This week specials!
           </Paragraph>
-          <Button>Online Menu</Button>
+          <Button>
+            <Link to="/orderonline">Online Menu</Link>
+          </Button>
         </FlexedDiv>
         <WeekSpacialStyled>
           <GridColumns>

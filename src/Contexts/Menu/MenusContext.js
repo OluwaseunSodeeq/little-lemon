@@ -35,6 +35,7 @@ function MenusContextProvider({ children }) {
     <MenusContextData.Provider
       value={{
         menus,
+        setMenus,
         selectedMenuHandler,
         userBookedData,
         setUserBookedData,

@@ -11,6 +11,11 @@ const CustomSelectContainer = styled.div`
   row-gap: 7rem;
   width: 100%;
   height: auto;
+
+  @media (max-width: 450px) {
+    width: 100%;
+    margin-top: 4rem;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -102,9 +107,12 @@ const CustomButton = ({
   dispatch,
   content,
   formSubmitted,
+  setResetBtns,
+  resetBtns,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(null);
+
   const dateRef = useRef(null);
 
   const onShowPicker = () => {
@@ -120,13 +128,18 @@ const CustomButton = ({
     });
     handleChange(e);
     dispatch({ type: "date", payload: formattedDate });
+
+    if (resetBtns) {
+      dispatch({ type: "date", payload: "Select Time" });
+      setResetBtns(false);
+    }
   };
 
   const toggleOptions = (id) => {
     setCurrentOption(id);
     setShowOptions((prevShow) => (currentOption !== id ? true : !prevShow));
   };
-
+  console.log(content);
   return (
     <CustomSelectContainer>
       {content.map((btn, i) => {
@@ -141,9 +154,7 @@ const CustomButton = ({
           name,
           placeholder,
         } = btn;
-        // console.log(name);
-        // console.log(errors[name]);
-        console.log(formSubmitted);
+        console.log(value);
         return (
           <ButtonContainer key={i}>
             <ButtonLabel>{label}</ButtonLabel>
@@ -165,7 +176,7 @@ const CustomButton = ({
                 <CustomDropdown
                   ind={i}
                   options={options}
-                  value={value}
+                  value={resetBtns ? placeholder : value}
                   currentID={currentID}
                   showOptions={showOptions && currentOption === currentID}
                   toggleOptions={() => toggleOptions(currentID)}

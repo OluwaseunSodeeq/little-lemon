@@ -5,12 +5,18 @@ import { Content } from "../ui/Content";
 import { Paragraph } from "../ui/Paragraph";
 import { FlexedDiv } from "../styles/FlexedDiv";
 import useMenusContext from "../Contexts/Menu/useMenusContext";
+import { Button } from "../ui/Button";
+import { Link } from "react-router-dom";
 // import { Button } from "../ui/Button";
 
 const MenuStyled = styled.div`
+  position: relative;
   width: 100%;
-  padding: 2rem 0 2rem 0;
+  height: auto;
+  /* padding: 2rem 0 2rem 0; */
+  /* padding: 2rem 0 2rem 0; */
   /* border: 5px solid blueviolet; */
+  /* border: 2px solid blue; */
 `;
 const OtherMenuStyledContainer = styled.div`
   padding: 5rem 0;
@@ -69,14 +75,14 @@ const OthermenuItem = styled.div`
 const OtherMenuContainer = styled.div`
   width: 100%;
 `;
-// const ButtonContainer = styled.div`
-//   position: relative;
-//   text-align: center;
-//   border: 5px solid red;
-// `;
+const ButtonContainer = styled.div`
+  position: relative;
+  text-align: center;
+  /* border: 5px solid red; */
+`;
 
 function Menu() {
-  const { menus, selectedMenuHandler, isAnyItemSelected } = useMenusContext();
+  const { menus, selectedMenuHandler } = useMenusContext();
 
   const resultOfMainMenu = menus
     .filter((menu) => menu.generalName !== "OTHER FOOD MENU")
@@ -169,7 +175,18 @@ function Menu() {
         </OtherMenuContainer>
       );
     });
-  console.log(isAnyItemSelected);
+
+  const orderArray = menus
+    .flatMap((category) => {
+      const { generalName, list } = category;
+      return list.map((menu) => ({ ...menu, generalName }));
+    })
+    .filter((item) => item.selected);
+
+  const userHasSelected = orderArray.length > 0;
+
+  console.log(orderArray.length);
+
   return (
     <div>
       <Container as="section" type="menu">
@@ -181,10 +198,20 @@ function Menu() {
             <OtherMenuStyledContainer>
               {resultOfOtherMenu}
             </OtherMenuStyledContainer>
+            <ButtonContainer>
+              {userHasSelected && (
+                <Button>
+                  <Link to="/reservations">Continue</Link>
+                </Button>
+              )}
+              {/* <Button>Continue</Button> */}
+            </ButtonContainer>
           </MenuStyled>
         </Content>
       </Container>
+
       {/*       
+      
       <Container as="div" type="helper">
         <Content>
           <ButtonContainer>
