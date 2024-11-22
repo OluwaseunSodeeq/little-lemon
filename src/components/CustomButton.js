@@ -93,6 +93,7 @@ const RenderSpanText = styled.span`
 `;
 const RotatingSpan = styled.span`
   transition: transform 0.3s ease-in-out;
+
   transform: ${({ value }) => (value ? "rotate(180deg)" : "")};
   margin-top: ${({ value }) => (value ? "-1rem" : "")};
   /* margin-top: -1rem; */
@@ -102,13 +103,10 @@ const CustomButton = ({
   handleBlur,
   handleChange,
   errors,
-  // errors = {}, // default to empty object
-  // touched = {}, // default to empty object
   dispatch,
   content,
   formSubmitted,
-  setResetBtns,
-  resetBtns,
+  values,
 }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [currentOption, setCurrentOption] = useState(null);
@@ -129,17 +127,17 @@ const CustomButton = ({
     handleChange(e);
     dispatch({ type: "date", payload: formattedDate });
 
-    if (resetBtns) {
-      dispatch({ type: "date", payload: "Select Time" });
-      setResetBtns(false);
-    }
+    // if (resetBtns) {
+    //   dispatch({ type: "date", payload: "Select Time" });
+    //   setResetBtns(false);
+    // }
   };
 
   const toggleOptions = (id) => {
     setCurrentOption(id);
     setShowOptions((prevShow) => (currentOption !== id ? true : !prevShow));
   };
-  console.log(content);
+  // console.log(content);
   return (
     <CustomSelectContainer>
       {content.map((btn, i) => {
@@ -154,13 +152,14 @@ const CustomButton = ({
           name,
           placeholder,
         } = btn;
-        console.log(value);
+        console.log(values[btn.name]);
+        // const notActiveColor = value === placeholder;
         return (
           <ButtonContainer key={i}>
             <ButtonLabel>{label}</ButtonLabel>
             <CustomButtonStyledContainer
               errors={errors[name] && formSubmitted}
-              value={value !== placeholder}
+              value={values[btn.name] !== ""}
             >
               {inputType === "input" ? (
                 <DateInput
@@ -169,6 +168,7 @@ const CustomButton = ({
                   placeholder={placeholder}
                   ref={dateRef}
                   onClick={onShowPicker}
+                  value={values[btn.name]}
                   onChange={dateChangeHandler}
                   onBlur={handleBlur}
                 />
@@ -176,7 +176,7 @@ const CustomButton = ({
                 <CustomDropdown
                   ind={i}
                   options={options}
-                  value={resetBtns ? placeholder : value}
+                  value={values[btn.name]}
                   currentID={currentID}
                   showOptions={showOptions && currentOption === currentID}
                   toggleOptions={() => toggleOptions(currentID)}
@@ -190,7 +190,7 @@ const CustomButton = ({
               >
                 <span>{beforeIcon}</span>
                 <RenderSpanText>{value}</RenderSpanText>
-                <RotatingSpan value={value !== placeholder}>
+                <RotatingSpan value={values[btn.name]}>
                   {afterIcon}
                 </RotatingSpan>
               </CustomRenderInputContent>

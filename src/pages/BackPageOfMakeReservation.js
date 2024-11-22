@@ -269,7 +269,7 @@ function SummaryOfSelectTags({
       <MakeReservationData>
         {makeReservationArr.map((data) => {
           const { icon, text, id, name } = data;
-          console.log(errors[name] && formSubmitted);
+          // console.log(errors[name] && formSubmitted);
           return (
             <EachMakeReservationData
               key={id}

@@ -8,7 +8,7 @@ function MenusContextProvider({ children }) {
   const [menus, setMenus] = useState(menuArr);
 
   useState();
-  const [userBookedData, setUserBookedData] = useState({});
+  const [userBookedData, setUserBookedData] = useState([]);
   const [userSelectedItems, setUserSelectedItems] = useState([]);
 
   // Menu Handler
@@ -31,13 +31,14 @@ function MenusContextProvider({ children }) {
   const isAnyItemSelected = menus
     .flatMap((category) => category.list)
     .filter((selected) => selected.selected === true);
+
+  console.log(userBookedData);
   return (
     <MenusContextData.Provider
       value={{
         menus,
         setMenus,
         selectedMenuHandler,
-        userBookedData,
         setUserBookedData,
         userSelectedItems,
         setUserSelectedItems,

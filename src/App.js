@@ -20,6 +20,7 @@ import Login from "./pages/Login";
 import OrderOnline from "./pages/Menu";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
+import { ReservationsContextProvider } from "./Contexts/ReservationsContext/ReservationsContext";
 
 function App() {
   return (
@@ -29,32 +30,37 @@ function App() {
 
         <AuthContextProvider>
           <ToggleContextProvider>
-            <MenusContextProvider>
-              <BrowserRouter>
-                {/* <Suspense fallback={<Loader />}> */}
-                {/* <HamburgerBg /> */}
-                <Routes>
-                  <Route
-                    element={
-                      <ProtectedRoute>
-                        <AppLayout />
-                      </ProtectedRoute>
-                    }
-                  >
-                    {/* <Route index element={<RedirectBasedOnAuth />} /> */}
-                    <Route index element={<Navigate replace to="/home" />} />
-                    <Route path="/home" element={<Homepage />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/reservations" element={<MakeReservation />} />
-                    <Route path="/orderonline" element={<OrderOnline />} />
-                  </Route>
+            <ReservationsContextProvider>
+              <MenusContextProvider>
+                <BrowserRouter>
+                  {/* <Suspense fallback={<Loader />}> */}
+                  {/* <HamburgerBg /> */}
+                  <Routes>
+                    <Route
+                      element={
+                        <ProtectedRoute>
+                          <AppLayout />
+                        </ProtectedRoute>
+                      }
+                    >
+                      {/* <Route index element={<RedirectBasedOnAuth />} /> */}
+                      <Route index element={<Navigate replace to="/home" />} />
+                      <Route path="/home" element={<Homepage />} />
+                      <Route path="/about" element={<About />} />
+                      <Route
+                        path="/reservations"
+                        element={<MakeReservation />}
+                      />
+                      <Route path="/orderonline" element={<OrderOnline />} />
+                    </Route>
 
-                  <Route path="/login" element={<Login />} />
-                  <Route path="*" element={<PageNotFound />} />
-                </Routes>
-                {/* </Suspense> */}
-              </BrowserRouter>
-            </MenusContextProvider>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="*" element={<PageNotFound />} />
+                  </Routes>
+                  {/* </Suspense> */}
+                </BrowserRouter>
+              </MenusContextProvider>
+            </ReservationsContextProvider>
           </ToggleContextProvider>
         </AuthContextProvider>
       </div>
@@ -85,7 +91,7 @@ function App() {
 
 export default App;
 // C:\Program Files\Git\bin
-
+// C:\Windows\System32
 // import React from "react";
 
 // import GlobalStyles from "./styles/GlobalStyles";

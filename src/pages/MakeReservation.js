@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useFormik } from "formik";
 import { CiCalendar } from "react-icons/ci";
@@ -7,6 +7,7 @@ import { LiaGlassCheersSolid } from "react-icons/lia";
 import { LuAlarmClock } from "react-icons/lu";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { TiShoppingCart } from "react-icons/ti";
+
 import useMenusContext from "../Contexts/Menu/useMenusContext";
 import { makeReservationSchemas } from "../schemas";
 
@@ -30,6 +31,7 @@ import { Heading } from "../ui/Heading";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { menuArr } from "../Contexts/Menu/defaultMenusArray";
+import useReservationsContext from "../Contexts/ReservationsContext/useReservationsContext";
 
 // import { ZERO } from "../ui/Constant";
 
@@ -322,52 +324,15 @@ const CartContainer = styled.div`
   justify-content: center;
 `;
 
-// REDUCER
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "date":
-      return { ...state, date: action.payload };
-    case "dinner":
-      return { ...state, dinner: action.payload };
-    case "occasion":
-      return { ...state, occasion: action.payload };
-    case "time":
-      return { ...state, time: action.payload };
-    case "seating":
-      return { ...state, seating: action.payload };
-
-    case "firstName":
-      return { ...state, seating: action.payload };
-    case "lastName":
-      return { ...state, seating: action.payload };
-    case "email":
-      return { ...state, seating: action.payload };
-    case "tel":
-      return { ...state, seating: action.payload };
-    case "countryCode":
-      return { ...state, seating: action.payload };
-    case "textArea":
-      return { ...state, textArea: action.payload };
-    default:
-      throw new Error("Unknown action type");
-  }
-};
-// user InitailData
-const initialState = {
-  date: "",
-  dinner: "",
-  occasion: "",
-  time: "",
-  seating: "",
-  firstName: "",
-  lastName: "",
-  tel: "",
-  email: "",
-  textArea: "",
-  countryCode: "NG",
-};
-
 function MakeReservation() {
+  const {
+    state,
+    dispatch,
+    initialState,
+    resetHandler,
+    formSubmitted,
+    setFormSubmitted,
+  } = useReservationsContext();
   const {
     menus,
     setMenus,
@@ -377,18 +342,16 @@ function MakeReservation() {
     isAnyItemSelected,
   } = useMenusContext();
 
-  const [state, dispatch] = useReducer(reducer, initialState);
   const { date, occasion, dinner, time } = state;
   const [turn, setTurn] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [resetBtns, setResetBtns] = useState(false);
+  console.log(date, occasion, dinner, time);
 
   const content = [
     {
       currentID: 0,
       label: "Date",
       beforeIcon: <CiCalendar style={{ fontSize: "3rem", color: "inherit" }} />,
-      value: date || "Select Date",
+      value: state.date || "Select Date",
       afterIcon: (
         <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
       ),
@@ -403,7 +366,7 @@ function MakeReservation() {
       beforeIcon: (
         <IoPersonOutline style={{ fontSize: "3rem", color: "inherit" }} />
       ),
-      value: dinner || "No. of Diners",
+      value: state.dinner || "No. of Diners",
       afterIcon: (
         <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
       ),
@@ -431,7 +394,7 @@ function MakeReservation() {
       beforeIcon: (
         <LuAlarmClock style={{ fontSize: "3rem", color: "inherit" }} />
       ),
-      value: time || "Select Time",
+      value: state.time || "Select Time",
       afterIcon: (
         <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
       ),
@@ -447,7 +410,7 @@ function MakeReservation() {
       beforeIcon: (
         <LiaGlassCheersSolid style={{ fontSize: "3rem", color: "inherit" }} />
       ),
-      value: occasion || "Occasion",
+      value: state.occasion || "Occasion",
       afterIcon: (
         <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
       ),
@@ -514,29 +477,36 @@ function MakeReservation() {
     initialValues: initialState,
     validationSchema: makeReservationSchemas,
     onSubmit: (values, { resetForm }) => {
-      // setUserBookedData(values);
       // setUserSelectedItems(orderArray);
       try {
-        setUserBookedData(values);
+        setUserBookedData((prevData) => [...prevData, values]);
         setUserSelectedItems(orderArray);
+        resetHandler();
         toast.success("Reservation successfully made!");
 
         setMenus(menuArr);
         resetForm();
         setUserSelectedItems([]);
-        setResetBtns(true);
-        // console.log(values)
+        // console.log(values);
       } catch (error) {
         toast.error("Failed to make reservation. Please try again.");
       }
     },
   });
 
+  // const handleFieldChange = (e) => {
+  //   dispatch({ type: e.target.name, payload: e.target.value });
+  //   handleChange(e);
+  // };
   const handleFieldChange = (e) => {
-    dispatch({ type: e.target.name, payload: e.target.value });
-    handleChange(e);
+    dispatch({
+      type: "updateField",
+      payload: { name: e.target.name, value: e.target.value },
+    });
+    handleChange(e); // Formik handler
   };
-  console.log(menus);
+  // console.log(menus);
+
   const orderArray = menus
     .flatMap((category) => {
       const { generalName, list } = category;
@@ -554,7 +524,7 @@ function MakeReservation() {
         </SelectedmenuImageContainer>
       );
     });
-  console.log(orderArray);
+  // console.log(orderArray);
 
   const cardLeftCards = content.filter(
     (customSelect) =>
@@ -568,7 +538,9 @@ function MakeReservation() {
 
   // If there is any error
   // const err = Object.keys(errors).length;
+  console.log("STATE :", JSON.stringify(state, null, 2));
   console.log("VALUES:", values);
+  // const valuess = values;
   return (
     <Container as="section" type="makeReservation">
       <Container as="div" type="reservationHeading">
@@ -651,8 +623,7 @@ function MakeReservation() {
                           dispatch={dispatch}
                           content={cardLeftCards}
                           formSubmitted={formSubmitted}
-                          resetBtns={resetBtns}
-                          setResetBtns={resetBtns}
+                          values={values}
                         />
                       </FrontCardLeft>
                       <BackCardLeft>
@@ -704,8 +675,7 @@ function MakeReservation() {
                           dispatch={dispatch}
                           content={cardRightCards}
                           formSubmitted={formSubmitted}
-                          resetBtns={resetBtns}
-                          setResetBtns={resetBtns}
+                          values={values}
                         />
                       </FrontCardRight>
                       <BackCardRight>
