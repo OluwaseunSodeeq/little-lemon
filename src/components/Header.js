@@ -22,6 +22,7 @@ const HeaderContent = styled.div`
 
 const HeaderIcon = styled.span`
   font-size: 1.8rem;
+  cursor: pointer;
 `;
 const Hamburger = styled.div`
   position: relative;
@@ -36,7 +37,6 @@ const Hamburger = styled.div`
 // function Header({ setHamburger, hamburger }) {
 function Header() {
   const { open, toggleHamburger } = useToggleContext();
-  console.log(open);
   return (
     <Container as="header">
       <Content>

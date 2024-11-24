@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
 import Footer from "./Footer";
-import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 const MainContainer = styled.section`
   /* position: relative;
@@ -17,11 +16,8 @@ const Main = styled.main`
 `;
 
 function AppLayout() {
-  const { auth: isAuthenticated } = useAuthContext();
   const currentLocation = useLocation();
   const isLoginPage = currentLocation.pathname === "/login";
-  console.log("Auth Status:", isAuthenticated);
-  console.log(isLoginPage);
 
   return (
     <MainContainer>

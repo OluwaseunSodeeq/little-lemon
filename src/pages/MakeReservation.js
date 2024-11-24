@@ -1,11 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useFormik } from "formik";
-import { CiCalendar } from "react-icons/ci";
-import { IoPersonOutline } from "react-icons/io5";
-import { LiaGlassCheersSolid } from "react-icons/lia";
-import { LuAlarmClock } from "react-icons/lu";
-import { RiArrowDropDownLine } from "react-icons/ri";
+
 import { TiShoppingCart } from "react-icons/ti";
 
 import useMenusContext from "../Contexts/Menu/useMenusContext";
@@ -30,7 +26,7 @@ import {
 import { Heading } from "../ui/Heading";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { menuArr } from "../Contexts/Menu/defaultMenusArray";
+// import { menuArr } from "../Contexts/Menu/defaultMenusArray";
 import useReservationsContext from "../Contexts/ReservationsContext/useReservationsContext";
 
 // import { ZERO } from "../ui/Constant";
@@ -324,188 +320,321 @@ const CartContainer = styled.div`
   justify-content: center;
 `;
 
+// function MakeReservation() {
+//   const {
+//     state,
+//     dispatch,
+//     initialState,
+//     resetHandler,
+//     formSubmitted,
+//     setFormSubmitted,
+//     setContent,
+//     content,
+//   } = useReservationsContext();
+
+//   const {
+//     menus,
+//     selectedMenuHandler,
+//     setUserBookedData,
+//     isAnyItemSelected,
+//     // setUserSelectedItems,
+//     // setMenus,
+//   } = useMenusContext();
+//   console.log(menuArr);
+//   // const { date, occasion, dinner, time } = state;
+//   const [turn, setTurn] = useState(false);
+//   // console.log(date, occasion, dinner, time);
+
+//   // const [content, setContent] = useState([
+//   //   {
+//   //     currentID: 0,
+//   //     label: "Date",
+//   //     beforeIcon: <CiCalendar style={{ fontSize: "3rem", color: "inherit" }} />,
+//   //     value: state.date || "Select Date",
+//   //     afterIcon: (
+//   //       <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
+//   //     ),
+//   //     inputType: "input",
+//   //     name: "date",
+//   //     id: "date",
+//   //     placeholder: "Select Date",
+//   //   },
+//   //   {
+//   //     currentID: 3,
+//   //     label: "Number of Diners",
+//   //     beforeIcon: (
+//   //       <IoPersonOutline style={{ fontSize: "3rem", color: "inherit" }} />
+//   //     ),
+//   //     value: state.dinner || "No. of Diners",
+//   //     afterIcon: (
+//   //       <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
+//   //     ),
+//   //     inputType: "select",
+//   //     options: [
+//   //       "1 Diner",
+//   //       "2 Diners",
+//   //       "3 Diners",
+//   //       "4 Diners",
+//   //       "5 Diners",
+//   //       "6 Diners",
+//   //       "7 Diners",
+//   //       "8 Diners",
+//   //       "9 Diners",
+//   //       "10 Diners",
+//   //     ],
+//   //     name: "dinner",
+//   //     id: "dinner",
+//   //     placeholder: "No. of Diners",
+//   //   },
+
+//   //   {
+//   //     currentID: 1,
+//   //     label: "Time",
+//   //     beforeIcon: (
+//   //       <LuAlarmClock style={{ fontSize: "3rem", color: "inherit" }} />
+//   //     ),
+//   //     value: state.time || "Select Time",
+//   //     afterIcon: (
+//   //       <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
+//   //     ),
+//   //     inputType: "select",
+//   //     options: ["Morning", "Afternoon", "Evening", "Night"],
+//   //     name: "time",
+//   //     id: "time",
+//   //     placeholder: "Select Time",
+//   //   },
+//   //   {
+//   //     currentID: 2,
+//   //     label: "Occasion",
+//   //     beforeIcon: (
+//   //       <LiaGlassCheersSolid style={{ fontSize: "3rem", color: "inherit" }} />
+//   //     ),
+//   //     value: state.occasion || "Occasion",
+//   //     afterIcon: (
+//   //       <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
+//   //     ),
+//   //     inputType: "select",
+//   //     options: ["Birthday", "Anniversary", "Graduation", "Other"],
+//   //     name: "occasion",
+//   //     id: "occasion",
+//   //     placeholder: "Occasion",
+//   //   },
+//   // ]);
+
+//   useEffect(() => {
+//     // Update the content array when `state` changes
+//     setContent((prevContent) =>
+//       prevContent.map((item) => ({
+//         ...item,
+//         value: state[item.name] || item.placeholder,
+//       }))
+//     );
+//   }, [state, setContent]);
+//   const dataArr = [
+//     {
+//       label: "First Name",
+//       id: "firstName",
+//       inputType: "text",
+//       itemId: 0,
+//       placeholder: "Oluwaseun",
+//     },
+//     {
+//       label: "Last Name",
+//       id: "lastName",
+//       inputType: "text",
+//       itemId: 1,
+//       placeholder: "Sodeeq",
+//     },
+//     {
+//       label: "Email",
+//       id: "email",
+//       inputType: "email",
+//       itemId: 2,
+//       placeholder: "ademolaoluwaseun90@gmail.com",
+//     },
+//     {
+//       label: "Phone Number",
+//       id: "tel",
+//       inputType: "tel",
+//       itemId: 3,
+//       placeholder: "8149428278",
+//       selectOptns: [
+//         { code: "+234", countryAbbrev: "NG", country: "Nigeria" },
+//         { code: "+1", countryAbbrev: "US", country: "United State of America" },
+//         { code: "+91", countryAbbrev: "IN", country: "India" },
+//         { code: "+44", countryAbbrev: "GB", country: "Great Britain" },
+//         { code: "+86", countryAbbrev: "CN", country: "China" },
+//       ],
+//     },
+//   ];
+//   const turnCardHandler = () => {
+//     setTurn((open) => !open);
+//   };
+
+//   const {
+//     errors,
+//     handleBlur,
+//     handleChange,
+//     handleSubmit,
+//     isSubmitting,
+//     touched,
+//     values,
+//     // setFieldValue,
+//   } = useFormik({
+//     initialValues: initialState,
+//     validationSchema: makeReservationSchemas,
+//     // onSubmit: (values, { resetForm }) => {
+//     //   // setUserSelectedItems(orderArray);
+//     //   try {
+//     //     setUserBookedData((prevData) => [...prevData, values]);
+//     //     setUserSelectedItems(orderArray);
+//     //     resetHandler();
+//     //     toast.success("Reservation successfully made!");
+
+//     //     setMenus(menuArr);
+//     //     resetForm();
+//     //     setUserSelectedItems([]);
+//     //     // console.log(values);
+//     //   } catch (error) {
+//     //     toast.error("Failed to make reservation. Please try again.");
+//     //   }
+//     // },
+//     onSubmit: (values, { resetForm }) => {
+//       try {
+//         setUserBookedData((prevData) => [...prevData, values]);
+//         resetHandler(); // Reset state and content
+//         toast.success("Reservation successfully made!");
+//       } catch (error) {
+//         toast.error("Failed to make reservation. Please try again.");
+//       }
+//     },
+//   });
+
+//   const handleFieldChange = (e) => {
+//     dispatch({ type: e.target.name, payload: e.target.value });
+//     handleChange(e);
+//   };
+// const handleFieldChange = (e) => {
+//   dispatch({
+//     type: "updateField",
+//     payload: { name: e.target.name, value: e.target.value },
+//   });
+//   handleChange(e); // Formik handler
+// };
+// console.log(menus);
 function MakeReservation() {
+  const [turn, setTurn] = useState(false);
   const {
     state,
     dispatch,
-    initialState,
     resetHandler,
+    setContent,
+    content,
     formSubmitted,
     setFormSubmitted,
   } = useReservationsContext();
   const {
     menus,
-    setMenus,
     selectedMenuHandler,
     setUserBookedData,
-    setUserSelectedItems,
     isAnyItemSelected,
+    setremount,
+    // setUserSelectedItems,
+    // setMenus,
   } = useMenusContext();
+  // const { date, occasion, dinner, time } = state;
 
-  const { date, occasion, dinner, time } = state;
-  const [turn, setTurn] = useState(false);
-  console.log(date, occasion, dinner, time);
+  //Dynamically update content when state changes
+  useEffect(() => {
+    setContent((prevContent) =>
+      prevContent.map((item) => ({
+        ...item,
+        value: state[item.name] || item.placeholder,
+      }))
+    );
+    setremount((change) => !change);
+  }, [state, setContent, setremount]);
 
-  const content = [
-    {
-      currentID: 0,
-      label: "Date",
-      beforeIcon: <CiCalendar style={{ fontSize: "3rem", color: "inherit" }} />,
-      value: state.date || "Select Date",
-      afterIcon: (
-        <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-      ),
-      inputType: "input",
-      name: "date",
-      id: "date",
-      placeholder: "Select Date",
-    },
-    {
-      currentID: 3,
-      label: "Number of Diners",
-      beforeIcon: (
-        <IoPersonOutline style={{ fontSize: "3rem", color: "inherit" }} />
-      ),
-      value: state.dinner || "No. of Diners",
-      afterIcon: (
-        <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-      ),
-      inputType: "select",
-      options: [
-        "1 Diner",
-        "2 Diners",
-        "3 Diners",
-        "4 Diners",
-        "5 Diners",
-        "6 Diners",
-        "7 Diners",
-        "8 Diners",
-        "9 Diners",
-        "10 Diners",
-      ],
-      name: "dinner",
-      id: "dinner",
-      placeholder: "No. of Diners",
-    },
+  // // Formik configuration
+  const { errors, handleBlur, handleSubmit, touched, values, isSubmitting } =
+    useFormik({
+      initialValues: state, // Sync with initial context state
+      validationSchema: makeReservationSchemas,
+      onSubmit: (values, { resetForm }) => {
+        try {
+          setUserBookedData((prevData) => [...prevData, values]); // Save booking
+          resetHandler(); // Reset context state
+          resetForm(); // Reset Formik state
+          toast.success("Reservation successfully made!");
+        } catch (error) {
+          setremount((change) => !change);
 
-    {
-      currentID: 1,
-      label: "Time",
-      beforeIcon: (
-        <LuAlarmClock style={{ fontSize: "3rem", color: "inherit" }} />
-      ),
-      value: state.time || "Select Time",
-      afterIcon: (
-        <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-      ),
-      inputType: "select",
-      options: ["Morning", "Afternoon", "Evening", "Night"],
-      name: "time",
-      id: "time",
-      placeholder: "Select Time",
-    },
-    {
-      currentID: 2,
-      label: "Occasion",
-      beforeIcon: (
-        <LiaGlassCheersSolid style={{ fontSize: "3rem", color: "inherit" }} />
-      ),
-      value: state.occasion || "Occasion",
-      afterIcon: (
-        <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-      ),
-      inputType: "select",
-      options: ["Birthday", "Anniversary", "Graduation", "Other"],
-      name: "occasion",
-      id: "occasion",
-      placeholder: "Occasion",
-    },
-  ];
+          console.error("Submission Error:", error); // Log error details
+          toast.error("Failed to make reservation. Please try again.");
+        }
+      },
+      //     onSubmit: (values, { resetForm }) => {
+      //       try {
+      //         // Handle successful submission
+      //         setUserBookedData((prevData) => [...prevData, values]);
+      //         resetHandler();
+      //         // resetForm();
+      //         toast.success("Reservation successfully made!");
+      //         //     //     setMenus(menuArr);
+      //       } catch (error) {
+      //         toast.error("Failed to make reservation. Please try again.");
+      //       }
+    });
 
+  // Unified state and Formik field update
+  // const handleFieldChange = (e) => {
+  const handleFieldChange = (e) => {
+    const { name, value } = e.target;
+    dispatch({ type: name, payload: value }); // Update context state
+    values[name] = value; // Ensure Formik state is in sync
+    setFormSubmitted(false);
+  };
+
+  const turnCardHandler = () => {
+    setTurn((open) => !open);
+  };
   const dataArr = [
     {
       label: "First Name",
       id: "firstName",
       inputType: "text",
-      itemId: 0,
       placeholder: "Oluwaseun",
     },
     {
       label: "Last Name",
       id: "lastName",
       inputType: "text",
-      itemId: 1,
       placeholder: "Sodeeq",
     },
     {
       label: "Email",
       id: "email",
       inputType: "email",
-      itemId: 2,
       placeholder: "ademolaoluwaseun90@gmail.com",
     },
     {
       label: "Phone Number",
       id: "tel",
       inputType: "tel",
-      itemId: 3,
       placeholder: "8149428278",
       selectOptns: [
         { code: "+234", countryAbbrev: "NG", country: "Nigeria" },
-        { code: "+1", countryAbbrev: "US", country: "United State of America" },
+        {
+          code: "+1",
+          countryAbbrev: "US",
+          country: "United States of America",
+        },
         { code: "+91", countryAbbrev: "IN", country: "India" },
         { code: "+44", countryAbbrev: "GB", country: "Great Britain" },
         { code: "+86", countryAbbrev: "CN", country: "China" },
       ],
     },
   ];
-
-  const turnCardHandler = () => {
-    setTurn((open) => !open);
-  };
-
-  const {
-    errors,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    isSubmitting,
-    touched,
-    values,
-    // setFieldValue,
-  } = useFormik({
-    initialValues: initialState,
-    validationSchema: makeReservationSchemas,
-    onSubmit: (values, { resetForm }) => {
-      // setUserSelectedItems(orderArray);
-      try {
-        setUserBookedData((prevData) => [...prevData, values]);
-        setUserSelectedItems(orderArray);
-        resetHandler();
-        toast.success("Reservation successfully made!");
-
-        setMenus(menuArr);
-        resetForm();
-        setUserSelectedItems([]);
-        // console.log(values);
-      } catch (error) {
-        toast.error("Failed to make reservation. Please try again.");
-      }
-    },
-  });
-
-  // const handleFieldChange = (e) => {
-  //   dispatch({ type: e.target.name, payload: e.target.value });
-  //   handleChange(e);
-  // };
-  const handleFieldChange = (e) => {
-    dispatch({
-      type: "updateField",
-      payload: { name: e.target.name, value: e.target.value },
-    });
-    handleChange(e); // Formik handler
-  };
-  // console.log(menus);
 
   const orderArray = menus
     .flatMap((category) => {
@@ -538,8 +667,9 @@ function MakeReservation() {
 
   // If there is any error
   // const err = Object.keys(errors).length;
-  console.log("STATE :", JSON.stringify(state, null, 2));
+  // console.log("STATE :", JSON.stringify(state, null, 2));
   console.log("VALUES:", values);
+  // console.log(menus);
   // const valuess = values;
   return (
     <Container as="section" type="makeReservation">
@@ -681,7 +811,8 @@ function MakeReservation() {
                       <BackCardRight>
                         <RightBackCard
                           values={values}
-                          handleChange={handleChange}
+                          // handleChange={handleChange}
+                          handleChange={handleFieldChange}
                           errors={errors}
                           touched={touched}
                           turn={turn}

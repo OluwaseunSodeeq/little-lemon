@@ -30,8 +30,8 @@ function App() {
 
         <AuthContextProvider>
           <ToggleContextProvider>
-            <ReservationsContextProvider>
-              <MenusContextProvider>
+            <MenusContextProvider>
+              <ReservationsContextProvider>
                 <BrowserRouter>
                   {/* <Suspense fallback={<Loader />}> */}
                   {/* <HamburgerBg /> */}
@@ -59,8 +59,8 @@ function App() {
                   </Routes>
                   {/* </Suspense> */}
                 </BrowserRouter>
-              </MenusContextProvider>
-            </ReservationsContextProvider>
+              </ReservationsContextProvider>
+            </MenusContextProvider>
           </ToggleContextProvider>
         </AuthContextProvider>
       </div>

@@ -46,7 +46,6 @@ const LogoContainer = styled.div`
 
 function Login() {
   const { auth } = useAuthContext();
-  console.log("Login page", auth);
 
   return (
     <Container as="section" type="login">

@@ -85,9 +85,6 @@ function LoginForm({ auth }) {
 
     navigate("/home");
     loginHandler();
-
-    console.log("Login form", auth);
-    console.log(name, password);
   }
   return (
     <LoginFormDiv onSubmit={handleSubmit}>
