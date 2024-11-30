@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import GlobalStyles from "./styles/GlobalStyles";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 // import { Suspense } from "react";
 import { MenusContextProvider } from "./Contexts/Menu/MenusContext";
 import { ToggleContextProvider } from "./Contexts/ToggleContext/ToggleContext";
@@ -37,7 +37,7 @@ function App() {
                 remount={remount}
                 setremount={setremount}
               >
-                <BrowserRouter>
+                <HashRouter>
                   {/* <Suspense fallback={<Loader />}> */}
                   {/* <HamburgerBg /> */}
                   <Routes>
@@ -63,7 +63,7 @@ function App() {
                     <Route path="*" element={<PageNotFound />} />
                   </Routes>
                   {/* </Suspense> */}
-                </BrowserRouter>
+                </HashRouter>
               </ReservationsContextProvider>
             </MenusContextProvider>
           </ToggleContextProvider>
