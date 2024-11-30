@@ -7,6 +7,7 @@ import CustomButton from "../components/CustomButton";
 import { Button } from "../ui/Button";
 import BackPageOfMakeReservation from "./BackPageOfMakeReservation";
 import useMenusContext from "../Contexts/Menu/useMenusContext";
+import BoxesContainer from "../components/BoxesContainer";
 /*
 NOTE:
 The native <option> tag inside a <select> element has limited styling capabilities and cannot be styled the same way as other HTML elements due to browser restrictions. For example, you cannot control the width of the individual <option> elements or apply complex layouts like flexbox to them. This is why creating a custom dropdown component is often necessary to achieve advanced styling and layout requirements.
@@ -268,6 +269,7 @@ function MakeReservation() {
         </SelectedmenuImageContainer>
       );
     });
+
   console.log(orderArray.length);
   return (
     <Container as="section" type="makeReservation">
@@ -305,7 +307,7 @@ function MakeReservation() {
         </Container>
         <BackPageOfMakeReservation />
       </Form>
-      <Container as="div" type="makeReservationBottom">
+      {/* <Container as="div" type="makeReservationBottom">
         <Content>
           <BottomContainerStyled>
             {orderArray.length > notinIsSelected && (
@@ -321,6 +323,29 @@ function MakeReservation() {
             )}
             <MenusContainer>
               {orderArray.length === 0 ? makeAnOrderMsg : orderArray}
+            </MenusContainer>
+            <ButtonContainer>
+              <Button>Confirm Reservation</Button>
+            </ButtonContainer>
+          </BottomContainerStyled>
+        </Content>
+      </Container> */}
+      <Container as="div" type="makeReservationBottom">
+        <Content>
+          <BottomContainerStyled>
+            {orderArray.length > notinIsSelected && (
+              <Paragraph
+                color="deepGreen"
+                fontFamily="markazi"
+                fontweight="deepBold"
+                fontSize="xxxlarge"
+              >
+                {orderArray.length} items{" "}
+                {orderArray.length === 1 ? "is" : "are"} selected!
+              </Paragraph>
+            )}
+            <MenusContainer>
+              {orderArray.length === 0 ? makeAnOrderMsg : menuArrray}
             </MenusContainer>
             <ButtonContainer>
               <Button>Confirm Reservation</Button>

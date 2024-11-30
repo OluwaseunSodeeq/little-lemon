@@ -28,6 +28,8 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 // import { menuArr } from "../Contexts/Menu/defaultMenusArray";
 import useReservationsContext from "../Contexts/ReservationsContext/useReservationsContext";
+import { menuArr } from "../Contexts/Menu/defaultMenusArray";
+// import BoxesContainer from "../components/BoxesContainer";
 
 // import { ZERO } from "../ui/Constant";
 
@@ -202,6 +204,7 @@ const BottomContainerStyled = styled.div`
 const SelectedmenuImageStyled = styled.div`
   width: 100%;
   height: 100%;
+
   /* position: relative; */
   cursor: pointer;
 
@@ -236,12 +239,17 @@ const SelectedmenuImageContainer = styled.div`
   z-index: 10;
   width: 23rem;
   height: 23rem;
-  top: 14rem;
-  transform: translate(-50%, -50%);
   padding: 1rem 0;
   transition: all 0.2s;
+
+  /* Centralizing the element */
+  /* top: 50%; */
+  /* left: 50%; */
+  top: 14rem;
   right: ${({ index }) => index * 7}rem;
-  /* left: ${({ index }) => index * 5}rem; */
+  transform: translate(-50%, -50%);
+
+  /* left: ${({ index }) => index * 1}rem; */
 
   &:hover {
     z-index: 20;
@@ -250,16 +258,41 @@ const SelectedmenuImageContainer = styled.div`
   @media (max-width: 450px) {
     width: 16rem;
     height: 23rem;
-    left: 20%;
     transform: translate(-50%, -50%);
     margin-right: 0%;
     margin-left: ${({ index }) => index * 3}rem;
   }
 `;
 
+// const SelectedmenuImageContainer = styled.div`
+//   position: absolute;
+//   z-index: 10;
+//   width: 23rem;
+//   height: 23rem;
+//   top: 14rem;
+//   transform: translate(-50%, -50%);
+//   padding: 1rem 0;
+//   transition: all 0.2s;
+//   right: ${({ index }) => index * 7}rem;
+//   /* left: ${({ index }) => index * 5}rem; */
+//   border: 2px solid yellow;
+
+//   &:hover {
+//     z-index: 20;
+//   }
+
+//   @media (max-width: 450px) {
+//     width: 16rem;
+//     height: 23rem;
+//     left: 20%;
+//     transform: translate(-50%, -50%);
+//     margin-right: 0%;
+//     margin-left: ${({ index }) => index * 3}rem;
+//   }
+// `;
 const MenusContainer = styled.div`
   position: relative;
-  height: ${(empty) => (empty ? "37rem" : "23rem")};
+  height: ${({ empty }) => (empty ? "37rem" : "23rem")};
   width: 100%;
   display: flex;
   align-items: center;
@@ -270,6 +303,21 @@ const MenusContainer = styled.div`
     //  transform: scale(0.95) translateY(0);
   }
 `;
+
+// const MenusContainer = styled.div`
+//   position: relative;
+//   height: ${(empty) => (empty ? "37rem" : "23rem")};
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   border: 2px solid red;
+
+//   &:hover ${SelectedmenuImageContainer}:not(:hover) {
+//     z-index: 10;
+//     //  transform: scale(0.95) translateY(0);
+//   }
+// `;
 
 const ButtonContainer = styled.div`
   position: ${({ next }) => (next ? "absolute" : "relative")};
@@ -318,6 +366,11 @@ const CartContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: -5rem;
+
+  @media (max-width: 450px) {
+    margin-top: 0;
+  }
 `;
 
 // function MakeReservation() {
@@ -522,6 +575,7 @@ const CartContainer = styled.div`
 //   handleChange(e); // Formik handler
 // };
 // console.log(menus);
+
 function MakeReservation() {
   const [turn, setTurn] = useState(false);
   const {
@@ -536,12 +590,14 @@ function MakeReservation() {
   const {
     menus,
     selectedMenuHandler,
-    setUserBookedData,
     isAnyItemSelected,
     setremount,
+    setUserBookedData,
     // setUserSelectedItems,
-    // setMenus,
+    setMenus,
   } = useMenusContext();
+  // console.log(isAnyItemSelected);
+
   // const { date, occasion, dinner, time } = state;
 
   //Dynamically update content when state changes
@@ -552,49 +608,110 @@ function MakeReservation() {
         value: state[item.name] || item.placeholder,
       }))
     );
-    setremount((change) => !change);
+    // setremount((change) => !change);
   }, [state, setContent, setremount]);
 
   // // Formik configuration
-  const { errors, handleBlur, handleSubmit, touched, values, isSubmitting } =
-    useFormik({
-      initialValues: state, // Sync with initial context state
-      validationSchema: makeReservationSchemas,
-      onSubmit: (values, { resetForm }) => {
-        try {
-          setUserBookedData((prevData) => [...prevData, values]); // Save booking
-          resetHandler(); // Reset context state
-          resetForm(); // Reset Formik state
-          toast.success("Reservation successfully made!");
-        } catch (error) {
-          setremount((change) => !change);
+  // const { errors, handleBlur, handleSubmit, touched, values, isSubmitting } =
+  //   useFormik({
+  //     initialValues: state, // Sync with initial context state
+  //     validationSchema: makeReservationSchemas,
+  //     onSubmit: (values, { resetForm }) => {
+  //       try {
+  //         setUserBookedData((prevData) => [...prevData, values]); // Save booking
+  //         resetHandler(); // Reset context state
+  //         resetForm(); // Reset Formik state
+  //         menus.forEach((category) => {
+  //           category.list.forEach((item) => {
+  //             item.selected = false; // Unselect each item
+  //           });
+  //         });
+  //         toast.success("Reservation successfully made!");
+  //         setUserSelectedItems([]);
 
-          console.error("Submission Error:", error); // Log error details
-          toast.error("Failed to make reservation. Please try again.");
-        }
-      },
-      //     onSubmit: (values, { resetForm }) => {
-      //       try {
-      //         // Handle successful submission
-      //         setUserBookedData((prevData) => [...prevData, values]);
-      //         resetHandler();
-      //         // resetForm();
-      //         toast.success("Reservation successfully made!");
-      //         //     //     setMenus(menuArr);
-      //       } catch (error) {
-      //         toast.error("Failed to make reservation. Please try again.");
-      //       }
-    });
+  //         setFormSubmitted(false);
+  //         setremount((val) => val + 1);
+  //       } catch (error) {
+  //         // setremount((change) => !change);
+  //         setremount((val) => val - 1);
+  //         setFormSubmitted(true);
+
+  //         //console.error("Submission Error:", error); // Log error details
+  //         toast.error("Failed to make reservation. Please try again.");
+  //       }
+  //     },
+  //     onSubmit: (values, { resetForm }) => {
+  //       try {
+  //         // Handle successful submission
+  //         setUserBookedData((prevData) => [...prevData, values]);
+  //         resetHandler();
+  //         // resetForm();
+  //         toast.success("Reservation successfully made!");
+  //         //     //     setMenus(menuArr);
+  //       } catch (error) {
+  //         toast.error("Failed to make reservation. Please try again.");
+  //       }
+  // });
 
   // Unified state and Formik field update
   // const handleFieldChange = (e) => {
+  // const handleFieldChange = (e) => {
+  //   const { name, value } = e.target;
+  //   dispatch({ type: name, payload: value }); // Update context state
+  //   values[name] = value; // Ensure Formik state is in sync
+  //   setFormSubmitted(false);
+
+  //   // setremount((val) => val + 1);
+  // };
+  // Formik initialization
+
+  // const clearSelectedArray = menus
+  //   .flatMap((category) => category.list)
+  //   .some((item) => item.selected);
+  // console.log(clearSelectedArray);
+  const formik = useFormik({
+    initialValues: state,
+    validationSchema: makeReservationSchemas,
+    validateOnBlur: true,
+    validateOnChange: true,
+    onSubmit: async (values, { setSubmitting }) => {
+      const errors = formik.validateForm(values);
+
+      if (Object.keys(errors).length === 0) {
+        try {
+          console.log("Form submitted successfully:", values);
+          toast.success("Form submitted successfully! 🎉");
+          // setUserSelectedItems([]);
+          setUserBookedData((prevData) => [...prevData, values]);
+          setFormSubmitted(true);
+          resetHandler(); // Clear form
+          setMenus(menuArr);
+          // clearSelectedArray(orderArray);
+        } catch (error) {
+          console.error("Error during form submission:", error);
+          toast.error("Something went wrong. Please try again.");
+        }
+      } else {
+        Object.entries(errors).forEach(([field, message]) =>
+          toast.error(`${field}: ${message}`)
+        );
+        setFormSubmitted(false);
+      }
+
+      setSubmitting(false);
+    },
+  });
+
+  // Destructure required properties
+  const { errors, handleBlur, handleSubmit, touched, values, isSubmitting } =
+    formik;
+
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
-    dispatch({ type: name, payload: value }); // Update context state
-    values[name] = value; // Ensure Formik state is in sync
+    dispatch({ type: name, payload: value });
+    formik.handleChange(e);
     setFormSubmitted(false);
   };
-
   const turnCardHandler = () => {
     setTurn((open) => !open);
   };
@@ -653,7 +770,10 @@ function MakeReservation() {
         </SelectedmenuImageContainer>
       );
     });
-  // console.log(orderArray);
+  // const ind = Number(orderArray.length);
+  // console.log(ind);
+
+  // const menuArray = [1, 2, 3, 4, 5, 6];
 
   const cardLeftCards = content.filter(
     (customSelect) =>
@@ -668,7 +788,7 @@ function MakeReservation() {
   // If there is any error
   // const err = Object.keys(errors).length;
   // console.log("STATE :", JSON.stringify(state, null, 2));
-  console.log("VALUES:", values);
+  // console.log("VALUES:", values);
   // console.log(menus);
   // const valuess = values;
   return (
@@ -869,6 +989,8 @@ function MakeReservation() {
                     </Paragraph>
                   </CartContainer>
                 ) : (
+                  // <BoxesContainer />
+                  // <BoxesContainer menuArray={menuArray} />
                   <div>{orderArray}</div>
                 )}
               </MenusContainer>
@@ -879,9 +1001,11 @@ function MakeReservation() {
                       Confirm Reservation
                     </Button>
                   ) : (
-                    <Button disabled={isSubmitting} type="submit">
-                      <Link to="/orderonline"> Go to Menu </Link>
-                    </Button>
+                    <Link to="/orderonline">
+                      <Button disabled={isSubmitting} type="submit">
+                        Go to Menu
+                      </Button>
+                    </Link>
                   )}
                 </ButtonContainer>
               </BottomBtnsContainer>
@@ -894,7 +1018,10 @@ function MakeReservation() {
 }
 
 export default MakeReservation;
+/*
 
+
+*/
 // INITIAL APPROACH
 // import React, { useReducer, useState } from "react";
 // import styled from "styled-components";

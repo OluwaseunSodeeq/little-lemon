@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import GlobalStyles from "./styles/GlobalStyles";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
@@ -23,6 +23,8 @@ import { Toaster } from "react-hot-toast";
 import { ReservationsContextProvider } from "./Contexts/ReservationsContext/ReservationsContext";
 
 function App() {
+  const [remount, setremount] = useState(0);
+
   return (
     <section>
       <div>
@@ -31,7 +33,10 @@ function App() {
         <AuthContextProvider>
           <ToggleContextProvider>
             <MenusContextProvider>
-              <ReservationsContextProvider>
+              <ReservationsContextProvider
+                remount={remount}
+                setremount={setremount}
+              >
                 <BrowserRouter>
                   {/* <Suspense fallback={<Loader />}> */}
                   {/* <HamburgerBg /> */}

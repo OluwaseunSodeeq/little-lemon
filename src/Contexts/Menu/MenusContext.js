@@ -15,12 +15,14 @@ function MenusContextProvider({ children }) {
   const selectedMenuHandler = (id, generalName) => {
     const updatedMenus = menus.map((category) => {
       const { generalName: menuGeneralName, list } = category;
+
       if (menuGeneralName === generalName) {
         const updatedList = list.map((menu) =>
           menu.id === id ? { ...menu, selected: !menu.selected } : menu
         );
         return { ...menuGeneralName, list: updatedList, generalName };
       }
+
       return category;
     });
 

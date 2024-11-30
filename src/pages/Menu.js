@@ -200,9 +200,9 @@ function Menu() {
             </OtherMenuStyledContainer>
             <ButtonContainer>
               {userHasSelected && (
-                <Button>
-                  <Link to="/reservations">Continue</Link>
-                </Button>
+                <Link to="/reservations">
+                  <Button>Continue</Button>
+                </Link>
               )}
               {/* <Button>Continue</Button> */}
             </ButtonContainer>

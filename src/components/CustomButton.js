@@ -152,7 +152,6 @@ const CustomButton = ({
           name,
           placeholder,
         } = btn;
-        console.log(values[btn.name]);
         // const notActiveColor = value === placeholder;
         return (
           <ButtonContainer key={i}>
