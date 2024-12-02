@@ -31,6 +31,7 @@ const fontSize = {
 
     @media (max-width: 450px) {
       font-size: 3.5rem;
+      white-space: nowrap;
     }
   `,
 };

@@ -234,48 +234,22 @@ const SelectedmenuImageStyled = styled.div`
     }
   }
 `;
-const SelectedmenuImageContainer = styled.div`
-  position: absolute;
-  z-index: 10;
-  width: 23rem;
-  height: 23rem;
-  padding: 1rem 0;
-  transition: all 0.2s;
-
-  /* Centralizing the element */
-  /* top: 50%; */
-  /* left: 50%; */
-  top: 14rem;
-  right: ${({ index }) => index * 7}rem;
-  transform: translate(-50%, -50%);
-
-  /* left: ${({ index }) => index * 1}rem; */
-
-  &:hover {
-    z-index: 20;
-  }
-
-  @media (max-width: 450px) {
-    width: 16rem;
-    height: 23rem;
-    transform: translate(-50%, -50%);
-    margin-right: 0%;
-    margin-left: ${({ index }) => index * 3}rem;
-  }
-`;
-
 // const SelectedmenuImageContainer = styled.div`
 //   position: absolute;
 //   z-index: 10;
 //   width: 23rem;
 //   height: 23rem;
-//   top: 14rem;
-//   transform: translate(-50%, -50%);
 //   padding: 1rem 0;
 //   transition: all 0.2s;
+
+//   /* Centralizing the element */
+//   /* top: 50%; */
+//   /* left: 50%; */
+//   top: 14rem;
 //   right: ${({ index }) => index * 7}rem;
-//   /* left: ${({ index }) => index * 5}rem; */
-//   border: 2px solid yellow;
+//   transform: translate(-50%, -50%);
+
+//   /* left: ${({ index }) => index * 1}rem; */
 
 //   &:hover {
 //     z-index: 20;
@@ -284,12 +258,37 @@ const SelectedmenuImageContainer = styled.div`
 //   @media (max-width: 450px) {
 //     width: 16rem;
 //     height: 23rem;
-//     left: 20%;
 //     transform: translate(-50%, -50%);
 //     margin-right: 0%;
 //     margin-left: ${({ index }) => index * 3}rem;
 //   }
 // `;
+
+const SelectedmenuImageContainer = styled.div`
+  position: absolute;
+  z-index: 10;
+  width: 23rem;
+  height: 23rem;
+  top: 14rem;
+  transform: translate(-50%, -50%);
+  padding: 1rem 0;
+  transition: all 0.2s;
+  right: ${({ index }) => index * 7}rem;
+  /* left: ${({ index }) => index * 5}rem; */
+
+  &:hover {
+    z-index: 20;
+  }
+
+  @media (max-width: 450px) {
+    width: 16rem;
+    height: 23rem;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    margin-right: 0%;
+    margin-left: ${({ index }) => index * 3}rem;
+  }
+`;
 const MenusContainer = styled.div`
   position: relative;
   height: ${({ empty }) => (empty ? "37rem" : "23rem")};
@@ -679,8 +678,7 @@ function MakeReservation() {
 
       if (Object.keys(errors).length === 0) {
         try {
-          console.log("Form submitted successfully:", values);
-          toast.success("Form submitted successfully! 🎉");
+          toast.success("Orders submitted successfully! 🎉");
           // setUserSelectedItems([]);
           setUserBookedData((prevData) => [...prevData, values]);
           setFormSubmitted(true);

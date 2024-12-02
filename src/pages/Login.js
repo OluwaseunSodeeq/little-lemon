@@ -8,12 +8,31 @@ import { Heading } from "../ui/Heading";
 import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 const LoginLayout = styled.main`
-  min-height: 100vh;
+  /* height: 100vh;
   display: grid;
   grid-template-columns: 48rem;
   align-content: center;
   justify-content: center;
   gap: 3.2rem;
+  border: 5px solid red;
+
+  @media (max-width: 450px) {
+    grid-template-columns: 30rem; */
+
+  /* } */
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  gap: 3.2rem;
+  align-content: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  @media (max-width: 450px) {
+    height: 100vh;
+    gap: 2.5rem;
+  }
 `;
 const FormContent = styled.div`
   background-color: var(--deepGreen);

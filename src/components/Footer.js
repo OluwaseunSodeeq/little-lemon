@@ -54,7 +54,7 @@ function Footer() {
         <div>
           <FlexedDiv type="doubleGap">
             <FooterLeftStyled>
-              <img src="icons_assets/logo.svg" alt="FooterLogo" />
+              <img src="icons_assets/Logo.svg" alt="Footer Logo" />
             </FooterLeftStyled>
             <FooterRightStyled>
               {footerContent.map((item, index) => (

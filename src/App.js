@@ -96,7 +96,9 @@ function App() {
 
 export default App;
 // C:\Program Files\Git\bin
+//C:\Program Files\Git\cmd
 // C:\Windows\System32
+
 // import React from "react";
 
 // import GlobalStyles from "./styles/GlobalStyles";
