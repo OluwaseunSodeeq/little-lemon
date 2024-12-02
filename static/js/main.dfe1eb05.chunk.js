@@ -359,7 +359,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   }
 `,R=l.c.div`
   display: inline-block;
-`;var F=function(){return n.a.createElement(R,null,n.a.createElement(d.b,{to:"/home"},n.a.createElement("img",{src:"icons_assets/Logo.svg",alt:"Logo"})))};var H=function(){const e=Object(r.useContext)(b);if(void 0===e)throw new Error("Auth context was used outside open context provider");return e};const L=l.c.nav`
+`;var H=function(){return n.a.createElement(R,null,n.a.createElement(d.b,{to:"/home"},n.a.createElement("img",{src:"icons_assets/Logo.svg",alt:"Logo"})))};var L=function(){const e=Object(r.useContext)(b);if(void 0===e)throw new Error("Auth context was used outside open context provider");return e};const M=l.c.nav`
   color: var(--deepGreen);
   display: block;
   transition: all 2s;
@@ -394,7 +394,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     /* width: 90%; */
     /* background-color: rgba(255, 255, 255, 0.3); */
   }
-`,M=Object(l.c)(d.c)`
+`,F=Object(l.c)(d.c)`
   color: inherit;
   text-decoration: none;
   padding: 0.5rem;
@@ -414,7 +414,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     flex-direction: column;
     gap: 2.5rem;
   }
-`;var q=function(e){let{openHamburger:t,onToggleHamburger:a}=e;const{logoutHandler:r}=H();return n.a.createElement(L,{hamburger:t},n.a.createElement(P,null,n.a.createElement("li",{onClick:a},n.a.createElement(M,{to:"/home"},"Home")),n.a.createElement("li",{onClick:a},n.a.createElement(M,{to:"/about"},"About")),n.a.createElement("li",{onClick:a},n.a.createElement(M,{to:"/reservations"},"Reservations")),n.a.createElement("li",{onClick:a},n.a.createElement(M,{to:"/orderonline"},"Order Online")),n.a.createElement("li",{onClick:()=>{r(),a()}},n.a.createElement(M,{to:"/login"},"Logout"))))};var _=function(){const e=Object(r.useContext)(g);if(void 0===e)throw new Error("Toggle context was used outside open context provider");return e};const U=l.c.div`
+`;var q=function(e){let{openHamburger:t,onToggleHamburger:a}=e;const{logoutHandler:r}=L();return n.a.createElement(M,{hamburger:t},n.a.createElement(P,null,n.a.createElement("li",{onClick:a},n.a.createElement(F,{to:"/home"},"Home")),n.a.createElement("li",{onClick:a},n.a.createElement(F,{to:"/about"},"About")),n.a.createElement("li",{onClick:a},n.a.createElement(F,{to:"/reservations"},"Reservations")),n.a.createElement("li",{onClick:a},n.a.createElement(F,{to:"/orderonline"},"Order Online")),n.a.createElement("li",{onClick:()=>{r(),a()}},n.a.createElement(F,{to:"/login"},"Logout"))))};var _=function(){const e=Object(r.useContext)(g);if(void 0===e)throw new Error("Toggle context was used outside open context provider");return e};const U=l.c.div`
   /* height: 8rem; */
   height: 7rem;
   display: flex;
@@ -437,7 +437,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   @media (max-width: 950px) {
     display: block;
   }
-`;var J=function(){const{open:e,toggleHamburger:t}=_();return n.a.createElement(A,{as:"header"},n.a.createElement(D,null,n.a.createElement(U,null,n.a.createElement(F,null),n.a.createElement(V,{onClick:t},e?n.a.createElement(Y,null,n.a.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:"25",height:"25",fill:"currentColor",class:"bi bi-x",viewBox:"0 0 12 12"},n.a.createElement("path",{d:"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"}))):n.a.createElement(Y,null,n.a.createElement("svg",{width:"25",height:"25",viewBox:"0 0 35 25",fill:"none",xmlns:"http://www.w3.org/2000/svg"},n.a.createElement("path",{fillRule:"evenodd",clipRule:"evenodd",d:"M1.34615 0C0.6027 0 0 0.621833 0 1.38889C0 2.15594 0.6027 2.77778 1.34615 2.77778H33.6538C34.3972 2.77778 35 2.15594 35 1.38889C35 0.621833 34.3972 0 33.6538 0H1.34615ZM0 12.5C0 11.7329 0.6027 11.1111 1.34615 11.1111H33.6538C34.3972 11.1111 35 11.7329 35 12.5C35 13.2671 34.3972 13.8889 33.6538 13.8889H1.34615C0.6027 13.8889 0 13.2671 0 12.5ZM0 23.6111C0 22.8442 0.6027 22.2222 1.34615 22.2222H33.6538C34.3972 22.2222 35 22.8442 35 23.6111C35 24.3781 34.3972 25 33.6538 25H1.34615C0.6027 25 0 24.3781 0 23.6111Z",fill:"currentColor"})))),n.a.createElement(q,{openHamburger:e,onToggleHamburger:t}))))};const Z=l.c.div`
+`;var J=function(){const{open:e,toggleHamburger:t}=_();return n.a.createElement(A,{as:"header"},n.a.createElement(D,null,n.a.createElement(U,null,n.a.createElement(H,null),n.a.createElement(V,{onClick:t},e?n.a.createElement(Y,null,n.a.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:"25",height:"25",fill:"currentColor",class:"bi bi-x",viewBox:"0 0 12 12"},n.a.createElement("path",{d:"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"}))):n.a.createElement(Y,null,n.a.createElement("svg",{width:"25",height:"25",viewBox:"0 0 35 25",fill:"none",xmlns:"http://www.w3.org/2000/svg"},n.a.createElement("path",{fillRule:"evenodd",clipRule:"evenodd",d:"M1.34615 0C0.6027 0 0 0.621833 0 1.38889C0 2.15594 0.6027 2.77778 1.34615 2.77778H33.6538C34.3972 2.77778 35 2.15594 35 1.38889C35 0.621833 34.3972 0 33.6538 0H1.34615ZM0 12.5C0 11.7329 0.6027 11.1111 1.34615 11.1111H33.6538C34.3972 11.1111 35 11.7329 35 12.5C35 13.2671 34.3972 13.8889 33.6538 13.8889H1.34615C0.6027 13.8889 0 13.2671 0 12.5ZM0 23.6111C0 22.8442 0.6027 22.2222 1.34615 22.2222H33.6538C34.3972 22.2222 35 22.8442 35 23.6111C35 24.3781 34.3972 25 33.6538 25H1.34615C0.6027 25 0 24.3781 0 23.6111Z",fill:"currentColor"})))),n.a.createElement(q,{openHamburger:e,onToggleHamburger:t}))))};const Z=l.c.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -550,7 +550,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     /* flex-wrap: wrap; */
     column-gap: 4rem;
   }
-`;var ne=function(){return n.a.createElement(A,{as:"footer"},n.a.createElement(D,null,n.a.createElement("div",null,n.a.createElement(Z,{type:"doubleGap"},n.a.createElement(ae,null,n.a.createElement("img",{src:"icons_assets/logo.svg",alt:"FooterLogo"})),n.a.createElement(re,null,te.map((e,t)=>n.a.createElement(ee,{content:e,key:t})))))))};const ie=l.c.section`
+`;var ne=function(){return n.a.createElement(A,{as:"footer"},n.a.createElement(D,null,n.a.createElement("div",null,n.a.createElement(Z,{type:"doubleGap"},n.a.createElement(ae,null,n.a.createElement("img",{src:"icons_assets/Logo.svg",alt:"Footer Logo"})),n.a.createElement(re,null,te.map((e,t)=>n.a.createElement(ee,{content:e,key:t})))))))};const ie=l.c.section`
   /* position: relative;
   padding: 0;
   display: flex;
@@ -580,6 +580,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
 
     @media (max-width: 450px) {
       font-size: 3.5rem;
+      white-space: nowrap;
     }
   `},de={regular:l.b`
     font-weight: var(--regular);
@@ -666,6 +667,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   border: none;
   cursor: pointer;
   display: inline-block;
+  white-space: nowrap;
 
   &:active,
   &:focus {
@@ -804,10 +806,10 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   }
 `,Ae=[{image:"icons_assets/greek salad.jpg",price:"12.99",name:"Greek Salad",description:"The famous Greek salad of srispy lettuce, peppers,olives and our Chicago style fota cheese, garnished with crunchy garlic and rosemary croutons."},{image:"icons_assets/bruchetta.svg",price:"5.99",name:"Bruchetta",description:"Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil"},{image:"icons_assets/lemon dessert.jpg",price:"8.00",name:"Lemon Dessert",description:"This comes straight from gradma's recipe book, evry last ingrdient has been sourced and is as authentic as can be imagined."}],De=l.c.div`
   margin-top: 2rem;
-`;var Re=function(){return n.a.createElement(A,{as:"section",type:"week"},n.a.createElement(D,null,n.a.createElement(Z,{type:"sbt"},n.a.createElement(ue,{fontSize:"extraLarge",color:"black",fontWeight:"bold"},"This week specials!"),n.a.createElement(fe,null,n.a.createElement(d.b,{to:"/orderonline"},"Online Menu"))),n.a.createElement(De,null,n.a.createElement(Te,null,Ae.map((e,t)=>n.a.createElement(We,{card:e,key:t}))))))};const Fe=l.c.section`
+`;var Re=function(){return n.a.createElement(A,{as:"section",type:"week"},n.a.createElement(D,null,n.a.createElement(Z,{type:"sbt"},n.a.createElement(ue,{fontSize:"extraLarge",color:"black",fontWeight:"bold"},"This week specials!"),n.a.createElement(fe,null,n.a.createElement(d.b,{to:"/orderonline"},"Online Menu"))),n.a.createElement(De,null,n.a.createElement(Te,null,Ae.map((e,t)=>n.a.createElement(We,{card:e,key:t}))))))};const He=l.c.section`
   position: relative;
   padding: 0;
-`;var He=function(){return n.a.createElement(Fe,null,n.a.createElement(ke,null),n.a.createElement(Re,null))};const Le=l.c.div`
+`;var Le=function(){return n.a.createElement(He,null,n.a.createElement(ke,null),n.a.createElement(Re,null))};const Me=l.c.div`
   width: 75%;
   margin: 0 auto;
   height: auto;
@@ -817,7 +819,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     /* flex-direction: column;
     justify-content: center; */
   }
-`,Me=l.c.div`
+`,Fe=l.c.div`
   display: flex;
   gap: 2rem;
   justify-content: space-between;
@@ -868,7 +870,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     padding-bottom: 1rem;
     float: left;
   }
-`;var Ue=function(){return n.a.createElement(Le,null,n.a.createElement(Me,null,n.a.createElement(_e,null,n.a.createElement("img",{src:"icons_assets/Mario&Adrian.png",alt:"CEOS"})),n.a.createElement(qe,null,n.a.createElement(ue,{color:"deepGreen"},"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam esse nihil mollitia, excepturi, qui sed fuga in minus quis obcaecati, illo est laborum iusto et.excepturi, qui sed fuga in minus quis obcaecati, illo est laborum iusto et."))),n.a.createElement(Pe,null,n.a.createElement(ue,{color:"yellow",fontSize:"nameSize"},"Oluwaseun Sodeeq"),n.a.createElement(x,{as:"h5"},"SIGNED!")))};const Ye=l.c.div`
+`;var Ue=function(){return n.a.createElement(Me,null,n.a.createElement(Fe,null,n.a.createElement(_e,null,n.a.createElement("img",{src:"icons_assets/Mario&Adrian.png",alt:"CEOS"})),n.a.createElement(qe,null,n.a.createElement(ue,{color:"deepGreen"},"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam esse nihil mollitia, excepturi, qui sed fuga in minus quis obcaecati, illo est laborum iusto et.excepturi, qui sed fuga in minus quis obcaecati, illo est laborum iusto et."))),n.a.createElement(Pe,null,n.a.createElement(ue,{color:"yellow",fontSize:"nameSize"},"Oluwaseun Sodeeq"),n.a.createElement(x,{as:"h5"},"SIGNED!")))};const Ye=l.c.div`
   position: relative;
   height: 25rem;
   background-image: url("icons_assets/restaurant.jpg");
@@ -1168,14 +1170,14 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   align-items: center;
   flex-direction: column;
   margin-top: 2rem;
-`,Ft=l.c.div`
+`,Ht=l.c.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   row-gap: 2rem;
-`,Ht=l.c.div`
+`,Lt=l.c.div`
   width: 45%;
   color: var(--pureWhite);
   display: flex;
@@ -1186,12 +1188,12 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   border-radius: var(--border-radius-sm);
   border: ${e=>{let{error:t}=e;return t?"2px solid red":""}};
   cursor: pointer;
-`,Lt=l.c.span`
+`,Mt=l.c.span`
   & > * {
     font-size: 3rem;
     color: var(--pureWhite);
   }
-`,Mt=l.c.span`
+`,Ft=l.c.span`
   font-size: 1.4rem;
   font-weight: 600;
 `,Pt=l.c.div`
@@ -1207,7 +1209,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   height: 13rem;
   border-radius: var(--border-radius-md);
   padding: 2rem;
-`;function Ut(e){let{values:t,handleChange:a,errors:r,touched:i,dataArr:o,turnCardHandler:l,formSubmitted:c}=e;const d=o.filter(e=>"firstName"===e.id||"email"===e.id),m=[{icon:n.a.createElement(jt.a,{style:{fontSize:"2.4rem",color:"inherit"}}),text:t.date||"Select Date",id:"date",name:"date"},{icon:n.a.createElement(Ot.a,{style:{fontSize:"2.4rem",color:"inherit"}}),text:t.dinner||"No. of diners",id:"dinner",name:"dinner"},{icon:n.a.createElement(It.a,{style:{fontSize:"2.4rem",color:"inherit"}}),text:t.time||"Select Time",id:"time",name:"time"},{icon:n.a.createElement($t.a,{style:{fontSize:"2.4rem",color:"inherit"}}),text:t.occasion||"Occasion",id:"occasion",name:"occasion"}];return n.a.createElement("div",null,n.a.createElement(Jt,{arr:d,errors:r,touched:i,values:t,handleChange:a,formSubmitted:c}),n.a.createElement(Vt,{makeReservationArr:m,values:t,errors:r,turnCardHandler:l,formSubmitted:c}))}function Yt(e){let{values:t,handleChange:a,errors:r,touched:i,dataArr:o,handleBlur:l,formSubmitted:c}=e;const d=o.filter(e=>"firstName"!==e.id&&"email"!==e.id);return n.a.createElement("div",null,n.a.createElement(Jt,{arr:d,errors:r,touched:i,values:t,handleChange:a,handleBlur:l,formSubmitted:c}),n.a.createElement(qt,null,n.a.createElement(Bt,null,"Special Requests"),n.a.createElement(_t,{id:"textArea",name:"textArea",onChange:a,value:t.textArea,onBlur:l}),n.a.createElement("div",null)))}function Vt(e){let{turnCardHandler:t,makeReservationArr:a,values:r,errors:i,formSubmitted:o}=e;return n.a.createElement(Rt,null,n.a.createElement(Ft,null,a.map(e=>{const{icon:a,text:r,id:l,name:c}=e;return n.a.createElement(Ht,{key:l,error:i[c]&&o,onClick:t},n.a.createElement(Lt,null,a),n.a.createElement(Mt,null,r))})),n.a.createElement(Pt,null,`${r.seating} seating`))}function Jt(e){let{arr:t,errors:a,touched:r,values:i,handleChange:o,formSubmitted:l}=e;return n.a.createElement(Nt,null,t.map((e,t)=>{const{id:c,inputType:d,label:m,itemId:s,selectOptns:u,placeholder:p}=e;return n.a.createElement(Gt,{key:t},n.a.createElement(Bt,{htmlFor:c},n.a.createElement(St.a,{style:{fontSize:"1.2rem",color:"var(--pureWhite)"}}),m),n.a.createElement(Wt,{error:a[c]&&r[c]},s===bt&&n.a.createElement(At,{id:"countryCode",value:i.countryCode,onChange:o},u.map(e=>{const{countryAbbrev:t,country:a,code:r}=e;return n.a.createElement(Dt,{value:r,key:a},t)})),n.a.createElement(Tt,{type:d,itemId:s,id:c,name:c,placeholder:p,value:i[c],onChange:o,space:s===bt})),a[c]&&r[c]&&l&&n.a.createElement(ue,{color:"red",fontSize:"large"},a[c]))}))}const Zt=l.c.div`
+`;function Ut(e){let{values:t,handleChange:a,errors:r,touched:i,dataArr:o,turnCardHandler:l,formSubmitted:c}=e;const d=o.filter(e=>"firstName"===e.id||"email"===e.id),m=[{icon:n.a.createElement(jt.a,{style:{fontSize:"2.4rem",color:"inherit"}}),text:t.date||"Select Date",id:"date",name:"date"},{icon:n.a.createElement(Ot.a,{style:{fontSize:"2.4rem",color:"inherit"}}),text:t.dinner||"No. of diners",id:"dinner",name:"dinner"},{icon:n.a.createElement(It.a,{style:{fontSize:"2.4rem",color:"inherit"}}),text:t.time||"Select Time",id:"time",name:"time"},{icon:n.a.createElement($t.a,{style:{fontSize:"2.4rem",color:"inherit"}}),text:t.occasion||"Occasion",id:"occasion",name:"occasion"}];return n.a.createElement("div",null,n.a.createElement(Jt,{arr:d,errors:r,touched:i,values:t,handleChange:a,formSubmitted:c}),n.a.createElement(Vt,{makeReservationArr:m,values:t,errors:r,turnCardHandler:l,formSubmitted:c}))}function Yt(e){let{values:t,handleChange:a,errors:r,touched:i,dataArr:o,handleBlur:l,formSubmitted:c}=e;const d=o.filter(e=>"firstName"!==e.id&&"email"!==e.id);return n.a.createElement("div",null,n.a.createElement(Jt,{arr:d,errors:r,touched:i,values:t,handleChange:a,handleBlur:l,formSubmitted:c}),n.a.createElement(qt,null,n.a.createElement(Bt,null,"Special Requests"),n.a.createElement(_t,{id:"textArea",name:"textArea",onChange:a,value:t.textArea,onBlur:l}),n.a.createElement("div",null)))}function Vt(e){let{turnCardHandler:t,makeReservationArr:a,values:r,errors:i,formSubmitted:o}=e;return n.a.createElement(Rt,null,n.a.createElement(Ht,null,a.map(e=>{const{icon:a,text:r,id:l,name:c}=e;return n.a.createElement(Lt,{key:l,error:i[c]&&o,onClick:t},n.a.createElement(Mt,null,a),n.a.createElement(Ft,null,r))})),n.a.createElement(Pt,null,`${r.seating} seating`))}function Jt(e){let{arr:t,errors:a,touched:r,values:i,handleChange:o,formSubmitted:l}=e;return n.a.createElement(Nt,null,t.map((e,t)=>{const{id:c,inputType:d,label:m,itemId:s,selectOptns:u,placeholder:p}=e;return n.a.createElement(Gt,{key:t},n.a.createElement(Bt,{htmlFor:c},n.a.createElement(St.a,{style:{fontSize:"1.2rem",color:"var(--pureWhite)"}}),m),n.a.createElement(Wt,{error:a[c]&&r[c]},s===bt&&n.a.createElement(At,{id:"countryCode",value:i.countryCode,onChange:o},u.map(e=>{const{countryAbbrev:t,country:a,code:r}=e;return n.a.createElement(Dt,{value:r,key:a},t)})),n.a.createElement(Tt,{type:d,itemId:s,id:c,name:c,placeholder:p,value:i[c],onChange:o,space:s===bt})),a[c]&&r[c]&&l&&n.a.createElement(ue,{color:"red",fontSize:"large"},a[c]))}))}const Zt=l.c.div`
   position: absolute;
   left: 0;
   top: 0;
@@ -1396,17 +1398,12 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   z-index: 10;
   width: 23rem;
   height: 23rem;
+  top: 14rem;
+  transform: translate(-50%, -50%);
   padding: 1rem 0;
   transition: all 0.2s;
-
-  /* Centralizing the element */
-  /* top: 50%; */
-  /* left: 50%; */
-  top: 14rem;
   right: ${e=>{let{index:t}=e;return 7*t}}rem;
-  transform: translate(-50%, -50%);
-
-  /* left: ${e=>{let{index:t}=e;return 1*t}}rem; */
+  /* left: ${e=>{let{index:t}=e;return 5*t}}rem; */
 
   &:hover {
     z-index: 20;
@@ -1415,6 +1412,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   @media (max-width: 450px) {
     width: 16rem;
     height: 23rem;
+    left: 20%;
     transform: translate(-50%, -50%);
     margin-right: 0%;
     margin-left: ${e=>{let{index:t}=e;return 3*t}}rem;
@@ -1474,7 +1472,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   @media (max-width: 450px) {
     margin-top: 0;
   }
-`;var Ia=function(){const[e,t]=Object(r.useState)(!1),{state:a,dispatch:i,resetHandler:o,setContent:l,content:c,formSubmitted:m,setFormSubmitted:u}=pa(),{menus:p,selectedMenuHandler:g,isAnyItemSelected:h,setremount:b,setUserBookedData:f,setMenus:v}=ct();Object(r.useEffect)(()=>{l(e=>e.map(e=>({...e,value:a[e.name]||e.placeholder})))},[a,l,b]);const w=Object(ot.a)({initialValues:a,validationSchema:mt,validateOnBlur:!0,validateOnChange:!0,onSubmit:async(e,t)=>{let{setSubmitting:a}=t;const r=w.validateForm(e);if(0===Object.keys(r).length)try{console.log("Form submitted successfully:",e),oa.a.success("Form submitted successfully! \ud83c\udf89"),f(t=>[...t,e]),u(!0),o(),v(s)}catch(n){console.error("Error during form submission:",n),oa.a.error("Something went wrong. Please try again.")}else Object.entries(r).forEach(e=>{let[t,a]=e;return oa.a.error(`${t}: ${a}`)}),u(!1);a(!1)}}),{errors:E,handleBlur:y,handleSubmit:k,touched:C,values:z,isSubmitting:S}=w,j=e=>{const{name:t,value:a}=e.target;i({type:t,payload:a}),w.handleChange(e),u(!1)},O=()=>{t(e=>!e)},$=[{label:"First Name",id:"firstName",inputType:"text",placeholder:"Oluwaseun"},{label:"Last Name",id:"lastName",inputType:"text",placeholder:"Sodeeq"},{label:"Email",id:"email",inputType:"email",placeholder:"ademolaoluwaseun90@gmail.com"},{label:"Phone Number",id:"tel",inputType:"tel",placeholder:"8149428278",selectOptns:[{code:"+234",countryAbbrev:"NG",country:"Nigeria"},{code:"+1",countryAbbrev:"US",country:"United States of America"},{code:"+91",countryAbbrev:"IN",country:"India"},{code:"+44",countryAbbrev:"GB",country:"Great Britain"},{code:"+86",countryAbbrev:"CN",country:"China"}]}],I=p.flatMap(e=>{const{generalName:t,list:a}=e;return a.map(e=>({...e,generalName:t}))}).filter(e=>e.selected).map((e,t)=>{const{id:a,generalName:r,image:i,name:o}=e;return n.a.createElement(ya,{index:t,key:a},n.a.createElement(Ea,null,n.a.createElement("img",{src:i,alt:o}),n.a.createElement("span",{onClick:()=>g(a,r)},"X")))}),N=c.filter(e=>"date"===e.name||"occasion"===e.name),G=c.filter(e=>"dinner"===e.name||"time"===e.name);return n.a.createElement(A,{as:"section",type:"makeReservation"},n.a.createElement(A,{as:"div",type:"reservationHeading"},n.a.createElement(D,null,n.a.createElement(za,null,n.a.createElement(x,{as:"h1"},"Reservations")))),n.a.createElement(ha,{onSubmit:e=>{e.preventDefault(),k(e),u(!0),Object.keys(E).length&&Object.keys(E).forEach(e=>{oa.a.error(E[e])})}},n.a.createElement(A,{as:"div",type:"makeReservationTop"},n.a.createElement(D,null,n.a.createElement(n.a.Fragment,null,n.a.createElement(ga,null,n.a.createElement(na,null,n.a.createElement(aa,{errors:E},n.a.createElement(ta,{turn:e},n.a.createElement(Kt,null,n.a.createElement(ja,null,n.a.createElement(ba,null,n.a.createElement(va,{type:"radio",name:"seating",id:"outdoor",value:"outdoor",checked:"outdoor"===z.seating,onChange:j,onBlur:y}),n.a.createElement(fa,{htmlFor:"outdoor"},"Outdoor seating ",n.a.createElement(xa,null)),E.seating&&C.seating&&m&&n.a.createElement(ue,{fontSize:"large",color:"red"},E.seating))),n.a.createElement(ba,null,n.a.createElement(va,{type:"radio",name:"seating",id:"indoor",value:"indoor",checked:"indoor"===z.seating,onChange:j,onBlur:y}),n.a.createElement(fa,{htmlFor:"indoor"},"Indoor seating ",n.a.createElement(xa,null)),E.seating&&C.seating&&m&&n.a.createElement(ue,{fontSize:"large",color:"red"},E.seating)),n.a.createElement(zt,{handleBlur:y,handleChange:j,errors:E,dispatch:i,content:N,formSubmitted:m,values:z})),n.a.createElement(Qt,null,n.a.createElement(Ut,{values:z,handleChange:j,errors:E,touched:C,turn:e,dataArr:$,turnCardHandler:O,formSubmitted:m})))),n.a.createElement(ra,null,n.a.createElement(ta,{turn:e},n.a.createElement(Xt,null,n.a.createElement(Sa,null,n.a.createElement(ba,null,n.a.createElement(va,{type:"radio",name:"seating",id:"Outdoor",value:"Outdoor",checked:"Outdoor"===z.seating,onChange:j,onBlur:y}),n.a.createElement(fa,{htmlFor:"Outdoor"},"Outdoor seating ",n.a.createElement(xa,null)),E.seating&&C.seating&&m&&n.a.createElement(ue,{fontSize:"large",color:"red"},E.seating))),n.a.createElement(zt,{handleBlur:y,handleChange:j,errors:E,dispatch:i,content:G,formSubmitted:m,values:z})),n.a.createElement(ea,null,n.a.createElement(Yt,{values:z,handleChange:j,errors:E,touched:C,turn:e,dataArr:$,handleBlur:y,formSubmitted:m}))))))),n.a.createElement(Ca,{next:"next"},n.a.createElement(fe,{$textColor:"deepGreen",$backgroundColor:"pureWhite",type:"button",onClick:O},"Next >>>")))),n.a.createElement(A,{as:"div",type:"makeReservationBottom"},n.a.createElement(D,null,n.a.createElement(wa,null,I.length>0&&n.a.createElement(ue,{color:"deepGreen",fontFamily:"markazi",fontweight:"deepBold",fontSize:"xxxlarge"},I.length," items"," ",1===I.length?"is":"are"," selected!"),n.a.createElement(ka,{empty:I.length},0===I.length?n.a.createElement($a,null,n.a.createElement(lt.a,{style:{fontSize:"5rem",color:"var(--deepGreen)"}}),n.a.createElement(ue,{color:"deepGreen",fontFamily:"markazi",fontweight:"deepBold",fontSize:"xxxlarge"},"Kindly make an Order!")):n.a.createElement("div",null,I)),n.a.createElement(Oa,null,n.a.createElement(Ca,null,h.length?n.a.createElement(fe,{disabled:S,type:"submit"},"Confirm Reservation"):n.a.createElement(d.b,{to:"/orderonline"},n.a.createElement(fe,{disabled:S,type:"submit"},"Go to Menu")))))))))};const Na=l.c.form`
+`;var Ia=function(){const[e,t]=Object(r.useState)(!1),{state:a,dispatch:i,resetHandler:o,setContent:l,content:c,formSubmitted:m,setFormSubmitted:u}=pa(),{menus:p,selectedMenuHandler:g,isAnyItemSelected:h,setremount:b,setUserBookedData:f,setMenus:v}=ct();Object(r.useEffect)(()=>{l(e=>e.map(e=>({...e,value:a[e.name]||e.placeholder})))},[a,l,b]);const w=Object(ot.a)({initialValues:a,validationSchema:mt,validateOnBlur:!0,validateOnChange:!0,onSubmit:async(e,t)=>{let{setSubmitting:a}=t;const r=w.validateForm(e);if(0===Object.keys(r).length)try{oa.a.success("Orders submitted successfully! \ud83c\udf89"),f(t=>[...t,e]),u(!0),o(),v(s)}catch(n){console.error("Error during form submission:",n),oa.a.error("Something went wrong. Please try again.")}else Object.entries(r).forEach(e=>{let[t,a]=e;return oa.a.error(`${t}: ${a}`)}),u(!1);a(!1)}}),{errors:E,handleBlur:y,handleSubmit:k,touched:C,values:z,isSubmitting:S}=w,j=e=>{const{name:t,value:a}=e.target;i({type:t,payload:a}),w.handleChange(e),u(!1)},O=()=>{t(e=>!e)},$=[{label:"First Name",id:"firstName",inputType:"text",placeholder:"Oluwaseun"},{label:"Last Name",id:"lastName",inputType:"text",placeholder:"Sodeeq"},{label:"Email",id:"email",inputType:"email",placeholder:"ademolaoluwaseun90@gmail.com"},{label:"Phone Number",id:"tel",inputType:"tel",placeholder:"8149428278",selectOptns:[{code:"+234",countryAbbrev:"NG",country:"Nigeria"},{code:"+1",countryAbbrev:"US",country:"United States of America"},{code:"+91",countryAbbrev:"IN",country:"India"},{code:"+44",countryAbbrev:"GB",country:"Great Britain"},{code:"+86",countryAbbrev:"CN",country:"China"}]}],I=p.flatMap(e=>{const{generalName:t,list:a}=e;return a.map(e=>({...e,generalName:t}))}).filter(e=>e.selected).map((e,t)=>{const{id:a,generalName:r,image:i,name:o}=e;return n.a.createElement(ya,{index:t,key:a},n.a.createElement(Ea,null,n.a.createElement("img",{src:i,alt:o}),n.a.createElement("span",{onClick:()=>g(a,r)},"X")))}),N=c.filter(e=>"date"===e.name||"occasion"===e.name),G=c.filter(e=>"dinner"===e.name||"time"===e.name);return n.a.createElement(A,{as:"section",type:"makeReservation"},n.a.createElement(A,{as:"div",type:"reservationHeading"},n.a.createElement(D,null,n.a.createElement(za,null,n.a.createElement(x,{as:"h1"},"Reservations")))),n.a.createElement(ha,{onSubmit:e=>{e.preventDefault(),k(e),u(!0),Object.keys(E).length&&Object.keys(E).forEach(e=>{oa.a.error(E[e])})}},n.a.createElement(A,{as:"div",type:"makeReservationTop"},n.a.createElement(D,null,n.a.createElement(n.a.Fragment,null,n.a.createElement(ga,null,n.a.createElement(na,null,n.a.createElement(aa,{errors:E},n.a.createElement(ta,{turn:e},n.a.createElement(Kt,null,n.a.createElement(ja,null,n.a.createElement(ba,null,n.a.createElement(va,{type:"radio",name:"seating",id:"outdoor",value:"outdoor",checked:"outdoor"===z.seating,onChange:j,onBlur:y}),n.a.createElement(fa,{htmlFor:"outdoor"},"Outdoor seating ",n.a.createElement(xa,null)),E.seating&&C.seating&&m&&n.a.createElement(ue,{fontSize:"large",color:"red"},E.seating))),n.a.createElement(ba,null,n.a.createElement(va,{type:"radio",name:"seating",id:"indoor",value:"indoor",checked:"indoor"===z.seating,onChange:j,onBlur:y}),n.a.createElement(fa,{htmlFor:"indoor"},"Indoor seating ",n.a.createElement(xa,null)),E.seating&&C.seating&&m&&n.a.createElement(ue,{fontSize:"large",color:"red"},E.seating)),n.a.createElement(zt,{handleBlur:y,handleChange:j,errors:E,dispatch:i,content:N,formSubmitted:m,values:z})),n.a.createElement(Qt,null,n.a.createElement(Ut,{values:z,handleChange:j,errors:E,touched:C,turn:e,dataArr:$,turnCardHandler:O,formSubmitted:m})))),n.a.createElement(ra,null,n.a.createElement(ta,{turn:e},n.a.createElement(Xt,null,n.a.createElement(Sa,null,n.a.createElement(ba,null,n.a.createElement(va,{type:"radio",name:"seating",id:"Outdoor",value:"Outdoor",checked:"Outdoor"===z.seating,onChange:j,onBlur:y}),n.a.createElement(fa,{htmlFor:"Outdoor"},"Outdoor seating ",n.a.createElement(xa,null)),E.seating&&C.seating&&m&&n.a.createElement(ue,{fontSize:"large",color:"red"},E.seating))),n.a.createElement(zt,{handleBlur:y,handleChange:j,errors:E,dispatch:i,content:G,formSubmitted:m,values:z})),n.a.createElement(ea,null,n.a.createElement(Yt,{values:z,handleChange:j,errors:E,touched:C,turn:e,dataArr:$,handleBlur:y,formSubmitted:m}))))))),n.a.createElement(Ca,{next:"next"},n.a.createElement(fe,{$textColor:"deepGreen",$backgroundColor:"pureWhite",type:"button",onClick:O},"Next >>>")))),n.a.createElement(A,{as:"div",type:"makeReservationBottom"},n.a.createElement(D,null,n.a.createElement(wa,null,I.length>0&&n.a.createElement(ue,{color:"deepGreen",fontFamily:"markazi",fontweight:"deepBold",fontSize:"xxxlarge"},I.length," items"," ",1===I.length?"is":"are"," selected!"),n.a.createElement(ka,{empty:I.length},0===I.length?n.a.createElement($a,null,n.a.createElement(lt.a,{style:{fontSize:"5rem",color:"var(--deepGreen)"}}),n.a.createElement(ue,{color:"deepGreen",fontFamily:"markazi",fontweight:"deepBold",fontSize:"xxxlarge"},"Kindly make an Order!")):n.a.createElement("div",null,I)),n.a.createElement(Oa,null,n.a.createElement(Ca,null,h.length?n.a.createElement(fe,{disabled:S,type:"submit"},"Confirm Reservation"):n.a.createElement(d.b,{to:"/orderonline"},n.a.createElement(fe,{disabled:S,type:"submit"},"Go to Menu")))))))))};const Na=l.c.form`
   width: 100%;
   display: flex;
   justify-content: center;
@@ -1515,13 +1513,32 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
 `,Ta=l.c.p`
   font-size: 1.6rem;
   color: red;
-`;var Aa=function(e){let{auth:t}=e;const a=Object(m.n)(),{userPassword:i,userName:o,setUserName:l,setUserPassword:c,defaultPassword:d,loginHandler:s}=H(),[u,p]=Object(r.useState)({name:"",password:""});return n.a.createElement(Na,{onSubmit:function(e){e.preventDefault(),o.trim()&&i.trim()&&i===d?(a("/home"),s()):p({name:o.trim()?"":"Please enter your name",password:i!==d?"Incorrect password":""})}},n.a.createElement(Ga,null,n.a.createElement(Ba,{htmlFor:"username"},"Your Name"),n.a.createElement(Wa,{type:"text",id:"username",placeholder:"Your Name",value:o,onChange:e=>l(e.target.value)}),u.name&&n.a.createElement(Ta,null,u.name)),n.a.createElement(Ga,null,n.a.createElement(Ba,{htmlFor:"password"},"Your Password"),n.a.createElement(Wa,{type:"password",id:"password",value:i,onChange:e=>c(e.target.value)}),u.password&&n.a.createElement(Ta,null,u.password)),n.a.createElement(Ga,null,n.a.createElement(fe,{$textColor:"black",$backgroundColor:"yellow",type:"submit"},"Log in")))};const Da=l.c.main`
-  min-height: 100vh;
+`;var Aa=function(e){let{auth:t}=e;const a=Object(m.n)(),{userPassword:i,userName:o,setUserName:l,setUserPassword:c,defaultPassword:d,loginHandler:s}=L(),[u,p]=Object(r.useState)({name:"",password:""});return n.a.createElement(Na,{onSubmit:function(e){e.preventDefault(),o.trim()&&i.trim()&&i===d?(a("/home"),s()):p({name:o.trim()?"":"Please enter your name",password:i!==d?"Incorrect password":""})}},n.a.createElement(Ga,null,n.a.createElement(Ba,{htmlFor:"username"},"Your Name"),n.a.createElement(Wa,{type:"text",id:"username",placeholder:"Your Name",value:o,onChange:e=>l(e.target.value)}),u.name&&n.a.createElement(Ta,null,u.name)),n.a.createElement(Ga,null,n.a.createElement(Ba,{htmlFor:"password"},"Your Password"),n.a.createElement(Wa,{type:"password",id:"password",value:i,onChange:e=>c(e.target.value)}),u.password&&n.a.createElement(Ta,null,u.password)),n.a.createElement(Ga,null,n.a.createElement(fe,{$textColor:"black",$backgroundColor:"yellow",type:"submit"},"Log in")))};const Da=l.c.main`
+  /* height: 100vh;
   display: grid;
   grid-template-columns: 48rem;
   align-content: center;
   justify-content: center;
   gap: 3.2rem;
+  border: 5px solid red;
+
+  @media (max-width: 450px) {
+    grid-template-columns: 30rem; */
+
+  /* } */
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  gap: 3.2rem;
+  align-content: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  @media (max-width: 450px) {
+    height: 100vh;
+    gap: 2.5rem;
+  }
 `,Ra=l.c.div`
   background-color: var(--deepGreen);
   border-radius: var(--border-radius-md);
@@ -1539,7 +1556,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     margin: 0 auto;
     padding: 2rem 0;
   }
-`,Fa=l.c.div`
+`,Ha=l.c.div`
   width: 25rem;
   padding: 0 2rem;
   margin: 0 auto;
@@ -1548,7 +1565,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     /* width: 100%; */
     object-fit: contain;
   }
-`;var Ha=function(){const{auth:e}=H();return n.a.createElement(A,{as:"section",type:"login"},n.a.createElement(D,null,n.a.createElement(Da,null,n.a.createElement(Fa,null,n.a.createElement("img",{src:"icons_assets/Logo.svg",alt:"Logo"})),n.a.createElement(Ra,null,n.a.createElement(x,{as:"h1"},"Log into your account"),n.a.createElement(Aa,{auth:e})))))};const La=l.c.div`
+`;var La=function(){const{auth:e}=L();return n.a.createElement(A,{as:"section",type:"login"},n.a.createElement(D,null,n.a.createElement(Da,null,n.a.createElement(Ha,null,n.a.createElement("img",{src:"icons_assets/Logo.svg",alt:"Logo"})),n.a.createElement(Ra,null,n.a.createElement(x,{as:"h1"},"Log into your account"),n.a.createElement(Aa,{auth:e})))))};const Ma=l.c.div`
   position: relative;
   width: 100%;
   height: auto;
@@ -1556,7 +1573,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   /* padding: 2rem 0 2rem 0; */
   /* border: 5px solid blueviolet; */
   /* border: 2px solid blue; */
-`,Ma=l.c.div`
+`,Fa=l.c.div`
   padding: 5rem 0;
 `,Pa=l.c.div`
   width: 100%;
@@ -1606,5 +1623,5 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   position: relative;
   text-align: center;
   /* border: 5px solid red; */
-`;var Za=function(){const{menus:e,selectedMenuHandler:t}=ct(),a=e.filter(e=>"OTHER FOOD MENU"!==e.generalName).map((e,a)=>{const{list:r,generalName:i}=e;return n.a.createElement(qa,{key:a},n.a.createElement(ue,{fontFamily:" markazi",fontweight:"deepBold",fontSize:"xxxlarge"},i),n.a.createElement(Pa,null,r.map((e,a)=>{const{name:r,price:o,image:l,id:c,selected:d}=e;return n.a.createElement(_a,{selected:d,onClick:()=>{t(c,i)},key:a},n.a.createElement(Ua,null,n.a.createElement("img",{src:l,alt:r})),n.a.createElement(ue,{fontFamily:"karlaText",fontSize:"xlarge"},r),n.a.createElement(ue,{fontFamily:"karlaText",fontweight:"bold",color:"yellow",fontSize:"xxlarge"},"$",o))})))}),r=e.filter(e=>"OTHER FOOD MENU"===e.generalName).map((e,a)=>{const{list:r,generalName:i}=e;return n.a.createElement(Va,{key:a},n.a.createElement(ue,{fontFamily:" markazi",fontweight:"deepBold",fontSize:"xxxlarge"},i),n.a.createElement(Ya,null,r.map((e,a)=>{const{name:r,price:o,image:l,id:c,selected:d}=e;return n.a.createElement(qa,{key:a},n.a.createElement(_a,{onClick:()=>t(c,i),selected:d},n.a.createElement(Ua,null,n.a.createElement("img",{src:l,alt:r})),n.a.createElement(ue,{fontFamily:"karlaText",fontSize:"xlarge"},r),n.a.createElement(ue,{fontFamily:"karlaText",fontweight:"bold",color:"yellow",fontSize:"xxlarge"},"$",o)))})))}),i=e.flatMap(e=>{const{generalName:t,list:a}=e;return a.map(e=>({...e,generalName:t}))}).filter(e=>e.selected),o=i.length>0;return console.log(i.length),n.a.createElement("div",null,n.a.createElement(A,{as:"section",type:"menu"},n.a.createElement(D,null,n.a.createElement(La,null,n.a.createElement(Pa,null,n.a.createElement(Z,{type:"flexMenu"},a)),n.a.createElement(Ma,null,r),n.a.createElement(Ja,null,o&&n.a.createElement(d.b,{to:"/reservations"},n.a.createElement(fe,null,"Continue")))))))};var Ka=function(e){let{children:t}=e;const a=Object(m.n)(),{auth:n}=H();if(Object(r.useEffect)(function(){n||a("/login")},[n,a]),n)return t};var Xa=function(){const[e,t]=Object(r.useState)(0);return n.a.createElement("section",null,n.a.createElement("div",null,n.a.createElement(c,null),n.a.createElement(f,null,n.a.createElement(h,null,n.a.createElement(p,null,n.a.createElement(ua,{remount:e,setremount:t},n.a.createElement(d.a,null,n.a.createElement(m.e,null,n.a.createElement(m.c,{element:n.a.createElement(Ka,null,n.a.createElement(le,null))},n.a.createElement(m.c,{index:!0,element:n.a.createElement(m.a,{replace:!0,to:"/home"})}),n.a.createElement(m.c,{path:"/home",element:n.a.createElement(He,null)}),n.a.createElement(m.c,{path:"/about",element:n.a.createElement(it,null)}),n.a.createElement(m.c,{path:"/reservations",element:n.a.createElement(Ia,null)}),n.a.createElement(m.c,{path:"/orderonline",element:n.a.createElement(Za,null)})),n.a.createElement(m.c,{path:"/login",element:n.a.createElement(Ha,null)}),n.a.createElement(m.c,{path:"*",element:n.a.createElement(y,null)})))))))),n.a.createElement(ia.Toaster,{position:"top center",guttter:12,containerStyles:{margin:"50px"},toastOptions:{success:{duration:3e3},error:{duration:5e3},style:{fontSize:"16px",maxWidth:"500px",padding:"8px 12px",backgroundColor:"#495E57",color:"#ffffff"}}}))};o.a.createRoot(document.getElementById("root")).render(n.a.createElement(n.a.StrictMode,null,n.a.createElement(Xa,null)))}},[[38,1,2]]]);
-//# sourceMappingURL=main.1a76775a.chunk.js.map
+`;var Za=function(){const{menus:e,selectedMenuHandler:t}=ct(),a=e.filter(e=>"OTHER FOOD MENU"!==e.generalName).map((e,a)=>{const{list:r,generalName:i}=e;return n.a.createElement(qa,{key:a},n.a.createElement(ue,{fontFamily:" markazi",fontweight:"deepBold",fontSize:"xxxlarge"},i),n.a.createElement(Pa,null,r.map((e,a)=>{const{name:r,price:o,image:l,id:c,selected:d}=e;return n.a.createElement(_a,{selected:d,onClick:()=>{t(c,i)},key:a},n.a.createElement(Ua,null,n.a.createElement("img",{src:l,alt:r})),n.a.createElement(ue,{fontFamily:"karlaText",fontSize:"xlarge"},r),n.a.createElement(ue,{fontFamily:"karlaText",fontweight:"bold",color:"yellow",fontSize:"xxlarge"},"$",o))})))}),r=e.filter(e=>"OTHER FOOD MENU"===e.generalName).map((e,a)=>{const{list:r,generalName:i}=e;return n.a.createElement(Va,{key:a},n.a.createElement(ue,{fontFamily:" markazi",fontweight:"deepBold",fontSize:"xxxlarge"},i),n.a.createElement(Ya,null,r.map((e,a)=>{const{name:r,price:o,image:l,id:c,selected:d}=e;return n.a.createElement(qa,{key:a},n.a.createElement(_a,{onClick:()=>t(c,i),selected:d},n.a.createElement(Ua,null,n.a.createElement("img",{src:l,alt:r})),n.a.createElement(ue,{fontFamily:"karlaText",fontSize:"xlarge"},r),n.a.createElement(ue,{fontFamily:"karlaText",fontweight:"bold",color:"yellow",fontSize:"xxlarge"},"$",o)))})))}),i=e.flatMap(e=>{const{generalName:t,list:a}=e;return a.map(e=>({...e,generalName:t}))}).filter(e=>e.selected),o=i.length>0;return console.log(i.length),n.a.createElement("div",null,n.a.createElement(A,{as:"section",type:"menu"},n.a.createElement(D,null,n.a.createElement(Ma,null,n.a.createElement(Pa,null,n.a.createElement(Z,{type:"flexMenu"},a)),n.a.createElement(Fa,null,r),n.a.createElement(Ja,null,o&&n.a.createElement(d.b,{to:"/reservations"},n.a.createElement(fe,null,"Continue")))))))};var Ka=function(e){let{children:t}=e;const a=Object(m.n)(),{auth:n}=L();if(Object(r.useEffect)(function(){n||a("/login")},[n,a]),n)return t};var Xa=function(){const[e,t]=Object(r.useState)(0);return n.a.createElement("section",null,n.a.createElement("div",null,n.a.createElement(c,null),n.a.createElement(f,null,n.a.createElement(h,null,n.a.createElement(p,null,n.a.createElement(ua,{remount:e,setremount:t},n.a.createElement(d.a,null,n.a.createElement(m.e,null,n.a.createElement(m.c,{element:n.a.createElement(Ka,null,n.a.createElement(le,null))},n.a.createElement(m.c,{index:!0,element:n.a.createElement(m.a,{replace:!0,to:"/home"})}),n.a.createElement(m.c,{path:"/home",element:n.a.createElement(Le,null)}),n.a.createElement(m.c,{path:"/about",element:n.a.createElement(it,null)}),n.a.createElement(m.c,{path:"/reservations",element:n.a.createElement(Ia,null)}),n.a.createElement(m.c,{path:"/orderonline",element:n.a.createElement(Za,null)})),n.a.createElement(m.c,{path:"/login",element:n.a.createElement(La,null)}),n.a.createElement(m.c,{path:"*",element:n.a.createElement(y,null)})))))))),n.a.createElement(ia.Toaster,{position:"top center",guttter:12,containerStyles:{margin:"50px"},toastOptions:{success:{duration:3e3},error:{duration:5e3},style:{fontSize:"16px",maxWidth:"500px",padding:"8px 12px",backgroundColor:"#495E57",color:"#ffffff"}}}))};o.a.createRoot(document.getElementById("root")).render(n.a.createElement(n.a.StrictMode,null,n.a.createElement(Xa,null)))}},[[38,1,2]]]);
+//# sourceMappingURL=main.dfe1eb05.chunk.js.map
