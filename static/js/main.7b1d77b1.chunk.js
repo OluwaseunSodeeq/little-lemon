@@ -1514,18 +1514,6 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   font-size: 1.6rem;
   color: red;
 `;var Aa=function(e){let{auth:t}=e;const a=Object(m.n)(),{userPassword:i,userName:o,setUserName:l,setUserPassword:c,defaultPassword:d,loginHandler:s}=L(),[u,p]=Object(r.useState)({name:"",password:""});return n.a.createElement(Na,{onSubmit:function(e){e.preventDefault(),o.trim()&&i.trim()&&i===d?(a("/home"),s()):p({name:o.trim()?"":"Please enter your name",password:i!==d?"Incorrect password":""})}},n.a.createElement(Ga,null,n.a.createElement(Ba,{htmlFor:"username"},"Your Name"),n.a.createElement(Wa,{type:"text",id:"username",placeholder:"Your Name",value:o,onChange:e=>l(e.target.value)}),u.name&&n.a.createElement(Ta,null,u.name)),n.a.createElement(Ga,null,n.a.createElement(Ba,{htmlFor:"password"},"Your Password"),n.a.createElement(Wa,{type:"password",id:"password",value:i,onChange:e=>c(e.target.value)}),u.password&&n.a.createElement(Ta,null,u.password)),n.a.createElement(Ga,null,n.a.createElement(fe,{$textColor:"black",$backgroundColor:"yellow",type:"submit"},"Log in")))};const Da=l.c.main`
-  /* height: 100vh;
-  display: grid;
-  grid-template-columns: 48rem;
-  align-content: center;
-  justify-content: center;
-  gap: 3.2rem;
-  border: 5px solid red;
-
-  @media (max-width: 450px) {
-    grid-template-columns: 30rem; */
-
-  /* } */
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
@@ -1558,6 +1546,8 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     padding: 2rem;
   }
 `,Ha=l.c.div`
+  white-space: nowrap;
+`,La=l.c.div`
   width: 25rem;
   padding: 0 2rem;
   margin: 0 auto;
@@ -1566,7 +1556,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     /* width: 100%; */
     object-fit: contain;
   }
-`;var La=function(){const{auth:e}=L();return n.a.createElement(A,{as:"section",type:"login"},n.a.createElement(D,null,n.a.createElement(Da,null,n.a.createElement(Ha,null,n.a.createElement("img",{src:"icons_assets/Logo.svg",alt:"Logo"})),n.a.createElement(Ra,null,n.a.createElement(x,{as:"h1"},"Log into your account"),n.a.createElement(Aa,{auth:e})))))};const Ma=l.c.div`
+`;var Ma=function(){const{auth:e}=L();return n.a.createElement(A,{as:"section",type:"login"},n.a.createElement(D,null,n.a.createElement(Da,null,n.a.createElement(La,null,n.a.createElement("img",{src:"icons_assets/Logo.svg",alt:"Logo"})),n.a.createElement(Ra,null,n.a.createElement(Ha,null,n.a.createElement(x,{as:"h1"},"Log into your account")),n.a.createElement(Aa,{auth:e})))))};const Fa=l.c.div`
   position: relative;
   width: 100%;
   height: auto;
@@ -1574,14 +1564,14 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   /* padding: 2rem 0 2rem 0; */
   /* border: 5px solid blueviolet; */
   /* border: 2px solid blue; */
-`,Fa=l.c.div`
-  padding: 5rem 0;
 `,Pa=l.c.div`
+  padding: 5rem 0;
+`,qa=l.c.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-`,qa=l.c.div`
+`,_a=l.c.div`
   width: 30%;
   @media (max-width: 950px) {
     width: 45%;
@@ -1590,7 +1580,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   @media (max-width: 600px) {
     width: 100%;
   }
-`,_a=l.c.div`
+`,Ua=l.c.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -1602,7 +1592,7 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
-`,Ua=l.c.div`
+`,Ya=l.c.div`
   width: 5rem;
   height: 5rem;
   border-radius: 1998px;
@@ -1612,17 +1602,17 @@ ${e=>"div"===e.as&&"reservationHeading"===e.type&&l.b`
     width: 100%;
     border-radius: 1998px;
   }
-`,Ya=l.c.div`
+`,Va=l.c.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: center;
   row-gap: 1rem;
-`,Va=l.c.div`
-  width: 100%;
 `,Ja=l.c.div`
+  width: 100%;
+`,Za=l.c.div`
   position: relative;
   text-align: center;
   /* border: 5px solid red; */
-`;var Za=function(){const{menus:e,selectedMenuHandler:t}=ct(),a=e.filter(e=>"OTHER FOOD MENU"!==e.generalName).map((e,a)=>{const{list:r,generalName:i}=e;return n.a.createElement(qa,{key:a},n.a.createElement(ue,{fontFamily:" markazi",fontweight:"deepBold",fontSize:"xxxlarge"},i),n.a.createElement(Pa,null,r.map((e,a)=>{const{name:r,price:o,image:l,id:c,selected:d}=e;return n.a.createElement(_a,{selected:d,onClick:()=>{t(c,i)},key:a},n.a.createElement(Ua,null,n.a.createElement("img",{src:l,alt:r})),n.a.createElement(ue,{fontFamily:"karlaText",fontSize:"xlarge"},r),n.a.createElement(ue,{fontFamily:"karlaText",fontweight:"bold",color:"yellow",fontSize:"xxlarge"},"$",o))})))}),r=e.filter(e=>"OTHER FOOD MENU"===e.generalName).map((e,a)=>{const{list:r,generalName:i}=e;return n.a.createElement(Va,{key:a},n.a.createElement(ue,{fontFamily:" markazi",fontweight:"deepBold",fontSize:"xxxlarge"},i),n.a.createElement(Ya,null,r.map((e,a)=>{const{name:r,price:o,image:l,id:c,selected:d}=e;return n.a.createElement(qa,{key:a},n.a.createElement(_a,{onClick:()=>t(c,i),selected:d},n.a.createElement(Ua,null,n.a.createElement("img",{src:l,alt:r})),n.a.createElement(ue,{fontFamily:"karlaText",fontSize:"xlarge"},r),n.a.createElement(ue,{fontFamily:"karlaText",fontweight:"bold",color:"yellow",fontSize:"xxlarge"},"$",o)))})))}),i=e.flatMap(e=>{const{generalName:t,list:a}=e;return a.map(e=>({...e,generalName:t}))}).filter(e=>e.selected),o=i.length>0;return console.log(i.length),n.a.createElement("div",null,n.a.createElement(A,{as:"section",type:"menu"},n.a.createElement(D,null,n.a.createElement(Ma,null,n.a.createElement(Pa,null,n.a.createElement(Z,{type:"flexMenu"},a)),n.a.createElement(Fa,null,r),n.a.createElement(Ja,null,o&&n.a.createElement(d.b,{to:"/reservations"},n.a.createElement(fe,null,"Continue")))))))};var Ka=function(e){let{children:t}=e;const a=Object(m.n)(),{auth:n}=L();if(Object(r.useEffect)(function(){n||a("/login")},[n,a]),n)return t};var Xa=function(){const[e,t]=Object(r.useState)(0);return n.a.createElement("section",null,n.a.createElement("div",null,n.a.createElement(c,null),n.a.createElement(f,null,n.a.createElement(h,null,n.a.createElement(p,null,n.a.createElement(ua,{remount:e,setremount:t},n.a.createElement(d.a,null,n.a.createElement(m.e,null,n.a.createElement(m.c,{element:n.a.createElement(Ka,null,n.a.createElement(le,null))},n.a.createElement(m.c,{index:!0,element:n.a.createElement(m.a,{replace:!0,to:"/home"})}),n.a.createElement(m.c,{path:"/home",element:n.a.createElement(Le,null)}),n.a.createElement(m.c,{path:"/about",element:n.a.createElement(it,null)}),n.a.createElement(m.c,{path:"/reservations",element:n.a.createElement(Ia,null)}),n.a.createElement(m.c,{path:"/orderonline",element:n.a.createElement(Za,null)})),n.a.createElement(m.c,{path:"/login",element:n.a.createElement(La,null)}),n.a.createElement(m.c,{path:"*",element:n.a.createElement(y,null)})))))))),n.a.createElement(ia.Toaster,{position:"top center",guttter:12,containerStyles:{margin:"50px"},toastOptions:{success:{duration:3e3},error:{duration:5e3},style:{fontSize:"16px",maxWidth:"500px",padding:"8px 12px",backgroundColor:"#495E57",color:"#ffffff"}}}))};o.a.createRoot(document.getElementById("root")).render(n.a.createElement(n.a.StrictMode,null,n.a.createElement(Xa,null)))}},[[38,1,2]]]);
-//# sourceMappingURL=main.ba605118.chunk.js.map
+`;var Ka=function(){const{menus:e,selectedMenuHandler:t}=ct(),a=e.filter(e=>"OTHER FOOD MENU"!==e.generalName).map((e,a)=>{const{list:r,generalName:i}=e;return n.a.createElement(_a,{key:a},n.a.createElement(ue,{fontFamily:" markazi",fontweight:"deepBold",fontSize:"xxxlarge"},i),n.a.createElement(qa,null,r.map((e,a)=>{const{name:r,price:o,image:l,id:c,selected:d}=e;return n.a.createElement(Ua,{selected:d,onClick:()=>{t(c,i)},key:a},n.a.createElement(Ya,null,n.a.createElement("img",{src:l,alt:r})),n.a.createElement(ue,{fontFamily:"karlaText",fontSize:"xlarge"},r),n.a.createElement(ue,{fontFamily:"karlaText",fontweight:"bold",color:"yellow",fontSize:"xxlarge"},"$",o))})))}),r=e.filter(e=>"OTHER FOOD MENU"===e.generalName).map((e,a)=>{const{list:r,generalName:i}=e;return n.a.createElement(Ja,{key:a},n.a.createElement(ue,{fontFamily:" markazi",fontweight:"deepBold",fontSize:"xxxlarge"},i),n.a.createElement(Va,null,r.map((e,a)=>{const{name:r,price:o,image:l,id:c,selected:d}=e;return n.a.createElement(_a,{key:a},n.a.createElement(Ua,{onClick:()=>t(c,i),selected:d},n.a.createElement(Ya,null,n.a.createElement("img",{src:l,alt:r})),n.a.createElement(ue,{fontFamily:"karlaText",fontSize:"xlarge"},r),n.a.createElement(ue,{fontFamily:"karlaText",fontweight:"bold",color:"yellow",fontSize:"xxlarge"},"$",o)))})))}),i=e.flatMap(e=>{const{generalName:t,list:a}=e;return a.map(e=>({...e,generalName:t}))}).filter(e=>e.selected),o=i.length>0;return console.log(i.length),n.a.createElement("div",null,n.a.createElement(A,{as:"section",type:"menu"},n.a.createElement(D,null,n.a.createElement(Fa,null,n.a.createElement(qa,null,n.a.createElement(Z,{type:"flexMenu"},a)),n.a.createElement(Pa,null,r),n.a.createElement(Za,null,o&&n.a.createElement(d.b,{to:"/reservations"},n.a.createElement(fe,null,"Continue")))))))};var Xa=function(e){let{children:t}=e;const a=Object(m.n)(),{auth:n}=L();if(Object(r.useEffect)(function(){n||a("/login")},[n,a]),n)return t};var Qa=function(){const[e,t]=Object(r.useState)(0);return n.a.createElement("section",null,n.a.createElement("div",null,n.a.createElement(c,null),n.a.createElement(f,null,n.a.createElement(h,null,n.a.createElement(p,null,n.a.createElement(ua,{remount:e,setremount:t},n.a.createElement(d.a,null,n.a.createElement(m.e,null,n.a.createElement(m.c,{element:n.a.createElement(Xa,null,n.a.createElement(le,null))},n.a.createElement(m.c,{index:!0,element:n.a.createElement(m.a,{replace:!0,to:"/home"})}),n.a.createElement(m.c,{path:"/home",element:n.a.createElement(Le,null)}),n.a.createElement(m.c,{path:"/about",element:n.a.createElement(it,null)}),n.a.createElement(m.c,{path:"/reservations",element:n.a.createElement(Ia,null)}),n.a.createElement(m.c,{path:"/orderonline",element:n.a.createElement(Ka,null)})),n.a.createElement(m.c,{path:"/login",element:n.a.createElement(Ma,null)}),n.a.createElement(m.c,{path:"*",element:n.a.createElement(y,null)})))))))),n.a.createElement(ia.Toaster,{position:"top center",guttter:12,containerStyles:{margin:"50px"},toastOptions:{success:{duration:3e3},error:{duration:5e3},style:{fontSize:"16px",maxWidth:"500px",padding:"8px 12px",backgroundColor:"#495E57",color:"#ffffff"}}}))};o.a.createRoot(document.getElementById("root")).render(n.a.createElement(n.a.StrictMode,null,n.a.createElement(Qa,null)))}},[[38,1,2]]]);
+//# sourceMappingURL=main.7b1d77b1.chunk.js.map

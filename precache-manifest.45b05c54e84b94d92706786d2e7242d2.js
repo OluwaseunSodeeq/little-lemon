@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bc9c0d931175aace31ed2689de9b3019",
+    "revision": "db0c82a134a3224427fce38fbb1465a1",
     "url": "/little-lemon/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/little-lemon/static/js/2.f2a82f44.chunk.js"
   },
   {
-    "revision": "feac09275f3191f5fc22",
-    "url": "/little-lemon/static/js/main.ba605118.chunk.js"
+    "revision": "a8fae1062111f02c6490",
+    "url": "/little-lemon/static/js/main.7b1d77b1.chunk.js"
   },
   {
     "revision": "eab72e9c680083adb518",
