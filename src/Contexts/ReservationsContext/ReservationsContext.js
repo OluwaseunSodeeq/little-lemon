@@ -75,6 +75,22 @@ function ReservationsContextProvider({ children, remount, setremount }) {
   const { date, time, dinner, occasion } = state;
   const initialContent = [
     {
+      currentID: 1,
+      label: "Time",
+      beforeIcon: (
+        <LuAlarmClock style={{ fontSize: "3rem", color: "inherit" }} />
+      ),
+      value: time || "Select Time",
+      afterIcon: (
+        <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
+      ),
+      inputType: "select",
+      options: ["Morning", "Afternoon", "Evening", "Night"],
+      name: "time",
+      id: "time",
+      placeholder: "Select Time",
+    },
+    {
       currentID: 0,
       label: "Date",
       beforeIcon: <CiCalendar style={{ fontSize: "3rem", color: "inherit" }} />,
@@ -114,22 +130,7 @@ function ReservationsContextProvider({ children, remount, setremount }) {
       id: "dinner",
       placeholder: "No. of Diners",
     },
-    {
-      currentID: 1,
-      label: "Time",
-      beforeIcon: (
-        <LuAlarmClock style={{ fontSize: "3rem", color: "inherit" }} />
-      ),
-      value: time || "Select Time",
-      afterIcon: (
-        <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-      ),
-      inputType: "select",
-      options: ["Morning", "Afternoon", "Evening", "Night"],
-      name: "time",
-      id: "time",
-      placeholder: "Select Time",
-    },
+
     {
       currentID: 2,
       label: "Occasion",

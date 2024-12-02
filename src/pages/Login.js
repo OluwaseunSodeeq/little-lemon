@@ -36,7 +36,7 @@ const FormContent = styled.div`
   margin: 0 auto;
 
   @media (max-width: 450px) {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     padding: 2rem;
   }
