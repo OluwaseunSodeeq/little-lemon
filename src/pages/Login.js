@@ -32,7 +32,7 @@ const LoginLayout = styled.main`
   @media (max-width: 450px) {
     height: 100vh;
     gap: 2.5rem;
-    grid-template-columns: 30rem;
+    /* grid-template-columns: 30rem; */
   }
 `;
 const FormContent = styled.div`
@@ -50,7 +50,7 @@ const FormContent = styled.div`
   @media (max-width: 450px) {
     width: 90%;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 2rem;
   }
 `;
 const LogoContainer = styled.div`
