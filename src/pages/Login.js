@@ -32,6 +32,7 @@ const LoginLayout = styled.main`
   @media (max-width: 450px) {
     height: 100vh;
     gap: 2.5rem;
+    grid-template-columns: 30rem;
   }
 `;
 const FormContent = styled.div`
