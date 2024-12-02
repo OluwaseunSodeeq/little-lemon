@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/little-lemon/static/js/main.da9aca4f.chunk.js",
-    "main.js.map": "/little-lemon/static/js/main.da9aca4f.chunk.js.map",
+    "main.js": "/little-lemon/static/js/main.ba605118.chunk.js",
+    "main.js.map": "/little-lemon/static/js/main.ba605118.chunk.js.map",
     "runtime~main.js": "/little-lemon/static/js/runtime~main.4d886ec1.js",
     "runtime~main.js.map": "/little-lemon/static/js/runtime~main.4d886ec1.js.map",
     "static/js/2.f2a82f44.chunk.js": "/little-lemon/static/js/2.f2a82f44.chunk.js",
     "static/js/2.f2a82f44.chunk.js.map": "/little-lemon/static/js/2.f2a82f44.chunk.js.map",
     "index.html": "/little-lemon/index.html",
-    "precache-manifest.e473401306aecf1416689aff9cf4a3b8.js": "/little-lemon/precache-manifest.e473401306aecf1416689aff9cf4a3b8.js",
+    "precache-manifest.d0476a6bfa31c9a0b0458c6ca7221bb0.js": "/little-lemon/precache-manifest.d0476a6bfa31c9a0b0458c6ca7221bb0.js",
     "service-worker.js": "/little-lemon/service-worker.js"
   }
 }
