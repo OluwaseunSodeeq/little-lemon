@@ -8,18 +8,6 @@ import { Heading } from "../ui/Heading";
 import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 const LoginLayout = styled.main`
-  /* height: 100vh;
-  display: grid;
-  grid-template-columns: 48rem;
-  align-content: center;
-  justify-content: center;
-  gap: 3.2rem;
-  border: 5px solid red;
-
-  @media (max-width: 450px) {
-    grid-template-columns: 30rem; */
-
-  /* } */
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
@@ -53,6 +41,10 @@ const FormContent = styled.div`
     padding: 2rem;
   }
 `;
+const HeadingContainer = styled.div`
+  white-space: nowrap;
+`;
+
 const LogoContainer = styled.div`
   width: 25rem;
   padding: 0 2rem;
@@ -75,7 +67,9 @@ function Login() {
             <img src="icons_assets/Logo.svg" alt="Logo" />
           </LogoContainer>
           <FormContent>
-            <Heading as="h1">Log into your account</Heading>
+            <HeadingContainer>
+              <Heading as="h1">Log into your account</Heading>
+            </HeadingContainer>
             <LoginForm auth={auth} />
           </FormContent>
         </LoginLayout>
