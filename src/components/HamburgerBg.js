@@ -1,3 +1,5 @@
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
+
 const HamburgerBgDiv = styled.div`
   display: none;
 
@@ -18,8 +20,11 @@ const HamburgerBgDiv = styled.div`
 `;
 
 function HamburgerBg() {
-  const { open } = useToggleContext();
-  const { auth } = useAuthContext();
+  const { open } = useCombinedContexts();
+  const { auth } = useCombinedContexts();
+
+  // const { open } = useToggleContext();
+  // const { auth } = useAuthContext();
   // const show = auth;
 
   return (

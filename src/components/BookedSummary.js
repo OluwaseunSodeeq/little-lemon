@@ -2,8 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Heading } from "../ui/Heading";
 import { Paragraph } from "../ui/Paragraph";
-import useMenusContext from "../Contexts/Menu/useMenusContext";
 import { Button } from "../ui/Button";
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
+// import useMenusContext from "../Contexts/Menu/useMenusContext";
 
 const BookedSummaryContainer = styled.div`
   /* display: inline-block; */
@@ -56,7 +57,7 @@ const CloseBtn = styled.span`
 `;
 // const MenuDataContainer = styled.div``;
 function BookedSummary({ onClose }) {
-  const { userSelectedItems } = useMenusContext();
+  const { userSelectedItems } = useCombinedContexts();
   const userBookedData = {
     countryCode: "+44",
     date: "2024-07-10",

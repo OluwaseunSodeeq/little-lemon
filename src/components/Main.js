@@ -1,14 +1,7 @@
 import React from "react";
-// import HeroSection from "./HeroSection";
-// import WeekSpecial from "./WeekSpecial";
 
 function Main() {
-  return (
-    <>
-      {/* <HeroSection />
-      <WeekSpecial /> */}
-    </>
-  );
+  return <main></main>;
 }
 
 export default Main;

@@ -22,7 +22,7 @@ const LoaderCircle = styled.div`
   height: 10rem;
   border-radius: 50%;
   background-color: transparent;
-  border: 0.25rem dashed
+  border: 0.5rem dashed
     ${({ theme }) => theme.contentColor || "var(--deepGreen)"};
   animation: ${spin} 5s linear infinite;
 `;

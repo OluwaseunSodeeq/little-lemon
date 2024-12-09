@@ -91,6 +91,7 @@ function Window({ children, name }) {
     document.body
   );
 }
+export default Modal;
 
 Modal.Open = Open;
 Modal.Window = Window;
@@ -110,5 +111,3 @@ Modal.Window = Window;
 //     document.body
 //   );
 // }
-
-export default Modal;

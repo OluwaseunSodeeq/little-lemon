@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 
 import { TiShoppingCart } from "react-icons/ti";
 
-import useMenusContext from "../Contexts/Menu/useMenusContext";
 import { makeReservationSchemas } from "../schemas";
 
 import { Container } from "../ui/Container";
@@ -26,10 +25,8 @@ import {
 import { Heading } from "../ui/Heading";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-// import { menuArr } from "../Contexts/Menu/defaultMenusArray";
-import useReservationsContext from "../Contexts/ReservationsContext/useReservationsContext";
 import { menuArr } from "../Contexts/Menu/defaultMenusArray";
-// import BoxesContainer from "../components/BoxesContainer";
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
 
 // import { ZERO } from "../ui/Constant";
 
@@ -291,7 +288,7 @@ const SelectedmenuImageContainer = styled.div`
 `;
 const MenusContainer = styled.div`
   position: relative;
-  height: ${({ empty }) => (empty ? "37rem" : "23rem")};
+  height: ${({ $empty }) => ($empty ? "37rem" : "23rem")};
   width: 100%;
   display: flex;
   align-items: center;
@@ -303,26 +300,11 @@ const MenusContainer = styled.div`
   }
 `;
 
-// const MenusContainer = styled.div`
-//   position: relative;
-//   height: ${(empty) => (empty ? "37rem" : "23rem")};
-//   width: 100%;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-//   border: 2px solid red;
-
-//   &:hover ${SelectedmenuImageContainer}:not(:hover) {
-//     z-index: 10;
-//     //  transform: scale(0.95) translateY(0);
-//   }
-// `;
-
 const ButtonContainer = styled.div`
-  position: ${({ next }) => (next ? "absolute" : "relative")};
-  bottom: ${({ next }) => (next ? "2rem" : "0")};
-  left: ${({ next }) => (next ? "50%" : "")};
-  transform: ${({ next }) => (next ? "translate(-50%,-50%)" : "")};
+  position: ${({ $next }) => ($next ? "absolute" : "relative")};
+  bottom: ${({ $next }) => ($next ? "2rem" : "0")};
+  left: ${({ $next }) => ($next ? "50%" : "")};
+  transform: ${({ $next }) => ($next ? "translate(-50%,-50%)" : "")};
   z-index: 30;
   display: inline-block;
   text-align: center;
@@ -331,7 +313,7 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-const Headingtext = styled.h1`
+const Headingtext = styled.div`
   padding-top: 2rem;
 `;
 
@@ -372,6 +354,462 @@ const CartContainer = styled.div`
   }
 `;
 
+function MakeReservation() {
+  const [turn, setTurn] = useState(false);
+  const {
+    state,
+    dispatch,
+    resetHandler,
+    setContent,
+    content,
+    formSubmitted,
+    setFormSubmitted,
+
+    menus,
+    selectedMenuHandler,
+    isAnyItemSelected,
+    setremount,
+    setUserBookedData,
+    // setUserSelectedItems,
+    setMenus,
+  } = useCombinedContexts();
+  // const {
+  //   state,
+  //   dispatch,
+  //   resetHandler,
+  //   setContent,
+  //   content,
+  //   formSubmitted,
+  //   setFormSubmitted,
+  // } = useReservationsContext();
+  // const {
+  //   menus,
+  //   selectedMenuHandler,
+  //   isAnyItemSelected,
+  //   setremount,
+  //   setUserBookedData,
+  //   // setUserSelectedItems,
+  //   setMenus,
+  // } = useMenusContext();
+  // console.log(isAnyItemSelected);
+
+  // const { date, occasion, dinner, time } = state;
+
+  //Dynamically update content when state changes
+  useEffect(() => {
+    setContent((prevContent) =>
+      prevContent.map((item) => ({
+        ...item,
+        value: state[item.name] || item.placeholder,
+      }))
+    );
+    // setremount((change) => !change);
+  }, [state, setContent, setremount]);
+
+  const formik = useFormik({
+    initialValues: state,
+    validationSchema: makeReservationSchemas,
+    validateOnBlur: true,
+    validateOnChange: true,
+    onSubmit: async (values, { setSubmitting }) => {
+      const errors = formik.validateForm(values);
+
+      if (Object.keys(errors).length === 0) {
+        try {
+          toast.success("Orders submitted successfully! 🎉");
+          // setUserSelectedItems([]);
+          setUserBookedData((prevData) => [...prevData, values]);
+          setFormSubmitted(true);
+          resetHandler(); // Clear form
+          setMenus(menuArr);
+          // clearSelectedArray(orderArray);
+        } catch (error) {
+          console.error("Error during form submission:", error);
+          toast.error("Something went wrong. Please try again.");
+        }
+      } else {
+        Object.entries(errors).forEach(([field, message]) =>
+          toast.error(`${field}: ${message}`)
+        );
+        setFormSubmitted(false);
+      }
+
+      setSubmitting(false);
+    },
+  });
+
+  // Destructure required properties
+  const { errors, handleBlur, handleSubmit, touched, values, isSubmitting } =
+    formik;
+
+  const handleFieldChange = (e) => {
+    const { name, value } = e.target;
+    dispatch({ type: name, payload: value });
+    formik.handleChange(e);
+    setFormSubmitted(false);
+  };
+  const turnCardHandler = () => {
+    setTurn((open) => !open);
+  };
+  const dataArr = [
+    {
+      label: "First Name",
+      id: "firstName",
+      inputType: "text",
+      placeholder: "Oluwaseun",
+    },
+    {
+      label: "Last Name",
+      id: "lastName",
+      inputType: "text",
+      placeholder: "Sodeeq",
+    },
+    {
+      label: "Email",
+      id: "email",
+      inputType: "email",
+      placeholder: "ademolaoluwaseun90@gmail.com",
+    },
+    {
+      label: "Phone Number",
+      id: "tel",
+      inputType: "tel",
+      placeholder: "8149428278",
+      selectOptns: [
+        { code: "+234", countryAbbrev: "NG", country: "Nigeria" },
+        {
+          code: "+1",
+          countryAbbrev: "US",
+          country: "United States of America",
+        },
+        { code: "+91", countryAbbrev: "IN", country: "India" },
+        { code: "+44", countryAbbrev: "GB", country: "Great Britain" },
+        { code: "+86", countryAbbrev: "CN", country: "China" },
+      ],
+    },
+  ];
+
+  const orderArray = menus
+    .flatMap((category) => {
+      const { generalName, list } = category;
+      return list.map((menu) => ({ ...menu, generalName }));
+    })
+    .filter((item) => item.selected)
+    .map((menu, i) => {
+      const { id, generalName, image, name } = menu;
+      return (
+        <SelectedmenuImageContainer index={i} key={id}>
+          <SelectedmenuImageStyled>
+            <img src={image} alt={name} />
+            <span onClick={() => selectedMenuHandler(id, generalName)}>X</span>
+          </SelectedmenuImageStyled>
+        </SelectedmenuImageContainer>
+      );
+    });
+
+  const cardLeftCards = content.filter(
+    (customSelect) =>
+      customSelect.name === "date" || customSelect.name === "occasion"
+  );
+
+  const cardRightCards = content.filter(
+    (customSelect) =>
+      customSelect.name === "dinner" || customSelect.name === "time"
+  );
+
+  return (
+    <Container as="section" type="makeReservation">
+      <Container as="div" type="reservationHeading">
+        <Content>
+          <Headingtext>
+            <Heading as="h1">Reservations</Heading>
+          </Headingtext>
+        </Content>
+      </Container>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(e);
+          setFormSubmitted(true);
+
+          if (Object.keys(errors).length) {
+            Object.keys(errors).forEach((field) => {
+              toast.error(errors[field]);
+            });
+          }
+        }}
+      >
+        <Container as="div" type="makeReservationTop">
+          <Content>
+            <>
+              <MakeReservationStyled>
+                <FlexedCard>
+                  {/* <CardLeft errors={errors}> */}
+                  <CardLeft>
+                    <ReservationCard $turn={turn}>
+                      <FrontCardLeft>
+                        <ShowtheRightRadio>
+                          <RadioButton>
+                            <RadioInput
+                              type="radio"
+                              name="seating"
+                              id="outdoor"
+                              value="outdoor"
+                              checked={values.seating === "outdoor"}
+                              onChange={handleFieldChange}
+                              onBlur={handleBlur}
+                            />
+                            <Radiolabel htmlFor="outdoor">
+                              Outdoor seating <RadioSpan />
+                            </Radiolabel>
+                            {errors.seating &&
+                              touched.seating &&
+                              formSubmitted && (
+                                <Paragraph fontSize="large" color="red">
+                                  {errors.seating}
+                                </Paragraph>
+                              )}
+                          </RadioButton>
+                        </ShowtheRightRadio>
+
+                        <RadioButton>
+                          <RadioInput
+                            type="radio"
+                            name="seating"
+                            id="indoor"
+                            value="indoor"
+                            checked={values.seating === "indoor"}
+                            onChange={handleFieldChange}
+                            onBlur={handleBlur}
+                          />
+                          <Radiolabel htmlFor="indoor">
+                            Indoor seating <RadioSpan />
+                          </Radiolabel>
+                          {errors.seating &&
+                            touched.seating &&
+                            formSubmitted && (
+                              <Paragraph fontSize="large" color="red">
+                                {errors.seating}
+                              </Paragraph>
+                            )}
+                        </RadioButton>
+                        <CustomButton
+                          handleBlur={handleBlur}
+                          handleChange={handleFieldChange}
+                          errors={errors}
+                          dispatch={dispatch}
+                          content={cardLeftCards}
+                          formSubmitted={formSubmitted}
+                          values={values}
+                        />
+                      </FrontCardLeft>
+                      <BackCardLeft>
+                        <LeftBackCard
+                          values={values}
+                          handleChange={handleFieldChange}
+                          errors={errors}
+                          touched={touched}
+                          $turn={turn}
+                          dataArr={dataArr}
+                          turnCardHandler={turnCardHandler}
+                          formSubmitted={formSubmitted}
+                        />
+                      </BackCardLeft>
+                    </ReservationCard>
+                  </CardLeft>
+
+                  <CardRight>
+                    <ReservationCard $turn={turn}>
+                      <FrontCardRight>
+                        <HidetheRightRadio>
+                          <RadioButton>
+                            <RadioInput
+                              type="radio"
+                              name="seating"
+                              id="Outdoor"
+                              value="Outdoor"
+                              checked={values.seating === "Outdoor"}
+                              onChange={handleFieldChange}
+                              onBlur={handleBlur}
+                            />
+                            <Radiolabel htmlFor="Outdoor">
+                              Outdoor seating <RadioSpan />
+                            </Radiolabel>
+                            {errors.seating &&
+                              touched.seating &&
+                              formSubmitted && (
+                                <Paragraph fontSize="large" color="red">
+                                  {errors.seating}
+                                </Paragraph>
+                              )}
+                          </RadioButton>
+                        </HidetheRightRadio>
+
+                        <CustomButton
+                          handleBlur={handleBlur}
+                          handleChange={handleFieldChange}
+                          errors={errors}
+                          dispatch={dispatch}
+                          content={cardRightCards}
+                          formSubmitted={formSubmitted}
+                          values={values}
+                        />
+                      </FrontCardRight>
+                      <BackCardRight>
+                        <RightBackCard
+                          values={values}
+                          // handleChange={handleChange}
+                          handleChange={handleFieldChange}
+                          errors={errors}
+                          touched={touched}
+                          $turn={turn}
+                          dataArr={dataArr}
+                          handleBlur={handleBlur}
+                          formSubmitted={formSubmitted}
+                        />
+                      </BackCardRight>
+                    </ReservationCard>
+                  </CardRight>
+                </FlexedCard>
+              </MakeReservationStyled>
+            </>
+            <ButtonContainer $next={Boolean(turn)}>
+              <Button
+                $textColor="deepGreen"
+                $backgroundColor="pureWhite"
+                type="button"
+                onClick={turnCardHandler}
+              >
+                Next &gt;&gt;&gt;
+              </Button>
+            </ButtonContainer>
+          </Content>
+        </Container>
+
+        <Container as="div" type="makeReservationBottom">
+          <Content>
+            <BottomContainerStyled>
+              {orderArray.length > 0 && (
+                <Paragraph
+                  color="deepGreen"
+                  fontFamily="markazi"
+                  fontWeight="deepBold"
+                  fontSize="xxxlarge"
+                >
+                  {orderArray.length}{" "}
+                  {orderArray.length === 1 ? "item" : "items"}
+                  {orderArray.length === 1 ? "is" : "are"} selected!
+                </Paragraph>
+              )}
+              <MenusContainer $empty={orderArray.length}>
+                {orderArray.length === 0 ? (
+                  <CartContainer>
+                    <TiShoppingCart
+                      style={{ fontSize: "5rem", color: "var(--deepGreen)" }}
+                    />
+                    <Paragraph
+                      color="deepGreen"
+                      fontFamily="markazi"
+                      fontWeight="deepBold"
+                      fontSize="xxxlarge"
+                    >
+                      Kindly make an Order!
+                    </Paragraph>
+                  </CartContainer>
+                ) : (
+                  // <BoxesContainer />
+                  // <BoxesContainer menuArray={menuArray} />
+                  <div>{orderArray}</div>
+                )}
+              </MenusContainer>
+              <BottomBtnsContainer>
+                <ButtonContainer>
+                  {isAnyItemSelected.length ? (
+                    <Button disabled={isSubmitting} type="submit">
+                      Confirm Reservation
+                    </Button>
+                  ) : (
+                    <Link to="/orderonline">
+                      <Button disabled={isSubmitting} type="submit">
+                        Go to Menu
+                      </Button>
+                    </Link>
+                  )}
+                </ButtonContainer>
+              </BottomBtnsContainer>
+            </BottomContainerStyled>
+          </Content>
+        </Container>
+      </Form>
+    </Container>
+  );
+}
+
+export default MakeReservation;
+
+/*
+
+  // // Formik configuration
+
+  // // Formik configuration
+  // const { errors, handleBlur, handleSubmit, touched, values, isSubmitting } =
+  //   useFormik({
+  //     initialValues: state, // Sync with initial context state
+  //     validationSchema: makeReservationSchemas,
+  //     onSubmit: (values, { resetForm }) => {
+  //       try {
+  //         setUserBookedData((prevData) => [...prevData, values]); // Save booking
+  //         resetHandler(); // Reset context state
+  //         resetForm(); // Reset Formik state
+  //         menus.forEach((category) => {
+  //           category.list.forEach((item) => {
+  //             item.selected = false; // Unselect each item
+  //           });
+  //         });
+  //         toast.success("Reservation successfully made!");
+  //         setUserSelectedItems([]);
+
+  //         setFormSubmitted(false);
+  //         setremount((val) => val + 1);
+  //       } catch (error) {
+  //         // setremount((change) => !change);
+  //         setremount((val) => val - 1);
+  //         setFormSubmitted(true);
+
+  //         //console.error("Submission Error:", error); // Log error details
+  //         toast.error("Failed to make reservation. Please try again.");
+  //       }
+  //     },
+  //     onSubmit: (values, { resetForm }) => {
+  //       try {
+  //         // Handle successful submission
+  //         setUserBookedData((prevData) => [...prevData, values]);
+  //         resetHandler();
+  //         // resetForm();
+  //         toast.success("Reservation successfully made!");
+  //         //     //     setMenus(menuArr);
+  //       } catch (error) {
+  //         toast.error("Failed to make reservation. Please try again.");
+  //       }
+  // });
+
+  // Unified state and Formik field update
+  // const handleFieldChange = (e) => {
+  // const handleFieldChange = (e) => {
+  //   const { name, value } = e.target;
+  //   dispatch({ type: name, payload: value }); // Update context state
+  //   values[name] = value; // Ensure Formik state is in sync
+  //   setFormSubmitted(false);
+
+  //   // setremount((val) => val + 1);
+  // };
+  // Formik initialization
+
+  // const clearSelectedArray = menus
+  //   .flatMap((category) => category.list)
+  //   .some((item) => item.selected);
+  // console.log(clearSelectedArray);
+  
 // function MakeReservation() {
 //   const {
 //     state,
@@ -574,450 +1012,6 @@ const CartContainer = styled.div`
 //   handleChange(e); // Formik handler
 // };
 // console.log(menus);
-
-function MakeReservation() {
-  const [turn, setTurn] = useState(false);
-  const {
-    state,
-    dispatch,
-    resetHandler,
-    setContent,
-    content,
-    formSubmitted,
-    setFormSubmitted,
-  } = useReservationsContext();
-  const {
-    menus,
-    selectedMenuHandler,
-    isAnyItemSelected,
-    setremount,
-    setUserBookedData,
-    // setUserSelectedItems,
-    setMenus,
-  } = useMenusContext();
-  // console.log(isAnyItemSelected);
-
-  // const { date, occasion, dinner, time } = state;
-
-  //Dynamically update content when state changes
-  useEffect(() => {
-    setContent((prevContent) =>
-      prevContent.map((item) => ({
-        ...item,
-        value: state[item.name] || item.placeholder,
-      }))
-    );
-    // setremount((change) => !change);
-  }, [state, setContent, setremount]);
-
-  // // Formik configuration
-  // const { errors, handleBlur, handleSubmit, touched, values, isSubmitting } =
-  //   useFormik({
-  //     initialValues: state, // Sync with initial context state
-  //     validationSchema: makeReservationSchemas,
-  //     onSubmit: (values, { resetForm }) => {
-  //       try {
-  //         setUserBookedData((prevData) => [...prevData, values]); // Save booking
-  //         resetHandler(); // Reset context state
-  //         resetForm(); // Reset Formik state
-  //         menus.forEach((category) => {
-  //           category.list.forEach((item) => {
-  //             item.selected = false; // Unselect each item
-  //           });
-  //         });
-  //         toast.success("Reservation successfully made!");
-  //         setUserSelectedItems([]);
-
-  //         setFormSubmitted(false);
-  //         setremount((val) => val + 1);
-  //       } catch (error) {
-  //         // setremount((change) => !change);
-  //         setremount((val) => val - 1);
-  //         setFormSubmitted(true);
-
-  //         //console.error("Submission Error:", error); // Log error details
-  //         toast.error("Failed to make reservation. Please try again.");
-  //       }
-  //     },
-  //     onSubmit: (values, { resetForm }) => {
-  //       try {
-  //         // Handle successful submission
-  //         setUserBookedData((prevData) => [...prevData, values]);
-  //         resetHandler();
-  //         // resetForm();
-  //         toast.success("Reservation successfully made!");
-  //         //     //     setMenus(menuArr);
-  //       } catch (error) {
-  //         toast.error("Failed to make reservation. Please try again.");
-  //       }
-  // });
-
-  // Unified state and Formik field update
-  // const handleFieldChange = (e) => {
-  // const handleFieldChange = (e) => {
-  //   const { name, value } = e.target;
-  //   dispatch({ type: name, payload: value }); // Update context state
-  //   values[name] = value; // Ensure Formik state is in sync
-  //   setFormSubmitted(false);
-
-  //   // setremount((val) => val + 1);
-  // };
-  // Formik initialization
-
-  // const clearSelectedArray = menus
-  //   .flatMap((category) => category.list)
-  //   .some((item) => item.selected);
-  // console.log(clearSelectedArray);
-  const formik = useFormik({
-    initialValues: state,
-    validationSchema: makeReservationSchemas,
-    validateOnBlur: true,
-    validateOnChange: true,
-    onSubmit: async (values, { setSubmitting }) => {
-      const errors = formik.validateForm(values);
-
-      if (Object.keys(errors).length === 0) {
-        try {
-          toast.success("Orders submitted successfully! 🎉");
-          // setUserSelectedItems([]);
-          setUserBookedData((prevData) => [...prevData, values]);
-          setFormSubmitted(true);
-          resetHandler(); // Clear form
-          setMenus(menuArr);
-          // clearSelectedArray(orderArray);
-        } catch (error) {
-          console.error("Error during form submission:", error);
-          toast.error("Something went wrong. Please try again.");
-        }
-      } else {
-        Object.entries(errors).forEach(([field, message]) =>
-          toast.error(`${field}: ${message}`)
-        );
-        setFormSubmitted(false);
-      }
-
-      setSubmitting(false);
-    },
-  });
-
-  // Destructure required properties
-  const { errors, handleBlur, handleSubmit, touched, values, isSubmitting } =
-    formik;
-
-  const handleFieldChange = (e) => {
-    const { name, value } = e.target;
-    dispatch({ type: name, payload: value });
-    formik.handleChange(e);
-    setFormSubmitted(false);
-  };
-  const turnCardHandler = () => {
-    setTurn((open) => !open);
-  };
-  const dataArr = [
-    {
-      label: "First Name",
-      id: "firstName",
-      inputType: "text",
-      placeholder: "Oluwaseun",
-    },
-    {
-      label: "Last Name",
-      id: "lastName",
-      inputType: "text",
-      placeholder: "Sodeeq",
-    },
-    {
-      label: "Email",
-      id: "email",
-      inputType: "email",
-      placeholder: "ademolaoluwaseun90@gmail.com",
-    },
-    {
-      label: "Phone Number",
-      id: "tel",
-      inputType: "tel",
-      placeholder: "8149428278",
-      selectOptns: [
-        { code: "+234", countryAbbrev: "NG", country: "Nigeria" },
-        {
-          code: "+1",
-          countryAbbrev: "US",
-          country: "United States of America",
-        },
-        { code: "+91", countryAbbrev: "IN", country: "India" },
-        { code: "+44", countryAbbrev: "GB", country: "Great Britain" },
-        { code: "+86", countryAbbrev: "CN", country: "China" },
-      ],
-    },
-  ];
-
-  const orderArray = menus
-    .flatMap((category) => {
-      const { generalName, list } = category;
-      return list.map((menu) => ({ ...menu, generalName }));
-    })
-    .filter((item) => item.selected)
-    .map((menu, i) => {
-      const { id, generalName, image, name } = menu;
-      return (
-        <SelectedmenuImageContainer index={i} key={id}>
-          <SelectedmenuImageStyled>
-            <img src={image} alt={name} />
-            <span onClick={() => selectedMenuHandler(id, generalName)}>X</span>
-          </SelectedmenuImageStyled>
-        </SelectedmenuImageContainer>
-      );
-    });
-  // const ind = Number(orderArray.length);
-  // console.log(ind);
-
-  // const menuArray = [1, 2, 3, 4, 5, 6];
-
-  const cardLeftCards = content.filter(
-    (customSelect) =>
-      customSelect.name === "date" || customSelect.name === "occasion"
-  );
-
-  const cardRightCards = content.filter(
-    (customSelect) =>
-      customSelect.name === "dinner" || customSelect.name === "time"
-  );
-
-  // If there is any error
-  // const err = Object.keys(errors).length;
-  // console.log("STATE :", JSON.stringify(state, null, 2));
-  // console.log("VALUES:", values);
-  // console.log(menus);
-  // const valuess = values;
-  return (
-    <Container as="section" type="makeReservation">
-      <Container as="div" type="reservationHeading">
-        <Content>
-          <Headingtext>
-            <Heading as="h1">Reservations</Heading>
-          </Headingtext>
-        </Content>
-      </Container>
-      <Form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit(e);
-          setFormSubmitted(true);
-
-          if (Object.keys(errors).length) {
-            Object.keys(errors).forEach((field) => {
-              toast.error(errors[field]);
-            });
-          }
-        }}
-      >
-        <Container as="div" type="makeReservationTop">
-          <Content>
-            <>
-              <MakeReservationStyled>
-                <FlexedCard>
-                  <CardLeft errors={errors}>
-                    <ReservationCard turn={turn}>
-                      <FrontCardLeft>
-                        <ShowtheRightRadio>
-                          <RadioButton>
-                            <RadioInput
-                              type="radio"
-                              name="seating"
-                              id="outdoor"
-                              value="outdoor"
-                              checked={values.seating === "outdoor"}
-                              onChange={handleFieldChange}
-                              onBlur={handleBlur}
-                            />
-                            <Radiolabel htmlFor="outdoor">
-                              Outdoor seating <RadioSpan />
-                            </Radiolabel>
-                            {errors.seating &&
-                              touched.seating &&
-                              formSubmitted && (
-                                <Paragraph fontSize="large" color="red">
-                                  {errors.seating}
-                                </Paragraph>
-                              )}
-                          </RadioButton>
-                        </ShowtheRightRadio>
-
-                        <RadioButton>
-                          <RadioInput
-                            type="radio"
-                            name="seating"
-                            id="indoor"
-                            value="indoor"
-                            checked={values.seating === "indoor"}
-                            onChange={handleFieldChange}
-                            onBlur={handleBlur}
-                          />
-                          <Radiolabel htmlFor="indoor">
-                            Indoor seating <RadioSpan />
-                          </Radiolabel>
-                          {errors.seating &&
-                            touched.seating &&
-                            formSubmitted && (
-                              <Paragraph fontSize="large" color="red">
-                                {errors.seating}
-                              </Paragraph>
-                            )}
-                        </RadioButton>
-                        <CustomButton
-                          handleBlur={handleBlur}
-                          handleChange={handleFieldChange}
-                          errors={errors}
-                          dispatch={dispatch}
-                          content={cardLeftCards}
-                          formSubmitted={formSubmitted}
-                          values={values}
-                        />
-                      </FrontCardLeft>
-                      <BackCardLeft>
-                        <LeftBackCard
-                          values={values}
-                          handleChange={handleFieldChange}
-                          errors={errors}
-                          touched={touched}
-                          turn={turn}
-                          dataArr={dataArr}
-                          turnCardHandler={turnCardHandler}
-                          formSubmitted={formSubmitted}
-                        />
-                      </BackCardLeft>
-                    </ReservationCard>
-                  </CardLeft>
-
-                  <CardRight>
-                    <ReservationCard turn={turn}>
-                      <FrontCardRight>
-                        <HidetheRightRadio>
-                          <RadioButton>
-                            <RadioInput
-                              type="radio"
-                              name="seating"
-                              id="Outdoor"
-                              value="Outdoor"
-                              checked={values.seating === "Outdoor"}
-                              onChange={handleFieldChange}
-                              onBlur={handleBlur}
-                            />
-                            <Radiolabel htmlFor="Outdoor">
-                              Outdoor seating <RadioSpan />
-                            </Radiolabel>
-                            {errors.seating &&
-                              touched.seating &&
-                              formSubmitted && (
-                                <Paragraph fontSize="large" color="red">
-                                  {errors.seating}
-                                </Paragraph>
-                              )}
-                          </RadioButton>
-                        </HidetheRightRadio>
-
-                        <CustomButton
-                          handleBlur={handleBlur}
-                          handleChange={handleFieldChange}
-                          errors={errors}
-                          dispatch={dispatch}
-                          content={cardRightCards}
-                          formSubmitted={formSubmitted}
-                          values={values}
-                        />
-                      </FrontCardRight>
-                      <BackCardRight>
-                        <RightBackCard
-                          values={values}
-                          // handleChange={handleChange}
-                          handleChange={handleFieldChange}
-                          errors={errors}
-                          touched={touched}
-                          turn={turn}
-                          dataArr={dataArr}
-                          handleBlur={handleBlur}
-                          formSubmitted={formSubmitted}
-                        />
-                      </BackCardRight>
-                    </ReservationCard>
-                  </CardRight>
-                </FlexedCard>
-              </MakeReservationStyled>
-            </>
-            <ButtonContainer next="next">
-              <Button
-                $textColor="deepGreen"
-                $backgroundColor="pureWhite"
-                type="button"
-                onClick={turnCardHandler}
-              >
-                Next &gt;&gt;&gt;
-              </Button>
-            </ButtonContainer>
-          </Content>
-        </Container>
-
-        <Container as="div" type="makeReservationBottom">
-          <Content>
-            <BottomContainerStyled>
-              {orderArray.length > 0 && (
-                <Paragraph
-                  color="deepGreen"
-                  fontFamily="markazi"
-                  fontweight="deepBold"
-                  fontSize="xxxlarge"
-                >
-                  {orderArray.length} items{" "}
-                  {orderArray.length === 1 ? "is" : "are"} selected!
-                </Paragraph>
-              )}
-              <MenusContainer empty={orderArray.length}>
-                {orderArray.length === 0 ? (
-                  <CartContainer>
-                    <TiShoppingCart
-                      style={{ fontSize: "5rem", color: "var(--deepGreen)" }}
-                    />
-                    <Paragraph
-                      color="deepGreen"
-                      fontFamily="markazi"
-                      fontweight="deepBold"
-                      fontSize="xxxlarge"
-                    >
-                      Kindly make an Order!
-                    </Paragraph>
-                  </CartContainer>
-                ) : (
-                  // <BoxesContainer />
-                  // <BoxesContainer menuArray={menuArray} />
-                  <div>{orderArray}</div>
-                )}
-              </MenusContainer>
-              <BottomBtnsContainer>
-                <ButtonContainer>
-                  {isAnyItemSelected.length ? (
-                    <Button disabled={isSubmitting} type="submit">
-                      Confirm Reservation
-                    </Button>
-                  ) : (
-                    <Link to="/orderonline">
-                      <Button disabled={isSubmitting} type="submit">
-                        Go to Menu
-                      </Button>
-                    </Link>
-                  )}
-                </ButtonContainer>
-              </BottomBtnsContainer>
-            </BottomContainerStyled>
-          </Content>
-        </Container>
-      </Form>
-    </Container>
-  );
-}
-
-export default MakeReservation;
-/*
-
 
 */
 // INITIAL APPROACH

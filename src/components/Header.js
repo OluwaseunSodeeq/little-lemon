@@ -4,7 +4,8 @@ import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import Logo from "./Logo";
 import Nav from "./Nav";
-import useToggleContext from "../Contexts/ToggleContext/useToggleContext";
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
+// import useToggleContext from "../Contexts/ToggleContext/useToggleContext";
 
 const HeaderContent = styled.div`
   /* height: 8rem; */
@@ -36,7 +37,8 @@ const Hamburger = styled.div`
 
 // function Header({ setHamburger, hamburger }) {
 function Header() {
-  const { open, toggleHamburger } = useToggleContext();
+  const { open, toggleHamburger } = useCombinedContexts();
+  // const { open, toggleHamburger } = useToggleContext();
   return (
     <Container as="header">
       <Content>
@@ -50,7 +52,7 @@ function Header() {
                   width="25"
                   height="25"
                   fill="currentColor"
-                  class="bi bi-x"
+                  className="bi bi-x"
                   viewBox="0 0 12 12"
                 >
                   <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />

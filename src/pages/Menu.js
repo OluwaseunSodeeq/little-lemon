@@ -4,10 +4,11 @@ import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import { Paragraph } from "../ui/Paragraph";
 import { FlexedDiv } from "../styles/FlexedDiv";
-import useMenusContext from "../Contexts/Menu/useMenusContext";
 import { Button } from "../ui/Button";
 import { Link } from "react-router-dom";
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
 // import { Button } from "../ui/Button";
+// import useMenusContext from "../Contexts/Menu/useMenusContext";
 
 const MenuStyled = styled.div`
   position: relative;
@@ -82,7 +83,8 @@ const ButtonContainer = styled.div`
 `;
 
 function Menu() {
-  const { menus, selectedMenuHandler } = useMenusContext();
+  const { menus, selectedMenuHandler } = useCombinedContexts();
+  // const { menus, selectedMenuHandler } = useMenusContext();
 
   const resultOfMainMenu = menus
     .filter((menu) => menu.generalName !== "OTHER FOOD MENU")
@@ -92,7 +94,7 @@ function Menu() {
         <EachMenuContainer key={i}>
           <Paragraph
             fontFamily=" markazi"
-            fontweight="deepBold"
+            fontWeight="deepBold"
             fontSize="xxxlarge"
           >
             {generalName}
@@ -117,7 +119,7 @@ function Menu() {
                   </Paragraph>
                   <Paragraph
                     fontFamily="karlaText"
-                    fontweight="bold"
+                    fontWeight="bold"
                     color="yellow"
                     fontSize="xxlarge"
                   >
@@ -139,7 +141,7 @@ function Menu() {
         <OtherMenuContainer key={i}>
           <Paragraph
             fontFamily=" markazi"
-            fontweight="deepBold"
+            fontWeight="deepBold"
             fontSize="xxxlarge"
           >
             {generalName}
@@ -161,7 +163,7 @@ function Menu() {
                     </Paragraph>
                     <Paragraph
                       fontFamily="karlaText"
-                      fontweight="bold"
+                      fontWeight="bold"
                       color="yellow"
                       fontSize="xxlarge"
                     >

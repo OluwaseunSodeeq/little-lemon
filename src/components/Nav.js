@@ -1,26 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
 import { NavLink } from "react-router-dom";
-import useAuthContext from "../Contexts/Authenticate/useAuthContext";
+// import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 const NavStyled = styled.nav`
   color: var(--deepGreen);
   display: block;
   transition: all 2s;
-
-  .active::before {
-    content: "";
-    position: absolute;
-    bottom: -0.3rem;
-    color: var(--pureWhite);
-
-    left: 0;
-    width: 1px;
-    height: 1px;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 1s, width 0.2s cubic-bezier(1, 0, 0, 1) 0.2s;
-  }
 
   @media (max-width: 950px) {
     padding: 3rem 0;
@@ -30,13 +17,10 @@ const NavStyled = styled.nav`
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 90;
-    display: ${({ hamburger }) => (hamburger ? "block" : "none")};
-    transition: top 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    top: ${({ hamburger }) => (hamburger ? "25rem" : "0")};
     background-color: var(--white);
-
-    /* width: 90%; */
-    /* background-color: rgba(255, 255, 255, 0.3); */
+    transition: top 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: ${({ $hamburger }) => ($hamburger ? "block" : "none")};
+    top: ${({ $hamburger }) => ($hamburger ? "25rem" : "0")};
   }
 `;
 
@@ -63,9 +47,8 @@ const LiContainer = styled.ul`
     gap: 2.5rem;
   }
 `;
-
 function Nav({ openHamburger, onToggleHamburger }) {
-  const { logoutHandler } = useAuthContext();
+  const { logoutHandler } = useCombinedContexts();
 
   const mainLogoutHandler = () => {
     logoutHandler();
@@ -73,7 +56,7 @@ function Nav({ openHamburger, onToggleHamburger }) {
   };
 
   return (
-    <NavStyled hamburger={openHamburger}>
+    <NavStyled $hamburger={openHamburger}>
       <LiContainer>
         <li onClick={onToggleHamburger}>
           <StyledNavLink to="/home">Home</StyledNavLink>
@@ -94,8 +77,108 @@ function Nav({ openHamburger, onToggleHamburger }) {
     </NavStyled>
   );
 }
-
 export default Nav;
+
+// import React from "react";
+// import styled from "styled-components";
+// import { NavLink } from "react-router-dom";
+// import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
+// // import useAuthContext from "../Contexts/Authenticate/useAuthContext";
+
+// const NavStyled = styled.nav`
+//   color: var(--deepGreen);
+//   display: block;
+//   transition: all 2s;
+
+//   .active::before {
+//     content: "";
+//     position: absolute;
+//     bottom: -0.3rem;
+//     color: var(--pureWhite);
+
+//     left: 0;
+//     width: 1px;
+//     height: 1px;
+//     transform: scaleX(0);
+//     transform-origin: left;
+//     transition: transform 1s, width 0.2s cubic-bezier(1, 0, 0, 1) 0.2s;
+//   }
+
+//   @media (max-width: 950px) {
+//     padding: 3rem 0;
+//     width: 99%;
+//     position: absolute;
+//     left: 50%;
+//     transform: translate(-50%, -50%);
+//     text-align: center;
+//     z-index: 90;
+//     display: ${({ hamburger }) => (hamburger ? "block" : "none")};
+//     transition: top 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+//     top: ${({ hamburger }) => (hamburger ? "25rem" : "0")};
+//     background-color: var(--white);
+
+//     /* width: 90%; */
+//     /* background-color: rgba(255, 255, 255, 0.3); */
+//   }
+// `;
+
+// const StyledNavLink = styled(NavLink)`
+//   color: inherit;
+//   text-decoration: none;
+//   padding: 0.5rem;
+
+//   &.active {
+//     /* color: var(--yellow); */
+//     color: var(--pureWhite);
+//     background-color: var(--deepGreen);
+//     border-radius: 5px;
+//     font-weight: 500;
+//   }
+// `;
+
+// const LiContainer = styled.ul`
+//   display: flex;
+//   gap: 1rem;
+
+//   @media (max-width: 950px) {
+//     flex-direction: column;
+//     gap: 2.5rem;
+//   }
+// `;
+
+// function Nav({ openHamburger, onToggleHamburger }) {
+//   const { logoutHandler } = useCombinedContexts();
+//   // const { logoutHandler } = useAuthContext();
+
+//   const mainLogoutHandler = () => {
+//     logoutHandler();
+//     onToggleHamburger();
+//   };
+
+//   return (
+//     <NavStyled hamburger={openHamburger}>
+//       <LiContainer>
+//         <li onClick={onToggleHamburger}>
+//           <StyledNavLink to="/home">Home</StyledNavLink>
+//         </li>
+//         <li onClick={onToggleHamburger}>
+//           <StyledNavLink to="/about">About</StyledNavLink>
+//         </li>
+//         <li onClick={onToggleHamburger}>
+//           <StyledNavLink to="/reservations">Reservations</StyledNavLink>
+//         </li>
+//         <li onClick={onToggleHamburger}>
+//           <StyledNavLink to="/orderonline">Order Online</StyledNavLink>
+//         </li>
+//         <li onClick={mainLogoutHandler}>
+//           <StyledNavLink to="/login">Logout</StyledNavLink>
+//         </li>
+//       </LiContainer>
+//     </NavStyled>
+//   );
+// }
+
+// export default Nav;
 
 // import React from "react";
 // import styled from "styled-components";

@@ -5,7 +5,8 @@ import LoginForm from "../components/LoginForm";
 import { Container } from "../ui/Container";
 import { Content } from "../ui/Content";
 import { Heading } from "../ui/Heading";
-import useAuthContext from "../Contexts/Authenticate/useAuthContext";
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
+// import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 const LoginLayout = styled.main`
   min-height: 100vh;
@@ -57,7 +58,8 @@ const LogoContainer = styled.div`
 `;
 
 function Login() {
-  const { auth } = useAuthContext();
+  const { auth } = useCombinedContexts();
+  // const { auth } = useAuthContext();
 
   return (
     <Container as="section" type="login">

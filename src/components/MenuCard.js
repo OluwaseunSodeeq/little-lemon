@@ -68,14 +68,16 @@ const Icon = styled.span`
 const ImageStyled = styled.div`
   ${constHeight}
 `;
+const CardContainer = styled.div`
+  cursor: pointer;
+`;
 function MenuCard({ card }) {
   const { name, description, price, image } = card;
   return (
-    <div>
+    <CardContainer>
       <ImageStyled>
         <img src={image} alt={name} />
       </ImageStyled>
-      {/*  */}
       <CardTexttContainer>
         <FlexedDiv type="grid">
           <NameStyled>{name}</NameStyled>
@@ -100,7 +102,7 @@ function MenuCard({ card }) {
           </Icon>
         </IconContainer>
       </CardTexttContainer>
-    </div>
+    </CardContainer>
   );
 }
 

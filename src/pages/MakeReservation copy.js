@@ -6,8 +6,10 @@ import { Paragraph } from "../ui/Paragraph";
 import CustomButton from "../components/CustomButton";
 import { Button } from "../ui/Button";
 import BackPageOfMakeReservation from "./BackPageOfMakeReservation";
-import useMenusContext from "../Contexts/Menu/useMenusContext";
-import BoxesContainer from "../components/BoxesContainer";
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
+// import useMenusContext from "../Contexts/Menu/useMenusContext";
+// import BoxesContainer from "../components/BoxesContainer";
+
 /*
 NOTE:
 The native <option> tag inside a <select> element has limited styling capabilities and cannot be styled the same way as other HTML elements due to browser restrictions. For example, you cannot control the width of the individual <option> elements or apply complex layouts like flexbox to them. This is why creating a custom dropdown component is often necessary to achieve advanced styling and layout requirements.
@@ -237,7 +239,8 @@ const ButtonContainer = styled.div`
 
 // Main Component
 function MakeReservation() {
-  const { menus, selectedMenuHandler } = useMenusContext();
+  const { menus, selectedMenuHandler } = useCombinedContexts();
+  // const { menus, selectedMenuHandler } = useMenusContext();
 
   const notinIsSelected = 0;
 

@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 import styled from "styled-components";
 import { Button } from "../ui/Button";
-import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
+// import useAuthContext from "../Contexts/Authenticate/useAuthContext";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -68,7 +69,16 @@ function LoginForm({ auth }) {
     setUserPassword: setPassword,
     defaultPassword,
     loginHandler,
-  } = useAuthContext();
+  } = useCombinedContexts();
+
+  // const {
+  //   userPassword: password,
+  //   userName: name,
+  //   setUserName: setName,
+  //   setUserPassword: setPassword,
+  //   defaultPassword,
+  //   loginHandler,
+  // } = useAuthContext();
 
   const [error, setError] = useState({ name: "", password: "" });
 
