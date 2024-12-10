@@ -37,13 +37,15 @@ const Hamburger = styled.div`
 
 // function Header({ setHamburger, hamburger }) {
 function Header() {
-  const { open, toggleHamburger } = useCombinedContexts();
+  const { open, closeHamburger, toggleHamburger } = useCombinedContexts();
   // const { open, toggleHamburger } = useToggleContext();
   return (
     <Container as="header">
       <Content>
         <HeaderContent>
-          <Logo />
+          <div onClick={closeHamburger}>
+            <Logo />
+          </div>
           <Hamburger onClick={toggleHamburger}>
             {open ? (
               <HeaderIcon>

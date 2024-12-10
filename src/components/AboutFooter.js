@@ -80,10 +80,11 @@ function AboutFooter() {
         </TopImageDiv>
         <TopTextDiv>
           <Paragraph color="deepGreen">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam
-            esse nihil mollitia, excepturi, qui sed fuga in minus quis
-            obcaecati, illo est laborum iusto et.excepturi, qui sed fuga in
-            minus quis obcaecati, illo est laborum iusto et.
+            Hi, I'm Oluwaseun Sodeeq, the proud owner of Little Lemon. Growing
+            up, I watched my parents pour their hearts into this restaurant, and
+            I’m committed to continuing their dedication to quality and
+            hospitality. It brings me great joy to welcome you to Little Lemon,
+            where every meal is a celebration of flavor and tradition.
           </Paragraph>
         </TopTextDiv>
       </AboutFooterTop>
@@ -91,7 +92,7 @@ function AboutFooter() {
         <Paragraph color="yellow" fontSize="nameSize">
           Oluwaseun Sodeeq
         </Paragraph>
-        <Heading as="h5">SIGNED!</Heading>
+        <Heading as="h5">CEO</Heading>
       </AboutFooterBottom>
     </AboutFooterContainer>
   );

@@ -60,7 +60,10 @@ const Dash = styled.div`
   height: 0.2rem;
   background-color: var(--yellow);
 `;
-
+const MissionDiv = styled.div`
+  margin-top: 2rem;
+  text-align: center;
+`;
 function AboutMain() {
   return (
     <AboutmainContainer>
@@ -70,11 +73,26 @@ function AboutMain() {
           <Dash /> <Heading as="h5">EST.1998</Heading>
           <Dash />
         </Est>
-        <Heading as="h1">Best Meal in Town</Heading>
+        <Heading as="h1">A Legacy of Great Taste</Heading>
+
         <Paragraph color="deepGreen">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolor, quos
-          porro? Voluptate et facilis eos explicabo illum omnis numquam quaerat
-          facere exercitationem blanditiis? Officiis aut unde voluptatem
+          Welcome to Little Lemon! Our restaurant has been a beloved part of the
+          community for generations, founded by my parents with a vision to
+          bring people together over delicious, home-cooked meals. Today, I
+          proudly continue their legacy, blending traditional recipes with
+          modern flavors. Little Lemon is the perfect spot for creating memories
+          over flavorful, fresh dishes.
+        </Paragraph>
+
+        <MissionDiv></MissionDiv>
+        <Heading as="h6">Mission, Values & Specialties</Heading>
+        <Paragraph color="deepGreen">
+          At Little Lemon, we're dedicated to serving freshly prepared,
+          high-quality meals that cater to all tastes. From local delicacies to
+          international favorites, our menu has something for everyone,
+          including our signature dish: "African Food". We value tradition,
+          hospitality, and the joy of sharing great food. Every bite is crafted
+          with care to bring happiness to your table.
         </Paragraph>
       </AboutmainContent>
       <AboutmainImageDiv>

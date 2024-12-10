@@ -56,7 +56,7 @@ function CustomDropdown({
   value,
   options,
   toggleOptions,
-  showOptions,
+  $showOptions,
   currentID,
   dispatch,
   ind,
@@ -81,9 +81,9 @@ function CustomDropdown({
           value={value}
           onClick={toggleOptions}
           name={typeofDD[currentID]}
-          showOptions={showOptions}
+          $showOptions={$showOptions}
         />
-        {showOptions && (
+        {$showOptions && (
           <SelectDivStyled>
             {options.map((option, index) => (
               <OptionStyled
@@ -165,7 +165,7 @@ export default CustomDropdown;
 //   value,
 //   options,
 //   toggleOptions,
-//   showOptions,
+//   $showOptions,
 //   currentID,
 //   dispatch,
 //   ind,
@@ -185,7 +185,7 @@ export default CustomDropdown;
 //   };
 
 //   useEffect(() => {
-//     if (showOptions && selectRef.current) {
+//     if ($showOptions && selectRef.current) {
 //       const selectRect = selectRef.current.getBoundingClientRect();
 //       setPosition({
 //         top: selectRect.bottom,

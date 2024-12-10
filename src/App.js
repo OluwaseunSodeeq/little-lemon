@@ -65,6 +65,7 @@ function App() {
 }
 
 export default App;
+
 // =======================
 
 // NOte:
@@ -192,7 +193,7 @@ export default App;
 //
 
 // C:\Windows\System32
-
+// C:\Program Files\Git\cmd
 // import React from "react";
 
 // import GlobalStyles from "./styles/GlobalStyles";

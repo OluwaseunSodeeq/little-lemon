@@ -489,23 +489,26 @@ function MakeReservation() {
     },
   ];
 
-  const orderArray = menus
-    .flatMap((category) => {
-      const { generalName, list } = category;
-      return list.map((menu) => ({ ...menu, generalName }));
-    })
-    .filter((item) => item.selected)
-    .map((menu, i) => {
-      const { id, generalName, image, name } = menu;
-      return (
-        <SelectedmenuImageContainer index={i} key={id}>
-          <SelectedmenuImageStyled>
-            <img src={image} alt={name} />
-            <span onClick={() => selectedMenuHandler(id, generalName)}>X</span>
-          </SelectedmenuImageStyled>
-        </SelectedmenuImageContainer>
-      );
-    });
+  const orderArray =
+    menus
+      .flatMap((category) => {
+        const { generalName, list } = category;
+        return list.map((menu) => ({ ...menu, generalName }));
+      })
+      .filter((item) => item.selected)
+      .map((menu, i) => {
+        const { id, generalName, image, name } = menu;
+        return (
+          <SelectedmenuImageContainer index={i} key={id}>
+            <SelectedmenuImageStyled>
+              <img src={image} alt={name} />
+              <span onClick={() => selectedMenuHandler(id, generalName)}>
+                X
+              </span>
+            </SelectedmenuImageStyled>
+          </SelectedmenuImageContainer>
+        );
+      }) || [];
 
   const cardLeftCards = content.filter(
     (customSelect) =>
@@ -544,8 +547,133 @@ function MakeReservation() {
             <>
               <MakeReservationStyled>
                 <FlexedCard>
-                  {/* <CardLeft errors={errors}> */}
                   <CardLeft>
+                    <ReservationCard turn={turn}>
+                      <FrontCardLeft>
+                        <ShowtheRightRadio>
+                          <RadioButton>
+                            <RadioInput
+                              type="radio"
+                              name="seating"
+                              id="outdoor"
+                              value="outdoor"
+                              checked={values.seating === "outdoor"}
+                              onChange={handleFieldChange}
+                              onBlur={handleBlur}
+                            />
+                            <Radiolabel htmlFor="outdoor">
+                              Outdoor seating <RadioSpan />
+                            </Radiolabel>
+                            {errors.seating &&
+                              touched.seating &&
+                              formSubmitted && (
+                                <Paragraph fontSize="large" color="red">
+                                  {errors.seating}
+                                </Paragraph>
+                              )}
+                          </RadioButton>
+                        </ShowtheRightRadio>
+
+                        <RadioButton>
+                          <RadioInput
+                            type="radio"
+                            name="seating"
+                            id="indoor"
+                            value="indoor"
+                            checked={values.seating === "indoor"}
+                            onChange={handleFieldChange}
+                            onBlur={handleBlur}
+                          />
+                          <Radiolabel htmlFor="indoor">
+                            Indoor seating <RadioSpan />
+                          </Radiolabel>
+                          {errors.seating &&
+                            touched.seating &&
+                            formSubmitted && (
+                              <Paragraph fontSize="large" color="red">
+                                {errors.seating}
+                              </Paragraph>
+                            )}
+                        </RadioButton>
+
+                        <CustomButton
+                          handleBlur={handleBlur}
+                          handleChange={handleFieldChange}
+                          errors={errors}
+                          dispatch={dispatch}
+                          content={cardLeftCards}
+                          formSubmitted={formSubmitted}
+                          values={values}
+                        />
+                      </FrontCardLeft>
+                      <BackCardLeft>
+                        <LeftBackCard
+                          values={values}
+                          handleChange={handleFieldChange}
+                          errors={errors}
+                          touched={touched}
+                          turn={turn}
+                          dataArr={dataArr}
+                          turnCardHandler={turnCardHandler}
+                          formSubmitted={formSubmitted}
+                        />
+                      </BackCardLeft>
+                    </ReservationCard>
+                  </CardLeft>
+
+                  <CardRight>
+                    <ReservationCard turn={turn}>
+                      <FrontCardRight>
+                        <HidetheRightRadio>
+                          <RadioButton>
+                            <RadioInput
+                              type="radio"
+                              name="seating"
+                              id="Outdoor"
+                              value="Outdoor"
+                              checked={values.seating === "Outdoor"}
+                              onChange={handleFieldChange}
+                              onBlur={handleBlur}
+                            />
+                            <Radiolabel htmlFor="Outdoor">
+                              Outdoor seating <RadioSpan />
+                            </Radiolabel>
+                            {errors.seating &&
+                              touched.seating &&
+                              formSubmitted && (
+                                <Paragraph fontSize="large" color="red">
+                                  {errors.seating}
+                                </Paragraph>
+                              )}
+                          </RadioButton>
+                        </HidetheRightRadio>
+
+                        <CustomButton
+                          handleBlur={handleBlur}
+                          handleChange={handleFieldChange}
+                          errors={errors}
+                          dispatch={dispatch}
+                          content={cardRightCards}
+                          formSubmitted={formSubmitted}
+                          values={values}
+                        />
+                      </FrontCardRight>
+                      <BackCardRight>
+                        <RightBackCard
+                          values={values}
+                          handleChange={handleFieldChange}
+                          errors={errors}
+                          touched={touched}
+                          turn={turn}
+                          dataArr={dataArr}
+                          handleBlur={handleBlur}
+                          formSubmitted={formSubmitted}
+                        />
+                      </BackCardRight>
+                    </ReservationCard>
+                  </CardRight>
+                  {/* <CardLeft errors={errors}> */}
+                  {/* <CardLeft>
                     <ReservationCard $turn={turn}>
                       <FrontCardLeft>
                         <ShowtheRightRadio>
@@ -669,7 +797,7 @@ function MakeReservation() {
                         />
                       </BackCardRight>
                     </ReservationCard>
-                  </CardRight>
+                  </CardRight> */}
                 </FlexedCard>
               </MakeReservationStyled>
             </>

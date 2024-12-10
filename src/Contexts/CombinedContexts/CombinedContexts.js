@@ -68,6 +68,7 @@ function CombinedContextsProvider({ children, remount, setremount }) {
 
   // Toggle Handler
   const toggleHamburger = () => setOpen((open) => !open);
+  const closeHamburger = () => setOpen(false);
 
   // ====================
 
@@ -188,20 +189,6 @@ function CombinedContextsProvider({ children, remount, setremount }) {
     },
 
     {
-      currentID: 0,
-      label: "Date",
-      beforeIcon: <CiCalendar style={{ fontSize: "3rem", color: "inherit" }} />,
-      value: date || "Select Date",
-      afterIcon: (
-        <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
-      ),
-      inputType: "input",
-      name: "date",
-      id: "date",
-      placeholder: "Select Date",
-    },
-
-    {
       currentID: 2,
       label: "Occasion",
       beforeIcon: (
@@ -216,6 +203,19 @@ function CombinedContextsProvider({ children, remount, setremount }) {
       name: "occasion",
       id: "occasion",
       placeholder: "Occasion",
+    },
+    {
+      currentID: 0,
+      label: "Date",
+      beforeIcon: <CiCalendar style={{ fontSize: "3rem", color: "inherit" }} />,
+      value: date || "Select Date",
+      afterIcon: (
+        <RiArrowDropDownLine style={{ fontSize: "3.4rem", color: "inherit" }} />
+      ),
+      inputType: "input",
+      name: "date",
+      id: "date",
+      placeholder: "Select Date",
     },
   ];
   const [content, setContent] = useState(initialContent);
@@ -244,6 +244,7 @@ function CombinedContextsProvider({ children, remount, setremount }) {
         // ToggleHamburger
         open,
         toggleHamburger,
+        closeHamburger,
         // Reservations
         dispatch,
         state,

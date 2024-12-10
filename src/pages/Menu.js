@@ -187,7 +187,7 @@ function Menu() {
 
   const userHasSelected = orderArray.length > 0;
 
-  console.log(orderArray.length);
+  // console.log(orderArray.length);
 
   return (
     <div>

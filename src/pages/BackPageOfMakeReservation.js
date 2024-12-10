@@ -38,7 +38,9 @@ const InputWrapper = styled.div`
   border-radius: var(--border-radius-md);
   border: ${({ error }) => (error ? "2px solid red" : "")};
 `;
-const Input = styled.input`
+const Input = styled.input.withConfig({
+  shouldForwardProp: (prop) => prop !== "space",
+})`
   height: 100%;
   position: relative;
   padding: ${({ space }) => (space ? "0.5rem 2rem;" : "0.5rem 1rem;")};
@@ -47,7 +49,6 @@ const Input = styled.input`
   outline: var(--deepGreen);
   font-weight: var(--bold);
   color: var(--deepGreen);
-  /*  */
   width: ${({ itemId }) => (itemId === LASTINPUTID ? "80%" : "100%")};
   margin-left: ${({ itemId }) => (itemId === LASTINPUTID ? "20%" : "")};
   &:focus {
@@ -60,8 +61,55 @@ const Input = styled.input`
     font-size: 1.6rem;
   }
 `;
+// const Input = styled.input.withConfig({
+//   shouldForwardProp: (prop) => prop !== "space",
+// })`
+//   height: 100%;
+//   position: relative;
+//   padding: ${({ space }) => (space ? "0.5rem 2rem;" : "0.5rem 1rem;")};
+//   border-radius: var(--border-radius-md);
+//   border: none;
+//   outline: var(--deepGreen);
+//   font-weight: var(--bold);
+//   color: var(--deepGreen);
+//   width: ${({ itemId }) => (itemId === LASTINPUTID ? "80%" : "100%")};
+//   margin-left: ${({ itemId }) => (itemId === LASTINPUTID ? "20%" : "")};
+//   &:focus {
+//     height: 100%;
+//     padding: 0 2.5rem;
+//   }
+//   &::placeholder {
+//     color: var(--deepGreen);
+//     font-style: italic;
+//     font-size: 1.6rem;
+//   }
+// `;
+
+// const Input = styled.input`
+//   height: 100%;
+//   position: relative;
+//   padding: ${({ space }) => (space ? "0.5rem 2rem;" : "0.5rem 1rem;")};
+//   border-radius: var(--border-radius-md);
+//   border: none;
+//   outline: var(--deepGreen);
+//   font-weight: var(--bold);
+//   color: var(--deepGreen);
+//   /*  */
+//   width: ${({ itemId }) => (itemId === LASTINPUTID ? "80%" : "100%")};
+//   margin-left: ${({ itemId }) => (itemId === LASTINPUTID ? "20%" : "")};
+//   &:focus {
+//     height: 100%;
+//     padding: 0 2.5rem;
+//   }
+//   &::placeholder {
+//     color: var(--deepGreen);
+//     font-style: italic;
+//     font-size: 1.6rem;
+//   }
+// `;
 
 // Select
+
 const SelectStyled = styled.select`
   font-family: var(--karla);
   color: var(--deepGreen);

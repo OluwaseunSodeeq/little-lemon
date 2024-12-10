@@ -87,7 +87,10 @@ const color = {
   `,
 };
 
-export const Paragraph = styled.p`
+export const Paragraph = styled.p.withConfig({
+  shouldForwardProp: (prop) =>
+    !["fontSize", "fontWeight", "color", "fontFamily"].includes(prop),
+})`
   ${(props) => fontSize[props.fontSize]}
   ${(props) => fontWeight[props.fontWeight]}
   ${(props) => color[props.color]}

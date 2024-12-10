@@ -126,11 +126,6 @@ const CustomButton = ({
     });
     handleChange(e);
     dispatch({ type: "date", payload: formattedDate });
-
-    // if (resetBtns) {
-    //   dispatch({ type: "date", payload: "Select Time" });
-    //   setResetBtns(false);
-    // }
   };
 
   const toggleOptions = (id) => {
@@ -152,7 +147,6 @@ const CustomButton = ({
           name,
           placeholder,
         } = btn;
-        // const notActiveColor = value === placeholder;
         return (
           <ButtonContainer key={i}>
             <ButtonLabel>{label}</ButtonLabel>
@@ -177,7 +171,7 @@ const CustomButton = ({
                   options={options}
                   value={values[btn.name]}
                   currentID={currentID}
-                  showOptions={showOptions && currentOption === currentID}
+                  $showOptions={showOptions && currentOption === currentID}
                   toggleOptions={() => toggleOptions(currentID)}
                   dispatch={dispatch}
                   handleChange={handleChange}
