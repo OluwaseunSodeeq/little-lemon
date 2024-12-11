@@ -10,6 +10,7 @@ const StyledPageNotFound = styled.main`
   align-items: center;
   justify-content: center;
   padding: 4.8rem;
+  color: var(--deepGreen);
 `;
 
 const Box = styled.div`
