@@ -48,6 +48,7 @@
   align-items: center;
   justify-content: center;
   padding: 4.8rem;
+  color: var(--deepGreen);
 `,s=i.c.div`
   /* box */
   background-color: var(--pureWhite);
@@ -62,4 +63,4 @@
     margin-bottom: 3.2rem;
   }
 `;r.default=function(){const e=function(){const e=Object(n.n)();return()=>e(-1)}();return o.a.createElement(c,null,o.a.createElement(s,null,o.a.createElement(l.a,{as:"h1"},o.a.createElement("span",{role:"img","aria-label":"description of emoji"},"\ud83d\ude22")),o.a.createElement("button",{onClick:e,size:"large"},"\u2190 Go back")))}}}]);
-//# sourceMappingURL=11.611c5b07.chunk.js.map
+//# sourceMappingURL=11.f8a044f8.chunk.js.map

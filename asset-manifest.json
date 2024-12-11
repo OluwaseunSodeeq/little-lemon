@@ -2,8 +2,8 @@
   "files": {
     "main.js": "/little-lemon/static/js/main.c1d10a98.chunk.js",
     "main.js.map": "/little-lemon/static/js/main.c1d10a98.chunk.js.map",
-    "runtime~main.js": "/little-lemon/static/js/runtime~main.75c1b5e5.js",
-    "runtime~main.js.map": "/little-lemon/static/js/runtime~main.75c1b5e5.js.map",
+    "runtime~main.js": "/little-lemon/static/js/runtime~main.4818c962.js",
+    "runtime~main.js.map": "/little-lemon/static/js/runtime~main.4818c962.js.map",
     "static/js/2.1d174f50.chunk.js": "/little-lemon/static/js/2.1d174f50.chunk.js",
     "static/js/2.1d174f50.chunk.js.map": "/little-lemon/static/js/2.1d174f50.chunk.js.map",
     "static/js/3.e443ab1e.chunk.js": "/little-lemon/static/js/3.e443ab1e.chunk.js",
@@ -22,12 +22,12 @@
     "static/js/9.0c9db7a4.chunk.js.map": "/little-lemon/static/js/9.0c9db7a4.chunk.js.map",
     "static/js/10.13e21445.chunk.js": "/little-lemon/static/js/10.13e21445.chunk.js",
     "static/js/10.13e21445.chunk.js.map": "/little-lemon/static/js/10.13e21445.chunk.js.map",
-    "static/js/11.611c5b07.chunk.js": "/little-lemon/static/js/11.611c5b07.chunk.js",
-    "static/js/11.611c5b07.chunk.js.map": "/little-lemon/static/js/11.611c5b07.chunk.js.map",
+    "static/js/11.f8a044f8.chunk.js": "/little-lemon/static/js/11.f8a044f8.chunk.js",
+    "static/js/11.f8a044f8.chunk.js.map": "/little-lemon/static/js/11.f8a044f8.chunk.js.map",
     "static/js/12.d4921327.chunk.js": "/little-lemon/static/js/12.d4921327.chunk.js",
     "static/js/12.d4921327.chunk.js.map": "/little-lemon/static/js/12.d4921327.chunk.js.map",
     "index.html": "/little-lemon/index.html",
-    "precache-manifest.5a980efb6dbe8312ba9f747457559f8c.js": "/little-lemon/precache-manifest.5a980efb6dbe8312ba9f747457559f8c.js",
+    "precache-manifest.df29e4d9e5812c4381d2cc00f33ce083.js": "/little-lemon/precache-manifest.df29e4d9e5812c4381d2cc00f33ce083.js",
     "service-worker.js": "/little-lemon/service-worker.js"
   }
 }
