@@ -2,8 +2,8 @@
   "files": {
     "main.js": "/little-lemon/static/js/main.55235760.chunk.js",
     "main.js.map": "/little-lemon/static/js/main.55235760.chunk.js.map",
-    "runtime~main.js": "/little-lemon/static/js/runtime~main.02d047a6.js",
-    "runtime~main.js.map": "/little-lemon/static/js/runtime~main.02d047a6.js.map",
+    "runtime~main.js": "/little-lemon/static/js/runtime~main.7ea61083.js",
+    "runtime~main.js.map": "/little-lemon/static/js/runtime~main.7ea61083.js.map",
     "static/js/2.1d174f50.chunk.js": "/little-lemon/static/js/2.1d174f50.chunk.js",
     "static/js/2.1d174f50.chunk.js.map": "/little-lemon/static/js/2.1d174f50.chunk.js.map",
     "static/js/3.e443ab1e.chunk.js": "/little-lemon/static/js/3.e443ab1e.chunk.js",
@@ -12,8 +12,8 @@
     "static/js/4.46b2db5b.chunk.js.map": "/little-lemon/static/js/4.46b2db5b.chunk.js.map",
     "static/js/5.ec78a298.chunk.js": "/little-lemon/static/js/5.ec78a298.chunk.js",
     "static/js/5.ec78a298.chunk.js.map": "/little-lemon/static/js/5.ec78a298.chunk.js.map",
-    "static/js/6.0a42bb51.chunk.js": "/little-lemon/static/js/6.0a42bb51.chunk.js",
-    "static/js/6.0a42bb51.chunk.js.map": "/little-lemon/static/js/6.0a42bb51.chunk.js.map",
+    "static/js/6.01964c6a.chunk.js": "/little-lemon/static/js/6.01964c6a.chunk.js",
+    "static/js/6.01964c6a.chunk.js.map": "/little-lemon/static/js/6.01964c6a.chunk.js.map",
     "static/js/7.1c0f5440.chunk.js": "/little-lemon/static/js/7.1c0f5440.chunk.js",
     "static/js/7.1c0f5440.chunk.js.map": "/little-lemon/static/js/7.1c0f5440.chunk.js.map",
     "static/js/8.8a4992c1.chunk.js": "/little-lemon/static/js/8.8a4992c1.chunk.js",
@@ -27,7 +27,7 @@
     "static/js/12.d4921327.chunk.js": "/little-lemon/static/js/12.d4921327.chunk.js",
     "static/js/12.d4921327.chunk.js.map": "/little-lemon/static/js/12.d4921327.chunk.js.map",
     "index.html": "/little-lemon/index.html",
-    "precache-manifest.65f7ebcf156ff90bb72a4864e99d4605.js": "/little-lemon/precache-manifest.65f7ebcf156ff90bb72a4864e99d4605.js",
+    "precache-manifest.258d791773625fe0e581aa0e855a09ad.js": "/little-lemon/precache-manifest.258d791773625fe0e581aa0e855a09ad.js",
     "service-worker.js": "/little-lemon/service-worker.js"
   }
 }
