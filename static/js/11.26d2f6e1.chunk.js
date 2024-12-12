@@ -1,6 +1,6 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{35:function(e,r,t){"use strict";t.d(r,"a",function(){return n});var a=t(6);const o=a.b`
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{35:function(e,r,t){"use strict";t.d(r,"a",function(){return o});var a=t(6);const n=a.b`
   text-align: left;
-`,n=a.c.h1`
+`,o=a.c.h1`
   ${e=>"h1"===e.as&&a.b`
       font-size: 38px;
       color: var(--yellow);
@@ -40,10 +40,10 @@
       font-style: italic;
     `} 
 
-  ${o}
-`},62:function(e,r,t){"use strict";t.r(r);var a=t(1),o=t.n(a),n=t(2),i=t(6),l=t(35);const c=i.c.main`
+  ${n}
+`},62:function(e,r,t){"use strict";t.r(r);var a=t(1),n=t.n(a),o=t(2),i=t(6),l=t(35);const c=i.c.main`
   height: 100vh;
-  background-color: var(--color-grey-50);
+  background-color: var(--pureWhite);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,5 +62,5 @@
   & h1 {
     margin-bottom: 3.2rem;
   }
-`;r.default=function(){const e=function(){const e=Object(n.n)();return()=>e(-1)}();return o.a.createElement(c,null,o.a.createElement(s,null,o.a.createElement(l.a,{as:"h1"},o.a.createElement("span",{role:"img","aria-label":"description of emoji"},"\ud83d\ude22")),o.a.createElement("button",{onClick:e,size:"large"},"\u2190 Go back")))}}}]);
-//# sourceMappingURL=11.f8a044f8.chunk.js.map
+`;r.default=function(){const e=function(){const e=Object(o.n)();return()=>e(-1)}();return n.a.createElement(c,null,n.a.createElement(s,null,n.a.createElement(l.a,{as:"h1"},n.a.createElement("span",{role:"img","aria-label":"description of emoji"},"\ud83d\ude22")),n.a.createElement("button",{onClick:e,size:"large"},"\u2190 Go back")))}}}]);
+//# sourceMappingURL=11.26d2f6e1.chunk.js.map

@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e5da8b2d74fc7e3a11602aa8cda5d599",
+    "revision": "d750d74257e362a76f177d8fe36cc94a",
     "url": "/little-lemon/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/little-lemon/static/js/10.13e21445.chunk.js"
   },
   {
-    "revision": "f1e27138fd344eabcefb",
-    "url": "/little-lemon/static/js/11.f8a044f8.chunk.js"
+    "revision": "c93ccc21d621ff11eb37",
+    "url": "/little-lemon/static/js/11.26d2f6e1.chunk.js"
   },
   {
     "revision": "f6befbf2ec670bb1253a",
@@ -48,11 +48,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/little-lemon/static/js/9.0c9db7a4.chunk.js"
   },
   {
-    "revision": "502c2b34c04067f836f9",
-    "url": "/little-lemon/static/js/main.c1d10a98.chunk.js"
+    "revision": "a6b72777961bf74f87f0",
+    "url": "/little-lemon/static/js/main.55235760.chunk.js"
   },
   {
-    "revision": "b82a61772eab1bf042f1",
-    "url": "/little-lemon/static/js/runtime~main.4818c962.js"
+    "revision": "522ad18a14b834e99592",
+    "url": "/little-lemon/static/js/runtime~main.02d047a6.js"
   }
 ]);
