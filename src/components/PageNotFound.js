@@ -18,7 +18,7 @@ const Box = styled.div`
   background-color: var(--pureWhite);
   border: 1px solid var(--deepGreen);
   border-radius: var(--border-radius-md);
-
+  color: var(--deepGreen);
   padding: 4.8rem;
   flex: 0 1 96rem;
   text-align: center;
