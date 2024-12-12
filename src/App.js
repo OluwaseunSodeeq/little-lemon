@@ -24,7 +24,8 @@ function App() {
         <BrowserRouter>
           <Suspense fallback={<Loader />}>
             <Routes>
-              {/* Protected Routes */}
+              <Route path="/" element={<Navigate to="/login" replace />} />
+              <Route path="/login" element={<Login />} />
               <Route
                 element={
                   <ProtectedRoute>
@@ -32,15 +33,11 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate replace to="/home" />} />
                 <Route path="/home" element={<Homepage />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/reservations" element={<MakeReservation />} />
                 <Route path="/orderonline" element={<OrderOnline />} />
               </Route>
-
-              {/* Public Routes */}
-              <Route path="/login" element={<Login />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </Suspense>
