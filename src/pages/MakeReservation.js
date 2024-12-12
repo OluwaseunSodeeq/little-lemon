@@ -672,6 +672,7 @@ function MakeReservation() {
                       </BackCardRight>
                     </ReservationCard>
                   </CardRight>
+
                   {/* <CardLeft errors={errors}> */}
                   {/* <CardLeft>
                     <ReservationCard $turn={turn}>
@@ -825,7 +826,7 @@ function MakeReservation() {
                   fontSize="xxxlarge"
                 >
                   {orderArray.length}{" "}
-                  {orderArray.length === 1 ? "item" : "items"}
+                  {orderArray.length === 1 ? "item" : "items"}{" "}
                   {orderArray.length === 1 ? "is" : "are"} selected!
                 </Paragraph>
               )}
