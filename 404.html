@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <title>Redirecting...</title>
-    <script>
-      // Redirect to index.html for React Router
-      window.location.href = "/little-lemon/";
+    <script type="text/javascript">
+      var path = window.location.pathname;
+      var redirectTo = "/little-lemon" + path;
+      window.location.replace(redirectTo);
     </script>
   </head>
   <body>

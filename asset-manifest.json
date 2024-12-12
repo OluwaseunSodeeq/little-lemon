@@ -1,9 +1,9 @@
 {
   "files": {
-    "main.js": "/little-lemon/static/js/main.55235760.chunk.js",
-    "main.js.map": "/little-lemon/static/js/main.55235760.chunk.js.map",
-    "runtime~main.js": "/little-lemon/static/js/runtime~main.7ea61083.js",
-    "runtime~main.js.map": "/little-lemon/static/js/runtime~main.7ea61083.js.map",
+    "main.js": "/little-lemon/static/js/main.7d8d559c.chunk.js",
+    "main.js.map": "/little-lemon/static/js/main.7d8d559c.chunk.js.map",
+    "runtime~main.js": "/little-lemon/static/js/runtime~main.d0461f1e.js",
+    "runtime~main.js.map": "/little-lemon/static/js/runtime~main.d0461f1e.js.map",
     "static/js/2.1d174f50.chunk.js": "/little-lemon/static/js/2.1d174f50.chunk.js",
     "static/js/2.1d174f50.chunk.js.map": "/little-lemon/static/js/2.1d174f50.chunk.js.map",
     "static/js/3.e443ab1e.chunk.js": "/little-lemon/static/js/3.e443ab1e.chunk.js",
@@ -22,12 +22,12 @@
     "static/js/9.0c9db7a4.chunk.js.map": "/little-lemon/static/js/9.0c9db7a4.chunk.js.map",
     "static/js/10.13e21445.chunk.js": "/little-lemon/static/js/10.13e21445.chunk.js",
     "static/js/10.13e21445.chunk.js.map": "/little-lemon/static/js/10.13e21445.chunk.js.map",
-    "static/js/11.26d2f6e1.chunk.js": "/little-lemon/static/js/11.26d2f6e1.chunk.js",
-    "static/js/11.26d2f6e1.chunk.js.map": "/little-lemon/static/js/11.26d2f6e1.chunk.js.map",
+    "static/js/11.aae0feb6.chunk.js": "/little-lemon/static/js/11.aae0feb6.chunk.js",
+    "static/js/11.aae0feb6.chunk.js.map": "/little-lemon/static/js/11.aae0feb6.chunk.js.map",
     "static/js/12.d4921327.chunk.js": "/little-lemon/static/js/12.d4921327.chunk.js",
     "static/js/12.d4921327.chunk.js.map": "/little-lemon/static/js/12.d4921327.chunk.js.map",
     "index.html": "/little-lemon/index.html",
-    "precache-manifest.258d791773625fe0e581aa0e855a09ad.js": "/little-lemon/precache-manifest.258d791773625fe0e581aa0e855a09ad.js",
+    "precache-manifest.9783ecbedd917901dd014858b81e8cfc.js": "/little-lemon/precache-manifest.9783ecbedd917901dd014858b81e8cfc.js",
     "service-worker.js": "/little-lemon/service-worker.js"
   }
 }
