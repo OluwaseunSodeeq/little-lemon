@@ -41,7 +41,9 @@ const StyledNavLink = styled(NavLink)`
 const LiContainer = styled.ul`
   display: flex;
   gap: 1rem;
-
+  & > li {
+    cursor: pointer;
+  }
   @media (max-width: 950px) {
     flex-direction: column;
     gap: 2.5rem;

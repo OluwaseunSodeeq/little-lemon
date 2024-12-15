@@ -1,11 +1,12 @@
 // ONE
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import GlobalStyles from "./styles/GlobalStyles";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import Loader from "./ui/Loader";
 import { CombinedContextsProvider } from "./Contexts/CombinedContexts/CombinedContexts";
+// import { ReservationsContextProvider } from "./Contexts/ReservationsContext/ReservationsContext";
 
 // LAZY LOADING COMPONENTS
 const AppLayout = React.lazy(() => import("./components/AppLayout"));
@@ -17,10 +18,12 @@ const OrderOnline = React.lazy(() => import("./pages/Menu"));
 const PageNotFound = React.lazy(() => import("./components/PageNotFound"));
 
 function App() {
+  const [remount, setremount] = useState(0);
   return (
     <section>
       <GlobalStyles />
-      <CombinedContextsProvider>
+      <CombinedContextsProvider remount={remount} setremount={setremount}>
+        {/* <ReservationsContextProvider remount={remount} setremount={setremount}> */}
         <BrowserRouter>
           <Suspense fallback={<Loader />}>
             <Routes>
@@ -42,6 +45,7 @@ function App() {
             </Routes>
           </Suspense>
         </BrowserRouter>
+        {/* </ReservationsContextProvider> */}
       </CombinedContextsProvider>
       <Toaster
         position="top center"

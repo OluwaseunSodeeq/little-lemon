@@ -126,6 +126,7 @@ function CombinedContextsProvider({ children, remount, setremount }) {
 
   // RESERVATION STATES ANDHANDLERS
   const [formSubmitted, setFormSubmitted] = useState(false);
+
   const storedState =
     JSON.parse(localStorage.getItem("reservationState")) || initialState;
 
@@ -134,7 +135,7 @@ function CombinedContextsProvider({ children, remount, setremount }) {
   // Sync state changes to localStorage
   useEffect(() => {
     localStorage.setItem("reservationState", JSON.stringify(state));
-  }, [state]); // Run every time `state` changes
+  }, [state]); 
 
   const resetHandler = () => {
     localStorage.removeItem("reservationState"); // Clear local storage
@@ -142,6 +143,7 @@ function CombinedContextsProvider({ children, remount, setremount }) {
     setremount((val) => val + 1); // Force re-render
     localStorage.setItem("reservationState", JSON.stringify(state));
   };
+
   const { date, time, dinner, occasion } = state;
   const initialContent = [
     {

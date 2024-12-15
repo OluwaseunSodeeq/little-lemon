@@ -27,6 +27,7 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { menuArr } from "../Contexts/Menu/defaultMenusArray";
 import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
+// import useReservationsContext from "../Contexts/ReservationsContext/useReservationsContext";
 
 // import { ZERO } from "../ui/Constant";
 
@@ -357,6 +358,14 @@ const CartContainer = styled.div`
 function MakeReservation() {
   const [turn, setTurn] = useState(false);
   const {
+    menus,
+    selectedMenuHandler,
+    isAnyItemSelected,
+    setremount,
+    setUserBookedData,
+    setMenus,
+    // setUserSelectedItems,
+
     state,
     dispatch,
     resetHandler,
@@ -364,15 +373,8 @@ function MakeReservation() {
     content,
     formSubmitted,
     setFormSubmitted,
-
-    menus,
-    selectedMenuHandler,
-    isAnyItemSelected,
-    setremount,
-    setUserBookedData,
-    // setUserSelectedItems,
-    setMenus,
   } = useCombinedContexts();
+
   // const {
   //   state,
   //   dispatch,
@@ -382,6 +384,7 @@ function MakeReservation() {
   //   formSubmitted,
   //   setFormSubmitted,
   // } = useReservationsContext();
+
   // const {
   //   menus,
   //   selectedMenuHandler,
@@ -396,6 +399,7 @@ function MakeReservation() {
   // const { date, occasion, dinner, time } = state;
 
   //Dynamically update content when state changes
+
   useEffect(() => {
     setContent((prevContent) =>
       prevContent.map((item) => ({
@@ -1725,3 +1729,19 @@ export default MakeReservation;
 // }
 
 // export default MakeReservation;
+// const {
+//   // state,
+//   // dispatch,
+//   // resetHandler,
+//   // setContent,
+//   // content,
+//   // formSubmitted,
+//   // setFormSubmitted,
+//   menus,
+//   selectedMenuHandler,
+//   isAnyItemSelected,
+//   setremount,
+//   setUserBookedData,
+//   setMenus,
+//   // setUserSelectedItems,
+// } = useCombinedContexts();
