@@ -82,7 +82,7 @@ function AboutFooter() {
           <Paragraph color="deepGreen">
             Hi, I'm Oluwaseun Sodeeq, the proud owner of Little Lemon. Growing
             up, I watched my parents pour their hearts into this restaurant, and
-            I’m committed to continuing their dedication to quality and
+            I'm committed to continuing their dedication to quality and
             hospitality. It brings me great joy to welcome you to Little Lemon,
             where every meal is a celebration of flavor and tradition.
           </Paragraph>

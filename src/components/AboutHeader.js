@@ -50,9 +50,6 @@ const AboutHeaderButton = styled.div`
 
   font-size: 3.4rem;
   padding: 0.5rem;
-
-  /* &:span {
-  } */
 `;
 const ButtonContainer = styled.div`
   margin-right: 5%;

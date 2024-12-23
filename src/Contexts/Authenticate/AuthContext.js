@@ -13,14 +13,6 @@ function AuthContextProvider({ children }) {
 
   //Auth Handlers
   const loginHandler = () => {
-    // if (
-    //   userName === "" ||
-    //   userName === " " ||
-    //   userPassword === " " ||
-    //   userPassword === ""
-    // )
-    //   return;
-    // setAuth(true);
     //If either userName or userPassword is empty, this line stops the function execution right there.
     if (!userName.trim() || !userPassword.trim()) return;
 

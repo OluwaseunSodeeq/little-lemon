@@ -4,10 +4,8 @@ import { Heading } from "../ui/Heading";
 import { Paragraph } from "../ui/Paragraph";
 import { Button } from "../ui/Button";
 import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
-// import useMenusContext from "../Contexts/Menu/useMenusContext";
 
 const BookedSummaryContainer = styled.div`
-  /* display: inline-block; */
   padding: 1rem 2rem;
   max-width: 50rem;
   position: relative;

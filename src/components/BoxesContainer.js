@@ -23,7 +23,6 @@ const Item = styled.div`
   width: 150px;
   height: 150px;
   margin-right: -100px;
-  /* margin-left: -50px; Slight overlap to the left */
   transition: transform 0.3s ease, z-index 0.3s ease, margin 0.3s ease;
   position: relative;
   z-index: ${({ index }) => 10 - index}; /* Higher index appears on top */

@@ -13,8 +13,8 @@ const StyledPageNotFound = styled.main`
   color: var(--deepGreen);
 `;
 
+/* box */
 const Box = styled.div`
-  /* box */
   background-color: var(--pureWhite);
   border: 1px solid var(--deepGreen);
   border-radius: var(--border-radius-md);
@@ -29,7 +29,6 @@ const Box = styled.div`
 `;
 
 function PageNotFound() {
-  //   const moveBack = useMoveBack();
   function useMoveBack() {
     const navigate = useNavigate();
     return () => navigate(-1);

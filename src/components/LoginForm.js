@@ -4,9 +4,6 @@ import styled from "styled-components";
 import { Button } from "../ui/Button";
 import { useNavigate } from "react-router-dom";
 import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
-// import useAuthContext from "../Contexts/Authenticate/useAuthContext";
-
-// import { useNavigate } from "react-router-dom";
 
 const LoginFormDiv = styled.form`
   width: 100%;
@@ -129,74 +126,3 @@ function LoginForm({ auth }) {
 }
 
 export default LoginForm;
-
-// function LoginForm() {
-//   const {
-//     userPassword: password,
-//     userName: name,
-//     setUserName: setName,
-//     setUserPassword: setPassword,
-//     defaultPassword,
-//     loginHandler,
-//     auth,
-//   } = useAuthContext();
-
-//   const [error, setError] = useState({ name: "", password: password });
-
-//   console.log("Login form");
-//   console.log(auth);
-
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     if (!name || !password || password !== defaultPassword) {
-//       setError({ name, password });
-//     }
-//     loginHandler();
-//     console.log("User has Log in", auth);
-
-//     // onLogin();
-//     // navigate("/home");
-//   }
-//   const atleastThree = 3;
-//   return (
-//     <LoginFormDiv onSubmit={handleSubmit}>
-//       <InputContainer>
-//         <InputLabel htmlFor="username">Your Name</InputLabel>
-//         <Input
-//           error={
-//             error.name === "" ||
-//             error.name === " " ||
-//             name.length < atleastThree
-//           }
-//           type="text"
-//           id="username"
-//           placeholder="Your Name"
-//           //   autoComplete="username"
-//           value={name}
-//           onChange={(e) => setName(e.target.value)}
-//           //   disabled={isLoading}
-//         />
-//         {error && <InputErrorMsg>Pls Enter Your name</InputErrorMsg>}
-//       </InputContainer>
-//       <InputContainer>
-//         <InputLabel htmlFor="name">Your Password</InputLabel>
-
-//         <Input
-//           error={error.password !== password}
-//           type="password"
-//           id="password"
-//           autoComplete="current-password"
-//           value={password}
-//           onChange={(e) => setPassword(e.target.value)}
-//           //   disabled={isLoading}
-//         />
-//         {error && <InputErrorMsg>Pls Enter the right Password</InputErrorMsg>}
-//       </InputContainer>
-//       <InputContainer>
-//         <Button>Log in</Button>
-//       </InputContainer>
-//     </LoginFormDiv>
-//   );
-// }
-
-// export default LoginForm;

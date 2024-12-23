@@ -47,6 +47,7 @@ const FooterRightStyled = styled.div`
     column-gap: 4rem;
   }
 `;
+
 function Footer() {
   return (
     <Container as="footer">

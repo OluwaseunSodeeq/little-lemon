@@ -36,8 +36,6 @@ const CustomButtonStyledContainer = styled.div`
   width: 100%;
   height: 5rem;
   padding: 0;
-  background-color: ${({ value }) =>
-    value ? "var(--deepGreen)" : "var(--pureWhite)"};
   border-radius: var(--border-radius-md);
   display: flex;
   align-items: center;
@@ -45,6 +43,8 @@ const CustomButtonStyledContainer = styled.div`
   border: ${({ errors }) => (errors ? "2px solid red" : "")};
   /* selected */
   box-shadow: ${({ value }) => (value ? boxShadowValue : "")};
+  background-color: ${({ value }) =>
+    value ? "var(--deepGreen)" : "var(--pureWhite)"};
 
   /*  */
 `;
@@ -59,7 +59,6 @@ const CustomRenderInputContent = styled.div`
   height: 100%;
   position: absolute;
   padding: 1rem 2rem;
-  /* z-index: 10; */
   top: 0;
   left: 0;
   display: flex;
@@ -96,7 +95,6 @@ const RotatingSpan = styled.span`
 
   transform: ${({ value }) => (value ? "rotate(180deg)" : "")};
   margin-top: ${({ value }) => (value ? "-1rem" : "")};
-  /* margin-top: -1rem; */
 `;
 
 const CustomButton = ({

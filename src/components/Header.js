@@ -5,10 +5,8 @@ import { Content } from "../ui/Content";
 import Logo from "./Logo";
 import Nav from "./Nav";
 import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
-// import useToggleContext from "../Contexts/ToggleContext/useToggleContext";
 
 const HeaderContent = styled.div`
-  /* height: 8rem; */
   height: 7rem;
   display: flex;
   justify-content: space-between;

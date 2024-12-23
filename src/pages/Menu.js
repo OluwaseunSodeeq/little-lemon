@@ -7,17 +7,11 @@ import { FlexedDiv } from "../styles/FlexedDiv";
 import { Button } from "../ui/Button";
 import { Link } from "react-router-dom";
 import useCombinedContexts from "../Contexts/CombinedContexts/useCombinedContexts";
-// import { Button } from "../ui/Button";
-// import useMenusContext from "../Contexts/Menu/useMenusContext";
 
 const MenuStyled = styled.div`
   position: relative;
   width: 100%;
   height: auto;
-  /* padding: 2rem 0 2rem 0; */
-  /* padding: 2rem 0 2rem 0; */
-  /* border: 5px solid blueviolet; */
-  /* border: 2px solid blue; */
 `;
 const OtherMenuStyledContainer = styled.div`
   padding: 5rem 0;
@@ -187,8 +181,6 @@ function Menu() {
 
   const userHasSelected = orderArray.length > 0;
 
-  // console.log(orderArray.length);
-
   return (
     <div>
       <Container as="section" type="menu">
@@ -211,25 +203,6 @@ function Menu() {
           </MenuStyled>
         </Content>
       </Container>
-
-      {/*       
-      
-      <Container as="div" type="helper">
-        <Content>
-          <ButtonContainer>
-            {isAnyItemSelected ? (
-              <Paragraph fontSize="xlarge" color="deepGreen">
-                Click Back for the submission of your selections
-              </Paragraph>
-            ) : (
-              <Paragraph fontSize="xlarge" color="deepGreen">
-                Make some selections above
-              </Paragraph>
-            )}
-            <Button>Back</Button>
-          </ButtonContainer>
-        </Content>
-      </Container> */}
     </div>
   );
 }

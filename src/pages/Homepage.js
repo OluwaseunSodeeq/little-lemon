@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import HeroSection from "../components/HeroSection";
 import WeekSpecial from "../components/WeekSpecial";
+import Main from "../components/Main";
 
 const HomeContainer = styled.section`
   position: relative;
@@ -9,10 +10,12 @@ const HomeContainer = styled.section`
 `;
 function Homepage() {
   return (
-    <HomeContainer>
-      <HeroSection />
-      <WeekSpecial />
-    </HomeContainer>
+    <Main>
+      <HomeContainer>
+        <HeroSection />
+        <WeekSpecial />
+      </HomeContainer>
+    </Main>
   );
 }
 

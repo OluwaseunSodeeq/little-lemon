@@ -6,7 +6,7 @@ function OrderOnline() {
   return (
     <Container>
       <Content>
-        <Paragraph>Oder Online Page</Paragraph>
+        <Paragraph>The content for this page is in the Menu Page</Paragraph>
       </Content>
     </Container>
   );

@@ -38,7 +38,6 @@ const DescriptionStyled = styled.p`
 const IconContainer = styled.div`
   position: absolute;
   bottom: 1rem;
-  /* margin-top: 50px; */
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -57,7 +56,6 @@ const IconText = styled.span`
   font-family: var(--karla);
 `;
 const Icon = styled.span`
-  /* color: var(--black); */
   font-weight: var(--bold);
   font-size: 1.6rem;
   width: 1.6rem;
@@ -72,7 +70,9 @@ const CardContainer = styled.div`
   cursor: pointer;
 `;
 function MenuCard({ card }) {
-  const { name, description, price, image } = card;
+  const { list } = card;
+  const { name, description, price, image } = list[0];
+
   return (
     <CardContainer>
       <ImageStyled>

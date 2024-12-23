@@ -20,12 +20,10 @@ const HamburgerBgDiv = styled.div`
 `;
 
 function HamburgerBg() {
-  const { open } = useCombinedContexts();
-  const { auth } = useCombinedContexts();
+  const { open, auth } = useCombinedContexts();
 
   // const { open } = useToggleContext();
   // const { auth } = useAuthContext();
-  // const show = auth;
 
   return (
     <div>

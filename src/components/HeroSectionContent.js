@@ -35,14 +35,10 @@ const HeroSectionContentLeft = styled.div`
 `;
 const HeroSectionContentRight = styled.div`
   position: absolute;
-  /* right: 1.5rem; */
   right: 0%;
   top: 5rem;
-  /* z-index: 10; */
-  /* padding: 2rem 0 0; */
   width: 32rem;
   height: 35rem;
-  /* border: 2px solid red; */
   border-radius: var(--border-radius-lg);
   @media (max-width: 950px) {
     top: 7rem;

@@ -1,4 +1,5 @@
-export const LASTINPUTID = 3;
+export const LASTINPUTID = "tel";
+
 export const boxShadowValue = `
 export const ZERO = 0;
 0 2.8px 2.2px rgba(0, 0, 0, 0.034),

@@ -124,7 +124,7 @@ function CombinedContextsProvider({ children, remount, setremount }) {
 
   // ====================
 
-  // RESERVATION STATES ANDHANDLERS
+  // RESERVATION STATES AND HANDLERS
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const storedState =
@@ -135,12 +135,15 @@ function CombinedContextsProvider({ children, remount, setremount }) {
   // Sync state changes to localStorage
   useEffect(() => {
     localStorage.setItem("reservationState", JSON.stringify(state));
-  }, [state]); 
+  }, [state]);
 
   const resetHandler = () => {
-    localStorage.removeItem("reservationState"); // Clear local storage
-    dispatch({ type: "reset" }); // Reset context state
-    setremount((val) => val + 1); // Force re-render
+    // Clear local storage
+    localStorage.removeItem("reservationState");
+    // Reset context state
+    dispatch({ type: "reset" });
+    // Force re-render
+    setremount((val) => val + 1);
     localStorage.setItem("reservationState", JSON.stringify(state));
   };
 

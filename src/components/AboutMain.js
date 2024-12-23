@@ -85,17 +85,6 @@ function AboutMain() {
             memories over flavorful, fresh dishes.
           </Paragraph>
         </AboutmainContent>
-        {/* <MissionDiv></MissionDiv>
-          <Heading as="h6">Mission, Values & Specialties</Heading>
-          <Paragraph color="deepGreen">
-            At Little Lemon, we're dedicated to serving freshly prepared,
-            high-quality meals that cater to all tastes. From local delicacies
-            to international favorites, our menu has something for everyone,
-            including our signature dish: "African Food". We value tradition,
-            hospitality, and the joy of sharing great food. Every bite is
-            crafted with care to bring happiness to your table.
-          </Paragraph>
-        </AboutmainContent> */}
 
         <AboutmainImageDiv>
           <img

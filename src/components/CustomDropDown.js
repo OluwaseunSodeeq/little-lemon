@@ -20,7 +20,7 @@ const SelectStyled = styled.select`
   appearance: none;
   z-index: 10;
 `;
-
+// ============Options styling ===============//
 const SelectDivStyled = styled.div`
   position: absolute;
   width: 100%;
@@ -29,7 +29,7 @@ const SelectDivStyled = styled.div`
   left: 0;
   background-color: var(--deepGreen);
 
-  /*  */
+  /* Wrapping the options */
   display: flex;
   flex-wrap: wrap;
   gap: 10px;

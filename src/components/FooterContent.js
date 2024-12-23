@@ -8,7 +8,9 @@ const FooterCon = styled.div`
     padding: 0;
   }
 `;
+
 const FooterUl = styled.ul``;
+
 const Footeritems = styled.li`
   font-size: 1.8rem;
   font-weight: normal;
