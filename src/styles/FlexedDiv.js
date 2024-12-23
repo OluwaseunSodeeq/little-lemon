@@ -18,6 +18,7 @@ export const FlexedDiv = styled.div`
       }
 
       @media (max-width: 450px) {
+        padding: 0 1rem;
       }
     `}
   ${(props) =>
