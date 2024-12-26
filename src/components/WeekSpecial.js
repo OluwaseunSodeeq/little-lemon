@@ -10,29 +10,6 @@ import styled from "styled-components";
 import { Link, useLocation } from "react-router-dom";
 import { menuArr } from "../Contexts/Menu/defaultMenusArray";
 
-// const cardArray = [
-//   {
-//     image: "icons_assets/greek salad.jpg",
-//     price: "12.99",
-//     name: "Greek Salad",
-//     description:
-//       "The famous Greek salad of srispy lettuce, peppers,olives and our Chicago style fota cheese, garnished with crunchy garlic and rosemary croutons.",
-//   },
-//   {
-//     image: "icons_assets/bruchetta.svg",
-//     price: "5.99",
-//     name: "Bruchetta",
-//     description:
-//       "Our Bruschetta is made from grilled bread that has been smeared with garlic and seasoned with salt and olive oil",
-//   },
-//   {
-//     image: "icons_assets/lemon dessert.jpg",
-//     price: "8.00",
-//     name: "Lemon Dessert",
-//     description:
-//       "This comes straight from gradma's recipe book, evry last ingrdient has been sourced and is as authentic as can be imagined.",
-//   },
-// ];
 
 const WeekSpacialStyled = styled.div`
   margin-top: 2rem;

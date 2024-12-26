@@ -87,16 +87,19 @@ function AboutMain() {
         </AboutmainContent>
 
         <AboutmainImageDiv>
-          <img
+          {/* <img
             src="icons_assets/inside-of-restautant.png"
             alt="Inside of the restaurant "
-          />
+          /> */}
+        <img src="icons_assets/jpeg-optimizer_inside-of-restautant.png" alt="restauranfood" />
+
         </AboutmainImageDiv>
       </AboutmainContainer>
 
       <AboutmainContainer>
         <AboutmainImageDiv>
-          <img src="icons_assets/restaurantchef.jpg" alt="Chef" />
+        <img src="images/about-images/jpeg-optimizer_restaurantchef.jpg" alt="Chef" />
+          {/* <img src="icons_assets/restaurantchef.jpg" alt="Chef" /> */}
         </AboutmainImageDiv>
         <MissionDiv></MissionDiv>
         <AboutmainContent>

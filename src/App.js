@@ -23,10 +23,11 @@ function App() {
     <section>
       <GlobalStyles />
       <CombinedContextsProvider remount={remount} setremount={setremount}>
-        {/* <AuthContextProvider>
-          <ToggleContextProvider>
-             <MenusContextProvider> 
-         <ReservationsContextProvider > */}
+
+       {/* <AuthContextProvider>
+         <ToggleContextProvider>
+            <MenusContextProvider> 
+              <ReservationsContextProvider >  */}
         <BrowserRouter>
           <Suspense fallback={<Loader />}>
             <Routes>
@@ -50,9 +51,9 @@ function App() {
         </BrowserRouter>
 
         {/* </ReservationsContextProvider> 
-         </AuthContextProvider>
-//           </ToggleContextProvider>
-//             </MenusContextProvider> */}
+           </MenusContextProvider>
+             </ToggleContextProvider>
+                </AuthContextProvider> */}
       </CombinedContextsProvider>
       <Toaster
         position="top center"
@@ -118,4 +119,5 @@ Working on real-world projects like Little Lemon has been transformative, bridgi
 
 GitHub Repository: https://github.com/OluwaseunSodeeq/little-lemon
 Live Project URL: https://little-lemon-indol.vercel.app/
+
 */

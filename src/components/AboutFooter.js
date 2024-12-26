@@ -76,7 +76,8 @@ function AboutFooter() {
     <AboutFooterContainer>
       <AboutFooterTop>
         <TopImageDiv>
-          <img src="icons_assets/Mario&Adrian.png" alt="CEOS" />
+        <img src="images/about-images/jpeg-optimizer_Mario and Adrian A.jpeg" alt="Mario & Adrian" />
+          {/* <img src="icons_assets/Mario&Adrian.png" alt="CEOS" /> */}
         </TopImageDiv>
         <TopTextDiv>
           <Paragraph color="deepGreen">

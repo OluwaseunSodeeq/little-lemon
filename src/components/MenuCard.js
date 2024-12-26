@@ -30,10 +30,11 @@ const PriceStyled = styled.span`
 `;
 const DescriptionStyled = styled.p`
   font-size: 1.6rem;
-  font-weight: var(--regular);
+  font-weight: var(--medium);
   font-family: var(--karla);
   color: var(--black);
   margin-top: 1.5rem;
+  font-style:italic;
 `;
 const IconContainer = styled.div`
   position: absolute;
@@ -61,7 +62,6 @@ const Icon = styled.span`
   width: 1.6rem;
   height: 1.6rem;
 `;
-// immage
 
 const ImageStyled = styled.div`
   ${constHeight}

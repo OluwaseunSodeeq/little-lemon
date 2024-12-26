@@ -70,7 +70,7 @@ function HeroSectionContent() {
         </HeroSectionContentBtnContainer>
       </HeroSectionContentLeft>
       <HeroSectionContentRight>
-        <img src="icons_assets/restauranfood.jpg" alt="restauranfood" />
+        <img src="images/about-images/jpeg-optimizer_restauranfood.jpeg" alt="restauranfood" />
       </HeroSectionContentRight>
     </HeroSectionContentDiv>
   );
